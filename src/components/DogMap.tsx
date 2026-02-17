@@ -13,11 +13,28 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-// Custom paw icon
+// Custom paw icon — color based on report type for helpers/admins,
+// or vaccination status for regular users
 const createPawIcon = (isVaccinated: boolean) => {
   const color = isVaccinated ? "#2d9a6e" : "#d4a72c";
   const bgColor = isVaccinated ? "#dcfce7" : "#fef9c3";
-  
+  return _buildPawIcon(color, bgColor);
+};
+
+// Report-type-based marker colors (helper/admin view)
+const REPORT_TYPE_COLORS: Record<string, { color: string; bgColor: string }> = {
+  save:             { color: "#2d9a6e", bgColor: "#dcfce7" }, // green
+  stray:            { color: "#d4a72c", bgColor: "#fef9c3" }, // yellow
+  sos:              { color: "#dc2626", bgColor: "#fee2e2" }, // red
+  vaccination_wish: { color: "#7c3aed", bgColor: "#ede9fe" }, // purple
+};
+
+const createReportTypeIcon = (reportType: string) => {
+  const colors = REPORT_TYPE_COLORS[reportType] || REPORT_TYPE_COLORS.stray;
+  return _buildPawIcon(colors.color, colors.bgColor);
+};
+
+const _buildPawIcon = (color: string, bgColor: string) => {
   return L.divIcon({
     html: `
       <div style="
@@ -136,6 +153,8 @@ interface DogMapProps {
   onLocationSelect?: (lat: number, lng: number) => void;
   selectable?: boolean;
   focusDogId?: string;
+  /** When true, marker colors are based on reportType instead of vaccination status */
+  showReportTypes?: boolean;
 }
 
 const DogMap = ({ 
@@ -146,7 +165,8 @@ const DogMap = ({
   height = "500px",
   onLocationSelect,
   selectable = false,
-  focusDogId
+  focusDogId,
+  showReportTypes = false,
 }: DogMapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -248,9 +268,11 @@ const DogMap = ({
 
     // Add new markers
     dogs.forEach((dog) => {
-      const marker = L.marker([dog.latitude, dog.longitude], {
-        icon: createPawIcon(dog.isVaccinated)
-      }).addTo(mapRef.current!);
+      const icon = showReportTypes
+        ? createReportTypeIcon(dog.reportType)
+        : createPawIcon(dog.isVaccinated);
+      const marker = L.marker([dog.latitude, dog.longitude], { icon })
+        .addTo(mapRef.current!);
 
       const popupContent = `
         <div style="padding: 12px; min-width: 200px;">
@@ -296,7 +318,7 @@ const DogMap = ({
         focusedMarker?.openPopup();
       }, 300);
     }
-  }, [dogs, focusDogId]);
+  }, [dogs, focusDogId, showReportTypes]);
 
   // Update facility markers
   useEffect(() => {

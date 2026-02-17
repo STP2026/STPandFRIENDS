@@ -383,5 +383,15 @@
     "online": {
       "title": "Online"
     }
+  },
+  "mapLegend": {
+    "tagged": "Getaggt",
+    "taggedDesc": "Geimpft & Ohrmarke",
+    "stray": "Streuner",
+    "strayDesc": "Gemeldeter Streuner — ohne Marke",
+    "sos": "SOS",
+    "sosDesc": "Braucht Hilfe",
+    "tagWish": "Tag-Wunsch",
+    "tagWishDesc": "Impfung / Markierung gewünscht"
   }
 }

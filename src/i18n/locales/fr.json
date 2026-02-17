@@ -383,5 +383,15 @@
     "online": {
       "title": "En ligne"
     }
+  },
+  "mapLegend": {
+    "tagged": "Identifié",
+    "taggedDesc": "Vacciné & marqué",
+    "stray": "Errant",
+    "strayDesc": "Chien errant signalé — sans marque",
+    "sos": "SOS",
+    "sosDesc": "A besoin d'aide",
+    "tagWish": "Souhait de marquage",
+    "tagWishDesc": "Vaccination / marquage demandé"
   }
 }

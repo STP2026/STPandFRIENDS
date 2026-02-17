@@ -383,5 +383,15 @@
     "online": {
       "title": "Online"
     }
+  },
+  "mapLegend": {
+    "tagged": "Tagged",
+    "taggedDesc": "Vaccinated & ear-tagged",
+    "stray": "Stray",
+    "strayDesc": "Reported stray — no tag",
+    "sos": "SOS",
+    "sosDesc": "Needs help",
+    "tagWish": "Tag Wish",
+    "tagWishDesc": "Vaccination / tag requested"
   }
 }

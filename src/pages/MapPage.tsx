@@ -4,12 +4,19 @@ import SafeDogMap from "@/components/SafeDogMap";
 import MapLegend from "@/components/MapLegend";
 import { useDogs } from "@/hooks/useDogs";
 import { useFacilities } from "@/hooks/useFacilities";
+import { useAuth } from "@/contexts/AuthContext";
+import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useTranslation } from "react-i18next";
 
 const MapPage = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
-  const { data: dogs, isLoading: dogsLoading } = useDogs(true);
+  const { user, isAdmin } = useAuth();
+  const { data: isHelper } = useIsHelper(user?.id);
+  const isElevated = isAdmin || !!isHelper;
+
+  // Helpers/admins see ALL dogs; regular users see only approved
+  const { data: dogs, isLoading: dogsLoading } = useDogs(!isElevated);
   const { data: facilities, isLoading: facilitiesLoading } = useFacilities();
   
   // Parse URL params for centering on specific dog
@@ -24,7 +31,12 @@ const MapPage = () => {
   const isLoading = dogsLoading || facilitiesLoading;
   const displayDogs = dogs || [];
   const displayFacilities = facilities || [];
-  const vaccinatedCount = displayDogs.filter((d) => d.isVaccinated).length;
+
+  // Stats
+  const taggedCount = displayDogs.filter((d) => d.reportType === 'save').length;
+  const strayCount = displayDogs.filter((d) => d.reportType === 'stray').length;
+  const sosCount = displayDogs.filter((d) => d.reportType === 'sos').length;
+  const tagWishCount = displayDogs.filter((d) => d.reportType === 'vaccination_wish').length;
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,20 +67,43 @@ const MapPage = () => {
                   center={initialCenter}
                   zoom={initialCenter ? 15 : undefined}
                   focusDogId={dogIdParam || undefined}
+                  showReportTypes={isElevated}
                 />
               )}
             </div>
             <div className="space-y-4">
-              <MapLegend />
+              <MapLegend isElevated={isElevated} />
 
               <div className="glass-card rounded-xl p-4 animate-fade-in">
                 <h3 className="font-display font-bold text-foreground mb-3">{t('map.stats')}</h3>
-                <div className="bg-safe/10 rounded-lg p-3 text-center">
-                  <p className="text-2xl font-bold text-safe">
-                    {vaccinatedCount}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{t('map.safeDogs')}</p>
-                </div>
+
+                {!isElevated ? (
+                  /* ── User: single green stat ── */
+                  <div className="bg-safe/10 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-safe">{taggedCount}</p>
+                    <p className="text-xs text-muted-foreground">{t('map.safeDogs')}</p>
+                  </div>
+                ) : (
+                  /* ── Helper / Admin: breakdown by report type ── */
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-2.5 text-center">
+                      <p className="text-xl font-bold text-green-600">{taggedCount}</p>
+                      <p className="text-xs text-muted-foreground">Tagged</p>
+                    </div>
+                    <div className="bg-yellow-50 dark:bg-yellow-950/30 rounded-lg p-2.5 text-center">
+                      <p className="text-xl font-bold text-yellow-600">{strayCount}</p>
+                      <p className="text-xs text-muted-foreground">Stray</p>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-950/30 rounded-lg p-2.5 text-center">
+                      <p className="text-xl font-bold text-red-600">{sosCount}</p>
+                      <p className="text-xs text-muted-foreground">SOS</p>
+                    </div>
+                    <div className="bg-purple-50 dark:bg-purple-950/30 rounded-lg p-2.5 text-center">
+                      <p className="text-xl font-bold text-purple-600">{tagWishCount}</p>
+                      <p className="text-xs text-muted-foreground">Tag Wish</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
