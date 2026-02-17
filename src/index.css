@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Moroccan Coastal Palette */
+    --background: 35 30% 97%;
+    --foreground: 25 20% 15%;
+
+    --card: 35 25% 99%;
+    --card-foreground: 25 20% 15%;
+
+    --popover: 35 25% 99%;
+    --popover-foreground: 25 20% 15%;
+
+    /* Terracotta Primary */
+    --primary: 18 65% 55%;
+    --primary-foreground: 35 30% 98%;
+
+    /* Sandy Secondary */
+    --secondary: 35 40% 92%;
+    --secondary-foreground: 25 20% 25%;
+
+    /* Muted Sandy Tones */
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 10% 45%;
+
+    /* Ocean Accent */
+    --accent: 185 55% 45%;
+    --accent-foreground: 185 100% 98%;
+
+    /* Safe Green for Vaccinated Dogs */
+    --safe: 145 55% 45%;
+    --safe-foreground: 145 100% 98%;
+
+    /* Warning/Unvaccinated */
+    --warning: 45 90% 55%;
+    --warning-foreground: 45 100% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 25% 85%;
+    --input: 35 25% 88%;
+    --ring: 18 65% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(18 65% 55% / 0.9), hsl(185 55% 45% / 0.8));
+    --gradient-card: linear-gradient(180deg, hsl(35 25% 99%), hsl(35 30% 96%));
+    --gradient-ocean: linear-gradient(135deg, hsl(185 55% 45%), hsl(185 65% 35%));
+    --gradient-warm: linear-gradient(135deg, hsl(18 65% 55%), hsl(35 70% 60%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(25 20% 15% / 0.08);
+    --shadow-medium: 0 8px 30px -6px hsl(25 20% 15% / 0.12);
+    --shadow-strong: 0 12px 40px -8px hsl(25 20% 15% / 0.18);
+    --shadow-glow-primary: 0 8px 30px -6px hsl(18 65% 55% / 0.35);
+    --shadow-glow-accent: 0 8px 30px -6px hsl(185 55% 45% / 0.35);
+
+    --sidebar-background: 35 30% 97%;
+    --sidebar-foreground: 25 20% 25%;
+    --sidebar-primary: 18 65% 55%;
+    --sidebar-primary-foreground: 35 30% 98%;
+    --sidebar-accent: 35 40% 92%;
+    --sidebar-accent-foreground: 25 20% 25%;
+    --sidebar-border: 35 25% 85%;
+    --sidebar-ring: 18 65% 55%;
+  }
+
+  .dark {
+    --background: 25 20% 8%;
+    --foreground: 35 30% 95%;
+
+    --card: 25 18% 12%;
+    --card-foreground: 35 30% 95%;
+
+    --popover: 25 18% 12%;
+    --popover-foreground: 35 30% 95%;
+
+    --primary: 18 65% 60%;
+    --primary-foreground: 25 20% 8%;
+
+    --secondary: 25 15% 18%;
+    --secondary-foreground: 35 30% 90%;
+
+    --muted: 25 15% 20%;
+    --muted-foreground: 35 15% 55%;
+
+    --accent: 185 55% 50%;
+    --accent-foreground: 25 20% 8%;
+
+    --safe: 145 55% 50%;
+    --safe-foreground: 25 20% 8%;
+
+    --warning: 45 90% 60%;
+    --warning-foreground: 45 100% 10%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 35 30% 95%;
+
+    --border: 25 15% 22%;
+    --input: 25 15% 22%;
+    --ring: 18 65% 60%;
+
+    --sidebar-background: 25 20% 10%;
+    --sidebar-foreground: 35 30% 90%;
+    --sidebar-primary: 18 65% 60%;
+    --sidebar-primary-foreground: 25 20% 8%;
+    --sidebar-accent: 25 15% 18%;
+    --sidebar-accent-foreground: 35 30% 90%;
+    --sidebar-border: 25 15% 22%;
+    --sidebar-ring: 18 65% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border/50;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .paw-marker {
+    @apply w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300;
+    box-shadow: var(--shadow-glow-primary);
+  }
+
+  .paw-marker-safe {
+    @apply bg-safe text-safe-foreground;
+    box-shadow: var(--shadow-glow-accent);
+  }
+
+  .paw-marker-warning {
+    @apply bg-warning text-warning-foreground;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      hsl(25 20% 8% / 0.3) 0%,
+      hsl(25 20% 8% / 0.5) 50%,
+      hsl(25 20% 8% / 0.8) 100%
+    );
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-warm);
+  }
+
+  .text-gradient-ocean {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-ocean);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .bg-gradient-card {
+    background-image: var(--gradient-card);
+  }
+
+  .bg-gradient-ocean {
+    background-image: var(--gradient-ocean);
+  }
+
+  .bg-gradient-warm {
+    background-image: var(--gradient-warm);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .shadow-strong {
+    box-shadow: var(--shadow-strong);
+  }
+
+  .shadow-glow-primary {
+    box-shadow: var(--shadow-glow-primary);
+  }
+
+  .shadow-glow-accent {
+    box-shadow: var(--shadow-glow-accent);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Leaflet Map Customization */
+.leaflet-container {
+  @apply rounded-xl;
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply bg-card rounded-lg shadow-medium border-0;
+}
+
+.leaflet-popup-content {
+  @apply text-foreground m-0 p-0;
+}
+
+.leaflet-popup-tip {
+  @apply bg-card;
+}
+
+/* =============================================
+   Mobile-First & PWA Improvements
+   ============================================= */
+
+/* Safe area insets for notched phones (iPhone X+, Android) */
+html {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+body {
+  /* Prevent elastic bounce scroll on iOS */
+  overscroll-behavior: none;
+  /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Prevent callout on long-press (iOS) */
+a, button, img {
+  -webkit-touch-callout: none;
+}
+
+/* Smooth scrolling in scroll containers */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+/* Fix leaflet z-index for mobile bottom navigation */
+.leaflet-container {
+  z-index: 0;
+}
+.leaflet-control-container {
+  z-index: 1;
+}
+
+/* Tap highlight removal for interactive elements */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Full-height layout for PWA standalone mode */
+@media all and (display-mode: standalone) {
+  html, body, #root {
+    height: 100%;
+    max-height: 100dvh;
+  }
+}

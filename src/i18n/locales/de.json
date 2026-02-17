@@ -1,0 +1,387 @@
+{
+  "appName": "Save The Paws",
+  "common": {
+    "home": "Start",
+    "map": "Karte",
+    "dogs": "Hunde",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "about": "Über uns",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "report": "Melden",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "loading": "Laden...",
+    "back": "Zurück",
+    "becomeHelper": "Helfer werden"
+  },
+  "hero": {
+    "region": "Region Agadir - Taghazout",
+    "title": "Save The",
+    "titleHighlight": "Paws",
+    "description": "Melde Tiere in Not, verbinde dich mit lokalen Helfern und verfolge geimpfte Hunde in der wunderschönen Küstenregion Agadir-Taghazout.",
+    "slogan": "Together, we save lives. 💚",
+    "exploreMap": "Karte erkunden",
+    "reportAnimal": "Tier melden",
+    "stats": {
+      "vaccinated": "Geimpfte Hunde",
+      "users": "User"
+    }
+  },
+  "reportTypes": {
+    "title": "Wie du helfen kannst",
+    "description": "Melde Tiere in verschiedenen Situationen – von geretteten Hunden bis zu Notfällen.",
+    "save": {
+      "title": "Tagged",
+      "description": "Geimpft, kastriert und mit Ohrmarke versehen."
+    },
+    "sos": {
+      "title": "SOS",
+      "description": "Notfälle, die sofortige Hilfe benötigen."
+    },
+    "stray": {
+      "title": "Report a Stray",
+      "description": "Hunde ohne Ohrmarke melden."
+    },
+    "vaccination": {
+      "title": "Promote",
+      "description": "Bitte impfen und kastrieren."
+    }
+  },
+  "map": {
+    "description": "Entdecke alle gemeldeten Hunde in der Region Agadir-Taghazout. Klicke auf eine Pfote für mehr Details.",
+    "stats": "Statistik",
+    "safeDogs": "Tagged Hunde",
+    "pending": "Ausstehend",
+    "legend": "Legende",
+    "vaccinatedDogs": "Geimpft & kastriert",
+    "notVaccinated": "Noch nicht geimpft",
+    "facilities": "Einrichtungen"
+  },
+  "facilities": {
+    "vet": "Tierarzt",
+    "friend": "PawFriend",
+    "title": "Einrichtungen",
+    "addFacility": "Einrichtung hinzufügen",
+    "noFacilities": "Noch keine Einrichtungen."
+  },
+  "donation": {
+    "title": "Unterstütze Save The Paws",
+    "description": "Save The Paws ist vollständig auf Spenden angewiesen, um Tiere zu retten und zu versorgen. Deine Unterstützung macht den Unterschied!",
+    "shortDescription": "Hilf uns, weiterhin Tiere zu retten.",
+    "cta": "Jetzt spenden",
+    "thankYou": "Danke für deine Meldung!",
+    "afterReport": "Deine Meldung hilft uns, Tieren zu helfen. Save The Paws läuft nur durch Spenden – bitte unterstütze unsere Arbeit.",
+    "together": "Together, we save lives."
+  },
+  "community": {
+    "title": "Unsere Community",
+    "description": "Gemeinsam kümmern wir uns um die Straßenhunde in der Region Agadir-Taghazout.",
+    "reportedDogs": "Gemeldete Hunde",
+    "vaccinated": "Geimpft",
+    "rescued": "Gerettet",
+    "viewMap": "Karte anzeigen"
+  },
+  "recent": {
+    "title": "Neueste Meldungen",
+    "description": "Die zuletzt hinzugefügten Hunde",
+    "viewAll": "Alle anzeigen",
+    "viewAllDogs": "Alle Hunde anzeigen"
+  },
+  "helperCta": {
+    "title": "Werde ein Helfer!",
+    "description": "Als Helfer kannst du SOS-Meldungen sehen, Meldungen freigeben und aktiv bei der Rettung von Tieren mithelfen.",
+    "apply": "Als Helfer bewerben"
+  },
+  "footer": {
+    "brand": "Save The Paws",
+    "madeWith": "Made with ❤️ für die Tiere in Agadir & Taghazout"
+  },
+  "addDog": {
+    "title": "Tier melden",
+    "description": "Hilf Tieren in Not in der Region Agadir-Taghazout",
+    "loginRequired": "Anmeldung erforderlich",
+    "loginRequiredDesc": "Bitte melde dich an, um ein Tier zu melden.",
+    "reportSent": "Meldung gesendet!",
+    "offlineSaved": "Offline gespeichert!",
+    "offlineMessage": "{{name}} wird automatisch gesendet, sobald du wieder online bist.",
+    "offlineQueueMessage": "({{count}} Meldungen in der Warteschlange)",
+    "backToList": "Zur Hundeliste",
+    "reportType": {
+      "title": "Art der Meldung",
+      "saveDesc": "Geimpft, kastriert, mit Ohrmarke",
+      "sosDesc": "Notfall - braucht sofort Hilfe",
+      "strayDesc": "Hund ohne Ohrmarke",
+      "vaccinationDesc": "Bitte impfen & kastrieren"
+    },
+    "visibility": {
+      "save": "✅ Tagged-Meldungen werden sofort allen Nutzern angezeigt.",
+      "sos": "🚨 SOS-Meldungen werden nur Helfern und Admins angezeigt.",
+      "stray": "🐕 Stray-Meldungen werden nach Prüfung durch Helfer/Admin freigegeben.",
+      "vaccination": "💉 Promote-Meldungen werden nach Prüfung durch Helfer/Admin freigegeben."
+    },
+    "urgency": "Dringlichkeitsstufe",
+    "urgencyPlaceholder": "Wie dringend ist die Situation?",
+    "urgencyLevels": {
+      "low": "Niedrig",
+      "lowDesc": "Keine unmittelbare Gefahr",
+      "medium": "Mittel",
+      "mediumDesc": "Braucht bald Hilfe",
+      "high": "Hoch",
+      "highDesc": "Dringend!",
+      "critical": "Kritisch",
+      "criticalDesc": "Lebensbedrohlich"
+    },
+    "basicInfo": "Grundinformationen",
+    "name": "Name des Hundes",
+    "namePlaceholder": "z.B. Lucky (oder 'Unbekannt')",
+    "earTag": "Ohrmarke (falls vorhanden)",
+    "earTagPlaceholder": "z.B. TAG-001",
+    "photo": "Foto",
+    "location": "Standort",
+    "locationHint": "Klicke auf die Karte, um den Standort festzulegen.",
+    "selectedLocation": "Ausgewählter Standort:",
+    "additionalDetails": "Zusätzliche Details",
+    "vaccinated": "Geimpft",
+    "vaccinatedHint": "Ist dieser Hund bereits geimpft?",
+    "additionalNotes": "Zusätzliche Notizen",
+    "additionalNotesPlaceholder": "Weitere Informationen (Verhalten, Zustand, etc.)...",
+    "sosNotesPlaceholder": "Beschreibe die Notsituation genau...",
+    "submit": "Meldung absenden",
+    "submitting": "Wird gesendet..."
+  },
+  "auth": {
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "loginToViewMap": "Bitte melde dich an, um die Karte zu sehen.",
+    "email": "E-Mail",
+    "emailPlaceholder": "deine@email.de",
+    "password": "Passwort",
+    "name": "Name",
+    "namePlaceholder": "Dein Name",
+    "pleaseWait": "Bitte warten...",
+    "loading": "Laden...",
+    "or": "oder",
+    "signInWithGoogle": "Mit Google anmelden",
+    "noAccount": "Noch kein Konto? Registrieren",
+    "alreadyRegistered": "Bereits registriert? Anmelden",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "passwordMinLength": "Passwort muss mindestens 6 Zeichen haben",
+    "invalidCredentials": "Ungültige Anmeldedaten",
+    "emailAlreadyRegistered": "Diese E-Mail ist bereits registriert",
+    "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten",
+    "checkYourEmail": "E-Mail bestätigen",
+    "verificationSent": "Wir haben einen Bestätigungslink an",
+    "clickLinkToVerify": "Klicke auf den Link in der E-Mail, um dein Konto zu aktivieren.",
+    "checkSpamFolder": "Nicht gefunden? Schau auch im Spam-Ordner nach.",
+    "linkExpiresIn": "Der Link ist 24 Stunden gültig.",
+    "backToLogin": "Zurück zur Anmeldung",
+    "emailNotConfirmed": "Bitte bestätige zuerst deine E-Mail-Adresse."
+  },
+  "admin": {
+    "title": "Admin",
+    "helperTitle": "Helfer",
+    "accessDenied": "Zugriff verweigert",
+    "accessDeniedDesc": "Du benötigst Helfer- oder Admin-Rechte, um diese Seite zu sehen.",
+    "goHome": "Zur Startseite",
+    "stats": {
+      "sos": "SOS",
+      "pending": "Ausstehend",
+      "visible": "Sichtbar",
+      "applications": "Bewerbungen"
+    },
+    "tabs": {
+      "pending": "Ausstehend",
+      "sos": "SOS",
+      "all": "Übersicht",
+      "messages": "Nachrichten",
+      "rehab": "Rehab-Spots",
+      "facilities": "Einrichtungen",
+      "ads": "Werbung",
+      "helpers": "Helfer"
+    },
+    "pendingApprovals": "Ausstehende Freigaben",
+    "noPending": "Keine ausstehenden Meldungen.",
+    "sosReports": "SOS-Meldungen",
+    "noSos": "Keine SOS-Meldungen.",
+    "allDogs": "Alle Hunde",
+    "noDogs": "Noch keine Hunde gemeldet.",
+    "helperApplications": "Helfer-Bewerbungen",
+    "noApplications": "Keine Bewerbungen.",
+    "approve": "Freigeben",
+    "accept": "Annehmen",
+    "table": {
+      "photo": "Foto",
+      "name": "Name",
+      "type": "Typ",
+      "location": "Standort",
+      "reported": "Gemeldet",
+      "vaccination1": "Impfung 1",
+      "vaccination2": "Impfung 2",
+      "vaccinationPassport": "Impfpass",
+      "comment": "Kommentar",
+      "remarks": "Bemerkung",
+      "actions": "Aktionen"
+    },
+    "status": {
+      "visible": "Sichtbar",
+      "pending": "Ausstehend",
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt"
+    },
+    "urgency": "Dringlichkeit",
+    "appliedOn": "Beworben am",
+    "edit": {
+      "title": "Bearbeiten",
+      "vaccination1": "Impfung 1 am",
+      "vaccination2": "Impfung 2 am",
+      "markVaccinated": "Als geimpft markieren",
+      "visibleToUsers": "Für User sichtbar"
+    },
+    "deleteConfirm": "Möchtest du diesen Hund wirklich löschen?",
+    "editDialog": "Bearbeiten",
+    "vaccination": {
+      "label1": "Impfung 1 am",
+      "label2": "Impfung 2 am",
+      "markAs": "Als geimpft markieren",
+      "visibleToUsers": "Für User sichtbar"
+    },
+    "deleteAdConfirm": "Möchtest du diese Werbung wirklich löschen?",
+    "deleteFacilityConfirm": "Möchtest du diese Einrichtung wirklich löschen?",
+    "statusLabels": {
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt",
+      "pending": "Ausstehend"
+    },
+    "buttons": {
+      "save": "Speichern",
+      "savingAd": "Speichern...",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "createAd": "Werbung erstellen"
+    },
+    "messages": {
+      "replyPlaceholder": "Antwort schreiben...",
+      "sendMessage": "Nachricht senden",
+      "send": "Senden",
+      "sendShort": "Absenden"
+    },
+    "ads": {
+      "image": "Bild",
+      "title": "Titel",
+      "targetUrl": "Ziel-URL",
+      "delay": "Verzögerung",
+      "titlePlaceholder": "Werbungstitel eingeben",
+      "urlPlaceholder": "https://example.com",
+      "delayPlaceholder": "Sekunden"
+    },
+    "rehabSpots": {
+      "title": "Rehab-Spots",
+      "description": "Plätze zur Genesung nach Kastration",
+      "add": "Rehab-Spot hinzufügen",
+      "noSpots": "Keine Rehab-Spots vorhanden.",
+      "placesTotal": "Anzahl der Plätze",
+      "availableUntil": "Verfügbar bis",
+      "contactInfo": "Kontakt",
+      "notes": "Notizen",
+      "placesPlaceholder": "z.B. 3",
+      "contactPlaceholder": "Name und Telefonnummer",
+      "notesPlaceholder": "Zusätzliche Informationen...",
+      "submit": "Rehab-Spot hinzufügen",
+      "submitting": "Wird hinzugefügt...",
+      "withdraw": "Angebot zurückziehen",
+      "withdrawConfirm": "Möchtest du diesen Rehab-Spot wirklich löschen?"
+    }
+  },
+  "helper": {
+    "title": "Werde Helfer 💚",
+    "description": "Hilf aktiv bei der Rettung und Versorgung von Tieren in Not.",
+    "loginRequired": "Anmeldung erforderlich",
+    "loginRequiredDesc": "Bitte melde dich an, um dich als Helfer zu bewerben.",
+    "benefits": {
+      "title": "Was Helfer können:",
+      "seeSos": "SOS-Meldungen sehen",
+      "sosDesc": "Reagiere schnell auf Notfälle",
+      "approve": "Meldungen freigeben",
+      "approveDesc": "Prüfe und veröffentliche neue Meldungen",
+      "edit": "Hunde-Daten bearbeiten",
+      "editDesc": "Halte Informationen aktuell"
+    },
+    "application": {
+      "title": "Deine Bewerbung",
+      "question": "Warum möchtest du Helfer werden?",
+      "placeholder": "Erzähle uns ein bisschen über dich und warum du helfen möchtest...",
+      "hint": "Teile uns deine Motivation und ggf. relevante Erfahrungen mit.",
+      "submit": "Bewerbung absenden",
+      "submitting": "Wird gesendet..."
+    },
+    "status": {
+      "pending": "Bewerbung in Prüfung",
+      "pendingDesc": "Deine Bewerbung wird von einem Admin geprüft. Wir melden uns bald bei dir!",
+      "approved": "Du bist Helfer! 🎉",
+      "approvedDesc": "Willkommen im Team! Du kannst jetzt SOS-Meldungen sehen und Meldungen freigeben.",
+      "goToDashboard": "Zum Dashboard",
+      "rejected": "Bewerbung abgelehnt",
+      "rejectedDesc": "Leider wurde deine Bewerbung abgelehnt. Bei Fragen kontaktiere uns gerne.",
+      "yourApplication": "Deine Bewerbung:"
+    }
+  },
+  "dogCard": {
+    "vaccinated": "Geimpft",
+    "notVaccinated": "Nicht geimpft",
+    "urgency": "Dringlichkeit",
+    "visible": "Sichtbar",
+    "pending": "Ausstehend",
+    "sponsorThanks": "Danke für Deine Hilfe, {{name}}!"
+  },
+  "pwa": {
+    "installTitle": "Save The Paws installieren",
+    "installDescription": "Zum Home-Bildschirm hinzufügen für schnellen Zugriff",
+    "iosInstructions": "Tippe auf Teilen und 'Zum Home-Bildschirm'",
+    "installButton": "App installieren",
+    "alreadyInstalled": "App bereits installiert!",
+    "alreadyInstalledDesc": "Du kannst Save The Paws direkt vom Home-Bildschirm öffnen.",
+    "pageTitle": "Save The Paws installieren",
+    "pageDescription": "Erlebe die volle App-Erfahrung auf deinem Gerät",
+    "benefits": "App-Vorteile",
+    "benefit1": "Funktioniert offline",
+    "benefit2": "Schneller Zugriff vom Home-Bildschirm",
+    "benefit3": "Kein App Store nötig",
+    "iosTitle": "Installation auf iPhone/iPad",
+    "iosStep1": "Tippe auf das",
+    "shareButton": "Teilen-Symbol",
+    "iosStep2": "Scrolle nach unten und tippe auf",
+    "iosStep3": "Tippe auf",
+    "androidTitle": "Installation auf Android",
+    "androidStep1": "Tippe auf das Browser-Menü (⋮)",
+    "androidStep2": "Wähle \"App installieren\" oder \"Zum Startbildschirm\"",
+    "androidStep3": "Tippe auf \"Installieren\" zum Bestätigen",
+    "desktopMessage": "Öffne diese Seite auf deinem Handy, um die App zu installieren.",
+    "skipInstall": "Ohne Installation fortfahren"
+  },
+  "contact": {
+    "navLabel": "Kontakt",
+    "title": "Kontakt",
+    "subtitle": "Nimm Kontakt mit Save The Paws auf – wir helfen gerne.",
+    "whatsapp": {
+      "title": "Schreib uns auf WhatsApp",
+      "description": "Der schnellste Weg uns zu erreichen. Fragen, Meldungen oder einfach helfen?",
+      "cta": "WhatsApp Chat"
+    },
+    "addresses": {
+      "title": "Unsere Adressen",
+      "germany": {
+        "label": "Deutschland (Verein)",
+        "note": "Platzhalter – bitte mit echter Adresse aktualisieren"
+      },
+      "morocco": {
+        "label": "Marokko (Vor Ort)",
+        "note": "Platzhalter – bitte mit echter Adresse aktualisieren"
+      }
+    },
+    "online": {
+      "title": "Online"
+    }
+  }
+}

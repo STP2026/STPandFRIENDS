@@ -1,0 +1,387 @@
+{
+  "appName": "Save The Paws",
+  "common": {
+    "home": "Home",
+    "map": "Map",
+    "dogs": "Dogs",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "about": "About us",
+    "login": "Login",
+    "logout": "Logout",
+    "report": "Report",
+    "cancel": "Cancel",
+    "save": "Save",
+    "loading": "Loading...",
+    "back": "Back",
+    "becomeHelper": "Become Helper"
+  },
+  "hero": {
+    "region": "Agadir - Taghazout Region",
+    "title": "Save The",
+    "titleHighlight": "Paws",
+    "description": "Report animals in need, connect with local helpers, and track vaccinated dogs in the beautiful Agadir-Taghazout coastal region.",
+    "slogan": "Together, we save lives. 💚",
+    "exploreMap": "Explore Map",
+    "reportAnimal": "Report Animal",
+    "stats": {
+      "vaccinated": "Vaccinated Dogs",
+      "users": "Users"
+    }
+  },
+  "reportTypes": {
+    "title": "How You Can Help",
+    "description": "Report animals in different situations – from rescued dogs to emergencies.",
+    "save": {
+      "title": "Tagged",
+      "description": "Vaccinated, neutered, and ear-tagged dogs."
+    },
+    "sos": {
+      "title": "SOS",
+      "description": "Emergencies that need immediate help."
+    },
+    "stray": {
+      "title": "Report a Stray",
+      "description": "Dogs without ear tags that need help."
+    },
+    "vaccination": {
+      "title": "Promote",
+      "description": "Request vaccination and neutering for this dog."
+    }
+  },
+  "map": {
+    "description": "Discover all reported dogs in the Agadir-Taghazout region. Click on a paw for more details.",
+    "stats": "Statistics",
+    "safeDogs": "Tagged Dogs",
+    "pending": "Pending",
+    "legend": "Legend",
+    "vaccinatedDogs": "Vaccinated & neutered",
+    "notVaccinated": "Not yet vaccinated",
+    "facilities": "Facilities"
+  },
+  "facilities": {
+    "vet": "Veterinarian",
+    "friend": "PawFriend",
+    "title": "Facilities",
+    "addFacility": "Add Facility",
+    "noFacilities": "No facilities yet."
+  },
+  "donation": {
+    "title": "Support Save The Paws",
+    "description": "Save The Paws relies entirely on donations to rescue and care for animals. Your support makes a difference!",
+    "shortDescription": "Help us continue rescuing animals.",
+    "cta": "Donate Now",
+    "thankYou": "Thank you for reporting!",
+    "afterReport": "Your report helps us help animals. Save The Paws runs entirely on donations – please consider supporting our work.",
+    "together": "Together, we save lives."
+  },
+  "community": {
+    "title": "Our Community",
+    "description": "Together we care for stray dogs in the Agadir-Taghazout region.",
+    "reportedDogs": "Reported Dogs",
+    "vaccinated": "Vaccinated",
+    "rescued": "Rescued",
+    "viewMap": "View Map"
+  },
+  "recent": {
+    "title": "Latest Reports",
+    "description": "Recently added dogs",
+    "viewAll": "View All",
+    "viewAllDogs": "View All Dogs"
+  },
+  "helperCta": {
+    "title": "Become a Helper!",
+    "description": "As a helper, you can see SOS reports, approve submissions, and actively help rescue animals.",
+    "apply": "Apply as Helper"
+  },
+  "footer": {
+    "brand": "Save The Paws",
+    "madeWith": "Made with ❤️ for the animals in Agadir & Taghazout"
+  },
+  "addDog": {
+    "title": "Report Animal",
+    "description": "Help animals in need in the Agadir-Taghazout region",
+    "loginRequired": "Login Required",
+    "loginRequiredDesc": "Please log in to report an animal.",
+    "reportSent": "Report Sent!",
+    "offlineSaved": "Saved Offline!",
+    "offlineMessage": "{{name}} will be sent automatically when you're back online.",
+    "offlineQueueMessage": "({{count}} reports in queue)",
+    "backToList": "Back to Dog List",
+    "reportType": {
+      "title": "Report Type",
+      "saveDesc": "Vaccinated, neutered, ear-tagged",
+      "sosDesc": "Emergency - needs immediate help",
+      "strayDesc": "Dog without ear tag",
+      "vaccinationDesc": "Request vaccination & neutering"
+    },
+    "visibility": {
+      "save": "✅ Tagged reports are immediately visible to all users.",
+      "sos": "🚨 SOS reports are only visible to helpers and admins.",
+      "stray": "🐕 Stray reports will be visible after approval by helper/admin.",
+      "vaccination": "💉 Promote requests will be visible after approval by helper/admin."
+    },
+    "urgency": "Urgency Level",
+    "urgencyPlaceholder": "How urgent is the situation?",
+    "urgencyLevels": {
+      "low": "Low",
+      "lowDesc": "No immediate danger",
+      "medium": "Medium",
+      "mediumDesc": "Needs help soon",
+      "high": "High",
+      "highDesc": "Urgent!",
+      "critical": "Critical",
+      "criticalDesc": "Life-threatening"
+    },
+    "basicInfo": "Basic Information",
+    "name": "Dog's Name",
+    "namePlaceholder": "e.g. Lucky (or 'Unknown')",
+    "earTag": "Ear Tag (if present)",
+    "earTagPlaceholder": "e.g. TAG-001",
+    "photo": "Photo",
+    "location": "Location",
+    "locationHint": "Click on the map to set the location.",
+    "selectedLocation": "Selected Location:",
+    "additionalDetails": "Additional Details",
+    "vaccinated": "Vaccinated",
+    "vaccinatedHint": "Is this dog already vaccinated?",
+    "additionalNotes": "Additional Notes",
+    "additionalNotesPlaceholder": "Additional information (behavior, condition, etc.)...",
+    "sosNotesPlaceholder": "Describe the emergency situation exactly...",
+    "submit": "Submit Report",
+    "submitting": "Submitting..."
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "loginToViewMap": "Please log in to view the map.",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "pleaseWait": "Please wait...",
+    "loading": "Loading...",
+    "or": "or",
+    "signInWithGoogle": "Sign in with Google",
+    "noAccount": "No account yet? Sign up",
+    "alreadyRegistered": "Already registered? Login",
+    "invalidEmail": "Invalid email address",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "invalidCredentials": "Invalid login credentials",
+    "emailAlreadyRegistered": "This email is already registered",
+    "unexpectedError": "An unexpected error occurred",
+    "checkYourEmail": "Check your email",
+    "verificationSent": "We sent a confirmation link to",
+    "clickLinkToVerify": "Click the link in the email to activate your account.",
+    "checkSpamFolder": "Not found? Check your spam folder too.",
+    "linkExpiresIn": "The link expires in 24 hours.",
+    "backToLogin": "Back to login",
+    "emailNotConfirmed": "Please confirm your email address first."
+  },
+  "admin": {
+    "title": "Admin",
+    "helperTitle": "Helper",
+    "accessDenied": "Access Denied",
+    "accessDeniedDesc": "You need helper or admin rights to view this page.",
+    "goHome": "Go to Homepage",
+    "stats": {
+      "sos": "SOS",
+      "pending": "Pending",
+      "visible": "Visible",
+      "applications": "Applications"
+    },
+    "tabs": {
+      "pending": "Pending",
+      "sos": "SOS",
+      "all": "Overview",
+      "messages": "Messages",
+      "rehab": "Rehab Spots",
+      "facilities": "Facilities",
+      "ads": "Advertisements",
+      "helpers": "Helpers"
+    },
+    "pendingApprovals": "Pending Approvals",
+    "noPending": "No pending reports.",
+    "sosReports": "SOS Reports",
+    "noSos": "No SOS reports.",
+    "allDogs": "All Dogs",
+    "noDogs": "No dogs reported yet.",
+    "helperApplications": "Helper Applications",
+    "noApplications": "No applications.",
+    "approve": "Approve",
+    "accept": "Accept",
+    "table": {
+      "photo": "Photo",
+      "name": "Name",
+      "type": "Type",
+      "location": "Location",
+      "reported": "Reported",
+      "vaccination1": "Vaccination 1",
+      "vaccination2": "Vaccination 2",
+      "vaccinationPassport": "Vaccination Passport",
+      "comment": "Comment",
+      "remarks": "Remarks",
+      "actions": "Actions"
+    },
+    "status": {
+      "visible": "Visible",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "urgency": "Urgency",
+    "appliedOn": "Applied on",
+    "edit": {
+      "title": "Edit",
+      "vaccination1": "Vaccination 1 on",
+      "vaccination2": "Vaccination 2 on",
+      "markVaccinated": "Mark as vaccinated",
+      "visibleToUsers": "Visible to users"
+    },
+    "deleteConfirm": "Do you really want to delete this dog?",
+    "editDialog": "Edit",
+    "vaccination": {
+      "label1": "Vaccination 1 on",
+      "label2": "Vaccination 2 on",
+      "markAs": "Mark as vaccinated",
+      "visibleToUsers": "Visible to users"
+    },
+    "deleteAdConfirm": "Do you really want to delete this ad?",
+    "deleteFacilityConfirm": "Do you really want to delete this facility?",
+    "statusLabels": {
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "pending": "Pending"
+    },
+    "buttons": {
+      "save": "Save",
+      "savingAd": "Saving...",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "createAd": "Create Ad"
+    },
+    "messages": {
+      "replyPlaceholder": "Reply...",
+      "sendMessage": "Send Message",
+      "send": "Send",
+      "sendShort": "Submit"
+    },
+    "ads": {
+      "image": "Image",
+      "title": "Title",
+      "targetUrl": "Target URL",
+      "delay": "Delay",
+      "titlePlaceholder": "Enter ad title",
+      "urlPlaceholder": "https://example.com",
+      "delayPlaceholder": "Seconds"
+    },
+    "rehabSpots": {
+      "title": "Rehab Spots",
+      "description": "Recovery places after neutering",
+      "add": "Add Rehab Spot",
+      "noSpots": "No rehab spots available.",
+      "placesTotal": "Number of Places",
+      "availableUntil": "Available Until",
+      "contactInfo": "Contact",
+      "notes": "Notes",
+      "placesPlaceholder": "e.g. 3",
+      "contactPlaceholder": "Name and phone number",
+      "notesPlaceholder": "Additional information...",
+      "submit": "Add Rehab Spot",
+      "submitting": "Adding...",
+      "withdraw": "Withdraw Offer",
+      "withdrawConfirm": "Do you really want to delete this rehab spot?"
+    }
+  },
+  "helper": {
+    "title": "Become a Helper 💚",
+    "description": "Actively help rescue and care for animals in need.",
+    "loginRequired": "Login Required",
+    "loginRequiredDesc": "Please log in to apply as a helper.",
+    "benefits": {
+      "title": "What helpers can do:",
+      "seeSos": "See SOS reports",
+      "sosDesc": "Respond quickly to emergencies",
+      "approve": "Approve reports",
+      "approveDesc": "Review and publish new reports",
+      "edit": "Edit dog data",
+      "editDesc": "Keep information up to date"
+    },
+    "application": {
+      "title": "Your Application",
+      "question": "Why do you want to become a helper?",
+      "placeholder": "Tell us a bit about yourself and why you want to help...",
+      "hint": "Share your motivation and any relevant experience.",
+      "submit": "Submit Application",
+      "submitting": "Submitting..."
+    },
+    "status": {
+      "pending": "Application Under Review",
+      "pendingDesc": "Your application is being reviewed by an admin. We'll get back to you soon!",
+      "approved": "You're a Helper! 🎉",
+      "approvedDesc": "Welcome to the team! You can now see SOS reports and approve submissions.",
+      "goToDashboard": "Go to Dashboard",
+      "rejected": "Application Rejected",
+      "rejectedDesc": "Unfortunately, your application was rejected. Contact us if you have questions.",
+      "yourApplication": "Your Application:"
+    }
+  },
+  "dogCard": {
+    "vaccinated": "Vaccinated",
+    "notVaccinated": "Not vaccinated",
+    "urgency": "Urgency",
+    "visible": "Visible",
+    "pending": "Pending",
+    "sponsorThanks": "Thank you for your help, {{name}}!"
+  },
+  "pwa": {
+    "installTitle": "Install Save The Paws",
+    "installDescription": "Add to your home screen for quick access",
+    "iosInstructions": "Tap the share button and 'Add to Home Screen'",
+    "installButton": "Install App",
+    "alreadyInstalled": "App Already Installed!",
+    "alreadyInstalledDesc": "You can access Save The Paws directly from your home screen.",
+    "pageTitle": "Install Save The Paws",
+    "pageDescription": "Get the full app experience on your device",
+    "benefits": "App Benefits",
+    "benefit1": "Works offline",
+    "benefit2": "Quick access from home screen",
+    "benefit3": "No app store needed",
+    "iosTitle": "How to Install on iPhone/iPad",
+    "iosStep1": "Tap the",
+    "shareButton": "Share button",
+    "iosStep2": "Scroll down and tap",
+    "iosStep3": "Tap",
+    "androidTitle": "How to Install on Android",
+    "androidStep1": "Tap the browser menu (⋮)",
+    "androidStep2": "Select \"Install app\" or \"Add to Home screen\"",
+    "androidStep3": "Tap \"Install\" to confirm",
+    "desktopMessage": "Open this page on your mobile device to install the app.",
+    "skipInstall": "Continue without installing"
+  },
+  "contact": {
+    "navLabel": "Contact",
+    "title": "Contact Us",
+    "subtitle": "Get in touch with Save The Paws – we're happy to help.",
+    "whatsapp": {
+      "title": "Write us on WhatsApp",
+      "description": "The fastest way to reach us. Questions, reports, or just want to help?",
+      "cta": "Chat on WhatsApp"
+    },
+    "addresses": {
+      "title": "Our Addresses",
+      "germany": {
+        "label": "Germany (Organization)",
+        "note": "Placeholder – update with real address"
+      },
+      "morocco": {
+        "label": "Morocco (On-site)",
+        "note": "Placeholder – update with real address"
+      }
+    },
+    "online": {
+      "title": "Online"
+    }
+  }
+}
