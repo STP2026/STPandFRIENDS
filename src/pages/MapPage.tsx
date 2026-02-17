@@ -25,7 +25,6 @@ const MapPage = () => {
   const displayDogs = dogs || [];
   const displayFacilities = facilities || [];
   const vaccinatedCount = displayDogs.filter((d) => d.isVaccinated).length;
-  const pendingCount = displayDogs.filter((d) => !d.isVaccinated).length;
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,19 +63,11 @@ const MapPage = () => {
 
               <div className="glass-card rounded-xl p-4 animate-fade-in">
                 <h3 className="font-display font-bold text-foreground mb-3">{t('map.stats')}</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-safe/10 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-safe">
-                      {vaccinatedCount}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{t('map.safeDogs')}</p>
-                  </div>
-                  <div className="bg-warning/10 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-warning">
-                      {pendingCount}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{t('map.pending')}</p>
-                  </div>
+                <div className="bg-safe/10 rounded-lg p-3 text-center">
+                  <p className="text-2xl font-bold text-safe">
+                    {vaccinatedCount}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{t('map.safeDogs')}</p>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { CheckCircle, AlertCircle, Stethoscope, Home } from "lucide-react";
+import { CheckCircle, Stethoscope, Home } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const MapLegend = () => {
@@ -16,15 +16,6 @@ const MapLegend = () => {
           <div>
             <p className="text-sm font-medium text-foreground">{t('map.safeDogs')}</p>
             <p className="text-xs text-muted-foreground">{t('map.vaccinatedDogs')}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-warning/20 border-2 border-warning flex items-center justify-center">
-            <AlertCircle className="w-4 h-4 text-warning" />
-          </div>
-          <div>
-            <p className="text-sm font-medium text-foreground">{t('map.pending')}</p>
-            <p className="text-xs text-muted-foreground">{t('map.notVaccinated')}</p>
           </div>
         </div>
 

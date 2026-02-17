@@ -6,7 +6,7 @@ import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import logoHeader from "@/assets/logo-header.webp";
+import logoHeader from "@/assets/logo-header.png";
 
 const FIRST_AID_URL = "https://save-the-paws.de/first-aid";
 

@@ -308,13 +308,13 @@ const AddDogPage = () => {
                   <Label htmlFor="earTag" className="flex items-center gap-2">
                     <Tag className="w-4 h-4" />
                     {t('addDog.earTag')}
+                    <span className="text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span>
                   </Label>
                   <Input
                     id="earTag"
                     placeholder={t('addDog.earTagPlaceholder')}
                     value={formData.earTag}
                     onChange={(e) => setFormData({ ...formData, earTag: e.target.value })}
-                    required
                   />
                 </div>
               </div>

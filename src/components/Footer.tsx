@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logoHeader from "@/assets/logo-header.webp";
+import logoHeader from "@/assets/logo-header.png";
 
 // WhatsApp click-to-chat — number is NOT displayed on the page
 const WA_NUMBER = "4915756175163";
