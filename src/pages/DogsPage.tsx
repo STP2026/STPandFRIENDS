@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import DogCard from "@/components/DogCard";
 import { useDogs } from "@/hooks/useDogs";
+import { useAuth } from "@/contexts/AuthContext";
+import { useIsHelper } from "@/hooks/useHelperApplication";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Filter, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
@@ -9,9 +11,15 @@ import { Search, Filter, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 const DogsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState<"all" | "vaccinated" | "pending">("all");
+  const { user, isAdmin } = useAuth();
+  const { data: isHelper } = useIsHelper(user?.id);
+  const isElevated = isAdmin || !!isHelper;
 
-  // React Query handles cache freshness via staleTime in App.tsx — no manual invalidation needed
-  const { data: dogs = [], isLoading } = useDogs(true);
+  // Helpers/admins see all dogs; users see only approved
+  const { data: allDogs = [], isLoading } = useDogs(!isElevated);
+
+  // Users only see tagged (save) dogs; helpers/admins see every report type
+  const dogs = isElevated ? allDogs : allDogs.filter((d) => d.reportType === 'save');
 
   const filteredDogs = dogs.filter((dog) => {
     const matchesSearch = dog.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -45,8 +45,10 @@ export function useAddDog() {
   
   return useMutation({
     mutationFn: async (formData: DogFormData & { reportedBy: string }) => {
-      // Determine if auto-approved based on report type
-      const isAutoApproved = formData.reportType === 'save';
+      // Non-tagged reports (stray, sos, vaccination_wish) are auto-approved
+      // so helpers/admins see them on the map immediately.
+      // Tagged ("save") dogs require admin approval before showing to users.
+      const isAutoApproved = formData.reportType !== 'save';
       
       const { data, error } = await supabase
         .from('dogs')

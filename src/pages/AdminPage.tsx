@@ -119,6 +119,7 @@ const AdminPage = () => {
     isVaccinated: false,
     isApproved: false,
     sponsorName: '',
+    reportType: '' as string,
   });
 
   const canAccess = isAdmin || isHelper;
@@ -176,6 +177,7 @@ const AdminPage = () => {
       isVaccinated: dog.isVaccinated,
       isApproved: dog.isApproved,
       sponsorName: dog.sponsorName || '',
+      reportType: dog.reportType,
     });
     setEditDialogOpen(true);
   };
@@ -202,6 +204,9 @@ const AdminPage = () => {
     if (editForm.sponsorName !== (selectedDog.sponsorName || '')) {
       changes.sponsor_name = editForm.sponsorName || null;
     }
+    if (editForm.reportType !== selectedDog.reportType) {
+      changes.report_type = editForm.reportType;
+    }
     
     await updateDog.mutateAsync({
       id: selectedDog.id,
@@ -212,6 +217,7 @@ const AdminPage = () => {
         is_vaccinated: editForm.isVaccinated,
         is_approved: editForm.isApproved,
         sponsor_name: editForm.sponsorName || null,
+        report_type: editForm.reportType,
       },
     });
 
@@ -1390,6 +1396,59 @@ const AdminPage = () => {
                     <Heart className="w-3 h-3 fill-red-600" />
                     Danke für Deine Hilfe, {editForm.sponsorName}!
                   </p>
+                )}
+              </div>
+            )}
+
+            {/* Convert to Tagged — shown for stray, sos, vaccination_wish */}
+            {selectedDog && selectedDog.reportType !== 'save' && (
+              <div className="border-t border-border pt-4 space-y-3">
+                <div className={`p-3 rounded-lg ${editForm.reportType === 'save' ? 'bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800' : 'bg-secondary/50'}`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <Label className="flex items-center gap-2 font-medium">
+                        <CheckCircle className={`w-4 h-4 ${editForm.reportType === 'save' ? 'text-green-600' : 'text-muted-foreground'}`} />
+                        In "Tagged" umwandeln
+                      </Label>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Hund wurde geimpft, kastriert & getaggt
+                      </p>
+                    </div>
+                    <Switch
+                      checked={editForm.reportType === 'save'}
+                      onCheckedChange={(checked) => {
+                        if (checked) {
+                          setEditForm({
+                            ...editForm,
+                            reportType: 'save',
+                            isVaccinated: true,
+                            isApproved: true,
+                          });
+                        } else {
+                          setEditForm({
+                            ...editForm,
+                            reportType: selectedDog.reportType,
+                            isVaccinated: selectedDog.isVaccinated,
+                          });
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+                {editForm.reportType === 'save' && (
+                  <div className="space-y-2">
+                    <Label htmlFor="sponsor-convert" className="flex items-center gap-2 text-red-600">
+                      <Heart className="w-4 h-4 fill-red-600" />
+                      Sponsor hinzufügen
+                    </Label>
+                    <Input
+                      id="sponsor-convert"
+                      type="text"
+                      placeholder="Name des Sponsors"
+                      value={editForm.sponsorName}
+                      onChange={(e) => setEditForm({ ...editForm, sponsorName: e.target.value })}
+                    />
+                  </div>
                 )}
               </div>
             )}

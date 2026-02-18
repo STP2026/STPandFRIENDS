@@ -29,8 +29,12 @@ const MapPage = () => {
     : undefined;
   
   const isLoading = dogsLoading || facilitiesLoading;
-  const displayDogs = dogs || [];
   const displayFacilities = facilities || [];
+
+  // Users only see tagged (save) dogs; helpers/admins see all report types
+  const displayDogs = isElevated
+    ? (dogs || [])
+    : (dogs || []).filter((d) => d.reportType === 'save');
 
   // Stats
   const taggedCount = displayDogs.filter((d) => d.reportType === 'save').length;
