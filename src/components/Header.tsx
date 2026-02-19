@@ -72,11 +72,14 @@ const AidTooltips = () => {
   return (
     <div
       className="absolute top-full mt-2 z-[60] pointer-events-none"
-      style={{ left: activeTooltip === "human" ? "-8px" : undefined, right: activeTooltip === "dog" ? "-8px" : undefined }}
+      style={{ left: activeTooltip === "human" ? "-4px" : undefined, right: activeTooltip === "dog" ? "-4px" : undefined }}
     >
       <div className="relative bg-card border border-border shadow-lg rounded-lg px-3 py-2 text-xs font-medium text-foreground whitespace-nowrap animate-fade-in">
-        {/* Arrow */}
-        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-card border-l border-t border-border rotate-45" />
+        {/* Arrow — positioned over the correct icon */}
+        <div
+          className="absolute -top-1.5 w-3 h-3 bg-card border-l border-t border-border rotate-45"
+          style={{ left: activeTooltip === "human" ? "16px" : undefined, right: activeTooltip === "dog" ? "16px" : undefined }}
+        />
         {activeTooltip === "human" ? "FirstAid support for you" : "DogHelp – How to act"}
       </div>
     </div>
