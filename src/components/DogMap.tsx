@@ -91,6 +91,53 @@ const createVetIcon = () => {
 };
 
 // Friend icon (paw with roof)
+const createMobileVetIcon = () => {
+  return L.divIcon({
+    html: `
+      <div style="
+        position: relative;
+        width: 40px;
+        height: 40px;
+      ">
+        <div style="
+          position: absolute;
+          inset: -4px;
+          background: rgba(220,38,38,0.2);
+          border-radius: 50%;
+          animation: mobilevet-pulse 2s ease-in-out infinite;
+        "></div>
+        <div style="
+          position: relative;
+          width: 40px;
+          height: 40px;
+          background: #dc2626;
+          border: 3px solid #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 12px rgba(220,38,38,0.4);
+          cursor: pointer;
+        ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+        </div>
+      </div>
+      <style>
+        @keyframes mobilevet-pulse {
+          0%, 100% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.5); opacity: 0; }
+        }
+      </style>
+    `,
+    className: "mobile-vet-marker",
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -24],
+  });
+};
+
 const createFriendIcon = () => {
   return L.divIcon({
     html: `
@@ -337,11 +384,16 @@ const DogMap = ({
 
     // Add new facility markers
     facilities.forEach((facility) => {
-      const icon = facility.type === 'vet' ? createVetIcon() : createFriendIcon();
+      const isMobileVet = facility.name.toLowerCase().includes('mobil');
+      const icon = isMobileVet
+        ? createMobileVetIcon()
+        : facility.type === 'vet' ? createVetIcon() : createFriendIcon();
       const marker = L.marker([facility.latitude, facility.longitude], { icon })
         .addTo(mapRef.current!);
 
-      const typeLabel = facility.type === 'vet' ? '🏥 Tierarzt' : '🏠 Partner';
+      const typeLabel = isMobileVet
+        ? '📱 Mobiler Tierarzt'
+        : facility.type === 'vet' ? '🏥 Tierarzt' : '🏠 Partner';
       const popupContent = `
         <div style="padding: 12px; min-width: 220px;">
           ${facility.photoUrl ? `
