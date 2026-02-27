@@ -104,6 +104,8 @@
     "loginRequired": "Anmeldung erforderlich",
     "loginRequiredDesc": "Bitte melde dich an, um ein Tier zu melden.",
     "reportSent": "Meldung gesendet!",
+    "sosHelpNowHint": "Deine Meldung wurde gesendet. Hilf dem Hund jetzt direkt!",
+    "sosHelpNowButton": "Jetzt helfen – Erste-Hilfe-Guide",
     "offlineSaved": "Offline gespeichert!",
     "offlineMessage": "{{name}} wird automatisch gesendet, sobald du wieder online bist.",
     "offlineQueueMessage": "({{count}} Meldungen in der Warteschlange)",
@@ -116,10 +118,10 @@
       "vaccinationDesc": "Bitte impfen & kastrieren"
     },
     "visibility": {
-      "save": "✅ Tagged-Meldungen werden sofort allen Nutzern angezeigt.",
-      "sos": "🚨 SOS-Meldungen werden nur Helfern und Admins angezeigt.",
-      "stray": "🐕 Stray-Meldungen werden nach Prüfung durch Helfer/Admin freigegeben.",
-      "vaccination": "💉 Promote-Meldungen werden nach Prüfung durch Helfer/Admin freigegeben."
+      "save": "✅ Tagged-Meldungen werden nach Freigabe durch Helfer/Admin allen Nutzern angezeigt.",
+      "sos": "🚨 SOS: Erst melden, dann wirst du zu unserem Erste-Hilfe-Guide weitergeleitet, um sofort zu helfen.",
+      "stray": "🐕 Stray-Meldungen werden der Tierhilfe gemeldet.",
+      "vaccination": "💉 Promote-Meldungen werden der Tierhilfe gemeldet."
     },
     "urgency": "Dringlichkeitsstufe",
     "urgencyPlaceholder": "Wie dringend ist die Situation?",

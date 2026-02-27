@@ -91,7 +91,15 @@ const AddDogPage = () => {
         setSubmittedOffline(true);
       }
       
-      setTimeout(() => navigate("/dogs"), 2000);
+      // SOS reports: redirect to Dog Aid landing page so the reporter can act immediately
+      if (formData.reportType === 'sos') {
+        setTimeout(() => {
+          window.open('https://aid.save-the-paws.de/dog-aid', '_blank');
+          navigate("/dogs");
+        }, 2000);
+      } else {
+        setTimeout(() => navigate("/dogs"), 2000);
+      }
     } catch (error) {
       console.error('Error submitting dog:', error);
       // If online submit fails, try adding to offline queue
@@ -180,6 +188,21 @@ const AddDogPage = () => {
                   <p className="text-muted-foreground">
                     {formData.name}: {getSubmissionMessage()}
                   </p>
+                  {formData.reportType === 'sos' && (
+                    <div className="mt-6 space-y-3">
+                      <p className="text-sm font-medium text-red-600">
+                        🚨 {t('addDog.sosHelpNowHint', 'Your report has been sent. Now help the dog directly!')}
+                      </p>
+                      <a
+                        href="https://aid.save-the-paws.de/dog-aid"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition-colors text-lg"
+                      >
+                        🐾 {t('addDog.sosHelpNowButton', 'Help Now – Dog Aid Guide')}
+                      </a>
+                    </div>
+                  )}
                 </>
               )}
             </div>

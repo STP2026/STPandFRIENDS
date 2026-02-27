@@ -104,6 +104,8 @@
     "loginRequired": "Login Required",
     "loginRequiredDesc": "Please log in to report an animal.",
     "reportSent": "Report Sent!",
+    "sosHelpNowHint": "Your report has been sent. Now help the dog directly!",
+    "sosHelpNowButton": "Help Now – Dog Aid Guide",
     "offlineSaved": "Saved Offline!",
     "offlineMessage": "{{name}} will be sent automatically when you're back online.",
     "offlineQueueMessage": "({{count}} reports in queue)",
@@ -116,10 +118,10 @@
       "vaccinationDesc": "Request vaccination & neutering"
     },
     "visibility": {
-      "save": "✅ Tagged reports are immediately visible to all users.",
-      "sos": "🚨 SOS reports are only visible to helpers and admins.",
-      "stray": "🐕 Stray reports will be visible after approval by helper/admin.",
-      "vaccination": "💉 Promote requests will be visible after approval by helper/admin."
+      "save": "✅ Tagged reports will be visible to all users after approval by helper/admin.",
+      "sos": "🚨 SOS: Report first, then you'll be redirected to our Dog Aid guide to help immediately.",
+      "stray": "🐕 Stray reports will be reported to animal rescue helpers.",
+      "vaccination": "💉 Promote requests will be reported to animal rescue helpers."
     },
     "urgency": "Urgency Level",
     "urgencyPlaceholder": "How urgent is the situation?",

@@ -299,6 +299,13 @@ const DogMap = ({
             </span>
           </div>
           
+          ${dog.sponsorName ? `
+          <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #dc2626;">
+            <span style="font-size: 14px;">❤️</span>
+            <span style="font-size: 13px; font-weight: 500;">Sponsor: ${dog.sponsorName}</span>
+          </div>
+          ` : ''}
+          
           ${dog.additionalInfo ? `<p style="margin-top: 8px; font-size: 14px; color: #666;">${dog.additionalInfo}</p>` : ''}
         </div>
       `;

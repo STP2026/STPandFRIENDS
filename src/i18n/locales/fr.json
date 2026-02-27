@@ -104,6 +104,8 @@
     "loginRequired": "Connexion requise",
     "loginRequiredDesc": "Veuillez vous connecter pour signaler un animal.",
     "reportSent": "Signalement envoyé !",
+    "sosHelpNowHint": "Votre signalement a été envoyé. Aidez le chien maintenant !",
+    "sosHelpNowButton": "Aider maintenant – Guide d'aide",
     "offlineSaved": "Enregistré hors ligne !",
     "offlineMessage": "{{name}} sera envoyé automatiquement dès que vous serez de nouveau en ligne.",
     "offlineQueueMessage": "({{count}} signalements en attente)",
@@ -116,10 +118,10 @@
       "vaccinationDesc": "Demander vaccination & stérilisation"
     },
     "visibility": {
-      "save": "✅ Les signalements Tagged sont immédiatement visibles par tous.",
-      "sos": "🚨 Les signalements SOS ne sont visibles que par les aidants et admins.",
-      "stray": "🐕 Les signalements Stray seront visibles après approbation.",
-      "vaccination": "💉 Les demandes Promote seront visibles après approbation."
+      "save": "✅ Les signalements Tagged seront visibles par tous après approbation par un aidant/admin.",
+      "sos": "🚨 SOS : Signalez d'abord, puis vous serez redirigé vers notre guide d'aide pour agir immédiatement.",
+      "stray": "🐕 Les signalements Stray seront transmis à l'aide animale.",
+      "vaccination": "💉 Les demandes Promote seront transmises à l'aide animale."
     },
     "urgency": "Niveau d'urgence",
     "urgencyPlaceholder": "Quelle est l'urgence de la situation ?",
