@@ -57,11 +57,14 @@
     "legend": "Légende",
     "vaccinatedDogs": "Vaccinés & stérilisés",
     "notVaccinated": "Pas encore vacciné",
-    "facilities": "Établissements"
+    "facilities": "Établissements",
+    "vaccinationCenters": "Centres de vaccination antirabique",
+    "vaccinationToggle": "Activer via le bouton au-dessus de la carte"
   },
   "facilities": {
     "vet": "Vétérinaire",
     "friend": "PawFriend",
+    "vaccination_center": "Centre antirabique",
     "title": "Établissements",
     "addFacility": "Ajouter un établissement",
     "noFacilities": "Aucun établissement pour le moment."

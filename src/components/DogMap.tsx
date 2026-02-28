@@ -165,6 +165,33 @@ const createFriendIcon = () => {
   });
 };
 
+const createVaccinationIcon = () => {
+  return L.divIcon({
+    html: `
+      <div style="
+        width: 32px;
+        height: 32px;
+        background: #7c3aed;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(124,58,237,0.35);
+        cursor: pointer;
+      ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0.5">
+          <path d="M11.15 15.18l.71-.71a.996.996 0 000-1.41l-1.41-1.41 1.41-1.41 1.41 1.41c.39.39 1.02.39 1.41 0l3.54-3.54a.996.996 0 000-1.41l-1.06-1.06.35-.35a.996.996 0 000-1.41l-.71-.71a.996.996 0 00-1.41 0l-.35.35L13.21 3a.996.996 0 00-1.41 0l-1.41 1.41-1.41-1.41a.996.996 0 00-1.41 0L6.16 4.41a.996.996 0 000 1.41l1.41 1.41-5.3 5.3a.996.996 0 000 1.41l2.12 2.12c.39.39 1.02.39 1.41 0l5.3-5.3.71.71c.39.39 1.02.39 1.41 0z"/>
+        </svg>
+      </div>
+    `,
+    className: "vaccination-marker",
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -20],
+  });
+};
+
 // Selection marker icon
 const createSelectionIcon = () => {
   return L.divIcon({
@@ -385,15 +412,24 @@ const DogMap = ({
     // Add new facility markers
     facilities.forEach((facility) => {
       const isMobileVet = facility.name.toLowerCase().includes('mobil');
-      const icon = isMobileVet
-        ? createMobileVetIcon()
-        : facility.type === 'vet' ? createVetIcon() : createFriendIcon();
+      let icon;
+      if (isMobileVet) {
+        icon = createMobileVetIcon();
+      } else if (facility.type === 'vaccination_center') {
+        icon = createVaccinationIcon();
+      } else if (facility.type === 'vet') {
+        icon = createVetIcon();
+      } else {
+        icon = createFriendIcon();
+      }
       const marker = L.marker([facility.latitude, facility.longitude], { icon })
         .addTo(mapRef.current!);
 
       const typeLabel = isMobileVet
         ? '📱 Mobiler Tierarzt'
-        : facility.type === 'vet' ? '🏥 Tierarzt' : '🏠 Partner';
+        : facility.type === 'vaccination_center'
+          ? '💉 Rabies Vaccination Center'
+          : facility.type === 'vet' ? '🏥 Tierarzt' : '🏠 Partner';
       const popupContent = `
         <div style="padding: 12px; min-width: 220px;">
           ${facility.photoUrl ? `
@@ -413,6 +449,7 @@ const DogMap = ({
           ${facility.phone ? `<p style="font-size: 13px; color: #666; margin: 4px 0;">📞 ${facility.phone}</p>` : ''}
           ${facility.website ? `<p style="font-size: 13px; margin: 4px 0;"><a href="${facility.website}" target="_blank" style="color: #2563eb;">🌐 Website</a></p>` : ''}
           ${facility.description ? `<p style="margin-top: 8px; font-size: 13px; color: #666;">${facility.description}</p>` : ''}
+          <p style="margin-top: 8px;"><a href="https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: #2563eb; font-weight: 500; text-decoration: none;">📍 Navigate with Google Maps</a></p>
         </div>
       `;
 

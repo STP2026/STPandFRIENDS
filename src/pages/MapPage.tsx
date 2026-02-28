@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import SafeDogMap from "@/components/SafeDogMap";
@@ -7,6 +8,8 @@ import { useFacilities } from "@/hooks/useFacilities";
 import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useTranslation } from "react-i18next";
+import { Syringe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const MapPage = () => {
   const { t } = useTranslation();
@@ -14,6 +17,10 @@ const MapPage = () => {
   const { user, isAdmin } = useAuth();
   const { data: isHelper } = useIsHelper(user?.id);
   const isElevated = isAdmin || !!isHelper;
+
+  // Deep-link: ?show=vaccination activates the filter by default
+  const showParam = searchParams.get('show');
+  const [showVaccination, setShowVaccination] = useState(showParam === 'vaccination');
 
   // Helpers/admins see ALL dogs; regular users see only approved
   const { data: dogs, isLoading: dogsLoading } = useDogs(!isElevated);
@@ -29,7 +36,12 @@ const MapPage = () => {
     : undefined;
   
   const isLoading = dogsLoading || facilitiesLoading;
-  const displayFacilities = facilities || [];
+
+  // Filter facilities: vaccination centers are toggled separately
+  const displayFacilities = (facilities || []).filter((f) => {
+    if (f.type === 'vaccination_center') return showVaccination;
+    return true; // vets & friends always shown
+  });
 
   // Users only see tagged (save) dogs; helpers/admins see all report types
   const displayDogs = isElevated
@@ -55,6 +67,19 @@ const MapPage = () => {
             <p className="text-muted-foreground">
               {t('map.description')}
             </p>
+
+            {/* Vaccination center toggle */}
+            <div className="mt-3">
+              <Button
+                variant={showVaccination ? "default" : "outline"}
+                size="sm"
+                className={`gap-2 text-sm ${showVaccination ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'border-purple-300 text-purple-700 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-purple-950/30'}`}
+                onClick={() => setShowVaccination(!showVaccination)}
+              >
+                <Syringe className="w-4 h-4" />
+                💉 {t('map.vaccinationCenters', 'Rabies Vaccination Centers')}
+              </Button>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-4 gap-6">

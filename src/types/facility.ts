@@ -1,4 +1,4 @@
-export type FacilityType = 'vet' | 'friend';
+export type FacilityType = 'vet' | 'friend' | 'vaccination_center';
 
 export interface Facility {
   id: string;
@@ -19,4 +19,5 @@ export interface Facility {
 export const FACILITY_TYPE_LABELS: Record<FacilityType, { label: string; emoji: string }> = {
   vet: { label: 'Tierarzt', emoji: '🏥' },
   friend: { label: 'PawFriend', emoji: '🏠' },
+  vaccination_center: { label: 'Tollwut-Impfzentrum', emoji: '💉' },
 };

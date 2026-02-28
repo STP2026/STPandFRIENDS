@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/select';
 import PhotoUpload from '@/components/PhotoUpload';
 import DogMap from '@/components/DogMap';
-import { Plus, MapPin, Building2, Stethoscope, Home, Phone, Globe, Image } from 'lucide-react';
+import { Plus, MapPin, Building2, Stethoscope, Home, Phone, Globe, Image, Syringe } from 'lucide-react';
 import { FacilityType, FACILITY_TYPE_LABELS } from '@/types/facility';
 import { toast } from 'sonner';
 
@@ -119,6 +119,12 @@ export default function AddFacilityDialog({ open, onOpenChange }: AddFacilityDia
                   <div className="flex items-center gap-2">
                     <Home className="w-4 h-4 text-primary" />
                     Partner (Friends) - Hotels, Shops
+                  </div>
+                </SelectItem>
+                <SelectItem value="vaccination_center">
+                  <div className="flex items-center gap-2">
+                    <Syringe className="w-4 h-4 text-purple-600" />
+                    Tollwut-Impfzentrum (Rabies Vaccination)
                   </div>
                 </SelectItem>
               </SelectContent>

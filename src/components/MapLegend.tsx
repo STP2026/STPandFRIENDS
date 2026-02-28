@@ -88,6 +88,15 @@ const MapLegend = ({ isElevated = false }: MapLegendProps) => {
               <p className="text-sm font-medium text-foreground">PawFriend</p>
             </div>
           </div>
+          <div className="flex items-center gap-3 mt-2">
+            <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-950/30 border-2 border-purple-600 flex items-center justify-center">
+              <Syringe className="w-4 h-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-foreground">{t('map.vaccinationCenters', 'Rabies Vaccination')}</p>
+              <p className="text-xs text-muted-foreground">{t('map.vaccinationToggle', 'Toggle via button above map')}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

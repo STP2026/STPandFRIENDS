@@ -57,11 +57,14 @@
     "legend": "Legende",
     "vaccinatedDogs": "Geimpft & kastriert",
     "notVaccinated": "Noch nicht geimpft",
-    "facilities": "Einrichtungen"
+    "facilities": "Einrichtungen",
+    "vaccinationCenters": "Tollwut-Impfzentren",
+    "vaccinationToggle": "Umschalten über Button oberhalb der Karte"
   },
   "facilities": {
     "vet": "Tierarzt",
     "friend": "PawFriend",
+    "vaccination_center": "Tollwut-Impfzentrum",
     "title": "Einrichtungen",
     "addFacility": "Einrichtung hinzufügen",
     "noFacilities": "Noch keine Einrichtungen."

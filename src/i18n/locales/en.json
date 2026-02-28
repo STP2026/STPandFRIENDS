@@ -57,11 +57,14 @@
     "legend": "Legend",
     "vaccinatedDogs": "Vaccinated & neutered",
     "notVaccinated": "Not yet vaccinated",
-    "facilities": "Facilities"
+    "facilities": "Facilities",
+    "vaccinationCenters": "Rabies Vaccination Centers",
+    "vaccinationToggle": "Toggle via button above map"
   },
   "facilities": {
     "vet": "Veterinarian",
     "friend": "PawFriend",
+    "vaccination_center": "Rabies Vaccination Center",
     "title": "Facilities",
     "addFacility": "Add Facility",
     "noFacilities": "No facilities yet."
