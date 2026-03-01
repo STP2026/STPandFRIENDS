@@ -5,11 +5,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './locales/en.json';
 import de from './locales/de.json';
 import fr from './locales/fr.json';
+import ar from './locales/ar.json';
 
 const resources = {
   en: { translation: en },
   de: { translation: de },
   fr: { translation: fr },
+  ar: { translation: ar },
 };
 
 // Initialize i18n synchronously before any React code runs

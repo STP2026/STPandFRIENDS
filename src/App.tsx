@@ -13,6 +13,7 @@ import AuthConfirmPage from "./pages/AuthConfirmPage";
 import NotFound from "./pages/NotFound";
 import InstallPWA from "./components/InstallPWA";
 import OfflineIndicator from "./components/OfflineIndicator";
+import DirectionHandler from "./components/DirectionHandler";
 
 // Lazy load heavy pages — Leaflet (~150KB) only loads when map page is visited
 const MapPage = lazy(() => import("./pages/MapPage"));
@@ -62,6 +63,7 @@ const App = () => (
       <AuthProvider>
         <OfflineProvider>
           <BrowserRouter>
+            <DirectionHandler />
             <OfflineIndicator />
             <Suspense fallback={<PageLoader />}>
               <Routes>

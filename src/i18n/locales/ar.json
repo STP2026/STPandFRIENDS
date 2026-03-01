@@ -1,0 +1,404 @@
+{
+  "appName": "Save The Paws",
+  "common": {
+    "home": "الرئيسية",
+    "map": "الخريطة",
+    "dogs": "الكلاب",
+    "admin": "الإدارة",
+    "dashboard": "لوحة التحكم",
+    "about": "من نحن",
+    "login": "دخول",
+    "logout": "خروج",
+    "report": "بلّغ",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "loading": "كيتحمّل...",
+    "back": "رجوع",
+    "becomeHelper": "ولّي متطوع"
+  },
+  "hero": {
+    "region": "منطقة أكادير - تاغازوت",
+    "title": "Save The",
+    "titleHighlight": "Paws",
+    "description": "بلّغ على الحيوانات اللي محتاجين المساعدة، تواصل مع المتطوعين المحليين، وتبّع الكلاب اللي دارو ليهم اللقاح فمنطقة أكادير-تاغازوت.",
+    "slogan": "مع بعضياتنا، كننقذو الأرواح. 💚",
+    "exploreMap": "شوف الخريطة",
+    "reportAnimal": "بلّغ على حيوان",
+    "stats": {
+      "vaccinated": "كلاب ملقّحين",
+      "users": "مستخدمين"
+    }
+  },
+  "reportTypes": {
+    "title": "كيفاش تقدر تعاون",
+    "description": "بلّغ على الحيوانات فحالات مختلفة.",
+    "save": {
+      "title": "مسجّل",
+      "description": "كلاب ملقّحين، مخصيين، ومعلّمين فالودن."
+    },
+    "sos": {
+      "title": "انتباه",
+      "description": "حالات طوارئ خاصها مساعدة دابا."
+    },
+    "stray": {
+      "title": "بلّغ على كلب ضال",
+      "description": "كلاب بلا علامة فالودن خاصهم مساعدة."
+    },
+    "vaccination": {
+      "title": "اقترح للتلقيح",
+      "description": "اطلب التلقيح والخصي لهاد الكلب."
+    }
+  },
+  "map": {
+    "description": "شوف كاع الكلاب اللي تبلّغ عليهم فمنطقة أكادير-تاغازوت. كليكي على رجل الكلب باش تشوف التفاصيل.",
+    "stats": "الإحصائيات",
+    "safeDogs": "كلاب مسجّلين",
+    "pending": "كيتسنّاو",
+    "legend": "دليل الألوان",
+    "vaccinatedDogs": "ملقّحين ومخصيين",
+    "notVaccinated": "مازال ما تلقّحوش",
+    "facilities": "المرافق",
+    "vaccinationCenters": "مراكز التلقيح ضد داء الكلب",
+    "vaccinationToggle": "شعّل/طفي بالبوطون اللي فوق الخريطة",
+    "dogAidTitle": "لقيتي كلب محتاج مساعدة؟",
+    "dogAidHint": "تعلّم كيفاش تعاون — دليل خطوة بخطوة للسياح والمحليين."
+  },
+  "facilities": {
+    "vet": "طبيب بيطري",
+    "friend": "صديق الحيوانات",
+    "vaccination_center": "مركز تلقيح ضد داء الكلب",
+    "title": "المرافق",
+    "addFacility": "زيد مرفق",
+    "noFacilities": "مازال ما كاين حتى مرفق."
+  },
+  "donation": {
+    "title": "ادعم Save The Paws",
+    "description": "Save The Paws كتعتمد كلياً على التبرعات باش تنقذ وتعتني بالحيوانات. دعمك كيفرّق!",
+    "shortDescription": "عاونّا نكمّلو إنقاذ الحيوانات.",
+    "cta": "تبرّع دابا",
+    "thankYou": "شكراً على التبليغ!",
+    "afterReport": "التبليغ ديالك كيعاونّا نعاونو الحيوانات. Save The Paws كتخدم غير بالتبرعات — فكّر تدعم خدمتنا.",
+    "together": "مع بعضياتنا، كننقذو الأرواح."
+  },
+  "community": {
+    "title": "المجتمع ديالنا",
+    "description": "مع بعضياتنا كنهتمّو بالكلاب الضالين فمنطقة أكادير-تاغازوت.",
+    "reportedDogs": "كلاب تبلّغ عليهم",
+    "vaccinated": "ملقّحين",
+    "rescued": "تنقذو",
+    "viewMap": "شوف الخريطة"
+  },
+  "recent": {
+    "title": "آخر التبليغات",
+    "description": "الكلاب اللي تزادو مؤخراً",
+    "viewAll": "شوف الكل",
+    "viewAllDogs": "شوف كاع الكلاب"
+  },
+  "helperCta": {
+    "title": "ولّي متطوع!",
+    "description": "كمتطوع، تقدر تشوف تقارير الانتباه، توافق على التبليغات، وتعاون فإنقاذ الحيوانات.",
+    "apply": "قدّم طلب تطوع"
+  },
+  "footer": {
+    "brand": "Save The Paws",
+    "madeWith": "تصنعات بالحب ❤️ للحيوانات ديال أكادير وتاغازوت"
+  },
+  "addDog": {
+    "title": "بلّغ على حيوان",
+    "description": "عاون الحيوانات اللي محتاجين مساعدة فمنطقة أكادير-تاغازوت",
+    "loginRequired": "خاصك تدخل",
+    "loginRequiredDesc": "عافاك دخل باش تبلّغ على حيوان.",
+    "reportSent": "التبليغ تصيفط!",
+    "sosHelpNowHint": "التبليغ ديالك تصيفط. دابا عاون الكلب مباشرة!",
+    "sosHelpNowButton": "عاون دابا – دليل مساعدة الكلاب",
+    "offlineSaved": "تحفظ بلا إنترنت!",
+    "offlineMessage": "{{name}} غادي يتصيفط أوتوماتيك ملي ترجع الإنترنت.",
+    "offlineQueueMessage": "({{count}} تبليغات فالانتظار)",
+    "backToList": "رجع للائحة الكلاب",
+    "reportType": {
+      "title": "نوع التبليغ",
+      "saveDesc": "ملقّح، مخصي، معلّم فالودن",
+      "sosDesc": "حالة طوارئ - خاصو مساعدة دابا",
+      "strayDesc": "كلب بلا علامة فالودن",
+      "vaccinationDesc": "اطلب التلقيح والخصي"
+    },
+    "visibility": {
+      "save": "✅ تبليغات المسجّلين غادي يبانو لكاع المستخدمين بعد الموافقة ديال متطوع/إدارة.",
+      "sos": "🚨 انتباه: بلّغ أولاً، ومن بعد غادي يتوجّهوك للدليل ديال مساعدة الكلاب.",
+      "stray": "🐕 تبليغات الكلاب الضالين غادي يتبلّغو لمتطوعي إنقاذ الحيوانات.",
+      "vaccination": "💉 طلبات التلقيح غادي يتبلّغو لمتطوعي إنقاذ الحيوانات."
+    },
+    "urgency": "مستوى الاستعجال",
+    "urgencyPlaceholder": "شحال هي مستعجلة الحالة؟",
+    "urgencyLevels": {
+      "low": "خفيف",
+      "lowDesc": "ما كاين حتى خطر دابا",
+      "medium": "متوسط",
+      "mediumDesc": "خاصو مساعدة قريباً",
+      "high": "عالي",
+      "highDesc": "مستعجل!",
+      "critical": "حرج",
+      "criticalDesc": "حياتو فخطر"
+    },
+    "basicInfo": "المعلومات الأساسية",
+    "name": "سمية الكلب",
+    "namePlaceholder": "مثلاً Lucky (ولا 'مجهول')",
+    "earTag": "علامة الودن (إلا كاينة)",
+    "earTagPlaceholder": "مثلاً TAG-001",
+    "photo": "تصويرة",
+    "location": "البلاصة",
+    "locationHint": "كليكي على الخريطة باش تحدد البلاصة.",
+    "selectedLocation": "البلاصة المختارة:",
+    "additionalDetails": "تفاصيل إضافية",
+    "vaccinated": "ملقّح",
+    "vaccinatedHint": "واش هاد الكلب ملقّح؟",
+    "additionalNotes": "ملاحظات إضافية",
+    "additionalNotesPlaceholder": "معلومات زايدة (سلوك، حالة، إلخ)...",
+    "sosNotesPlaceholder": "وصف حالة الطوارئ بالتفصيل...",
+    "submit": "صيفط التبليغ",
+    "submitting": "كيتصيفط..."
+  },
+  "auth": {
+    "login": "دخول",
+    "signup": "تسجيل",
+    "loginToViewMap": "عافاك دخل باش تشوف الخريطة.",
+    "email": "الإيميل",
+    "emailPlaceholder": "الإيميل ديالك",
+    "password": "كلمة السر",
+    "name": "الاسم",
+    "namePlaceholder": "الاسم ديالك",
+    "pleaseWait": "عافاك تسنّا...",
+    "loading": "كيتحمّل...",
+    "or": "ولا",
+    "signInWithGoogle": "دخل بـ Google",
+    "noAccount": "ما عندكش حساب؟ تسجّل",
+    "alreadyRegistered": "عندك حساب؟ دخل",
+    "invalidEmail": "الإيميل ماشي صحيح",
+    "passwordMinLength": "كلمة السر خاصها على الأقل 6 حروف",
+    "invalidCredentials": "معلومات الدخول ماشي صحيحين",
+    "emailAlreadyRegistered": "هاد الإيميل مسجّل من قبل",
+    "unexpectedError": "وقع مشكل غير متوقع",
+    "checkYourEmail": "شوف الإيميل ديالك",
+    "verificationSent": "صيفطنا ليك رابط التأكيد ل",
+    "clickLinkToVerify": "كليكي على الرابط فالإيميل باش تفعّل الحساب ديالك.",
+    "checkSpamFolder": "ما لقيتيهش؟ شوف فـ spam.",
+    "linkExpiresIn": "الرابط كيمشي بعد 24 ساعة.",
+    "backToLogin": "رجع للدخول",
+    "emailNotConfirmed": "عافاك أكّد الإيميل ديالك أولاً."
+  },
+  "admin": {
+    "title": "الإدارة",
+    "helperTitle": "المتطوع",
+    "accessDenied": "ممنوع الدخول",
+    "accessDeniedDesc": "خاصك تكون متطوع ولا إداري باش تشوف هاد الصفحة.",
+    "goHome": "رجع للرئيسية",
+    "stats": {
+      "sos": "انتباه",
+      "pending": "كيتسنّاو",
+      "visible": "ظاهرين",
+      "applications": "الطلبات"
+    },
+    "tabs": {
+      "pending": "كيتسنّاو",
+      "sos": "انتباه",
+      "all": "نظرة عامة",
+      "messages": "الرسائل",
+      "rehab": "أماكن التعافي",
+      "facilities": "المرافق",
+      "ads": "الإعلانات",
+      "helpers": "المتطوعين"
+    },
+    "pendingApprovals": "كيتسنّاو الموافقة",
+    "noPending": "ما كاين حتى تبليغ كيتسنّا.",
+    "sosReports": "تقارير الانتباه",
+    "noSos": "ما كاين حتى تقرير انتباه.",
+    "allDogs": "كاع الكلاب",
+    "noDogs": "مازال ما تبلّغ على حتى كلب.",
+    "helperApplications": "طلبات التطوع",
+    "noApplications": "ما كاين حتى طلب.",
+    "approve": "وافق",
+    "accept": "قبل",
+    "table": {
+      "photo": "تصويرة",
+      "name": "الاسم",
+      "type": "النوع",
+      "location": "البلاصة",
+      "reported": "تبلّغ عليه",
+      "vaccination1": "التلقيح 1",
+      "vaccination2": "التلقيح 2",
+      "vaccinationPassport": "دفتر التلقيح",
+      "comment": "تعليق",
+      "remarks": "ملاحظات",
+      "actions": "الإجراءات"
+    },
+    "status": {
+      "visible": "ظاهر",
+      "pending": "كيتسنّا",
+      "approved": "موافق عليه",
+      "rejected": "مرفوض"
+    },
+    "urgency": "الاستعجال",
+    "appliedOn": "قدّم الطلب في",
+    "edit": {
+      "title": "تعديل",
+      "vaccination1": "التلقيح 1 في",
+      "vaccination2": "التلقيح 2 في",
+      "markVaccinated": "علّم كملقّح",
+      "visibleToUsers": "ظاهر للمستخدمين"
+    },
+    "deleteConfirm": "واش بصّح بغيتي تمسح هاد الكلب؟",
+    "editDialog": "تعديل",
+    "vaccination": {
+      "label1": "التلقيح 1 في",
+      "label2": "التلقيح 2 في",
+      "markAs": "علّم كملقّح",
+      "visibleToUsers": "ظاهر للمستخدمين"
+    },
+    "deleteAdConfirm": "واش بصّح بغيتي تمسح هاد الإعلان؟",
+    "deleteFacilityConfirm": "واش بصّح بغيتي تمسح هاد المرفق؟",
+    "statusLabels": {
+      "approved": "موافق عليه",
+      "rejected": "مرفوض",
+      "pending": "كيتسنّا"
+    },
+    "buttons": {
+      "save": "حفظ",
+      "savingAd": "كيتحفظ...",
+      "cancel": "إلغاء",
+      "delete": "مسح",
+      "createAd": "زيد إعلان"
+    },
+    "messages": {
+      "replyPlaceholder": "جاوب...",
+      "sendMessage": "صيفط رسالة",
+      "send": "صيفط",
+      "sendShort": "صيفط"
+    },
+    "ads": {
+      "image": "تصويرة",
+      "title": "العنوان",
+      "targetUrl": "الرابط",
+      "delay": "التأخير",
+      "titlePlaceholder": "دخل عنوان الإعلان",
+      "urlPlaceholder": "https://example.com",
+      "delayPlaceholder": "الثواني"
+    },
+    "rehabSpots": {
+      "title": "أماكن التعافي",
+      "description": "بلايص التعافي بعد الخصي",
+      "add": "زيد بلاصة تعافي",
+      "noSpots": "ما كاين حتى بلاصة تعافي.",
+      "placesTotal": "عدد البلايص",
+      "availableUntil": "متوفرة حتى",
+      "contactInfo": "الاتصال",
+      "notes": "ملاحظات",
+      "placesPlaceholder": "مثلاً 3",
+      "contactPlaceholder": "الاسم ورقم التيليفون",
+      "notesPlaceholder": "معلومات زايدة...",
+      "submit": "زيد بلاصة تعافي",
+      "submitting": "كيتزاد...",
+      "withdraw": "حيّد العرض",
+      "withdrawConfirm": "واش بصّح بغيتي تمسح بلاصة التعافي هادي؟"
+    }
+  },
+  "helper": {
+    "title": "ولّي متطوع 💚",
+    "description": "عاون بشكل فعّال فإنقاذ والعناية بالحيوانات اللي محتاجين.",
+    "loginRequired": "خاصك تدخل",
+    "loginRequiredDesc": "عافاك دخل باش تقدّم طلب التطوع.",
+    "benefits": {
+      "title": "شنو يقدر المتطوع يدير:",
+      "seeSos": "شوف تقارير الانتباه",
+      "sosDesc": "جاوب بسرعة على الحالات المستعجلة",
+      "approve": "وافق على التبليغات",
+      "approveDesc": "راجع ونشر التبليغات الجديدة",
+      "edit": "عدّل بيانات الكلاب",
+      "editDesc": "خلّي المعلومات محيّنة"
+    },
+    "application": {
+      "title": "الطلب ديالك",
+      "question": "علاش بغيتي تولّي متطوع؟",
+      "placeholder": "قول لينا شوية على راسك وعلاش بغيتي تعاون...",
+      "hint": "شارك الدافع ديالك وأي تجربة عندك.",
+      "submit": "صيفط الطلب",
+      "submitting": "كيتصيفط..."
+    },
+    "status": {
+      "pending": "الطلب كيتراجع",
+      "pendingDesc": "الطلب ديالك كيتراجع من الإدارة. غادي نرجعو ليك قريباً!",
+      "approved": "ولّيتي متطوع! 🎉",
+      "approvedDesc": "مرحبا بيك فالفريق! دابا تقدر تشوف تقارير الانتباه وتوافق على التبليغات.",
+      "goToDashboard": "سير للوحة التحكم",
+      "rejected": "الطلب مرفوض",
+      "rejectedDesc": "للأسف، الطلب ديالك ترفض. تواصل معنا إلا عندك أسئلة.",
+      "yourApplication": "الطلب ديالك:"
+    }
+  },
+  "dogCard": {
+    "vaccinated": "ملقّح",
+    "notVaccinated": "ما ملقّحش",
+    "urgency": "الاستعجال",
+    "visible": "ظاهر",
+    "pending": "كيتسنّا",
+    "sponsorThanks": "شكراً على المساعدة ديالك، {{name}}!"
+  },
+  "pwa": {
+    "installTitle": "نصّب Save The Paws",
+    "installDescription": "زيدها للشاشة الرئيسية باش توصل ليها بسرعة",
+    "iosInstructions": "كليكي على بوطون المشاركة ومن بعد 'زيد للشاشة الرئيسية'",
+    "installButton": "نصّب التطبيق",
+    "alreadyInstalled": "التطبيق مزال منصّب!",
+    "alreadyInstalledDesc": "تقدر توصل ل Save The Paws مباشرة من الشاشة الرئيسية.",
+    "pageTitle": "نصّب Save The Paws",
+    "pageDescription": "حصل على تجربة التطبيق الكاملة على الجهاز ديالك",
+    "benefits": "مزايا التطبيق",
+    "benefit1": "كيخدم بلا إنترنت",
+    "benefit2": "وصول سريع من الشاشة الرئيسية",
+    "benefit3": "ما خاصكش متجر التطبيقات",
+    "iosTitle": "كيفاش تنصّب على iPhone/iPad",
+    "iosStep1": "كليكي على",
+    "shareButton": "بوطون المشاركة",
+    "iosStep2": "نزل وكليكي على",
+    "iosStep3": "كليكي على",
+    "androidTitle": "كيفاش تنصّب على Android",
+    "androidStep1": "كليكي على القائمة ديال المتصفح (⋮)",
+    "androidStep2": "اختار \"نصّب التطبيق\" ولا \"زيد للشاشة الرئيسية\"",
+    "androidStep3": "كليكي على \"نصّب\" للتأكيد",
+    "desktopMessage": "حل هاد الصفحة على التيليفون ديالك باش تنصّب التطبيق.",
+    "skipInstall": "كمّل بلا تنصيب"
+  },
+  "contact": {
+    "navLabel": "اتصل بينا",
+    "title": "اتصل بينا",
+    "subtitle": "تواصل مع Save The Paws – حنا هنا باش نعاونوك.",
+    "whatsapp": {
+      "title": "كتب لينا فـ WhatsApp",
+      "description": "أسرع طريقة توصل لينا. أسئلة، تبليغات، ولا بغيتي تعاون؟",
+      "cta": "دردش فـ WhatsApp"
+    },
+    "addresses": {
+      "title": "العناوين ديالنا",
+      "germany": {
+        "label": "ألمانيا (المنظمة)",
+        "note": "العنوان كيتحدث"
+      },
+      "morocco": {
+        "label": "المغرب (فعين المكان)",
+        "note": "العنوان كيتحدث"
+      }
+    },
+    "online": {
+      "title": "على الإنترنت"
+    }
+  },
+  "mapLegend": {
+    "tagged": "مسجّل",
+    "taggedDesc": "ملقّح ومعلّم فالودن",
+    "stray": "ضال",
+    "strayDesc": "كلب ضال تبلّغ عليه — بلا علامة",
+    "sos": "انتباه",
+    "sosDesc": "محتاج مساعدة",
+    "tagWish": "طلب تلقيح",
+    "tagWishDesc": "مطلوب التلقيح / العلامة"
+  }
+}

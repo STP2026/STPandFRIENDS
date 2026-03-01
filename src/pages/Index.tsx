@@ -50,13 +50,13 @@ const Index = () => {
                 {t('reportTypes.save.description')}
               </p>
             </div>
-            <div className="glass-card rounded-xl p-4 sm:p-6 text-center animate-fade-in border-l-4 border-red-500">
-              <div className="text-2xl sm:text-4xl mb-2 sm:mb-3">🚨</div>
-              <h3 className="font-bold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">{t('reportTypes.sos.title')}</h3>
+            <a href="https://aid.save-the-paws.de/dog-aid" target="_blank" rel="noopener noreferrer" className="glass-card rounded-xl p-4 sm:p-6 text-center animate-fade-in border-l-4 border-red-500 hover:border-red-600 transition-colors group">
+              <div className="text-2xl sm:text-4xl mb-2 sm:mb-3">🐾</div>
+              <h3 className="font-bold text-foreground mb-1 sm:mb-2 text-sm sm:text-base group-hover:text-red-600 transition-colors">{t('reportTypes.sos.title')}</h3>
               <p className="text-xs sm:text-sm text-muted-foreground">
                 {t('reportTypes.sos.description')}
               </p>
-            </div>
+            </a>
             <div className="glass-card rounded-xl p-4 sm:p-6 text-center animate-fade-in border-l-4 border-amber-500">
               <div className="text-2xl sm:text-4xl mb-2 sm:mb-3">🐕</div>
               <h3 className="font-bold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">{t('reportTypes.stray.title')}</h3>

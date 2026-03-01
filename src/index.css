@@ -305,3 +305,29 @@ button, a, [role="button"] {
     max-height: 100dvh;
   }
 }
+
+/* RTL support for Darija (Moroccan Arabic) */
+[dir="rtl"] {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+[dir="rtl"] .flex {
+  /* Tailwind flex handles RTL automatically via logical properties */
+}
+
+/* Flip specific icons/elements that shouldn't mirror in RTL */
+[dir="rtl"] .leaflet-container {
+  direction: ltr; /* Map always stays LTR */
+}
+
+[dir="rtl"] .glass-card,
+[dir="rtl"] .rounded-xl {
+  text-align: right;
+}
+
+/* Fix gap direction for RTL layout */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
