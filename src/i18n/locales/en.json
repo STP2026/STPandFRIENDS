@@ -59,7 +59,9 @@
     "notVaccinated": "Not yet vaccinated",
     "facilities": "Facilities",
     "vaccinationCenters": "Rabies Vaccination Centers",
-    "vaccinationToggle": "Toggle via button above map"
+    "vaccinationToggle": "Toggle via button above map",
+    "dogAidTitle": "Found a dog in need?",
+    "dogAidHint": "Learn how to help — step by step guide for tourists & locals."
   },
   "facilities": {
     "vet": "Veterinarian",

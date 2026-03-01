@@ -9,7 +9,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import logoHeader from "@/assets/logo-header.png";
 
 const HUMAN_AID_URL = "https://save-the-paws.de/first-aid";
-const DOG_AID_URL = "https://save-the-paws.de/dog-first-aid";
+const DOG_AID_URL = "https://aid.save-the-paws.de/dog-aid";
 
 // ── Custom SVG Icons ──
 
@@ -177,15 +177,16 @@ const Header = () => {
             >
               <HumanAidIcon className="w-6 h-6 sm:w-7 sm:h-7" />
             </a>
-            {/* Dog First Aid */}
+            {/* Dog First Aid — highlighted */}
             <a
               href={DOG_AID_URL}
               target="_blank"
               rel="noopener noreferrer"
               title="Dog First Aid – how to act"
-              className="inline-flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 rounded-full hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
+              className="relative inline-flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 rounded-full hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
             >
-              <DogAidIcon className="w-6 h-6 sm:w-7 sm:h-7" />
+              <span className="absolute inset-0 rounded-full bg-blue-400/30 animate-ping" style={{ animationDuration: '2s' }} />
+              <DogAidIcon className="relative w-6 h-6 sm:w-7 sm:h-7" />
             </a>
 
             {/* Speech bubble tooltips — once per session */}

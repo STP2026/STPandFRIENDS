@@ -103,6 +103,26 @@ const MapPage = () => {
             <div className="space-y-4">
               <MapLegend isElevated={isElevated} />
 
+              {/* Dog Aid hint */}
+              <a
+                href="https://aid.save-the-paws.de/dog-aid"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block glass-card rounded-xl p-4 animate-fade-in border-2 border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-600 transition-colors group"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🐾</span>
+                  <div>
+                    <p className="text-sm font-bold text-blue-700 dark:text-blue-400 group-hover:underline">
+                      {t('map.dogAidTitle', 'Found a dog in need?')}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {t('map.dogAidHint', 'Learn how to help — step by step guide for tourists & locals.')}
+                    </p>
+                  </div>
+                </div>
+              </a>
+
               <div className="glass-card rounded-xl p-4 animate-fade-in">
                 <h3 className="font-display font-bold text-foreground mb-3">{t('map.stats')}</h3>
 
@@ -125,7 +145,7 @@ const MapPage = () => {
                     </div>
                     <div className="bg-red-50 dark:bg-red-950/30 rounded-lg p-2.5 text-center">
                       <p className="text-xl font-bold text-red-600">{sosCount}</p>
-                      <p className="text-xs text-muted-foreground">SOS</p>
+                      <p className="text-xs text-muted-foreground">Attention</p>
                     </div>
                     <div className="bg-purple-50 dark:bg-purple-950/30 rounded-lg p-2.5 text-center">
                       <p className="text-xl font-bold text-purple-600">{tagWishCount}</p>

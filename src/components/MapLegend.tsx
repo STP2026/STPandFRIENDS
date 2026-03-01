@@ -53,7 +53,7 @@ const MapLegend = ({ isElevated = false }: MapLegendProps) => {
                 <AlertTriangle className="w-4 h-4 text-red-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-foreground">SOS</p>
+                <p className="text-sm font-medium text-foreground">Attention</p>
                 <p className="text-xs text-muted-foreground">{t('mapLegend.sosDesc', 'Needs help')}</p>
               </div>
             </div>

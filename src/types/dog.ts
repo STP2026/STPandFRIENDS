@@ -86,10 +86,13 @@ export function mapDbDogToDog(dbDog: DbDog): Dog {
 
 export const REPORT_TYPE_LABELS: Record<ReportType, { label: string; emoji: string; color: string; description: string }> = {
   save: { label: 'Tagged', emoji: '✅', color: 'bg-green-500', description: 'Geimpft, kastriert, mit Ohrmarke' },
-  sos: { label: 'SOS', emoji: '🚨', color: 'bg-red-500', description: 'Verletztes Tier melden' },
+  sos: { label: 'Attention', emoji: '🚨', color: 'bg-red-500', description: 'Braucht dringend Hilfe' },
   stray: { label: 'Report a Stray', emoji: '🐕', color: 'bg-amber-500', description: 'Hund ohne Ohrmarke melden' },
   vaccination_wish: { label: 'Promote', emoji: '💉', color: 'bg-blue-500', description: 'Bitte impfen & kastrieren' },
 };
+
+/** Report types available to regular users (no SOS — that's admin/helper only) */
+export const USER_REPORT_TYPES: ReportType[] = ['save', 'stray', 'vaccination_wish'];
 
 export interface HelperApplication {
   id: string;

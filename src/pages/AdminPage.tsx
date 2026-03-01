@@ -310,7 +310,7 @@ const AdminPage = () => {
   };
 
   const pendingDogs = dogs?.filter(d => !d.isApproved) || [];
-  const sosDogs = dogs?.filter(d => d.reportType === 'sos') || [];
+  const sosDogs = dogs?.filter(d => d.reportType === 'sos') || []; // "Attention" dogs
   const pendingApplications = helperApplications?.filter(a => a.status === 'pending') || [];
 
   return (
@@ -565,12 +565,12 @@ const AdminPage = () => {
             </div>
           </TabsContent>
 
-          {/* SOS Dogs */}
+          {/* Attention Dogs (needs help) */}
           <TabsContent value="sos">
             <div className="glass-card rounded-xl p-4 sm:p-6">
               <h2 className="font-display text-lg sm:text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-red-500" />
-                {t('admin.sosReports')}
+                🚨 Attention – Needs Help
               </h2>
               
               {sosDogs.length === 0 ? (
@@ -1397,6 +1397,34 @@ const AdminPage = () => {
                     Danke für Deine Hilfe, {editForm.sponsorName}!
                   </p>
                 )}
+              </div>
+            )}
+
+            {/* Mark as Attention — for strays/vaccination_wish that need urgent help */}
+            {selectedDog && selectedDog.reportType !== 'save' && editForm.reportType !== 'save' && (
+              <div className="border-t border-border pt-4">
+                <div className={`p-3 rounded-lg ${editForm.reportType === 'sos' ? 'bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800' : 'bg-secondary/50'}`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <Label className="flex items-center gap-2 font-medium">
+                        <AlertTriangle className={`w-4 h-4 ${editForm.reportType === 'sos' ? 'text-red-600' : 'text-muted-foreground'}`} />
+                        🚨 Als "Attention" markieren
+                      </Label>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Hund braucht dringend Hilfe
+                      </p>
+                    </div>
+                    <Switch
+                      checked={editForm.reportType === 'sos'}
+                      onCheckedChange={(checked) => {
+                        setEditForm({
+                          ...editForm,
+                          reportType: checked ? 'sos' : selectedDog.reportType === 'sos' ? 'stray' : selectedDog.reportType,
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             )}
 

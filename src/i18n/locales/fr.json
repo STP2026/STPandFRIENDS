@@ -59,7 +59,9 @@
     "notVaccinated": "Pas encore vacciné",
     "facilities": "Établissements",
     "vaccinationCenters": "Centres de vaccination antirabique",
-    "vaccinationToggle": "Activer via le bouton au-dessus de la carte"
+    "vaccinationToggle": "Activer via le bouton au-dessus de la carte",
+    "dogAidTitle": "Vous avez trouvé un chien en détresse ?",
+    "dogAidHint": "Découvrez comment aider — guide étape par étape pour touristes et locaux."
   },
   "facilities": {
     "vet": "Vétérinaire",

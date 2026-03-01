@@ -59,7 +59,9 @@
     "notVaccinated": "Noch nicht geimpft",
     "facilities": "Einrichtungen",
     "vaccinationCenters": "Tollwut-Impfzentren",
-    "vaccinationToggle": "Umschalten über Button oberhalb der Karte"
+    "vaccinationToggle": "Umschalten über Button oberhalb der Karte",
+    "dogAidTitle": "Hund in Not gefunden?",
+    "dogAidHint": "Erfahre wie du helfen kannst — Schritt-für-Schritt-Anleitung für Touristen & Einheimische."
   },
   "facilities": {
     "vet": "Tierarzt",

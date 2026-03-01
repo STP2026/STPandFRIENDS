@@ -13,7 +13,7 @@ import PhotoUpload from "@/components/PhotoUpload";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAddDog } from "@/hooks/useDogs";
 import { useOfflineContext } from "@/contexts/OfflineContext";
-import { ReportType, REPORT_TYPE_LABELS } from "@/types/dog";
+import { ReportType, REPORT_TYPE_LABELS, USER_REPORT_TYPES } from "@/types/dog";
 import { useTranslation } from "react-i18next";
 import {
   Select,
@@ -92,14 +92,7 @@ const AddDogPage = () => {
       }
       
       // SOS reports: redirect to Dog Aid landing page so the reporter can act immediately
-      if (formData.reportType === 'sos') {
-        setTimeout(() => {
-          window.open('https://aid.save-the-paws.de/dog-aid', '_blank');
-          navigate("/dogs");
-        }, 2000);
-      } else {
-        setTimeout(() => navigate("/dogs"), 2000);
-      }
+      setTimeout(() => navigate("/dogs"), 2000);
     } catch (error) {
       console.error('Error submitting dog:', error);
       // If online submit fails, try adding to offline queue
@@ -188,21 +181,6 @@ const AddDogPage = () => {
                   <p className="text-muted-foreground">
                     {formData.name}: {getSubmissionMessage()}
                   </p>
-                  {formData.reportType === 'sos' && (
-                    <div className="mt-6 space-y-3">
-                      <p className="text-sm font-medium text-red-600">
-                        🚨 {t('addDog.sosHelpNowHint', 'Your report has been sent. Now help the dog directly!')}
-                      </p>
-                      <a
-                        href="https://aid.save-the-paws.de/dog-aid"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition-colors text-lg"
-                      >
-                        🐾 {t('addDog.sosHelpNowButton', 'Help Now – Dog Aid Guide')}
-                      </a>
-                    </div>
-                  )}
                 </>
               )}
             </div>
@@ -245,7 +223,9 @@ const AddDogPage = () => {
               </h2>
               
               <div className="grid grid-cols-2 gap-3">
-                {(Object.entries(REPORT_TYPE_LABELS) as [ReportType, typeof REPORT_TYPE_LABELS[ReportType]][]).map(([type, info]) => (
+                {USER_REPORT_TYPES.map((type) => {
+                  const info = REPORT_TYPE_LABELS[type];
+                  return (
                   <button
                     key={type}
                     type="button"
@@ -262,41 +242,16 @@ const AddDogPage = () => {
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {type === 'save' && t('addDog.reportType.saveDesc')}
-                      {type === 'sos' && t('addDog.reportType.sosDesc')}
                       {type === 'stray' && t('addDog.reportType.strayDesc')}
                       {type === 'vaccination_wish' && t('addDog.reportType.vaccinationDesc')}
                     </p>
                   </button>
-                ))}
+                  );
+                })}
               </div>
-
-              {formData.reportType === 'sos' && (
-                <div className="mt-4 space-y-2">
-                  <Label>{t('addDog.urgency')}</Label>
-                  <Select
-                    value={formData.urgencyLevel}
-                    onValueChange={(value) => setFormData({ ...formData, urgencyLevel: value })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder={t('addDog.urgencyPlaceholder')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {getUrgencyLevels(t).map((level) => (
-                        <SelectItem key={level.value} value={level.value}>
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium">{level.label}</span>
-                            <span className="text-muted-foreground text-sm">- {level.description}</span>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
 
               <p className="mt-4 text-sm text-muted-foreground bg-secondary/50 p-3 rounded-lg">
                 {formData.reportType === 'save' && t('addDog.visibility.save')}
-                {formData.reportType === 'sos' && t('addDog.visibility.sos')}
                 {formData.reportType === 'stray' && t('addDog.visibility.stray')}
                 {formData.reportType === 'vaccination_wish' && t('addDog.visibility.vaccination')}
               </p>
