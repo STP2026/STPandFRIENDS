@@ -18,8 +18,8 @@
   },
   "hero": {
     "region": "Région Agadir - Taghazout",
-    "title": "Save The",
-    "titleHighlight": "Paws",
+    "title": "Engagez-vous pour les",
+    "titleHighlight": "chiens en détresse",
     "description": "Signalez les animaux en détresse, connectez-vous avec les aidants locaux et suivez les chiens vaccinés dans la belle région côtière d'Agadir-Taghazout.",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Explorer la carte",
@@ -45,8 +45,8 @@
       "description": "Signaler un chien sans marque d'oreille."
     },
     "vaccination": {
-      "title": "Promote",
-      "description": "Demander vaccination et stérilisation."
+      "title": "Parrainer & Suivre",
+      "description": "Gardez ce chien sur notre radar grâce à votre don."
     }
   },
   "map": {
@@ -120,13 +120,13 @@
       "saveDesc": "Vacciné, stérilisé, marqué",
       "sosDesc": "Urgence - besoin d'aide immédiate",
       "strayDesc": "Chien sans marque d'oreille",
-      "vaccinationDesc": "Demander vaccination & stérilisation"
+      "vaccinationDesc": "Garder sur le radar avec mon don"
     },
     "visibility": {
       "save": "✅ Les signalements Tagged seront visibles par tous après approbation par un aidant/admin.",
       "sos": "🚨 SOS : Signalez d'abord, puis vous serez redirigé vers notre guide d'aide pour agir immédiatement.",
       "stray": "🐕 Les signalements Stray seront transmis à l'aide animale.",
-      "vaccination": "💉 Les demandes Promote seront transmises à l'aide animale."
+      "vaccination": "❤️ Votre parrainage garde ce chien sur notre radar — les aidants seront notifiés."
     },
     "urgency": "Niveau d'urgence",
     "urgencyPlaceholder": "Quelle est l'urgence de la situation ?",

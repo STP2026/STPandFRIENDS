@@ -20,6 +20,14 @@ const Footer = () => {
 
           {/* Nav links */}
           <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-muted-foreground">
+            <a
+              href="https://save-the-paws.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              🌐 save-the-paws.de
+            </a>
             <Link to="/about" className="hover:text-foreground transition-colors">
               {t('common.about')}
             </Link>

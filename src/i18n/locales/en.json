@@ -18,8 +18,8 @@
   },
   "hero": {
     "region": "Agadir - Taghazout Region",
-    "title": "Save The",
-    "titleHighlight": "Paws",
+    "title": "Engage for",
+    "titleHighlight": "Dogs in Need",
     "description": "Report animals in need, connect with local helpers, and track vaccinated dogs in the beautiful Agadir-Taghazout coastal region.",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Explore Map",
@@ -45,8 +45,8 @@
       "description": "Dogs without ear tags that need help."
     },
     "vaccination": {
-      "title": "Promote",
-      "description": "Request vaccination and neutering for this dog."
+      "title": "Sponsor & Watch",
+      "description": "Keep this dog on our radar with your donation."
     }
   },
   "map": {
@@ -120,13 +120,13 @@
       "saveDesc": "Vaccinated, neutered, ear-tagged",
       "sosDesc": "Emergency - needs immediate help",
       "strayDesc": "Dog without ear tag",
-      "vaccinationDesc": "Request vaccination & neutering"
+      "vaccinationDesc": "Keep on the radar with my donation"
     },
     "visibility": {
       "save": "✅ Tagged reports will be visible to all users after approval by helper/admin.",
       "sos": "🚨 SOS: Report first, then you'll be redirected to our Dog Aid guide to help immediately.",
       "stray": "🐕 Stray reports will be reported to animal rescue helpers.",
-      "vaccination": "💉 Promote requests will be reported to animal rescue helpers."
+      "vaccination": "❤️ Your sponsorship keeps this dog on our radar — helpers will be notified."
     },
     "urgency": "Urgency Level",
     "urgencyPlaceholder": "How urgent is the situation?",

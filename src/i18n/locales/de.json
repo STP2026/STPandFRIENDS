@@ -18,8 +18,8 @@
   },
   "hero": {
     "region": "Region Agadir - Taghazout",
-    "title": "Save The",
-    "titleHighlight": "Paws",
+    "title": "Engagiere dich für",
+    "titleHighlight": "Hunde in Not",
     "description": "Melde Tiere in Not, verbinde dich mit lokalen Helfern und verfolge geimpfte Hunde in der wunderschönen Küstenregion Agadir-Taghazout.",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Karte erkunden",
@@ -45,8 +45,8 @@
       "description": "Hunde ohne Ohrmarke melden."
     },
     "vaccination": {
-      "title": "Promote",
-      "description": "Bitte impfen und kastrieren."
+      "title": "Sponsor & Beobachten",
+      "description": "Mit meiner Spende diesen Hund auf dem Schirm behalten."
     }
   },
   "map": {
@@ -120,13 +120,13 @@
       "saveDesc": "Geimpft, kastriert, mit Ohrmarke",
       "sosDesc": "Notfall - braucht sofort Hilfe",
       "strayDesc": "Hund ohne Ohrmarke",
-      "vaccinationDesc": "Bitte impfen & kastrieren"
+      "vaccinationDesc": "Mit meiner Spende auf dem Schirm behalten"
     },
     "visibility": {
       "save": "✅ Tagged-Meldungen werden nach Freigabe durch Helfer/Admin allen Nutzern angezeigt.",
       "sos": "🚨 SOS: Erst melden, dann wirst du zu unserem Erste-Hilfe-Guide weitergeleitet, um sofort zu helfen.",
       "stray": "🐕 Stray-Meldungen werden der Tierhilfe gemeldet.",
-      "vaccination": "💉 Promote-Meldungen werden der Tierhilfe gemeldet."
+      "vaccination": "❤️ Deine Spende hält diesen Hund auf unserem Schirm — Helfer werden benachrichtigt."
     },
     "urgency": "Dringlichkeitsstufe",
     "urgencyPlaceholder": "Wie dringend ist die Situation?",

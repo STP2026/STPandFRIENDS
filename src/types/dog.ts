@@ -88,7 +88,7 @@ export const REPORT_TYPE_LABELS: Record<ReportType, { label: string; emoji: stri
   save: { label: 'Tagged', emoji: '✅', color: 'bg-green-500', description: 'Geimpft, kastriert, mit Ohrmarke' },
   sos: { label: 'Attention', emoji: '🚨', color: 'bg-red-500', description: 'Braucht dringend Hilfe' },
   stray: { label: 'Report a Stray', emoji: '🐕', color: 'bg-amber-500', description: 'Hund ohne Ohrmarke melden' },
-  vaccination_wish: { label: 'Promote', emoji: '💉', color: 'bg-blue-500', description: 'Bitte impfen & kastrieren' },
+  vaccination_wish: { label: 'Sponsor & Watch', emoji: '❤️', color: 'bg-blue-500', description: 'Mit Spende auf dem Schirm behalten' },
 };
 
 /** Report types available to regular users (no SOS — that's admin/helper only) */
