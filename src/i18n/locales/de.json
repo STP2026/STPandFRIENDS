@@ -441,5 +441,14 @@
     "appText2": "Eine große Aufgabe – doch gemeinsam können wir heute Leben retten.",
     "websiteLink": "Zur Website",
     "viewDogs": "Alle Hunde ansehen"
+  },
+  "photo": {
+    "invalidType": "Bitte ein Bild auswählen",
+    "tooLarge": "Das Bild darf maximal 25MB groß sein",
+    "uploadError": "Fehler beim Hochladen. Bitte versuche es erneut.",
+    "takeOrUpload": "Foto aufnehmen oder hochladen",
+    "tapHere": "Tippe hier, um ein Foto auszuwählen",
+    "camera": "Kamera",
+    "gallery": "Galerie"
   }
 }

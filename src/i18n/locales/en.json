@@ -441,5 +441,14 @@
     "appText2": "A big task — but together we can save lives today.",
     "websiteLink": "Visit Website",
     "viewDogs": "View All Dogs"
+  },
+  "photo": {
+    "invalidType": "Please select an image",
+    "tooLarge": "Image must be smaller than 25MB",
+    "uploadError": "Upload failed. Please try again.",
+    "takeOrUpload": "Take or upload a photo",
+    "tapHere": "Tap here to select a photo",
+    "camera": "Camera",
+    "gallery": "Gallery"
   }
 }

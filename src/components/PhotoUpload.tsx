@@ -3,6 +3,7 @@ import { Camera, Upload, X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 interface PhotoUploadProps {
   onPhotoUploaded: (url: string) => void;
@@ -10,7 +11,7 @@ interface PhotoUploadProps {
 }
 
 // Compress image client-side before upload
-// Reduces a 5MB phone photo to ~300KB — faster upload, less storage cost
+// Reduces a 15MB phone photo to ~300KB — faster upload, less storage cost
 const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -51,6 +52,7 @@ const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promi
 };
 
 const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [isUploading, setIsUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(currentPhotoUrl || null);
@@ -63,13 +65,13 @@ const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => 
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      setError('Bitte wähle ein Bild aus');
+      setError(t('photo.invalidType', 'Please select an image'));
       return;
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('Das Bild darf maximal 5MB groß sein');
+    // Allow up to 25MB — compression will shrink it to ~300KB anyway
+    if (file.size > 25 * 1024 * 1024) {
+      setError(t('photo.tooLarge', 'Image must be smaller than 25MB'));
       return;
     }
 
@@ -109,7 +111,7 @@ const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => 
       onPhotoUploaded(publicUrl);
     } catch (err) {
       console.error('Upload error:', err);
-      setError('Fehler beim Hochladen. Bitte versuche es erneut.');
+      setError(t('photo.uploadError', 'Upload failed. Please try again.'));
       setPreviewUrl(null);
     } finally {
       setIsUploading(false);
@@ -174,8 +176,8 @@ const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => 
             <Upload className="w-8 h-8 text-muted-foreground" />
           </div>
           <div className="text-center">
-            <p className="text-sm font-medium text-foreground">Foto aufnehmen oder hochladen</p>
-            <p className="text-xs text-muted-foreground">Tippe hier, um ein Foto auszuwählen</p>
+            <p className="text-sm font-medium text-foreground">{t('photo.takeOrUpload', 'Take or upload a photo')}</p>
+            <p className="text-xs text-muted-foreground">{t('photo.tapHere', 'Tap here to select a photo')}</p>
           </div>
         </div>
       )}
@@ -193,7 +195,7 @@ const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => 
             onClick={triggerFileInput}
           >
             <Camera className="w-4 h-4" />
-            Kamera
+            {t('photo.camera', 'Camera')}
           </Button>
           <Button
             type="button"
@@ -211,7 +213,7 @@ const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => 
             }}
           >
             <Upload className="w-4 h-4" />
-            Galerie
+            {t('photo.gallery', 'Gallery')}
           </Button>
         </div>
       )}

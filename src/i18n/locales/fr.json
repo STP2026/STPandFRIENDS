@@ -441,5 +441,14 @@
     "appText2": "Une grande mission — mais ensemble, nous pouvons sauver des vies aujourd'hui.",
     "websiteLink": "Visiter le site",
     "viewDogs": "Voir tous les chiens"
+  },
+  "photo": {
+    "invalidType": "Veuillez sélectionner une image",
+    "tooLarge": "L'image doit faire moins de 25 Mo",
+    "uploadError": "Échec du téléchargement. Veuillez réessayer.",
+    "takeOrUpload": "Prendre ou télécharger une photo",
+    "tapHere": "Appuyez ici pour choisir une photo",
+    "camera": "Caméra",
+    "gallery": "Galerie"
   }
 }
