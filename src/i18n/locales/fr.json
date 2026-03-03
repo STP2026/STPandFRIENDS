@@ -61,7 +61,9 @@
     "vaccinationCenters": "Centres de vaccination antirabique",
     "vaccinationToggle": "Activer via le bouton au-dessus de la carte",
     "dogAidTitle": "Vous avez trouvé un chien en détresse ?",
-    "dogAidHint": "Découvrez comment aider — guide étape par étape pour touristes et locaux."
+    "dogAidHint": "Découvrez comment aider — guide étape par étape pour touristes et locaux.",
+    "loginHintTitle": "Connectez-vous pour voir les chiens et établissements sur la carte",
+    "loginHintDesc": "Créez un compte gratuit pour explorer la carte complète avec tous les chiens signalés et les établissements vétérinaires."
   },
   "facilities": {
     "vet": "Vétérinaire",
@@ -407,5 +409,37 @@
     "sosDesc": "A besoin d'aide",
     "tagWish": "Souhait de marquage",
     "tagWishDesc": "Vaccination / marquage demandé"
+  },
+  "dogsPage": {
+    "title": "Tous les chiens",
+    "description": "Tous les chiens enregistrés dans notre base de données communautaire",
+    "searchPlaceholder": "Rechercher par nom, lieu ou marque auriculaire...",
+    "filterAll": "Tous",
+    "filterPending": "En attente",
+    "noDogs": "Aucun chien trouvé",
+    "resetFilter": "Réinitialiser les filtres"
+  },
+  "about": {
+    "heroTitle": "Un filet de sécurité pour les",
+    "heroHighlight": "chiens errants du Maroc",
+    "heroDescription": "Save The Paws est un filet de sécurité central pour les chiens errants du Maroc.",
+    "mission1": "Nous soutenons des organisations de protection animale vérifiées sur place, finançons les stérilisations et vaccinations, et sensibilisons — pour une coexistence durable, contrôlée et pacifique entre humains et animaux.",
+    "mission2": "La population locale doit pouvoir vivre sans peur, en harmonie avec des animaux en bonne santé.",
+    "missionBold": "Les chiens errants ont le droit de vivre.",
+    "mission3": "En bonne santé. Protégés. Et sans souffrance causée par des maladies mortelles et une reproduction incontrôlée.",
+    "mission4": "Pour réaliser cette vision, nous avons besoin de personnes qui assument leurs responsabilités. Chaque contribution aide à sauver des vies et à créer un changement durable.",
+    "card1Title": "Vaccinations & Stérilisations",
+    "card1Desc": "Financement des soins médicaux sur le terrain",
+    "card2Title": "Protection animale locale",
+    "card2Desc": "Organisations partenaires vérifiées dans la région",
+    "card3Title": "Sensibilisation",
+    "card3Desc": "Pour une coexistence pacifique entre humains et animaux",
+    "donateTitle": "Chaque don sauve des vies",
+    "donateDescription": "Save The Paws dépend entièrement des dons. Votre soutien finance les vaccinations, stérilisations et l'aide d'urgence directement sur place.",
+    "appTitle": "Cette application fait partie de notre travail",
+    "appText1": "Tandis que nous présentons les animaux taggés comme vaccinés, stérilisés et en sécurité, nous travaillons en coulisses pour recenser tous les chiens de la région et gérer les urgences avec la protection animale locale.",
+    "appText2": "Une grande mission — mais ensemble, nous pouvons sauver des vies aujourd'hui.",
+    "websiteLink": "Visiter le site",
+    "viewDogs": "Voir tous les chiens"
   }
 }

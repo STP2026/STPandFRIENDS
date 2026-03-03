@@ -61,7 +61,9 @@
     "vaccinationCenters": "Tollwut-Impfzentren",
     "vaccinationToggle": "Umschalten über Button oberhalb der Karte",
     "dogAidTitle": "Hund in Not gefunden?",
-    "dogAidHint": "Erfahre wie du helfen kannst — Schritt-für-Schritt-Anleitung für Touristen & Einheimische."
+    "dogAidHint": "Erfahre wie du helfen kannst — Schritt-für-Schritt-Anleitung für Touristen & Einheimische.",
+    "loginHintTitle": "Melde dich an, um Hunde und Einrichtungen auf der Karte zu sehen",
+    "loginHintDesc": "Erstelle ein kostenloses Konto und entdecke die vollständige Karte mit allen gemeldeten Hunden und tierärztlichen Einrichtungen."
   },
   "facilities": {
     "vet": "Tierarzt",
@@ -407,5 +409,37 @@
     "sosDesc": "Braucht Hilfe",
     "tagWish": "Tag-Wunsch",
     "tagWishDesc": "Impfung / Markierung gewünscht"
+  },
+  "dogsPage": {
+    "title": "Alle Hunde",
+    "description": "Alle registrierten Hunde in unserer Community-Datenbank",
+    "searchPlaceholder": "Suche nach Name, Ort oder Ohrmarke...",
+    "filterAll": "Alle",
+    "filterPending": "Ausstehend",
+    "noDogs": "Keine Hunde gefunden",
+    "resetFilter": "Filter zurücksetzen"
+  },
+  "about": {
+    "heroTitle": "Ein Rettungsschirm für die",
+    "heroHighlight": "Straßenhunde Marokkos",
+    "heroDescription": "Save The Paws ist ein zentraler Rettungsschirm für die Straßenhunde Marokkos.",
+    "mission1": "Wir unterstützen geprüfte Tierschutzorganisationen vor Ort, finanzieren Kastrationen und Impfungen, leisten Aufklärungsarbeit – für ein nachhaltiges, kontrolliertes und friedliches Zusammenleben von Mensch und Tier.",
+    "mission2": "Die Bevölkerung soll angstfrei leben können, im Einklang mit gesunden Tieren.",
+    "missionBold": "Straßenhunde haben ein Recht zu leben.",
+    "mission3": "Gesund. Geschützt. Und ohne Leid durch tödliche Krankheiten und unkontrollierte Vermehrung.",
+    "mission4": "Damit diese Vision möglich wird, braucht es Menschen, die Verantwortung übernehmen. Jede Unterstützung trägt dazu bei, Leben zu retten und langfristig Veränderung zu schaffen.",
+    "card1Title": "Impfungen & Kastrationen",
+    "card1Desc": "Finanzierung medizinischer Versorgung vor Ort",
+    "card2Title": "Lokaler Tierschutz",
+    "card2Desc": "Geprüfte Partnerorganisationen in der Region",
+    "card3Title": "Aufklärungsarbeit",
+    "card3Desc": "Für friedliches Zusammenleben von Mensch & Tier",
+    "donateTitle": "Jede Spende rettet Leben",
+    "donateDescription": "Save The Paws ist vollständig auf Spenden angewiesen. Deine Unterstützung finanziert Impfungen, Kastrationen und Notfallhilfe direkt vor Ort.",
+    "appTitle": "Diese App ist ein Teil unserer Arbeit",
+    "appText1": "Während wir Dir die getaggten Tiere als geimpft, kastriert und sicher vorstellen dürfen, arbeiten wir im Hintergrund an der Erfassung aller Hunde der Region und kümmern uns gemeinsam mit dem lokalen Tierschutz um Notfälle.",
+    "appText2": "Eine große Aufgabe – doch gemeinsam können wir heute Leben retten.",
+    "websiteLink": "Zur Website",
+    "viewDogs": "Alle Hunde ansehen"
   }
 }

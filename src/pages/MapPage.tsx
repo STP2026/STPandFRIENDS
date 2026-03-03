@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import SafeDogMap from "@/components/SafeDogMap";
 import MapLegend from "@/components/MapLegend";
@@ -81,6 +81,27 @@ const MapPage = () => {
               </Button>
             </div>
           </div>
+
+          {/* Login hint for non-authenticated users */}
+          {!user && (
+            <Link
+              to="/auth"
+              state={{ from: "/map", message: "map" }}
+              className="block glass-card rounded-xl p-4 mb-6 animate-fade-in border-2 border-primary/30 hover:border-primary/60 transition-colors group"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🔐</span>
+                <div>
+                  <p className="text-sm font-bold text-primary group-hover:underline">
+                    {t('map.loginHintTitle')}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {t('map.loginHintDesc')}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          )}
 
           <div className="grid lg:grid-cols-4 gap-6">
             <div className="lg:col-span-3">

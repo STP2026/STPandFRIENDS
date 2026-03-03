@@ -61,7 +61,9 @@
     "vaccinationCenters": "Rabies Vaccination Centers",
     "vaccinationToggle": "Toggle via button above map",
     "dogAidTitle": "Found a dog in need?",
-    "dogAidHint": "Learn how to help — step by step guide for tourists & locals."
+    "dogAidHint": "Learn how to help — step by step guide for tourists & locals.",
+    "loginHintTitle": "Sign in to see dogs & facilities on the map",
+    "loginHintDesc": "Create a free account to explore the full map with all reported dogs and veterinary facilities."
   },
   "facilities": {
     "vet": "Veterinarian",
@@ -407,5 +409,37 @@
     "sosDesc": "Needs help",
     "tagWish": "Tag Wish",
     "tagWishDesc": "Vaccination / tag requested"
+  },
+  "dogsPage": {
+    "title": "All Dogs",
+    "description": "All registered dogs in our community database",
+    "searchPlaceholder": "Search by name, location or ear tag...",
+    "filterAll": "All",
+    "filterPending": "Pending",
+    "noDogs": "No dogs found",
+    "resetFilter": "Reset filters"
+  },
+  "about": {
+    "heroTitle": "A safety net for",
+    "heroHighlight": "Morocco's street dogs",
+    "heroDescription": "Save The Paws is a central safety net for Morocco's street dogs.",
+    "mission1": "We support vetted animal welfare organizations on the ground, fund spaying/neutering and vaccinations, and raise awareness — for sustainable, controlled, and peaceful coexistence of humans and animals.",
+    "mission2": "The local population should be able to live free of fear, in harmony with healthy animals.",
+    "missionBold": "Street dogs have a right to live.",
+    "mission3": "Healthy. Protected. And free from suffering caused by deadly diseases and uncontrolled breeding.",
+    "mission4": "To make this vision possible, we need people who take responsibility. Every contribution helps save lives and create lasting change.",
+    "card1Title": "Vaccinations & Spaying",
+    "card1Desc": "Funding medical care on the ground",
+    "card2Title": "Local Animal Welfare",
+    "card2Desc": "Vetted partner organizations in the region",
+    "card3Title": "Education & Awareness",
+    "card3Desc": "For peaceful coexistence of humans and animals",
+    "donateTitle": "Every donation saves lives",
+    "donateDescription": "Save The Paws relies entirely on donations. Your support funds vaccinations, spaying/neutering, and emergency aid directly on site.",
+    "appTitle": "This app is part of our work",
+    "appText1": "While we proudly present the tagged animals as vaccinated, neutered, and safe, we are working behind the scenes to register all dogs in the region and help with emergencies together with local animal welfare.",
+    "appText2": "A big task — but together we can save lives today.",
+    "websiteLink": "Visit Website",
+    "viewDogs": "View All Dogs"
   }
 }
