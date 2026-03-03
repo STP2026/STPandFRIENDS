@@ -391,6 +391,13 @@
       "title": "Online"
     }
   },
+  "mapPopup": {
+    "mobileVet": "Mobile Vet",
+    "navigate": "Navigate with Google Maps",
+    "earTag": "Ear Tag",
+    "unknownLocation": "Unknown location",
+    "sponsor": "Sponsor"
+  },
   "mapLegend": {
     "tagged": "Tagged",
     "taggedDesc": "Vaccinated & ear-tagged",

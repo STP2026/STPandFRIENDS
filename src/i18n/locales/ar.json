@@ -391,6 +391,13 @@
       "title": "على الإنترنت"
     }
   },
+  "mapPopup": {
+    "mobileVet": "طبيب بيطري متنقل",
+    "navigate": "تنقل بـ Google Maps",
+    "earTag": "علامة الودن",
+    "unknownLocation": "بلاصة مجهولة",
+    "sponsor": "الداعم"
+  },
   "mapLegend": {
     "tagged": "مسجّل",
     "taggedDesc": "ملقّح ومعلّم فالودن",

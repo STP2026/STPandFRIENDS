@@ -391,6 +391,13 @@
       "title": "Online"
     }
   },
+  "mapPopup": {
+    "mobileVet": "Mobiler Tierarzt",
+    "navigate": "Mit Google Maps navigieren",
+    "earTag": "Ohrmarke",
+    "unknownLocation": "Unbekannter Standort",
+    "sponsor": "Sponsor"
+  },
   "mapLegend": {
     "tagged": "Getaggt",
     "taggedDesc": "Geimpft & Ohrmarke",

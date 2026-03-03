@@ -391,6 +391,13 @@
       "title": "En ligne"
     }
   },
+  "mapPopup": {
+    "mobileVet": "Vétérinaire mobile",
+    "navigate": "Naviguer avec Google Maps",
+    "earTag": "Marque auriculaire",
+    "unknownLocation": "Emplacement inconnu",
+    "sponsor": "Parrain"
+  },
   "mapLegend": {
     "tagged": "Identifié",
     "taggedDesc": "Vacciné & marqué",

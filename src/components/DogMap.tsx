@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { Dog } from "@/types/dog";
 import { Facility } from "@/types/facility";
 import { MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Fix for default marker icons in Vite
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -242,6 +243,7 @@ const DogMap = ({
   focusDogId,
   showReportTypes = false,
 }: DogMapProps) => {
+  const { t } = useTranslation();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
@@ -359,24 +361,24 @@ const DogMap = ({
             />
             <div style="flex: 1;">
               <h3 style="font-weight: bold; font-size: 16px; margin: 0;">${dog.name}</h3>
-              <p style="font-size: 12px; color: #666; margin: 4px 0 0 0;">Ohrmarke: ${dog.earTag}</p>
+              <p style="font-size: 12px; color: #666; margin: 4px 0 0 0;">${t('mapPopup.earTag', 'Ear Tag')}: ${dog.earTag}</p>
             </div>
           </div>
           
           <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 14px; color: #666;">${dog.location || 'Unbekannter Standort'}</span>
+            <span style="font-size: 14px; color: #666;">${dog.location || t('mapPopup.unknownLocation', 'Unknown location')}</span>
           </div>
           
           <div style="margin-top: 8px; display: flex; align-items: center; gap: 8px; color: ${dog.isVaccinated ? '#2d9a6e' : '#d4a72c'};">
             <span style="font-size: 14px; font-weight: 500;">
-              ${dog.isVaccinated ? '✓ Tagged' : '⚠ Noch nicht geimpft'}
+              ${dog.isVaccinated ? `✓ ${t('dogCard.vaccinated', 'Vaccinated')}` : `⚠ ${t('dogCard.notVaccinated', 'Not vaccinated')}`}
             </span>
           </div>
           
           ${dog.sponsorName ? `
           <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #dc2626;">
             <span style="font-size: 14px;">❤️</span>
-            <span style="font-size: 13px; font-weight: 500;">Sponsor: ${dog.sponsorName}</span>
+            <span style="font-size: 13px; font-weight: 500;">${t('mapPopup.sponsor', 'Sponsor')}: ${dog.sponsorName}</span>
           </div>
           ` : ''}
           
@@ -426,10 +428,10 @@ const DogMap = ({
         .addTo(mapRef.current!);
 
       const typeLabel = isMobileVet
-        ? '📱 Mobiler Tierarzt'
+        ? `📱 ${t('mapPopup.mobileVet', 'Mobile Vet')}`
         : facility.type === 'vaccination_center'
-          ? '💉 Rabies Vaccination Center'
-          : facility.type === 'vet' ? '🏥 Tierarzt' : '🏠 Partner';
+          ? `💉 ${t('facilities.vaccination_center', 'Rabies Vaccination Center')}`
+          : facility.type === 'vet' ? `🏥 ${t('facilities.vet', 'Veterinarian')}` : `🏠 ${t('facilities.friend', 'PawFriend')}`;
       const popupContent = `
         <div style="padding: 12px; min-width: 220px;">
           ${facility.photoUrl ? `
@@ -449,7 +451,7 @@ const DogMap = ({
           ${facility.phone ? `<p style="font-size: 13px; color: #666; margin: 4px 0;">📞 ${facility.phone}</p>` : ''}
           ${facility.website ? `<p style="font-size: 13px; margin: 4px 0;"><a href="${facility.website}" target="_blank" style="color: #2563eb;">🌐 Website</a></p>` : ''}
           ${facility.description ? `<p style="margin-top: 8px; font-size: 13px; color: #666;">${facility.description}</p>` : ''}
-          <p style="margin-top: 8px;"><a href="https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: #2563eb; font-weight: 500; text-decoration: none;">📍 Navigate with Google Maps</a></p>
+          <p style="margin-top: 8px;"><a href="https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: #2563eb; font-weight: 500; text-decoration: none;">📍 ${t('mapPopup.navigate', 'Navigate with Google Maps')}</a></p>
         </div>
       `;
 
