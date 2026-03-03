@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
-import { useDogs } from "@/hooks/useDogs";
+import { usePublicStats } from "@/hooks/usePublicStats";
 import heroImage from "@/assets/hero-dog.webp";
 import logoWhite from "@/assets/logo-white.webp";
 
@@ -11,10 +11,10 @@ const HeroSection = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { data: dogs } = useDogs(true);
+  const { data: stats } = usePublicStats();
 
-  const totalDogs = (dogs?.length || 0) + 30;
-  const vaccinatedCount = (dogs?.filter(d => d.isVaccinated).length || 0) + 30;
+  const totalDogs = stats?.totalDogs || 30;
+  const vaccinatedCount = stats?.vaccinatedDogs || 30;
 
   const handleExploreMap = (e: React.MouseEvent) => {
     if (!user) {
