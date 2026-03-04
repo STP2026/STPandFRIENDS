@@ -25,6 +25,8 @@ const InstallPage = lazy(() => import("./pages/InstallPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
+import { useAutoLogout } from "@/hooks/useAutoLogout";
+
 // Loading fallback for lazy pages
 const PageLoader = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
@@ -57,10 +59,14 @@ const queryClient = new QueryClient({
   },
 });
 
+// Auto-logout after 30min inactivity
+const AutoLogout = () => { useAutoLogout(); return null; };
+
 const App = () => (
   <I18nextProvider i18n={i18n}>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <AutoLogout />
         <OfflineProvider>
           <BrowserRouter>
             <DirectionHandler />
