@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import logoHeader from "@/assets/logo-header.png";
 
-const HUMAN_AID_URL = "https://save-the-paws.de/first-aid";
+const HUMAN_AID_URL = "https://aid.save-the-paws.de/first-aid";
 const DOG_AID_URL = "https://aid.save-the-paws.de/dog-aid";
 
 // ── Custom SVG Icons ──
