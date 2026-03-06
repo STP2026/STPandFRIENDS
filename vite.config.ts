@@ -116,17 +116,6 @@ export default defineConfig({
           {
             urlPattern: /^https:\/\/acdwmmzaeuxuxldwjrpl\.supabase\.co\/rest\/v1\/.*/i,
             handler: "NetworkOnly",
-            options: {
-              cacheName: "supabase-api-cache",
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 // 1 day
-              },
-              cacheableResponse: {
-                statuses: [0, 200]
-              },
-              networkTimeoutSeconds: 5
-            }
           }
         ]
       }
