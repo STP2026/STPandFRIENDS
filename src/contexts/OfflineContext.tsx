@@ -81,7 +81,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
 
       try {
         const formData = report.data;
-        const isAutoApproved = formData.reportType === 'save';
+        const isAutoApproved = formData.reportType !== 'save';
 
         const { error } = await supabase
           .from('dogs')

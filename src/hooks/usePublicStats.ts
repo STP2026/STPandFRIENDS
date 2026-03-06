@@ -32,6 +32,7 @@ export function usePublicStats() {
 
       if (vacError) throw vacError;
 
+      // +30 offset: represents dogs tracked before this app was launched
       return {
         totalDogs: (totalCount || 0) + 30,
         vaccinatedDogs: (vaccinatedCount || 0) + 30,

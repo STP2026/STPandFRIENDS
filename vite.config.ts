@@ -112,10 +112,10 @@ export default defineConfig({
               }
             }
           },
-          // Supabase API (dogs data) - NetworkFirst for fresh data when online
+          // Supabase API (dogs data) - NetworkOnly, React Query handles caching
           {
             urlPattern: /^https:\/\/acdwmmzaeuxuxldwjrpl\.supabase\.co\/rest\/v1\/.*/i,
-            handler: "NetworkFirst",
+            handler: "NetworkOnly",
             options: {
               cacheName: "supabase-api-cache",
               expiration: {

@@ -24,6 +24,7 @@ export function useAutoLogout(timeoutMs = INACTIVITY_TIMEOUT_MS) {
 
     const events: (keyof WindowEventMap)[] = [
       'mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll',
+      'visibilitychange',
     ];
 
     // Throttle: only reset timer at most once per 30 seconds
