@@ -28,6 +28,7 @@ export const useActiveAdvertisement = () => {
       if (error) throw error;
       return data as Advertisement | null;
     },
+    staleTime: 1000 * 60 * 60, // 1 hour — ads change rarely
   });
 };
 

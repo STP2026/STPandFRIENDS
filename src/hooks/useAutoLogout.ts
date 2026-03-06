@@ -5,7 +5,7 @@ const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
 
 /**
  * Automatically signs out the user after a period of inactivity.
- * Tracks mouse, touch, keyboard, and scroll events as "activity".
+ * Tracks mouse, touch, keyboard, scroll and visibility events.
  * Only active when a user is logged in.
  */
 export function useAutoLogout(timeoutMs = INACTIVITY_TIMEOUT_MS) {
@@ -22,12 +22,11 @@ export function useAutoLogout(timeoutMs = INACTIVITY_TIMEOUT_MS) {
   useEffect(() => {
     if (!user) return;
 
-    const events: (keyof WindowEventMap)[] = [
+    // Throttled events: mouse, keyboard, touch, scroll
+    const throttledEvents: (keyof WindowEventMap)[] = [
       'mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll',
-      'visibilitychange',
     ];
 
-    // Throttle: only reset timer at most once per 30 seconds
     let lastReset = Date.now();
     const throttledReset = () => {
       const now = Date.now();
@@ -37,11 +36,21 @@ export function useAutoLogout(timeoutMs = INACTIVITY_TIMEOUT_MS) {
       }
     };
 
-    events.forEach((e) => window.addEventListener(e, throttledReset, { passive: true }));
+    // visibilitychange resets immediately (no throttle) — important for PWA/mobile
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        lastReset = Date.now();
+        resetTimer();
+      }
+    };
+
+    throttledEvents.forEach((e) => window.addEventListener(e, throttledReset, { passive: true }));
+    window.addEventListener('visibilitychange', handleVisibilityChange);
     resetTimer(); // Start initial timer
 
     return () => {
-      events.forEach((e) => window.removeEventListener(e, throttledReset));
+      throttledEvents.forEach((e) => window.removeEventListener(e, throttledReset));
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [user, resetTimer]);

@@ -50,7 +50,7 @@ export interface DbDog {
   vaccination2_date: string | null;
   vaccination_passport: string | null;
   additional_info: string | null;
-  is_approved: boolean;
+  is_approved: boolean | null;
   reported_by?: string | null;
   reporter_name?: string | null;
   created_at: string;
@@ -74,7 +74,7 @@ export function mapDbDogToDog(dbDog: DbDog): Dog {
     vaccination2Date: dbDog.vaccination2_date,
     vaccinationPassport: dbDog.vaccination_passport,
     additionalInfo: dbDog.additional_info || undefined,
-    isApproved: dbDog.is_approved,
+    isApproved: dbDog.is_approved ?? false,
     reporterName: dbDog.reporter_name || undefined,
     createdAt: dbDog.created_at,
     updatedAt: dbDog.updated_at,

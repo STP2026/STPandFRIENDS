@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +13,7 @@ const AD_SHOWN_KEY = 'ad_popup_shown_session';
 const AdPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: ad, isLoading } = useActiveAdvertisement();
+  const timerStartedRef = useRef(false);
 
   useEffect(() => {
     // Only show ad once per session
@@ -23,6 +24,9 @@ const AdPopup = () => {
     if (isLoading || !ad) {
       return;
     }
+
+    if (timerStartedRef.current) return;
+    timerStartedRef.current = true;
 
     const delayMs = (ad.display_delay_seconds || 20) * 1000;
     
