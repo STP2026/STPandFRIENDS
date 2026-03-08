@@ -231,7 +231,11 @@
       "vaccinationPassport": "Carnet de vaccination",
       "comment": "Commentaire",
       "remarks": "Remarques",
-      "actions": "Actions"
+      "actions": "Actions",
+      "vacc1": "Vaccin 1",
+      "vacc2": "Vaccin 2",
+      "passport": "Passeport",
+      "remark": "Remarque"
     },
     "status": {
       "visible": "Visible",
@@ -301,7 +305,13 @@
       "submitting": "Ajout en cours...",
       "withdraw": "Retirer l'offre",
       "withdrawConfirm": "Voulez-vous vraiment supprimer ce spot de réhabilitation ?"
-    }
+    },
+    "searchDogs": "Rechercher par nom, marque, lieu, parrain...",
+    "visible": "Visible",
+    "pending": "En attente",
+    "showOnMap": "Afficher sur la carte",
+    "note": "Note",
+    "changeLog": "Historique"
   },
   "helper": {
     "title": "Devenez Aidant 💚",

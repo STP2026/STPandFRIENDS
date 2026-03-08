@@ -64,6 +64,7 @@ import {
   Image as ImageIcon,
   Bandage,
   MapPin,
+  ArrowUpDown,
 } from 'lucide-react';
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
@@ -105,6 +106,56 @@ const AdminPage = () => {
   const [newMessage, setNewMessage] = useState('');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState('');
+  const [dogSortField, setDogSortField] = useState<string>('name');
+  const [dogSortDir, setDogSortDir] = useState<'asc' | 'desc'>('asc');
+  const [dogSearch, setDogSearch] = useState('');
+
+  const toggleDogSort = (field: string) => {
+    if (dogSortField === field) {
+      setDogSortDir(prev => prev === 'asc' ? 'desc' : 'asc');
+    } else {
+      setDogSortField(field);
+      setDogSortDir('asc');
+    }
+  };
+
+  const sortedDogs = (() => {
+    if (!dogs) return [];
+    let filtered = [...dogs];
+
+    // Search filter
+    if (dogSearch.trim()) {
+      const q = dogSearch.toLowerCase();
+      filtered = filtered.filter(d =>
+        d.name.toLowerCase().includes(q) ||
+        d.earTag.toLowerCase().includes(q) ||
+        (d.location || '').toLowerCase().includes(q) ||
+        (d.sponsorName || '').toLowerCase().includes(q)
+      );
+    }
+
+    // Sort
+    filtered.sort((a, b) => {
+      let valA: any, valB: any;
+      switch (dogSortField) {
+        case 'name': valA = a.name.toLowerCase(); valB = b.name.toLowerCase(); break;
+        case 'earTag': valA = a.earTag.toLowerCase(); valB = b.earTag.toLowerCase(); break;
+        case 'location': valA = (a.location || '').toLowerCase(); valB = (b.location || '').toLowerCase(); break;
+        case 'reportType': valA = a.reportType; valB = b.reportType; break;
+        case 'vaccination1': valA = a.vaccination1Date || ''; valB = b.vaccination1Date || ''; break;
+        case 'vaccination2': valA = a.vaccination2Date || ''; valB = b.vaccination2Date || ''; break;
+        case 'passport': valA = (a.vaccinationPassport || '').toLowerCase(); valB = (b.vaccinationPassport || '').toLowerCase(); break;
+        case 'sponsor': valA = (a.sponsorName || '').toLowerCase(); valB = (b.sponsorName || '').toLowerCase(); break;
+        case 'status': valA = a.isApproved ? 1 : 0; valB = b.isApproved ? 1 : 0; break;
+        case 'created': valA = a.createdAt; valB = b.createdAt; break;
+        default: valA = a.name.toLowerCase(); valB = b.name.toLowerCase();
+      }
+      if (valA < valB) return dogSortDir === 'asc' ? -1 : 1;
+      if (valA > valB) return dogSortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    return filtered;
+  })();
   const [newAdForm, setNewAdForm] = useState({
     title: '',
     image_url: '',
@@ -616,18 +667,28 @@ const AdminPage = () => {
             <div className="glass-card rounded-xl p-4 sm:p-6">
               <h2 className="font-display text-lg sm:text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                 <DogIcon className="w-5 h-5 text-primary" />
-                {t('admin.allDogs')} ({dogs?.length || 0})
+                {t('admin.allDogs')} ({sortedDogs.length})
               </h2>
+
+              {/* Search */}
+              <div className="mb-4">
+                <Input
+                  placeholder={t('admin.searchDogs', 'Search by name, ear tag, location, sponsor...')}
+                  value={dogSearch}
+                  onChange={(e) => setDogSearch(e.target.value)}
+                  className="max-w-md"
+                />
+              </div>
               
               {dogsLoading ? (
-                <div className="text-center py-8 text-muted-foreground">Laden...</div>
-              ) : dogs?.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">Noch keine Hunde gemeldet.</div>
+                <div className="text-center py-8 text-muted-foreground">{t('common.loading')}</div>
+              ) : sortedDogs.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">{t('admin.noDogs', 'No dogs reported yet.')}</div>
               ) : (
                 <>
                   {/* Mobile Card View */}
                   <div className="sm:hidden space-y-3">
-                    {dogs?.map((dog) => (
+                    {sortedDogs.map((dog) => (
                       <div key={dog.id} className="border border-border rounded-lg p-3 bg-card">
                         <div className="flex gap-3 mb-3">
                           <img src={dog.photo} alt={dog.name} className="w-14 h-14 rounded-lg object-cover shrink-0" />
@@ -635,25 +696,36 @@ const AdminPage = () => {
                             <div className="flex items-center justify-between gap-2 mb-1">
                               <h3 className="font-medium text-foreground truncate">{dog.name}</h3>
                               <Badge variant={dog.isApproved ? 'default' : 'secondary'} className="text-xs shrink-0">
-                                {dog.isApproved ? 'Sichtbar' : 'Ausstehend'}
+                                {dog.isApproved ? t('admin.visible', 'Visible') : t('admin.pending', 'Pending')}
                               </Badge>
                             </div>
                             <div className="flex items-center gap-1.5">
                               {getReportTypeBadge(dog.reportType)}
                             </div>
-                            <p className="text-xs text-muted-foreground truncate mt-1">{dog.location}</p>
+                            <p className="text-xs text-muted-foreground truncate mt-1">{dog.earTag} · {dog.location}</p>
                           </div>
                         </div>
-                        {/* Dog details */}
                         <div className="grid grid-cols-2 gap-2 text-xs mb-3 p-2 bg-secondary/30 rounded-lg">
                           <div>
-                            <span className="text-muted-foreground">Impfung 1:</span>
+                            <span className="text-muted-foreground">{t('admin.table.vacc1', 'Vacc 1')}:</span>
                             <span className="ml-1 font-medium">{formatDate(dog.vaccination1Date)}</span>
                           </div>
                           <div>
-                            <span className="text-muted-foreground">Impfung 2:</span>
+                            <span className="text-muted-foreground">{t('admin.table.vacc2', 'Vacc 2')}:</span>
                             <span className="ml-1 font-medium">{formatDate(dog.vaccination2Date)}</span>
                           </div>
+                          {dog.vaccinationPassport && (
+                            <div className="col-span-2">
+                              <span className="text-muted-foreground">{t('admin.table.passport', 'Passport')}:</span>
+                              <span className="ml-1 font-medium">{dog.vaccinationPassport}</span>
+                            </div>
+                          )}
+                          {dog.sponsorName && (
+                            <div className="col-span-2">
+                              <span className="text-muted-foreground">{t('mapPopup.sponsor', 'Sponsor')}:</span>
+                              <span className="ml-1 font-medium text-red-500">❤️ {dog.sponsorName}</span>
+                            </div>
+                          )}
                         </div>
                         {latestRemarks?.[dog.id] && (
                           <div className="text-xs p-2 bg-muted/50 rounded-lg mb-3">
@@ -661,14 +733,13 @@ const AdminPage = () => {
                             <p className="text-muted-foreground mt-0.5">{latestRemarks[dog.id].userName}</p>
                           </div>
                         )}
-                        {/* Actions */}
                         <div className="flex gap-1 pt-2 border-t border-border">
-                          <Button size="sm" variant="ghost" onClick={() => handleNavigateToMap(dog)} title="Auf Karte anzeigen">
+                          <Button size="sm" variant="ghost" onClick={() => handleNavigateToMap(dog)} title={t('admin.showOnMap', 'Show on map')}>
                             <MapPin className="w-3.5 h-3.5" />
                           </Button>
                           <Button size="sm" variant="ghost" onClick={() => { setSelectedDog(dog); setRemarkDialogOpen(true); }} className="flex-1 text-xs">
                             <StickyNote className="w-3.5 h-3.5 mr-1" />
-                            Notiz
+                            {t('admin.note', 'Note')}
                           </Button>
                           <Button size="sm" variant="ghost" onClick={() => { setSelectedDog(dog); setChangeLogDialogOpen(true); }}>
                             <History className="w-4 h-4" />
@@ -685,48 +756,68 @@ const AdminPage = () => {
                       </div>
                     ))}
                   </div>
-                  {/* Desktop Table View */}
+                  {/* Desktop Sortable Table */}
                   <div className="hidden sm:block overflow-x-auto">
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Foto</TableHead>
-                          <TableHead>Name</TableHead>
-                          <TableHead>Typ</TableHead>
-                          <TableHead>Standort</TableHead>
-                          <TableHead>Impfung 1</TableHead>
-                          <TableHead>Impfung 2</TableHead>
-                          <TableHead>Impfpass</TableHead>
-                          <TableHead>Kommentar</TableHead>
-                          <TableHead>Status</TableHead>
-                          <TableHead>Bemerkung</TableHead>
-                          <TableHead className="text-right">Aktionen</TableHead>
+                          <TableHead>{t('admin.table.photo', 'Photo')}</TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('name')}>
+                            {t('admin.table.name', 'Name')} {dogSortField === 'name' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('earTag')}>
+                            {t('mapPopup.earTag', 'Ear Tag')} {dogSortField === 'earTag' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('reportType')}>
+                            {t('admin.table.type', 'Type')} {dogSortField === 'reportType' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('location')}>
+                            {t('admin.table.location', 'Location')} {dogSortField === 'location' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('vaccination1')}>
+                            {t('admin.table.vacc1', 'Vacc 1')} {dogSortField === 'vaccination1' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('vaccination2')}>
+                            {t('admin.table.vacc2', 'Vacc 2')} {dogSortField === 'vaccination2' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('passport')}>
+                            {t('admin.table.passport', 'Passport')} {dogSortField === 'passport' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('sponsor')}>
+                            {t('mapPopup.sponsor', 'Sponsor')} {dogSortField === 'sponsor' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('status')}>
+                            {t('admin.table.status', 'Status')} {dogSortField === 'status' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
+                          <TableHead>{t('admin.table.remark', 'Remark')}</TableHead>
+                          <TableHead className="text-right">{t('admin.table.actions', 'Actions')}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {dogs?.map((dog) => (
+                        {sortedDogs.map((dog) => (
                           <TableRow key={dog.id}>
                             <TableCell>
                               <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover" />
                             </TableCell>
                             <TableCell className="font-medium">{dog.name}</TableCell>
+                            <TableCell className="text-xs font-mono">{dog.earTag || '-'}</TableCell>
                             <TableCell>{getReportTypeBadge(dog.reportType)}</TableCell>
                             <TableCell className="max-w-[120px] truncate">{dog.location}</TableCell>
-                            <TableCell>{formatDate(dog.vaccination1Date)}</TableCell>
-                            <TableCell>{formatDate(dog.vaccination2Date)}</TableCell>
+                            <TableCell className="text-sm">{formatDate(dog.vaccination1Date)}</TableCell>
+                            <TableCell className="text-sm">{formatDate(dog.vaccination2Date)}</TableCell>
                             <TableCell className="max-w-[100px]">
                               <span className="truncate block text-sm">{dog.vaccinationPassport || '-'}</span>
                             </TableCell>
-                            <TableCell className="max-w-[120px]">
-                              {dog.additionalInfo ? (
-                                <p className="truncate text-sm text-muted-foreground" title={dog.additionalInfo}>{dog.additionalInfo}</p>
+                            <TableCell className="max-w-[100px]">
+                              {dog.sponsorName ? (
+                                <span className="text-sm text-red-500 font-medium truncate block" title={dog.sponsorName}>❤️ {dog.sponsorName}</span>
                               ) : (
                                 <span className="text-muted-foreground text-sm">-</span>
                               )}
                             </TableCell>
                             <TableCell>
                               <Badge variant={dog.isApproved ? 'default' : 'secondary'}>
-                                {dog.isApproved ? 'Sichtbar' : 'Ausstehend'}
+                                {dog.isApproved ? t('admin.visible', 'Visible') : t('admin.pending', 'Pending')}
                               </Badge>
                             </TableCell>
                             <TableCell className="max-w-[150px]">
@@ -743,13 +834,13 @@ const AdminPage = () => {
                             </TableCell>
                             <TableCell className="text-right">
                               <div className="flex gap-1 justify-end">
-                                <Button size="sm" variant="ghost" onClick={() => handleNavigateToMap(dog)} title="Auf Karte anzeigen">
+                                <Button size="sm" variant="ghost" onClick={() => handleNavigateToMap(dog)} title={t('admin.showOnMap', 'Show on map')}>
                                   <MapPin className="w-4 h-4" />
                                 </Button>
-                                <Button size="sm" variant="ghost" onClick={() => { setSelectedDog(dog); setRemarkDialogOpen(true); }} title="Bemerkung">
+                                <Button size="sm" variant="ghost" onClick={() => { setSelectedDog(dog); setRemarkDialogOpen(true); }} title={t('admin.note', 'Note')}>
                                   <StickyNote className="w-4 h-4" />
                                 </Button>
-                                <Button size="sm" variant="ghost" onClick={() => { setSelectedDog(dog); setChangeLogDialogOpen(true); }} title="Änderungslog">
+                                <Button size="sm" variant="ghost" onClick={() => { setSelectedDog(dog); setChangeLogDialogOpen(true); }} title={t('admin.changeLog', 'Change log')}>
                                   <History className="w-4 h-4" />
                                 </Button>
                                 <Button size="sm" variant="ghost" onClick={() => handleEdit(dog)}>

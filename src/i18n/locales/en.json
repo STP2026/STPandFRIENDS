@@ -231,7 +231,11 @@
       "vaccinationPassport": "Vaccination Passport",
       "comment": "Comment",
       "remarks": "Remarks",
-      "actions": "Actions"
+      "actions": "Actions",
+      "vacc1": "Vacc 1",
+      "vacc2": "Vacc 2",
+      "passport": "Passport",
+      "remark": "Remark"
     },
     "status": {
       "visible": "Visible",
@@ -301,7 +305,13 @@
       "submitting": "Adding...",
       "withdraw": "Withdraw Offer",
       "withdrawConfirm": "Do you really want to delete this rehab spot?"
-    }
+    },
+    "searchDogs": "Search by name, ear tag, location, sponsor...",
+    "visible": "Visible",
+    "pending": "Pending",
+    "showOnMap": "Show on map",
+    "note": "Note",
+    "changeLog": "Change log"
   },
   "helper": {
     "title": "Become a Helper 💚",

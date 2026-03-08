@@ -231,7 +231,11 @@
       "vaccinationPassport": "Impfpass",
       "comment": "Kommentar",
       "remarks": "Bemerkung",
-      "actions": "Aktionen"
+      "actions": "Aktionen",
+      "vacc1": "Impfung 1",
+      "vacc2": "Impfung 2",
+      "passport": "Impfpass",
+      "remark": "Bemerkung"
     },
     "status": {
       "visible": "Sichtbar",
@@ -301,7 +305,13 @@
       "submitting": "Wird hinzugefügt...",
       "withdraw": "Angebot zurückziehen",
       "withdrawConfirm": "Möchtest du diesen Rehab-Spot wirklich löschen?"
-    }
+    },
+    "searchDogs": "Suche nach Name, Ohrmarke, Ort, Sponsor...",
+    "visible": "Sichtbar",
+    "pending": "Ausstehend",
+    "showOnMap": "Auf Karte anzeigen",
+    "note": "Notiz",
+    "changeLog": "Änderungslog"
   },
   "helper": {
     "title": "Werde Helfer 💚",
