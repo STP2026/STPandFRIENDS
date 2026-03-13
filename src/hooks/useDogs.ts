@@ -2,25 +2,31 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Dog, DbDog, DogFormData, mapDbDogToDog, ReportType } from '@/types/dog';
 
+// onlyApproved: true = normal user (only 'save' approved)
+//               false = helper/admin (all report types)
 export function useDogs(onlyApproved = true) {
   return useQuery({
     queryKey: ['dogs', onlyApproved],
     queryFn: async (): Promise<Dog[]> => {
-      // Use the dogs_public view which masks reported_by UUID and shows reporter_name instead
+      // The dogs_public view already enforces visibility via RLS + WHERE clause.
+      // The frontend filter here is defense-in-depth only.
       let query = supabase.from('dogs_public').select('*');
-      
+
       if (onlyApproved) {
-        query = query.eq('is_approved', true);
+        // Normal users: only approved 'save' dogs
+        query = query
+          .eq('is_approved', true)
+          .eq('report_type', 'save');
       }
-      
+      // Helper/Admin: the view returns all types they are allowed to see
+
       const { data, error } = await query.order('created_at', { ascending: false });
-      
+
       if (error) throw error;
       return (data as DbDog[]).map(mapDbDogToDog);
     },
-    // Return empty array instead of undefined while loading — prevents map from crashing
     placeholderData: [],
-    staleTime: 1000 * 60 * 2, // 2 minutes
+    staleTime: 1000 * 60 * 2,
   });
 }
 
