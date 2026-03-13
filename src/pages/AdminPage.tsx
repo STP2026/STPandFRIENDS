@@ -1696,6 +1696,16 @@ const AdminPage = () => {
         open={changeLogDialogOpen}
         onOpenChange={setChangeLogDialogOpen}
       />
+
+      {/* Photo Lightbox */}
+      {lightboxPhotos.length > 0 && (
+        <PhotoLightbox
+          photos={lightboxPhotos}
+          currentIndex={lightboxIndex}
+          onIndexChange={setLightboxIndex}
+          onClose={() => setLightboxPhotos([])}
+        />
+      )}
     </div>
   );
 };
@@ -1825,16 +1835,6 @@ function ChangeLogDialog({
         </ScrollArea>
       </DialogContent>
     </Dialog>
-
-    {/* Photo Lightbox */}
-    {lightboxPhotos.length > 0 && (
-      <PhotoLightbox
-        photos={lightboxPhotos}
-        currentIndex={lightboxIndex}
-        onIndexChange={setLightboxIndex}
-        onClose={() => setLightboxPhotos([])}
-      />
-    )}
   );
 }
 
