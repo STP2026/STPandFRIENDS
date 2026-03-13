@@ -235,7 +235,8 @@
       "vacc1": "Impfung 1",
       "vacc2": "Impfung 2",
       "passport": "Impfpass",
-      "remark": "Bemerkung"
+      "remark": "Bemerkung",
+      "caretaker": "Verantwortlich"
     },
     "status": {
       "visible": "Sichtbar",
@@ -311,7 +312,11 @@
     "pending": "Ausstehend",
     "showOnMap": "Auf Karte anzeigen",
     "note": "Notiz",
-    "changeLog": "Änderungslog"
+    "changeLog": "Änderungslog",
+    "caretakerPrompt": "Wer betreut diesen Hund?",
+    "caretakerClick": "Klicken zum Zuweisen",
+    "caretakerEmpty": "+ zuweisen",
+    "caretakerUnassigned": "Nicht zugewiesen"
   },
   "helper": {
     "title": "Werde Helfer 💚",

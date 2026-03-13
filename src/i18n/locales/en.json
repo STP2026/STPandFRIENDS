@@ -235,7 +235,8 @@
       "vacc1": "Vacc 1",
       "vacc2": "Vacc 2",
       "passport": "Passport",
-      "remark": "Remark"
+      "remark": "Remark",
+      "caretaker": "Caretaker"
     },
     "status": {
       "visible": "Visible",
@@ -311,7 +312,11 @@
     "pending": "Pending",
     "showOnMap": "Show on map",
     "note": "Note",
-    "changeLog": "Change log"
+    "changeLog": "Change log",
+    "caretakerPrompt": "Who is responsible for this dog?",
+    "caretakerClick": "Click to assign",
+    "caretakerEmpty": "+ assign",
+    "caretakerUnassigned": "Unassigned"
   },
   "helper": {
     "title": "Become a Helper 💚",

@@ -109,6 +109,7 @@ const AdminPage = () => {
   const [dogSortField, setDogSortField] = useState<string>('name');
   const [dogSortDir, setDogSortDir] = useState<'asc' | 'desc'>('asc');
   const [dogSearch, setDogSearch] = useState('');
+  const [caretakerFilter, setCaretakerFilter] = useState<string>('all');
 
   const toggleDogSort = (field: string) => {
     if (dogSortField === field) {
@@ -130,8 +131,16 @@ const AdminPage = () => {
         d.name.toLowerCase().includes(q) ||
         d.earTag.toLowerCase().includes(q) ||
         (d.location || '').toLowerCase().includes(q) ||
-        (d.sponsorName || '').toLowerCase().includes(q)
+        (d.sponsorName || '').toLowerCase().includes(q) ||
+        (d.caretaker || '').toLowerCase().includes(q)
       );
+    }
+
+    // Caretaker filter
+    if (caretakerFilter === 'unassigned') {
+      filtered = filtered.filter(d => !d.caretaker);
+    } else if (caretakerFilter !== 'all') {
+      filtered = filtered.filter(d => d.caretaker === caretakerFilter);
     }
 
     // Sort
@@ -146,6 +155,7 @@ const AdminPage = () => {
         case 'vaccination2': valA = a.vaccination2Date || ''; valB = b.vaccination2Date || ''; break;
         case 'passport': valA = (a.vaccinationPassport || '').toLowerCase(); valB = (b.vaccinationPassport || '').toLowerCase(); break;
         case 'sponsor': valA = (a.sponsorName || '').toLowerCase(); valB = (b.sponsorName || '').toLowerCase(); break;
+        case 'caretaker': valA = (a.caretaker || '').toLowerCase(); valB = (b.caretaker || '').toLowerCase(); break;
         case 'status': valA = a.isApproved ? 1 : 0; valB = b.isApproved ? 1 : 0; break;
         case 'created': valA = a.createdAt; valB = b.createdAt; break;
         default: valA = a.name.toLowerCase(); valB = b.name.toLowerCase();
@@ -170,6 +180,7 @@ const AdminPage = () => {
     isVaccinated: false,
     isApproved: false,
     sponsorName: '',
+    caretaker: '',
     reportType: '' as string,
   });
 
@@ -228,6 +239,7 @@ const AdminPage = () => {
       isVaccinated: dog.isVaccinated,
       isApproved: dog.isApproved,
       sponsorName: dog.sponsorName || '',
+      caretaker: dog.caretaker || '',
       reportType: dog.reportType,
     });
     setEditDialogOpen(true);
@@ -255,6 +267,9 @@ const AdminPage = () => {
     if (editForm.sponsorName !== (selectedDog.sponsorName || '')) {
       changes.sponsor_name = editForm.sponsorName || null;
     }
+    if (editForm.caretaker !== (selectedDog.caretaker || '')) {
+      changes.caretaker = editForm.caretaker || null;
+    }
     if (editForm.reportType !== selectedDog.reportType) {
       changes.report_type = editForm.reportType;
     }
@@ -268,6 +283,7 @@ const AdminPage = () => {
         is_vaccinated: editForm.isVaccinated,
         is_approved: editForm.isApproved,
         sponsor_name: editForm.sponsorName || null,
+        caretaker: editForm.caretaker || null,
         report_type: editForm.reportType,
       },
     });
@@ -671,14 +687,25 @@ const AdminPage = () => {
                 {t('admin.allDogs')} ({sortedDogs.length})
               </h2>
 
-              {/* Search */}
-              <div className="mb-4">
+              {/* Search + Caretaker Filter */}
+              <div className="mb-4 flex flex-col sm:flex-row gap-3">
                 <Input
                   placeholder={t('admin.searchDogs', 'Search by name, ear tag, location, sponsor...')}
                   value={dogSearch}
                   onChange={(e) => setDogSearch(e.target.value)}
-                  className="max-w-md"
+                  className="flex-1 max-w-md"
                 />
+                <select
+                  value={caretakerFilter}
+                  onChange={(e) => setCaretakerFilter(e.target.value)}
+                  className="h-10 rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+                >
+                  <option value="all">{t('admin.table.caretaker', 'Caretaker')}: {t('dogsPage.filterAll', 'All')}</option>
+                  <option value="unassigned">⚠ {t('admin.caretakerUnassigned', 'Unassigned')}</option>
+                  {[...new Set(dogs?.map(d => d.caretaker).filter(Boolean) || [])].sort().map(name => (
+                    <option key={name} value={name!}>👤 {name}</option>
+                  ))}
+                </select>
               </div>
               
               {dogsLoading ? (
@@ -727,6 +754,7 @@ const AdminPage = () => {
                               <span className="ml-1 font-medium text-red-500">❤️ {dog.sponsorName}</span>
                             </div>
                           )}
+
                         </div>
                         {latestRemarks?.[dog.id] && (
                           <div className="text-xs p-2 bg-muted/50 rounded-lg mb-3">
@@ -787,6 +815,9 @@ const AdminPage = () => {
                           <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('sponsor')}>
                             {t('mapPopup.sponsor', 'Sponsor')} {dogSortField === 'sponsor' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
                           </TableHead>
+                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('caretaker')}>
+                            {t('admin.table.caretaker', 'Caretaker')} {dogSortField === 'caretaker' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          </TableHead>
                           <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('status')}>
                             {t('admin.table.status', 'Status')} {dogSortField === 'status' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
                           </TableHead>
@@ -815,6 +846,24 @@ const AdminPage = () => {
                               ) : (
                                 <span className="text-muted-foreground text-sm">-</span>
                               )}
+                            </TableCell>
+                            <TableCell className="max-w-[120px]">
+                              <button
+                                className="text-sm w-full text-left hover:bg-secondary/50 rounded px-1 py-0.5 transition-colors"
+                                onClick={() => {
+                                  const name = prompt(t('admin.caretakerPrompt', 'Who is responsible for this dog?'), dog.caretaker || '');
+                                  if (name !== null) {
+                                    updateDog.mutateAsync({ id: dog.id, updates: { caretaker: name || null } }).catch(() => {});
+                                  }
+                                }}
+                                title={t('admin.caretakerClick', 'Click to assign')}
+                              >
+                                {dog.caretaker ? (
+                                  <span className="text-sm font-medium truncate block text-blue-600 dark:text-blue-400">👤 {dog.caretaker}</span>
+                                ) : (
+                                  <span className="text-muted-foreground text-sm italic">{t('admin.caretakerEmpty', '+ assign')}</span>
+                                )}
+                              </button>
                             </TableCell>
                             <TableCell>
                               <Badge variant={dog.isApproved ? 'default' : 'secondary'}>
@@ -1492,6 +1541,18 @@ const AdminPage = () => {
               </div>
             )}
 
+            {/* Caretaker / Verantwortlich */}
+            <div className="space-y-2">
+              <Label htmlFor="caretaker">{t('admin.table.caretaker', 'Caretaker')}</Label>
+              <Input
+                id="caretaker"
+                type="text"
+                placeholder={t('admin.caretakerPrompt', 'Who is responsible for this dog?')}
+                value={editForm.caretaker}
+                onChange={(e) => setEditForm({ ...editForm, caretaker: e.target.value })}
+              />
+            </div>
+
             {/* Mark as Attention — for strays/vaccination_wish that need urgent help */}
             {selectedDog && selectedDog.reportType !== 'save' && editForm.reportType !== 'save' && (
               <div className="border-t border-border pt-4">
@@ -1573,6 +1634,20 @@ const AdminPage = () => {
               </div>
             )}
           </div>
+
+          {/* Caretaker in convert dialog */}
+          {!selectedDog?.reportType?.match(/save/) && (
+            <div className="space-y-2">
+              <Label htmlFor="caretaker-convert">{t('admin.table.caretaker', 'Caretaker')}</Label>
+              <Input
+                id="caretaker-convert"
+                type="text"
+                placeholder={t('admin.caretakerPrompt', 'Who is responsible for this dog?')}
+                value={editForm.caretaker}
+                onChange={(e) => setEditForm({ ...editForm, caretaker: e.target.value })}
+              />
+            </div>
+          )}
           
           <div className="flex gap-3 justify-end">
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>

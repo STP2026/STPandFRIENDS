@@ -235,7 +235,8 @@
       "vacc1": "Vaccin 1",
       "vacc2": "Vaccin 2",
       "passport": "Passeport",
-      "remark": "Remarque"
+      "remark": "Remarque",
+      "caretaker": "Responsable"
     },
     "status": {
       "visible": "Visible",
@@ -311,7 +312,11 @@
     "pending": "En attente",
     "showOnMap": "Afficher sur la carte",
     "note": "Note",
-    "changeLog": "Historique"
+    "changeLog": "Historique",
+    "caretakerPrompt": "Qui s'occupe de ce chien ?",
+    "caretakerClick": "Cliquer pour assigner",
+    "caretakerEmpty": "+ assigner",
+    "caretakerUnassigned": "Non assigné"
   },
   "helper": {
     "title": "Devenez Aidant 💚",

@@ -235,7 +235,8 @@
       "vacc1": "التلقيح 1",
       "vacc2": "التلقيح 2",
       "passport": "جواز التلقيح",
-      "remark": "ملاحظة"
+      "remark": "ملاحظة",
+      "caretaker": "المسؤول"
     },
     "status": {
       "visible": "ظاهر",
@@ -311,7 +312,11 @@
     "pending": "كيتسنّا",
     "showOnMap": "بيّن فالخريطة",
     "note": "ملاحظة",
-    "changeLog": "سجل التغييرات"
+    "changeLog": "سجل التغييرات",
+    "caretakerPrompt": "شكون اللي كيتكلف بهاد الكلب؟",
+    "caretakerClick": "كليكي باش تعيّن",
+    "caretakerEmpty": "+ عيّن",
+    "caretakerUnassigned": "غير معيّن"
   },
   "helper": {
     "title": "ولّي متطوع 💚",
