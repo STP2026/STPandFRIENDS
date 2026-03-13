@@ -56,6 +56,8 @@ export function useAddDog() {
           name: formData.name,
           ear_tag: formData.earTag,
           photo_url: formData.photo || null,
+          photo_url_2: formData.photo2 || null,
+          photo_url_3: formData.photo3 || null,
           latitude: formData.latitude,
           longitude: formData.longitude,
           location: formData.location,

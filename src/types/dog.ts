@@ -5,6 +5,8 @@ export interface Dog {
   name: string;
   earTag: string;
   photo: string;
+  photo2?: string | null;
+  photo3?: string | null;
   latitude: number;
   longitude: number;
   location: string;
@@ -27,6 +29,8 @@ export interface DogFormData {
   name: string;
   earTag: string;
   photo: string;
+  photo2?: string;
+  photo3?: string;
   latitude: number;
   longitude: number;
   location: string;
@@ -43,6 +47,8 @@ export interface DbDog {
   name: string;
   ear_tag: string;
   photo_url: string | null;
+  photo_url_2: string | null;
+  photo_url_3: string | null;
   latitude: number;
   longitude: number;
   location: string | null;
@@ -68,6 +74,8 @@ export function mapDbDogToDog(dbDog: DbDog): Dog {
     name: dbDog.name,
     earTag: dbDog.ear_tag,
     photo: dbDog.photo_url || '/placeholder.svg',
+    photo2: dbDog.photo_url_2 || null,
+    photo3: dbDog.photo_url_3 || null,
     latitude: dbDog.latitude,
     longitude: dbDog.longitude,
     location: dbDog.location || '',

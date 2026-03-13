@@ -25,7 +25,7 @@ const InstallPage = lazy(() => import("./pages/InstallPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
-import { useAutoLogout } from "@/hooks/useAutoLogout";
+import AutoLogoutWarning from "@/components/AutoLogoutWarning";
 
 // Loading fallback for lazy pages
 const PageLoader = () => (
@@ -60,13 +60,13 @@ const queryClient = new QueryClient({
 });
 
 // Auto-logout after 30min inactivity
-const AutoLogout = () => { useAutoLogout(); return null; };
+
 
 const App = () => (
   <I18nextProvider i18n={i18n}>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <AutoLogout />
+        <AutoLogoutWarning />
         <OfflineProvider>
           <BrowserRouter>
             <DirectionHandler />

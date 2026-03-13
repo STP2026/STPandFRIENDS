@@ -186,7 +186,12 @@
     "checkSpamFolder": "Not found? Check your spam folder too.",
     "linkExpiresIn": "The link expires in 24 hours.",
     "backToLogin": "Back to login",
-    "emailNotConfirmed": "Please confirm your email address first."
+    "emailNotConfirmed": "Please confirm your email address first.",
+    "forgotPassword": "Forgot password?",
+    "forgotPasswordDesc": "Enter your email address and we will send you a link to reset your password.",
+    "sendResetLink": "Send reset link",
+    "resetEmailSent": "Email sent",
+    "resetEmailDesc": "If an account exists for this email, you will receive a password reset link shortly."
   },
   "admin": {
     "title": "Admin",
@@ -461,9 +466,14 @@
     "invalidType": "Please select an image",
     "tooLarge": "Image must be smaller than 25MB",
     "uploadError": "Upload failed. Please try again.",
-    "takeOrUpload": "Take or upload a photo",
+    "takeOrUpload": "Photo",
     "tapHere": "Tap here to select a photo",
     "camera": "Camera",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "photos": "Photos"
+  },
+  "autoLogout": {
+    "warning": "You will be automatically logged out in {{seconds}} seconds.",
+    "stayLoggedIn": "Stay logged in"
   }
 }

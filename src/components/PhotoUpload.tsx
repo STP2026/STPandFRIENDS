@@ -1,39 +1,32 @@
 import { useState, useRef } from 'react';
-import { Camera, Upload, X, Loader2 } from 'lucide-react';
+import { Camera, Upload, X, Loader2, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 
 interface PhotoUploadProps {
-  onPhotoUploaded: (url: string) => void;
-  currentPhotoUrl?: string;
+  onPhotosUploaded: (urls: [string, string, string]) => void;
+  currentPhotoUrls?: [string, string, string];
 }
 
 // Compress image client-side before upload
-// Reduces a 15MB phone photo to ~300KB — faster upload, less storage cost
 const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
-
     img.onload = () => {
       URL.revokeObjectURL(objectUrl);
-
       const canvas = document.createElement('canvas');
       let { width, height } = img;
-
       if (width > maxWidthPx) {
         height = Math.round((height * maxWidthPx) / width);
         width = maxWidthPx;
       }
-
       canvas.width = width;
       canvas.height = height;
-
       const ctx = canvas.getContext('2d');
       if (!ctx) return reject(new Error('Canvas not supported'));
-
       ctx.drawImage(img, 0, 0, width, height);
       canvas.toBlob(
         (blob) => blob ? resolve(blob) : reject(new Error('Compression failed')),
@@ -41,158 +34,175 @@ const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promi
         qualityJpeg
       );
     };
-
-    img.onerror = () => {
-      URL.revokeObjectURL(objectUrl);
-      reject(new Error('Image load failed'));
-    };
-
+    img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error('Image load failed')); };
     img.src = objectUrl;
   });
 };
 
-const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => {
+const MAX_PHOTOS = 3;
+
+const PhotoUpload = ({ onPhotosUploaded, currentPhotoUrls }: PhotoUploadProps) => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [isUploading, setIsUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(currentPhotoUrl || null);
-  const [error, setError] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [previews, setPreviews] = useState<[string, string, string]>(
+    currentPhotoUrls ?? ['', '', '']
+  );
+  const [uploading, setUploading] = useState<[boolean, boolean, boolean]>([false, false, false]);
+  const [errors, setErrors] = useState<[string, string, string]>(['', '', '']);
+  const fileInputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
-  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Validate file type
+  const uploadSlot = async (file: File, slot: 0 | 1 | 2) => {
     if (!file.type.startsWith('image/')) {
-      setError(t('photo.invalidType', 'Please select an image'));
+      setErrors(prev => { const e = [...prev] as [string,string,string]; e[slot] = t('photo.invalidType', 'Please select an image'); return e; });
       return;
     }
-
-    // Allow up to 25MB — compression will shrink it to ~300KB anyway
     if (file.size > 25 * 1024 * 1024) {
-      setError(t('photo.tooLarge', 'Image must be smaller than 25MB'));
+      setErrors(prev => { const e = [...prev] as [string,string,string]; e[slot] = t('photo.tooLarge', 'Image must be smaller than 25MB'); return e; });
       return;
     }
+    setErrors(prev => { const e = [...prev] as [string,string,string]; e[slot] = ''; return e; });
+    setUploading(prev => { const u = [...prev] as [boolean,boolean,boolean]; u[slot] = true; return u; });
 
-    setError(null);
-    setIsUploading(true);
+    const objectUrl = URL.createObjectURL(file);
+    setPreviews(prev => { const p = [...prev] as [string,string,string]; p[slot] = objectUrl; return p; });
 
     try {
-      // Create preview immediately from original file
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-
-      // Compress before upload: ~5MB phone photo → ~300KB
       const compressed = await compressImage(file);
       const compressedFile = new File([compressed], `photo.jpg`, { type: 'image/jpeg' });
+      const fileName = `${user?.id}/${Date.now()}-${slot}.jpg`;
 
-      // Generate unique filename
-      const fileName = `${user?.id}/${Date.now()}.jpg`;
-
-      // Upload compressed image to Supabase Storage
       const { data, error: uploadError } = await supabase.storage
         .from('dog-photos')
-        .upload(fileName, compressedFile, {
-          cacheControl: '3600',
-          upsert: false,
-          contentType: 'image/jpeg',
-        });
+        .upload(fileName, compressedFile, { cacheControl: '3600', upsert: false, contentType: 'image/jpeg' });
 
-      if (uploadError) {
-        throw uploadError;
-      }
+      if (uploadError) throw uploadError;
 
-      // Get public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from('dog-photos')
-        .getPublicUrl(data.path);
+      const { data: { publicUrl } } = supabase.storage.from('dog-photos').getPublicUrl(data.path);
 
-      onPhotoUploaded(publicUrl);
+      const newPreviews = [...previews] as [string,string,string];
+      newPreviews[slot] = publicUrl;
+      setPreviews(newPreviews);
+      onPhotosUploaded(newPreviews);
     } catch (err) {
       console.error('Upload error:', err);
-      setError(t('photo.uploadError', 'Upload failed. Please try again.'));
-      setPreviewUrl(null);
+      setErrors(prev => { const e = [...prev] as [string,string,string]; e[slot] = t('photo.uploadError', 'Upload failed. Please try again.'); return e; });
+      setPreviews(prev => { const p = [...prev] as [string,string,string]; p[slot] = ''; return p; });
     } finally {
-      setIsUploading(false);
+      setUploading(prev => { const u = [...prev] as [boolean,boolean,boolean]; u[slot] = false; return u; });
     }
   };
 
-  const handleRemovePhoto = () => {
-    setPreviewUrl(null);
-    onPhotoUploaded('');
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+  const handleFileSelect = (slot: 0 | 1 | 2) => async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    await uploadSlot(file, slot);
   };
 
-  const triggerFileInput = () => {
-    fileInputRef.current?.click();
+  const removePhoto = (slot: 0 | 1 | 2) => {
+    const newPreviews = [...previews] as [string,string,string];
+    newPreviews[slot] = '';
+    setPreviews(newPreviews);
+    onPhotosUploaded(newPreviews);
+    if (fileInputRefs[slot].current) fileInputRefs[slot].current!.value = '';
   };
+
+  // Count filled slots
+  const filledCount = previews.filter(Boolean).length;
 
   return (
     <div className="space-y-3">
-      {/* Hidden file input with camera/gallery access */}
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onChange={handleFileSelect}
-        className="hidden"
-      />
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-medium text-foreground">
+          {t('photo.photos', 'Photos')}
+        </span>
+        <span className="text-xs text-muted-foreground">
+          {filledCount}/{MAX_PHOTOS}
+        </span>
+      </div>
 
-      {previewUrl ? (
-        <div className="relative">
-          <img
-            src={previewUrl}
-            alt="Vorschau"
-            className="w-full h-48 object-cover rounded-lg border border-border"
-          />
-          {isUploading && (
-            <div className="absolute inset-0 bg-background/80 flex items-center justify-center rounded-lg">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          )}
-          {!isUploading && (
-            <Button
-              type="button"
-              variant="destructive"
-              size="icon"
-              className="absolute top-2 right-2"
-              onClick={handleRemovePhoto}
-            >
-              <X className="w-4 h-4" />
-            </Button>
-          )}
-        </div>
-      ) : (
-        <div
-          onClick={triggerFileInput}
-          className="w-full h-48 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-primary/50 hover:bg-secondary/30 transition-colors"
-        >
-          <div className="flex gap-2">
-            <Camera className="w-8 h-8 text-muted-foreground" />
-            <Upload className="w-8 h-8 text-muted-foreground" />
+      <div className="grid grid-cols-3 gap-2">
+        {([0, 1, 2] as const).map((slot) => (
+          <div key={slot} className="relative">
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRefs[slot]}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handleFileSelect(slot)}
+              className="hidden"
+            />
+
+            {previews[slot] ? (
+              <div className="relative aspect-square">
+                <img
+                  src={previews[slot]}
+                  alt={`Foto ${slot + 1}`}
+                  className="w-full h-full object-cover rounded-lg border border-border"
+                />
+                {uploading[slot] && (
+                  <div className="absolute inset-0 bg-background/80 flex items-center justify-center rounded-lg">
+                    <Loader2 className="w-5 h-5 animate-spin text-primary" />
+                  </div>
+                )}
+                {!uploading[slot] && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="icon"
+                    className="absolute top-1 right-1 w-6 h-6"
+                    onClick={() => removePhoto(slot)}
+                  >
+                    <X className="w-3 h-3" />
+                  </Button>
+                )}
+              </div>
+            ) : (
+              <div
+                onClick={() => {
+                  // Only allow adding if previous slots are filled (sequential)
+                  if (slot === 0 || previews[slot - 1]) {
+                    fileInputRefs[slot].current?.click();
+                  }
+                }}
+                className={`aspect-square border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-1 transition-colors
+                  ${(slot === 0 || previews[slot - 1])
+                    ? 'border-border hover:border-primary/50 hover:bg-secondary/30 cursor-pointer'
+                    : 'border-border/30 opacity-40 cursor-not-allowed'
+                  }`}
+              >
+                {slot === 0 ? (
+                  <>
+                    <Camera className="w-5 h-5 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground text-center leading-tight px-1">
+                      {t('photo.takeOrUpload', 'Photo')}
+                    </span>
+                  </>
+                ) : (
+                  <Plus className="w-5 h-5 text-muted-foreground" />
+                )}
+              </div>
+            )}
+
+            {errors[slot] && (
+              <p className="text-xs text-destructive mt-1">{errors[slot]}</p>
+            )}
           </div>
-          <div className="text-center">
-            <p className="text-sm font-medium text-foreground">{t('photo.takeOrUpload', 'Take or upload a photo')}</p>
-            <p className="text-xs text-muted-foreground">{t('photo.tapHere', 'Tap here to select a photo')}</p>
-          </div>
-        </div>
-      )}
+        ))}
+      </div>
 
-      {error && (
-        <p className="text-sm text-destructive">{error}</p>
-      )}
-
-      {!previewUrl && (
+      {/* Camera / Gallery buttons for slot 0 when empty */}
+      {!previews[0] && (
         <div className="flex gap-2">
           <Button
             type="button"
             variant="outline"
             className="flex-1 gap-2"
-            onClick={triggerFileInput}
+            onClick={() => fileInputRefs[0].current?.click()}
           >
             <Camera className="w-4 h-4" />
             {t('photo.camera', 'Camera')}
@@ -202,13 +212,10 @@ const PhotoUpload = ({ onPhotoUploaded, currentPhotoUrl }: PhotoUploadProps) => 
             variant="outline"
             className="flex-1 gap-2"
             onClick={() => {
-              if (fileInputRef.current) {
-                fileInputRef.current.removeAttribute('capture');
-                fileInputRef.current.click();
-                // Restore capture attribute after click
-                setTimeout(() => {
-                  fileInputRef.current?.setAttribute('capture', 'environment');
-                }, 100);
+              if (fileInputRefs[0].current) {
+                fileInputRefs[0].current.removeAttribute('capture');
+                fileInputRefs[0].current.click();
+                setTimeout(() => fileInputRefs[0].current?.setAttribute('capture', 'environment'), 100);
               }
             }}
           >

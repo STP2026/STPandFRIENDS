@@ -182,6 +182,7 @@ const AdminPage = () => {
     sponsorName: '',
     caretaker: '',
     reportType: '' as string,
+    photoUrls: ['', '', ''] as [string, string, string],
   });
 
   const canAccess = isAdmin || isHelper;
@@ -241,6 +242,7 @@ const AdminPage = () => {
       sponsorName: dog.sponsorName || '',
       caretaker: dog.caretaker || '',
       reportType: dog.reportType,
+      photoUrls: [dog.photo !== '/placeholder.svg' ? dog.photo : '', dog.photo2 || '', dog.photo3 || ''] as [string, string, string],
     });
     setEditDialogOpen(true);
   };
@@ -285,6 +287,9 @@ const AdminPage = () => {
         sponsor_name: editForm.sponsorName || null,
         caretaker: editForm.caretaker || null,
         report_type: editForm.reportType,
+        photo_url: editForm.photoUrls[0] || null,
+        photo_url_2: editForm.photoUrls[1] || null,
+        photo_url_3: editForm.photoUrls[2] || null,
       },
     });
 
@@ -1461,6 +1466,10 @@ const AdminPage = () => {
           </DialogHeader>
           
           <div className="space-y-4 py-4">
+            <PhotoUpload
+              onPhotosUploaded={(urls) => setEditForm({ ...editForm, photoUrls: urls })}
+              currentPhotoUrls={editForm.photoUrls}
+            />
             <div className="space-y-2">
                <Label htmlFor="vac1" className="flex items-center gap-2">
                  <Calendar className="w-4 h-4" />

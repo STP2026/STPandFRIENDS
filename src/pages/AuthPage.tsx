@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dog, Mail, Lock, User, AlertCircle, MapPin, CheckCircle } from 'lucide-react';
 import { z } from 'zod';
+import { supabase } from '@/integrations/supabase/client';
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -14,12 +15,14 @@ const AuthPage = () => {
   const { t } = useTranslation();
   const { user, isLoading, signIn, signUp, signInWithGoogle } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const [resetEmailSent, setResetEmailSent] = useState(false);
 
   const redirectMessage = (location.state as { message?: string })?.message;
   const redirectTo = (location.state as { from?: string })?.from || '/';
@@ -81,6 +84,25 @@ const AuthPage = () => {
     }
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    try {
+      emailSchema.parse(email);
+    } catch (err) {
+      if (err instanceof z.ZodError) { setError(err.errors[0].message); return; }
+    }
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`,
+      });
+      if (error) { setError(error.message); }
+      else { setResetEmailSent(true); }
+    } catch { setError(t('auth.unexpectedError')); }
+    finally { setIsSubmitting(false); }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -90,6 +112,92 @@ const AuthPage = () => {
   }
 
   // Show "check your email" screen after successful signup
+  if (resetEmailSent) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="glass-card rounded-xl p-8 animate-fade-in text-center">
+            <div className="bg-primary/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+              <Mail className="w-10 h-10 text-primary" />
+            </div>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-3">
+              {t('auth.resetEmailSent', 'E-Mail gesendet')}
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              {t('auth.resetEmailDesc', 'Falls ein Konto mit dieser E-Mail existiert, erhältst du in Kürze einen Link zum Zurücksetzen deines Passworts.')}{' '}
+              <strong>{email}</strong>
+            </p>
+            <div className="bg-secondary/50 rounded-lg p-4 text-left space-y-2 mb-6">
+              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <span>{t('auth.checkSpamFolder')}</span>
+              </div>
+              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <span>{t('auth.linkExpiresIn')}</span>
+              </div>
+            </div>
+            <Button variant="outline" className="w-full" onClick={() => { setResetEmailSent(false); setIsForgotPassword(false); setIsLogin(true); }}>
+              {t('auth.backToLogin')}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isForgotPassword) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="glass-card rounded-xl p-8 animate-fade-in">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="bg-primary/10 p-3 rounded-full">
+                <Lock className="w-8 h-8 text-primary" />
+              </div>
+              <h1 className="font-display text-2xl font-bold text-foreground">
+                {t('auth.forgotPassword', 'Passwort vergessen')}
+              </h1>
+            </div>
+            <p className="text-sm text-muted-foreground mb-6 text-center">
+              {t('auth.forgotPasswordDesc', 'Gib deine E-Mail-Adresse ein und wir schicken dir einen Link zum Zurücksetzen deines Passworts.')}
+            </p>
+            {error && (
+              <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-2 text-destructive">
+                <AlertCircle className="w-4 h-4" />
+                <span className="text-sm">{error}</span>
+              </div>
+            )}
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="reset-email" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  {t('auth.email')}
+                </Label>
+                <Input
+                  id="reset-email"
+                  type="email"
+                  placeholder={t('auth.emailPlaceholder')}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? t('auth.pleaseWait') : t('auth.sendResetLink', 'Reset-Link senden')}
+              </Button>
+            </form>
+            <div className="mt-6 text-center">
+              <button type="button" onClick={() => { setIsForgotPassword(false); setError(''); }} className="text-sm text-primary hover:underline">
+                {t('auth.backToLogin')}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (emailSent) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -210,6 +318,17 @@ const AuthPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              {isLogin && (
+                <div className="text-right">
+                  <button
+                    type="button"
+                    onClick={() => { setIsForgotPassword(true); setError(''); }}
+                    className="text-xs text-muted-foreground hover:text-primary hover:underline"
+                  >
+                    {t('auth.forgotPassword', 'Passwort vergessen?')}
+                  </button>
+                </div>
+              )}
             </div>
 
             <Button type="submit" className="w-full" disabled={isSubmitting}>

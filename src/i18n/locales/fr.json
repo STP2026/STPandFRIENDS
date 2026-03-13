@@ -186,7 +186,12 @@
     "checkSpamFolder": "Pas trouvé ? Vérifiez aussi vos spams.",
     "linkExpiresIn": "Le lien est valable 24 heures.",
     "backToLogin": "Retour à la connexion",
-    "emailNotConfirmed": "Veuillez d'abord confirmer votre adresse e-mail."
+    "emailNotConfirmed": "Veuillez d'abord confirmer votre adresse e-mail.",
+    "forgotPassword": "Mot de passe oublié ?",
+    "forgotPasswordDesc": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "sendResetLink": "Envoyer le lien",
+    "resetEmailSent": "E-mail envoyé",
+    "resetEmailDesc": "Si un compte existe pour cet e-mail, vous recevrez bientôt un lien de réinitialisation."
   },
   "admin": {
     "title": "Admin",
@@ -459,11 +464,16 @@
   },
   "photo": {
     "invalidType": "Veuillez sélectionner une image",
-    "tooLarge": "L'image doit faire moins de 25 Mo",
+    "tooLarge": "L'image doit être inférieure à 25 Mo",
     "uploadError": "Échec du téléchargement. Veuillez réessayer.",
-    "takeOrUpload": "Prendre ou télécharger une photo",
-    "tapHere": "Appuyez ici pour choisir une photo",
-    "camera": "Caméra",
-    "gallery": "Galerie"
+    "takeOrUpload": "Photo",
+    "tapHere": "Appuyez ici pour sélectionner une photo",
+    "camera": "Appareil photo",
+    "gallery": "Galerie",
+    "photos": "Photos"
+  },
+  "autoLogout": {
+    "warning": "Vous serez déconnecté automatiquement dans {{seconds}} secondes.",
+    "stayLoggedIn": "Rester connecté"
   }
 }

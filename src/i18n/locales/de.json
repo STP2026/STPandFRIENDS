@@ -186,7 +186,12 @@
     "checkSpamFolder": "Nicht gefunden? Schau auch im Spam-Ordner nach.",
     "linkExpiresIn": "Der Link ist 24 Stunden gültig.",
     "backToLogin": "Zurück zur Anmeldung",
-    "emailNotConfirmed": "Bitte bestätige zuerst deine E-Mail-Adresse."
+    "emailNotConfirmed": "Bitte bestätige zuerst deine E-Mail-Adresse.",
+    "forgotPassword": "Passwort vergessen?",
+    "forgotPasswordDesc": "Gib deine E-Mail-Adresse ein und wir schicken dir einen Link zum Zurücksetzen deines Passworts.",
+    "sendResetLink": "Reset-Link senden",
+    "resetEmailSent": "E-Mail gesendet",
+    "resetEmailDesc": "Falls ein Konto mit dieser E-Mail existiert, erhältst du in Kürze einen Link zum Zurücksetzen."
   },
   "admin": {
     "title": "Admin",
@@ -458,12 +463,17 @@
     "viewDogs": "Alle Hunde ansehen"
   },
   "photo": {
-    "invalidType": "Bitte ein Bild auswählen",
-    "tooLarge": "Das Bild darf maximal 25MB groß sein",
-    "uploadError": "Fehler beim Hochladen. Bitte versuche es erneut.",
-    "takeOrUpload": "Foto aufnehmen oder hochladen",
+    "invalidType": "Bitte wähle ein Bild aus",
+    "tooLarge": "Bild muss kleiner als 25 MB sein",
+    "uploadError": "Upload fehlgeschlagen. Bitte erneut versuchen.",
+    "takeOrUpload": "Foto",
     "tapHere": "Tippe hier, um ein Foto auszuwählen",
     "camera": "Kamera",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "photos": "Fotos"
+  },
+  "autoLogout": {
+    "warning": "Du wirst in {{seconds}} Sekunden automatisch abgemeldet.",
+    "stayLoggedIn": "Eingeloggt bleiben"
   }
 }

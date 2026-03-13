@@ -44,7 +44,7 @@ const AddDogPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     earTag: "",
-    photoUrl: "",
+    photoUrls: ["", "", ""] as [string, string, string],
     location: "",
     isVaccinated: false,
     additionalInfo: "",
@@ -72,7 +72,9 @@ const AddDogPage = () => {
       latitude: selectedPosition.lat,
       longitude: selectedPosition.lng,
       location: formData.location,
-      photo: formData.photoUrl || '',
+      photo: formData.photoUrls[0] || '',
+      photo2: formData.photoUrls[1] || '',
+      photo3: formData.photoUrls[2] || '',
       isVaccinated: formData.isVaccinated,
       additionalInfo: formData.additionalInfo || undefined,
       reportedBy: user.id,
@@ -303,8 +305,8 @@ const AddDogPage = () => {
                   {t('addDog.photo')}
                 </Label>
                 <PhotoUpload
-                  onPhotoUploaded={(url) => setFormData({ ...formData, photoUrl: url })}
-                  currentPhotoUrl={formData.photoUrl}
+                  onPhotosUploaded={(urls) => setFormData({ ...formData, photoUrls: urls })}
+                  currentPhotoUrls={formData.photoUrls}
                 />
               </div>
             </div>

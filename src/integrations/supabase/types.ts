@@ -147,6 +147,8 @@ export type Database = {
           longitude: number
           name: string
           photo_url: string | null
+          photo_url_2: string | null
+          photo_url_3: string | null
           report_type: Database["public"]["Enums"]["report_type"]
           reported_by: string | null
           sponsor_name: string | null
@@ -168,6 +170,8 @@ export type Database = {
           longitude: number
           name: string
           photo_url?: string | null
+          photo_url_2?: string | null
+          photo_url_3?: string | null
           report_type?: Database["public"]["Enums"]["report_type"]
           reported_by?: string | null
           sponsor_name?: string | null
@@ -189,6 +193,8 @@ export type Database = {
           longitude?: number
           name?: string
           photo_url?: string | null
+          photo_url_2?: string | null
+          photo_url_3?: string | null
           report_type?: Database["public"]["Enums"]["report_type"]
           reported_by?: string | null
           sponsor_name?: string | null
