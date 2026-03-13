@@ -94,7 +94,7 @@ const AddDogPage = () => {
       // SOS reports: redirect to Dog Aid landing page so the reporter can act immediately
       setTimeout(() => navigate("/dogs"), 2000);
     } catch (error) {
-      console.error('Error submitting dog:', error);
+      console.error('Error submitting dog');
       // If online submit fails, try adding to offline queue
       if (isOnline) {
         addReportToQueue(reportData);

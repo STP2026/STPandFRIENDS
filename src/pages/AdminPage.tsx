@@ -73,7 +73,7 @@ import RehabSpotsTab from '@/components/RehabSpotsTab';
 
 const AdminPage = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user, isAdmin, isLoading, signOut } = useAuth();
   const { data: isHelper } = useIsHelper(user?.id);
   const { data: dogs, isLoading: dogsLoading } = useAllDogs();
@@ -136,7 +136,7 @@ const AdminPage = () => {
 
     // Sort
     filtered.sort((a, b) => {
-      let valA: any, valB: any;
+      let valA: string | number, valB: string | number;
       switch (dogSortField) {
         case 'name': valA = a.name.toLowerCase(); valB = b.name.toLowerCase(); break;
         case 'earTag': valA = a.earTag.toLowerCase(); valB = b.earTag.toLowerCase(); break;
@@ -328,11 +328,12 @@ const AdminPage = () => {
 
   const formatDate = (dateString: string | null | undefined) => {
     if (!dateString) return '-';
-    return new Date(dateString).toLocaleDateString('de-DE');
+    return new Date(dateString).toLocaleDateString(i18n.language === 'ar' ? 'ar-MA' : i18n.language === 'fr' ? 'fr-FR' : i18n.language === 'en' ? 'en-GB' : 'de-DE');
   };
 
   const formatDateTime = (dateString: string) => {
-    return new Date(dateString).toLocaleString('de-DE', {
+    const dateLocale = i18n.language === 'ar' ? 'ar-MA' : i18n.language === 'fr' ? 'fr-FR' : i18n.language === 'en' ? 'en-GB' : 'de-DE';
+    return new Date(dateString).toLocaleString(dateLocale, {
       day: '2-digit',
       month: '2-digit',
       year: '2-digit',
@@ -907,7 +908,7 @@ const AdminPage = () => {
                               <Reply className="w-4 h-4" />
                             </Button>
                             {canDelete && (
-                              <Button size="sm" variant="ghost" className="text-destructive" onClick={() => deleteTeamMessage.mutateAsync(message.id)}>
+                              <Button size="sm" variant="ghost" className="text-destructive" onClick={() => { deleteTeamMessage.mutateAsync(message.id).catch(() => {}); }}>
                                 <Trash2 className="w-4 h-4" />
                               </Button>
                             )}
@@ -1084,7 +1085,7 @@ const AdminPage = () => {
                               className="text-destructive"
                               onClick={() => {
                                  if (confirm(t('admin.deleteFacilityConfirm'))) {
-                                   deleteFacility.mutateAsync(facility.id);
+                                   deleteFacility.mutateAsync(facility.id).catch(() => {});
                                 }
                               }}
                             >
@@ -1147,7 +1148,7 @@ const AdminPage = () => {
                                   className="text-destructive"
                                   onClick={() => {
                                      if (confirm(t('admin.deleteFacilityConfirm'))) {
-                                       deleteFacility.mutateAsync(facility.id);
+                                       deleteFacility.mutateAsync(facility.id).catch(() => {});
                                     }
                                   }}
                                 >
@@ -1208,7 +1209,7 @@ const AdminPage = () => {
                                   updateAdvertisement.mutateAsync({ 
                                     id: ad.id, 
                                     updates: { is_active: checked } 
-                                  })
+                                  }).catch(() => {})
                                 }
                               />
                               <Badge variant={ad.is_active ? 'default' : 'secondary'} className="text-xs">
@@ -1221,7 +1222,7 @@ const AdminPage = () => {
                               className="text-destructive"
                               onClick={() => {
                                  if (confirm(t('admin.deleteAdConfirm'))) {
-                                   deleteAdvertisement.mutateAsync(ad.id);
+                                   deleteAdvertisement.mutateAsync(ad.id).catch(() => {});
                                 }
                               }}
                             >
@@ -1281,7 +1282,7 @@ const AdminPage = () => {
                                   className="text-destructive"
                                   onClick={() => {
                                      if (confirm(t('admin.deleteAdConfirm'))) {
-                                       deleteAdvertisement.mutateAsync(ad.id);
+                                       deleteAdvertisement.mutateAsync(ad.id).catch(() => {});
                                     }
                                   }}
                                 >
@@ -1682,10 +1683,17 @@ function ChangeLogDialog({
 }) {
   const { data: changeLog } = useDogChangeLog(dog?.id || '');
 
-  const formatChanges = (changes: unknown) => {
-    if (!changes || typeof changes !== 'object') return '';
-    const entries = Object.entries(changes as Record<string, unknown>);
-    return entries.map(([key, value]) => `${key}: ${value}`).join(', ');
+  const formatChanges = (changes: unknown): string => {
+    if (!changes || typeof changes !== 'object' || Array.isArray(changes)) return '';
+    try {
+      const entries = Object.entries(changes as Record<string, unknown>);
+      return entries.map(([key, value]) => {
+        const formatted = (typeof value === 'object' && value !== null) ? JSON.stringify(value) : String(value ?? '-');
+        return `${key}: ${formatted}`;
+      }).join(', ');
+    } catch {
+      return '';
+    }
   };
 
   return (

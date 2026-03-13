@@ -28,7 +28,7 @@ const BecomeHelperPage = () => {
         message: message.trim(),
       });
     } catch (error) {
-      console.error('Error submitting application:', error);
+      console.error('Error submitting application');
     } finally {
       setIsSubmitting(false);
     }

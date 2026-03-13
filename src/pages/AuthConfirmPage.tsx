@@ -77,7 +77,7 @@ export default function AuthConfirmPage() {
       } catch (err) {
         setState('error');
         setErrorMessage('An unexpected error occurred.');
-        console.error('Auth confirm error:', err);
+        console.error('Auth confirm error:', (err as any)?.code || 'unknown');
       }
     };
 
