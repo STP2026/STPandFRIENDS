@@ -475,5 +475,19 @@
   "autoLogout": {
     "warning": "Vous serez déconnecté automatiquement dans {{seconds}} secondes.",
     "stayLoggedIn": "Rester connecté"
+  },
+  "resetPassword": {
+    "invalidLink": "Lien de réinitialisation invalide ou manquant.",
+    "linkExpired": "Le lien a expiré. Veuillez en demander un nouveau.",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "verifying": "Vérification du lien…",
+    "title": "Définir un nouveau mot de passe",
+    "subtitle": "Choisissez un mot de passe sécurisé d'au moins 6 caractères.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "savePassword": "Enregistrer le mot de passe",
+    "successTitle": "Mot de passe modifié ! 🎉",
+    "successDesc": "Votre mot de passe a été enregistré. Vous allez être redirigé vers la connexion…",
+    "errorTitle": "Lien invalide"
   }
 }

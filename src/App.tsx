@@ -10,6 +10,7 @@ import i18n from "@/i18n";
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import AuthConfirmPage from "./pages/AuthConfirmPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFound from "./pages/NotFound";
 import InstallPWA from "./components/InstallPWA";
 import OfflineIndicator from "./components/OfflineIndicator";
@@ -79,6 +80,7 @@ const App = () => (
                 <Route path="/add" element={<AddDogPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/auth/confirm" element={<AuthConfirmPage />} />
+                <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/admin" element={<AdminPage />} />

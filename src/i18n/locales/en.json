@@ -475,5 +475,19 @@
   "autoLogout": {
     "warning": "You will be automatically logged out in {{seconds}} seconds.",
     "stayLoggedIn": "Stay logged in"
+  },
+  "resetPassword": {
+    "invalidLink": "Invalid or missing reset link.",
+    "linkExpired": "The link has expired. Please request a new one.",
+    "passwordMismatch": "Passwords do not match.",
+    "verifying": "Verifying link…",
+    "title": "Set new password",
+    "subtitle": "Choose a secure password with at least 6 characters.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "savePassword": "Save password",
+    "successTitle": "Password changed! 🎉",
+    "successDesc": "Your password has been saved. You will be redirected to login shortly…",
+    "errorTitle": "Invalid link"
   }
 }

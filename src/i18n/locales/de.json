@@ -475,5 +475,19 @@
   "autoLogout": {
     "warning": "Du wirst in {{seconds}} Sekunden automatisch abgemeldet.",
     "stayLoggedIn": "Eingeloggt bleiben"
+  },
+  "resetPassword": {
+    "invalidLink": "Ungültiger oder fehlender Reset-Link.",
+    "linkExpired": "Der Link ist abgelaufen. Bitte fordere einen neuen an.",
+    "passwordMismatch": "Passwörter stimmen nicht überein.",
+    "verifying": "Link wird überprüft…",
+    "title": "Neues Passwort setzen",
+    "subtitle": "Wähle ein sicheres Passwort mit mindestens 6 Zeichen.",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "savePassword": "Passwort speichern",
+    "successTitle": "Passwort geändert! 🎉",
+    "successDesc": "Dein Passwort wurde erfolgreich gesetzt. Du wirst gleich zur Anmeldung weitergeleitet…",
+    "errorTitle": "Link ungültig"
   }
 }
