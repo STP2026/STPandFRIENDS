@@ -43,12 +43,10 @@ export function useOffline() {
   // Listen for online/offline events
   useEffect(() => {
     const handleOnline = () => {
-      console.log('[Offline] Back online');
       setIsOnline(true);
     };
 
     const handleOffline = () => {
-      console.log('[Offline] Gone offline');
       setIsOnline(false);
     };
 
@@ -68,7 +66,6 @@ export function useOffline() {
       const now = Date.now();
       localStorage.setItem(LAST_SYNC_KEY, now.toString());
       setLastSyncTime(now);
-      console.log('[Offline] Cached', dogs.length, 'dogs');
     } catch (e) {
       console.error('Failed to cache dogs:', e);
     }
@@ -98,14 +95,12 @@ export function useOffline() {
     };
 
     setOfflineQueue(prev => [...prev, report]);
-    console.log('[Offline] Added report to queue:', report.id);
     return report;
   }, []);
 
   // Remove report from queue (after successful sync)
   const removeFromQueue = useCallback((id: string) => {
     setOfflineQueue(prev => prev.filter(r => r.id !== id));
-    console.log('[Offline] Removed report from queue:', id);
   }, []);
 
   // Update report status in queue

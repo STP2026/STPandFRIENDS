@@ -18,9 +18,9 @@ const DogsPage = () => {
   const isElevated = isAdmin || !!isHelper;
 
   const { data: allDogs = [], isLoading } = useDogs(!isElevated);
-  const dogs = isElevated ? allDogs : allDogs.filter((d) => d.reportType === 'save');
+  // useDogs already filters by report_type via DB — no additional frontend filter needed
 
-  const filteredDogs = dogs.filter((dog) => {
+  const filteredDogs = allDogs.filter((dog) => {
     const matchesSearch = dog.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (dog.location?.toLowerCase().includes(searchTerm.toLowerCase()) || false) ||
       dog.earTag.toLowerCase().includes(searchTerm.toLowerCase());

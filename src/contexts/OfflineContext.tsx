@@ -53,7 +53,6 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
       const dogs = (data as DbDog[]).map(mapDbDogToDog);
       cacheDogs(dogs);
       setCachedDogs(dogs);
-      console.log('[Offline] Fetched and cached dogs');
     } catch (e) {
       console.error('[Offline] Failed to fetch dogs:', e);
     }
@@ -71,7 +70,6 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     if (!isOnline || pendingCount === 0) return;
 
     setIsSyncing(true);
-    console.log('[Offline] Starting queue sync, pending:', pendingCount);
 
     for (const report of offlineQueue) {
       if (report.status !== 'pending' && report.status !== 'failed') continue;
@@ -105,7 +103,6 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
         if (error) throw error;
 
         removeFromQueue(report.id);
-        console.log('[Offline] Synced report:', report.id);
       } catch (e) {
         console.error('[Offline] Failed to sync report:', report.id, e);
         updateQueueStatus(report.id, 'failed');
