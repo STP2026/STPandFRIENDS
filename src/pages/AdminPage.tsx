@@ -69,6 +69,7 @@ import {
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
 import PhotoUpload from '@/components/PhotoUpload';
+import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
 
 const AdminPage = () => {
@@ -98,6 +99,8 @@ const AdminPage = () => {
 
   const [selectedDog, setSelectedDog] = useState<Dog | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [remarkDialogOpen, setRemarkDialogOpen] = useState(false);
   const [changeLogDialogOpen, setChangeLogDialogOpen] = useState(false);
   const [addFacilityDialogOpen, setAddFacilityDialogOpen] = useState(false);
@@ -315,6 +318,14 @@ const AdminPage = () => {
   const handleHelperApplication = async (id: string, status: 'approved' | 'rejected') => {
     if (!user) return;
     await updateHelperApplication.mutateAsync({ id, status, reviewedBy: user.id });
+  };
+
+  const openLightbox = (dog: Dog, startIndex = 0) => {
+    const photos = [dog.photo, dog.photo2, dog.photo3]
+      .filter((p): p is string => !!p && p !== '/placeholder.svg');
+    if (photos.length === 0) return;
+    setLightboxPhotos(photos);
+    setLightboxIndex(Math.min(startIndex, photos.length - 1));
   };
 
   const handleAddRemark = async () => {
@@ -556,7 +567,7 @@ const AdminPage = () => {
                     {pendingDogs.map((dog) => (
                       <div key={dog.id} className="border border-border rounded-lg p-3 bg-card">
                         <div className="flex gap-3">
-                          <img src={dog.photo} alt={dog.name} className="w-16 h-16 rounded-lg object-cover shrink-0" />
+                          <img src={dog.photo} alt={dog.name} className="w-16 h-16 rounded-lg object-cover shrink-0 cursor-zoom-in" onClick={() => openLightbox(dog)} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2 mb-1">
                               <h3 className="font-medium text-foreground truncate">{dog.name}</h3>
@@ -603,7 +614,7 @@ const AdminPage = () => {
                         {pendingDogs.map((dog) => (
                           <TableRow key={dog.id}>
                             <TableCell>
-                              <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover" />
+                              <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover cursor-zoom-in" onClick={() => openLightbox(dog)} />
                             </TableCell>
                             <TableCell className="font-medium">{dog.name}</TableCell>
                             <TableCell>{getReportTypeBadge(dog.reportType)}</TableCell>
@@ -653,7 +664,7 @@ const AdminPage = () => {
                   {sosDogs.map((dog) => (
                     <div key={dog.id} className="border border-red-200 dark:border-red-800 rounded-lg p-3 sm:p-4 bg-red-50/50 dark:bg-red-900/10">
                       <div className="flex items-start gap-3 sm:gap-4">
-                        <img src={dog.photo} alt={dog.name} className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover shrink-0" />
+                        <img src={dog.photo} alt={dog.name} className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover shrink-0 cursor-zoom-in" onClick={() => openLightbox(dog)} />
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-2">
                             <h3 className="font-bold text-foreground">{dog.name}</h3>
@@ -724,7 +735,7 @@ const AdminPage = () => {
                     {sortedDogs.map((dog) => (
                       <div key={dog.id} className="border border-border rounded-lg p-3 bg-card">
                         <div className="flex gap-3 mb-3">
-                          <img src={dog.photo} alt={dog.name} className="w-14 h-14 rounded-lg object-cover shrink-0" />
+                          <img src={dog.photo} alt={dog.name} className="w-14 h-14 rounded-lg object-cover shrink-0 cursor-zoom-in" onClick={() => openLightbox(dog)} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2 mb-1">
                               <h3 className="font-medium text-foreground truncate">{dog.name}</h3>
@@ -808,11 +819,11 @@ const AdminPage = () => {
                           <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('location')}>
                             {t('admin.table.location', 'Location')} {dogSortField === 'location' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
                           </TableHead>
-                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('vaccination1')}>
-                            {t('admin.table.vacc1', 'Vacc 1')} {dogSortField === 'vaccination1' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          <TableHead className="cursor-pointer select-none hover:text-foreground whitespace-nowrap min-w-[90px]" onClick={() => toggleDogSort('vaccination1')}>
+                            {t('admin.table.vacc1', 'Impfung 1')} {dogSortField === 'vaccination1' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
                           </TableHead>
-                          <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('vaccination2')}>
-                            {t('admin.table.vacc2', 'Vacc 2')} {dogSortField === 'vaccination2' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
+                          <TableHead className="cursor-pointer select-none hover:text-foreground whitespace-nowrap min-w-[90px]" onClick={() => toggleDogSort('vaccination2')}>
+                            {t('admin.table.vacc2', 'Impfung 2')} {dogSortField === 'vaccination2' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
                           </TableHead>
                           <TableHead className="cursor-pointer select-none hover:text-foreground" onClick={() => toggleDogSort('passport')}>
                             {t('admin.table.passport', 'Passport')} {dogSortField === 'passport' ? (dogSortDir === 'asc' ? '↑' : '↓') : ''}
@@ -834,7 +845,7 @@ const AdminPage = () => {
                         {sortedDogs.map((dog) => (
                           <TableRow key={dog.id}>
                             <TableCell>
-                              <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover" />
+                              <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover cursor-zoom-in" onClick={() => openLightbox(dog)} />
                             </TableCell>
                             <TableCell className="font-medium">{dog.name}</TableCell>
                             <TableCell className="text-xs font-mono">{dog.earTag || '-'}</TableCell>
@@ -1814,6 +1825,16 @@ function ChangeLogDialog({
         </ScrollArea>
       </DialogContent>
     </Dialog>
+
+    {/* Photo Lightbox */}
+    {lightboxPhotos.length > 0 && (
+      <PhotoLightbox
+        photos={lightboxPhotos}
+        currentIndex={lightboxIndex}
+        onIndexChange={setLightboxIndex}
+        onClose={() => setLightboxPhotos([])}
+      />
+    )}
   );
 }
 
