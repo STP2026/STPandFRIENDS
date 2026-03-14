@@ -82,8 +82,16 @@ const Index = () => {
 
             {/* Card 3: Dog Aid */}
             <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.2s' }}>
-              <div className="bg-gradient-to-br from-red-400 to-red-600 p-6 flex items-center justify-center">
-                <Stethoscope className="w-14 h-14 text-white drop-shadow" />
+              <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-6 flex items-center justify-center">
+                <svg viewBox="0 0 32 32" className="w-14 h-14 drop-shadow" aria-label="Dog Aid">
+                  <ellipse cx="10.5" cy="9" rx="3" ry="3.5" fill="white" />
+                  <ellipse cx="21.5" cy="9" rx="3" ry="3.5" fill="white" />
+                  <ellipse cx="6.5" cy="16" rx="2.8" ry="3.2" fill="white" />
+                  <ellipse cx="25.5" cy="16" rx="2.8" ry="3.2" fill="white" />
+                  <ellipse cx="16" cy="22" rx="7" ry="6" fill="white" />
+                  <rect x="14.8" y="18.5" width="2.4" height="7" rx="0.6" fill="#2563eb" />
+                  <rect x="12.5" y="20.8" width="7" height="2.4" rx="0.6" fill="#2563eb" />
+                </svg>
               </div>
               <div className="p-6">
                 <h3 className="font-display text-xl font-bold text-foreground mb-2">
@@ -94,7 +102,7 @@ const Index = () => {
                 </p>
                 <a href="https://aid.save-the-paws.de/dog-aid" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="w-full gap-2 border-red-500 text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30">
-                    <Stethoscope className="w-4 h-4" />
+                    <svg viewBox="0 0 32 32" className="w-4 h-4"><ellipse cx="10.5" cy="9" rx="3" ry="3.5" fill="currentColor" /><ellipse cx="21.5" cy="9" rx="3" ry="3.5" fill="currentColor" /><ellipse cx="6.5" cy="16" rx="2.8" ry="3.2" fill="currentColor" /><ellipse cx="25.5" cy="16" rx="2.8" ry="3.2" fill="currentColor" /><ellipse cx="16" cy="22" rx="7" ry="6" fill="currentColor" /></svg>
                     {t('actions.dogaid.cta')}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
@@ -104,8 +112,12 @@ const Index = () => {
 
             {/* Card 4: First Aid (human) */}
             <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.3s' }}>
-              <div className="bg-gradient-to-br from-blue-400 to-blue-600 p-6 flex items-center justify-center">
-                <Heart className="w-14 h-14 text-white drop-shadow" />
+              <div className="bg-gradient-to-br from-red-500 to-red-700 p-6 flex items-center justify-center">
+                <svg viewBox="0 0 32 32" className="w-14 h-14 drop-shadow" aria-label="First Aid">
+                  <path d="M16 28s-11-7.2-11-14.5C5 9.4 8.4 6 12.5 6c2.2 0 3.5 1.5 3.5 1.5S17.8 6 20 6c3.6 0 6.5 3.4 6.5 7.5C26.5 20.8 16 28 16 28z" fill="white" />
+                  <rect x="14" y="11" width="4" height="10" rx="0.8" fill="#dc2626" />
+                  <rect x="11" y="14" width="10" height="4" rx="0.8" fill="#dc2626" />
+                </svg>
               </div>
               <div className="p-6">
                 <h3 className="font-display text-xl font-bold text-foreground mb-2">
