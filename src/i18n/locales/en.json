@@ -530,7 +530,7 @@
   "pawfriends": {
     "badge": "Local Supporters",
     "heroTitle": "PawFriends",
-    "heroSubtitle": "Dog-friendly places in the region",
+    "heroSubtitle": "Dog-friendly places & shop for friends",
     "heroDesc": "Restaurants, cafés, hotels and shops that welcome dogs — and actively support local animal welfare. Recognisable by the PawFriends sticker on the door.",
     "mapCta": "All PawFriends on the map",
     "whatTitle": "What is PawFriends?",
@@ -549,8 +549,36 @@
       "vet": "Vet & Pet Care"
     },
     "currentTitle": "Current PawFriends",
-    "ctaTitle": "Become a PawFriend now",
+    "ctaTitle": "Your venue as a PawFriend location",
     "ctaDesc": "No complicated process — just message us and we take care of everything. No commitment, fast.",
-    "ctaNote": "No commitment — we get back to you within 24 hours."
+    "ctaNote": "No commitment — we get back to you within 24 hours.",
+    "shopBadge": "Shop for Friends",
+    "shopTitle": "Wear the difference",
+    "shopDesc": "Every purchase is a direct donation for the dogs of the region. Merch with heart — subsidised with the kind support of horaygoods.de.",
+    "shopCta": "Shop for Friends",
+    "shop": {
+      "price": "Price",
+      "donationShare": "thereof donation",
+      "orderTitle": "Order & donate directly",
+      "orderDesc": "Message us on WhatsApp with your order. We take care of the rest.",
+      "orderButton": "Order via WhatsApp now",
+      "horayNote": "Merch is subsidised with the kind support of",
+      "horayNote2": "",
+      "hoodie": {
+        "name": "Save The Paws Hoodie",
+        "desc": "Premium hoodie with Save The Paws print — show what you stand for.",
+        "donation": "€25 go directly to dog rescue."
+      },
+      "bag": {
+        "name": "Dog Walk Bag",
+        "desc": "Fluffy shoulder bag with STP logo — perfect for the beach and promenade.",
+        "donation": "€20 go directly to dog rescue."
+      },
+      "bracelet": {
+        "name": "Wristband",
+        "desc": "\"Be a lifesaver.\" — The entire proceeds go to dog rescue.",
+        "donation": "€10 go directly to dog rescue."
+      }
+    }
   }
 }

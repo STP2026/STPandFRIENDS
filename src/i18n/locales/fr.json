@@ -530,7 +530,7 @@
   "pawfriends": {
     "badge": "Soutiens locaux",
     "heroTitle": "PawFriends",
-    "heroSubtitle": "Lieux dog-friendly dans la région",
+    "heroSubtitle": "Lieux dog-friendly & boutique pour amis",
     "heroDesc": "Restaurants, cafés, hôtels et boutiques qui accueillent les chiens — et soutiennent activement la protection animale locale. Reconnaissables au sticker PawFriends sur la porte.",
     "mapCta": "Tous les PawFriends sur la carte",
     "whatTitle": "Qu'est-ce que PawFriends ?",
@@ -549,8 +549,36 @@
       "vet": "Vétérinaire & Soins"
     },
     "currentTitle": "PawFriends actuels",
-    "ctaTitle": "Devenir PawFriend maintenant",
+    "ctaTitle": "Votre établissement en tant que PawFriend",
     "ctaDesc": "Pas de processus compliqué — écrivez-nous simplement et nous nous occupons de tout. Sans engagement.",
-    "ctaNote": "Sans engagement — nous vous répondons dans les 24 heures."
+    "ctaNote": "Sans engagement — nous vous répondons dans les 24 heures.",
+    "shopBadge": "Shop for Friends",
+    "shopTitle": "Porter la différence",
+    "shopDesc": "Chaque achat est un don direct pour les chiens de la région. Merch avec cœur — subventionné avec le soutien bienveillant de horaygoods.de.",
+    "shopCta": "Shop for Friends",
+    "shop": {
+      "price": "Prix",
+      "donationShare": "dont don",
+      "orderTitle": "Commander & donner directement",
+      "orderDesc": "Écrivez-nous sur WhatsApp avec votre commande. Nous nous occupons du reste.",
+      "orderButton": "Commander via WhatsApp",
+      "horayNote": "Merch subventionné avec le soutien de",
+      "horayNote2": "",
+      "hoodie": {
+        "name": "Save The Paws Hoodie",
+        "desc": "Sweat à capuche premium avec impression Save The Paws.",
+        "donation": "25 € vont directement au sauvetage."
+      },
+      "bag": {
+        "name": "Sac de balade",
+        "desc": "Sac bandoulière moelleux avec logo STP — parfait pour la plage.",
+        "donation": "20 € vont directement au sauvetage."
+      },
+      "bracelet": {
+        "name": "Bracelet",
+        "desc": "\"Be a lifesaver.\" — La totalité des bénéfices va au sauvetage.",
+        "donation": "10 € vont directement au sauvetage."
+      }
+    }
   }
 }
