@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, Heart, Shield, Users, Syringe } from "lucide-react";
+import { ArrowRight, MapPin, Heart, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -18,8 +18,6 @@ const HeroSection = () => {
   const statItems = [
     { icon: Shield, label: t('hero.stats.tagged'), value: `${taggedDogs}+` },
     { icon: Users, label: t('hero.stats.users'), value: `${userCount}+` },
-    { icon: Heart, label: t('hero.stats.helpers'), value: `${helperCount}+` },
-    { icon: Syringe, label: t('hero.stats.tnvr'), value: 'TNVR' },
   ];
 
   return (
@@ -75,7 +73,7 @@ const HeroSection = () => {
         </div>
 
         {/* 4 Stats — centered */}
-        <div className="mt-10 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-2xl mx-auto px-4">
+        <div className="mt-10 sm:mt-16 grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-sm mx-auto px-4">
           {statItems.map((stat, index) => (
             <div
               key={stat.label}
