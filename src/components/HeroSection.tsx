@@ -1,27 +1,18 @@
 import { ArrowRight, MapPin, Heart, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "@/contexts/AuthContext";
 import { usePublicStats } from "@/hooks/usePublicStats";
 import heroImage from "@/assets/hero-dog.webp";
 import logoWhite from "@/assets/logo-white.webp";
 
 const HeroSection = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
-  const navigate = useNavigate();
   const { data: stats } = usePublicStats();
 
   const totalDogs = stats?.totalDogs || 30;
   const vaccinatedCount = stats?.vaccinatedDogs || 30;
 
-  const handleExploreMap = (e: React.MouseEvent) => {
-    if (!user) {
-      e.preventDefault();
-      navigate("/auth", { state: { from: "/map", message: "map" } });
-    }
-  };
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-14 sm:pt-16">
       {/* Background Image */}
@@ -53,16 +44,18 @@ const HeroSection = () => {
             <span className="text-orange-300">{t('hero.titleHighlight')}</span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow-md px-4">
+          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-3 sm:mb-4 max-w-2xl mx-auto drop-shadow-md px-4">
             {t('hero.description')}
           </p>
 
-          <p className="text-lg sm:text-xl md:text-2xl font-display font-bold text-orange-300 mb-6 sm:mb-8 drop-shadow-md">
-            {t('hero.slogan')}
+          {/* Tourist-focused subline */}
+          <p className="text-sm sm:text-base text-orange-200 font-medium mb-6 sm:mb-8 drop-shadow-md px-4">
+            {t('hero.touristHint')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-            <Link to="/map" className="w-full sm:w-auto" onClick={handleExploreMap}>
+            {/* Map — no login required */}
+            <Link to="/map" className="w-full sm:w-auto">
               <Button variant="hero" size="lg" className="gap-2 w-full text-sm sm:text-base">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                 {t('hero.exploreMap')}
@@ -70,9 +63,9 @@ const HeroSection = () => {
               </Button>
             </Link>
             <Link to="/add" className="w-full sm:w-auto">
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="gap-2 w-full text-sm sm:text-base bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm"
               >
                 <Heart className="w-4 h-4 sm:w-5 sm:h-5" />

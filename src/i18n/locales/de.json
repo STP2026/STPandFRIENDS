@@ -27,7 +27,8 @@
     "stats": {
       "vaccinated": "Geimpfte Hunde",
       "users": "User"
-    }
+    },
+    "touristHint": "Siehst du einen verletzten Hund? Melde ihn — kein Account nötig."
   },
   "reportTypes": {
     "title": "Wie du helfen kannst",

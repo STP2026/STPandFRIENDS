@@ -27,7 +27,8 @@
     "stats": {
       "vaccinated": "Vaccinated Dogs",
       "users": "Users"
-    }
+    },
+    "touristHint": "Spotted an injured dog? Report it — no account needed."
   },
   "reportTypes": {
     "title": "How You Can Help",

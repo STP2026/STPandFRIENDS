@@ -2,9 +2,9 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import DonationSection from "@/components/DonationSection";
 import AdPopup from "@/components/AdPopup";
-import { ArrowRight, Heart, MapPin, Users, Stethoscope, HandHeart, Dog } from "lucide-react";
+import { ArrowRight, Heart, MapPin, Users, Stethoscope, HandHeart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useTranslation } from "react-i18next";
@@ -13,15 +13,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { data: isHelper } = useIsHelper(user?.id);
-
-  const handleMapClick = (e: React.MouseEvent) => {
-    if (!user) {
-      e.preventDefault();
-      navigate("/auth", { state: { from: "/map", message: "map" } });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -78,7 +70,7 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
                   {t('actions.pawfriends.description')}
                 </p>
-                <Link to="/map" onClick={handleMapClick}>
+                <Link to="/map">
                   <Button variant="outline" className="w-full gap-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30">
                     <MapPin className="w-4 h-4" />
                     {t('actions.pawfriends.cta')}
