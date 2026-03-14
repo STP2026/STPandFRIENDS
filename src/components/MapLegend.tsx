@@ -1,4 +1,4 @@
-import { CheckCircle, AlertCircle, AlertTriangle, Syringe, Stethoscope, Home } from "lucide-react";
+import { CheckCircle, AlertCircle, AlertTriangle, Syringe, Stethoscope } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface MapLegendProps {
@@ -70,8 +70,10 @@ const MapLegend = ({ isElevated = false }: MapLegendProps) => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-md bg-primary/10 border-2 border-primary flex items-center justify-center">
-              <Home className="w-4 h-4 text-primary" />
+            <div className="w-8 h-8 rounded-md bg-blue-100 dark:bg-blue-950/30 border-2 border-blue-600 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#2563eb">
+                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 3.5l5 4.5v6.5h-2v-5h-6v5H7V11l5-4.5z"/>
+              </svg>
             </div>
             <div>
               <p className="text-sm font-medium text-foreground">PawFriend</p>

@@ -515,19 +515,29 @@
     "title": "Tu peux faire la différence",
     "subtitle": "Touriste, expatrié ou local — chaque aide compte.",
     "rescue": {
-      "title": "Aide à sauver les chiens errants",
-      "description": "Signalez les chiens en danger, documentez les animaux vaccinés et soutenez le programme TNVR local. Ensemble, nous suivons chaque chien de la région.",
+      "title": "Signalez vos rencontres avec des chiens",
+      "description": "Aidez-nous à recenser et protéger les chiens errants de la région — sains, blessés ou taggés.",
       "cta": "Signaler un chien"
     },
     "pawfriends": {
-      "title": "Découvrez les lieux dog-friendly",
-      "description": "Restaurants, cafés et commerces locaux qui accueillent les chiens — et les vétérinaires qui peuvent aider. Trouvez-les tous sur la carte.",
-      "cta": "Ouvrir la carte"
+      "title": "Découvrez les PawFriends",
+      "description": "Boutiques, restaurants et hôtels qui soutiennent la protection animale — toujours une bonne adresse !",
+      "cta": "Découvrir les PawFriends"
     },
     "help": {
       "title": "Trouver de l'aide — pour chien et humain",
       "description": "Chien blessé ? Humain mordu ? Notre guide Dog Aid vous guide pas à pas dans chaque urgence — en allemand, anglais, français et arabe.",
       "cta": "Ouvrir le guide Dog Aid"
+    },
+    "dogaid": {
+      "title": "Chien en détresse ?",
+      "description": "Nous vous disons comment aider — étape par étape, même sans vétérinaire.",
+      "cta": "Ouvrir le Dog Aid Guide"
+    },
+    "firstaid": {
+      "title": "Incident avec un chien ?",
+      "description": "Griffure ou morsure : voici ce qu'il faut faire — expliqué rapidement et clairement.",
+      "cta": "Ouvrir le First Aid Guide"
     }
   },
   "pawfriends": {

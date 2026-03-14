@@ -515,19 +515,29 @@
     "title": "Du kannst einen Unterschied machen",
     "subtitle": "Ob Urlauber, Expat oder Einheimischer — jede Hilfe zählt.",
     "rescue": {
-      "title": "Hilf mit, Straßenhunde zu retten",
-      "description": "Melde Hunde in Not, erfasse geimpfte Tiere und unterstütze das lokale TNVR-Programm. Gemeinsam dokumentieren wir jeden Hund der Region.",
+      "title": "Melde deine Hundebegegnungen",
+      "description": "Hilf uns, die Straßenhunde der Region zu erfassen und zu schützen — ob gesund, verletzt oder getaggt.",
       "cta": "Hund melden"
     },
     "pawfriends": {
-      "title": "Entdecke hundefreundliche Orte",
-      "description": "Lokale Restaurants, Cafés und Geschäfte die Hunde willkommen heißen — und Tierärzte die helfen. Finde sie alle auf der Karte.",
-      "cta": "Karte öffnen"
+      "title": "Entdecke die PawFriends",
+      "description": "Coole Läden, Restaurants und Hotels die den Tierschutz unterstützen — immer einen Besuch wert!",
+      "cta": "PawFriends entdecken"
     },
     "help": {
       "title": "Finde Hilfe — für Hund und Mensch",
       "description": "Hund verletzt? Mensch gebissen? Unser Dog Aid Guide führt dich Schritt für Schritt durch jeden Notfall — auf Deutsch, Englisch, Französisch und Arabisch.",
       "cta": "Dog Aid Guide öffnen"
+    },
+    "dogaid": {
+      "title": "Hund in Not?",
+      "description": "Wir sagen dir wie du helfen kannst — Schritt für Schritt, auch ohne Tierarzt.",
+      "cta": "Dog Aid Guide öffnen"
+    },
+    "firstaid": {
+      "title": "Vorfall mit Hund?",
+      "description": "Ob Kratzer oder Biss: hier siehst du, was zu tun ist — schnell und klar erklärt.",
+      "cta": "First Aid Guide öffnen"
     }
   },
   "pawfriends": {

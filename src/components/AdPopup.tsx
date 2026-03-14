@@ -22,7 +22,7 @@ const AdPopup = () => {
     if (isLoading || !ad) return;
     if (timerStartedRef.current) return;
     timerStartedRef.current = true;
-    const delayMs = (ad.display_delay_seconds || 20) * 1000;
+    const delayMs = (ad.display_delay_seconds || 10) * 1000;
     const timer = setTimeout(() => {
       setIsOpen(true);
       sessionStorage.setItem(AD_SHOWN_KEY, 'true');

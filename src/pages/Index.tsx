@@ -34,9 +34,9 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
 
-            {/* Card 1: Rescue */}
+            {/* Card 1: Report */}
             <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group">
               <div className="bg-gradient-to-br from-orange-400 to-orange-600 p-6 flex items-center justify-center">
                 <HandHeart className="w-14 h-14 text-white drop-shadow" />
@@ -49,7 +49,7 @@ const Index = () => {
                   {t('actions.rescue.description')}
                 </p>
                 <Link to="/add">
-                  <Button className="w-full gap-2 group-hover:gap-3 transition-all">
+                  <Button className="w-full gap-2">
                     <Heart className="w-4 h-4" />
                     {t('actions.rescue.cta')}
                     <ArrowRight className="w-4 h-4" />
@@ -70,7 +70,7 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
                   {t('actions.pawfriends.description')}
                 </p>
-                <Link to="/map">
+                <Link to="/pawfriends">
                   <Button variant="outline" className="w-full gap-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30">
                     <MapPin className="w-4 h-4" />
                     {t('actions.pawfriends.cta')}
@@ -80,22 +80,44 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Card 3: Find Help */}
+            {/* Card 3: Dog Aid */}
             <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.2s' }}>
-              <div className="bg-gradient-to-br from-blue-400 to-blue-600 p-6 flex items-center justify-center">
+              <div className="bg-gradient-to-br from-red-400 to-red-600 p-6 flex items-center justify-center">
                 <Stethoscope className="w-14 h-14 text-white drop-shadow" />
               </div>
               <div className="p-6">
                 <h3 className="font-display text-xl font-bold text-foreground mb-2">
-                  {t('actions.help.title')}
+                  {t('actions.dogaid.title')}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-                  {t('actions.help.description')}
+                  {t('actions.dogaid.description')}
                 </p>
                 <a href="https://aid.save-the-paws.de/dog-aid" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="w-full gap-2 border-blue-500 text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30">
+                  <Button variant="outline" className="w-full gap-2 border-red-500 text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30">
                     <Stethoscope className="w-4 h-4" />
-                    {t('actions.help.cta')}
+                    {t('actions.dogaid.cta')}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 4: First Aid (human) */}
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.3s' }}>
+              <div className="bg-gradient-to-br from-blue-400 to-blue-600 p-6 flex items-center justify-center">
+                <Heart className="w-14 h-14 text-white drop-shadow" />
+              </div>
+              <div className="p-6">
+                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+                  {t('actions.firstaid.title')}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                  {t('actions.firstaid.description')}
+                </p>
+                <a href="https://aid.save-the-paws.de/first-aid" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="w-full gap-2 border-blue-500 text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30">
+                    <Heart className="w-4 h-4" />
+                    {t('actions.firstaid.cta')}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </a>
