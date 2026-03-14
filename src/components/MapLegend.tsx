@@ -14,18 +14,7 @@ const MapLegend = ({ isElevated = false }: MapLegendProps) => {
       <h3 className="font-display font-bold text-foreground mb-3">{t('map.legend')}</h3>
       <div className="space-y-3">
 
-        {/* ── User view: just "tagged / safe" ── */}
-        {!isElevated && (
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-safe/20 border-2 border-safe flex items-center justify-center">
-              <CheckCircle className="w-4 h-4 text-safe" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-foreground">{t('map.safeDogs')}</p>
-              <p className="text-xs text-muted-foreground">{t('map.vaccinatedDogs')}</p>
-            </div>
-          </div>
-        )}
+        {/* ── User view: no dog pins shown, only facilities ── */}
 
         {/* ── Helper / Admin view: all report types ── */}
         {isElevated && (

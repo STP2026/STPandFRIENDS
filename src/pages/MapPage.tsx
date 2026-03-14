@@ -80,26 +80,7 @@ const MapPage = () => {
             </div>
           </div>
 
-          {/* Login hint for non-authenticated users */}
-          {!user && (
-            <Link
-              to="/auth"
-              state={{ from: "/map", message: "map" }}
-              className="block glass-card rounded-xl p-4 mb-6 animate-fade-in border-2 border-primary/30 hover:border-primary/60 transition-colors group"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">🔐</span>
-                <div>
-                  <p className="text-sm font-bold text-primary group-hover:underline">
-                    {t('map.loginHintTitle')}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {t('map.loginHintDesc')}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          )}
+
 
           <div className="grid lg:grid-cols-4 gap-6">
             <div className="lg:col-span-3">
@@ -142,37 +123,29 @@ const MapPage = () => {
                 </div>
               </a>
 
+              {isElevated && (
               <div className="glass-card rounded-xl p-4 animate-fade-in">
                 <h3 className="font-display font-bold text-foreground mb-3">{t('map.stats')}</h3>
-
-                {!isElevated ? (
-                  /* ── User: single green stat ── */
-                  <div className="bg-safe/10 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-safe">{taggedCount}</p>
-                    <p className="text-xs text-muted-foreground">{t('map.safeDogs')}</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-2.5 text-center">
+                    <p className="text-xl font-bold text-green-600">{taggedCount}</p>
+                    <p className="text-xs text-muted-foreground">Tagged</p>
                   </div>
-                ) : (
-                  /* ── Helper / Admin: breakdown by report type ── */
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-2.5 text-center">
-                      <p className="text-xl font-bold text-green-600">{taggedCount}</p>
-                      <p className="text-xs text-muted-foreground">Tagged</p>
-                    </div>
-                    <div className="bg-yellow-50 dark:bg-yellow-950/30 rounded-lg p-2.5 text-center">
-                      <p className="text-xl font-bold text-yellow-600">{strayCount}</p>
-                      <p className="text-xs text-muted-foreground">Stray</p>
-                    </div>
-                    <div className="bg-red-50 dark:bg-red-950/30 rounded-lg p-2.5 text-center">
-                      <p className="text-xl font-bold text-red-600">{sosCount}</p>
-                      <p className="text-xs text-muted-foreground">Attention</p>
-                    </div>
-                    <div className="bg-purple-50 dark:bg-purple-950/30 rounded-lg p-2.5 text-center">
-                      <p className="text-xl font-bold text-purple-600">{tagWishCount}</p>
-                      <p className="text-xs text-muted-foreground">Tag Wish</p>
-                    </div>
+                  <div className="bg-yellow-50 dark:bg-yellow-950/30 rounded-lg p-2.5 text-center">
+                    <p className="text-xl font-bold text-yellow-600">{strayCount}</p>
+                    <p className="text-xs text-muted-foreground">Stray</p>
                   </div>
-                )}
+                  <div className="bg-red-50 dark:bg-red-950/30 rounded-lg p-2.5 text-center">
+                    <p className="text-xl font-bold text-red-600">{sosCount}</p>
+                    <p className="text-xs text-muted-foreground">Attention</p>
+                  </div>
+                  <div className="bg-purple-50 dark:bg-purple-950/30 rounded-lg p-2.5 text-center">
+                    <p className="text-xl font-bold text-purple-600">{tagWishCount}</p>
+                    <p className="text-xs text-muted-foreground">Tag Wish</p>
+                  </div>
+                </div>
               </div>
+              )}
             </div>
           </div>
         </div>
