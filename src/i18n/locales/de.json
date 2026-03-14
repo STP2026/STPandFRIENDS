@@ -20,7 +20,7 @@
     "region": "Region Agadir - Taghazout",
     "title": "Save The",
     "titleHighlight": "Paws",
-    "description": "Engagiere dich für Hunde in Not — melde Tiere, verbinde dich mit lokalen Helfern und verfolge geimpfte Hunde in der Küstenregion Agadir-Taghazout.",
+    "description": "Engagiere dich für die Straßenhunde der Region Agadir-Taghazout — melde Tiere, finde hundefreundliche Orte und hilf in Notfällen.",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Karte erkunden",
     "reportAnimal": "Tier melden",
@@ -492,5 +492,24 @@
   },
   "dogs": {
     "helperOnly": "Diese Seite ist nur für Helfer und Admins zugänglich."
+  },
+  "actions": {
+    "title": "Du kannst einen Unterschied machen",
+    "subtitle": "Ob Urlauber, Expat oder Einheimischer — jede Hilfe zählt.",
+    "rescue": {
+      "title": "Hilf mit, Straßenhunde zu retten",
+      "description": "Melde Hunde in Not, erfasse geimpfte Tiere und unterstütze das lokale TNVR-Programm. Gemeinsam dokumentieren wir jeden Hund der Region.",
+      "cta": "Hund melden"
+    },
+    "pawfriends": {
+      "title": "Entdecke hundefreundliche Orte",
+      "description": "Lokale Restaurants, Cafés und Geschäfte die Hunde willkommen heißen — und Tierärzte die helfen. Finde sie alle auf der Karte.",
+      "cta": "Karte öffnen"
+    },
+    "help": {
+      "title": "Finde Hilfe — für Hund und Mensch",
+      "description": "Hund verletzt? Mensch gebissen? Unser Dog Aid Guide führt dich Schritt für Schritt durch jeden Notfall — auf Deutsch, Englisch, Französisch und Arabisch.",
+      "cta": "Dog Aid Guide öffnen"
+    }
   }
 }

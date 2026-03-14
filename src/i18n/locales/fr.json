@@ -20,7 +20,7 @@
     "region": "Région Agadir - Taghazout",
     "title": "Save The",
     "titleHighlight": "Paws",
-    "description": "Engagez-vous pour les chiens en détresse — signalez les animaux, connectez-vous avec les aidants locaux et suivez les chiens vaccinés dans la région d'Agadir-Taghazout.",
+    "description": "Engagez-vous pour les chiens errants de la région Agadir-Taghazout — signalez des animaux, trouvez des lieux dog-friendly et aidez en cas d'urgence.",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Explorer la carte",
     "reportAnimal": "Signaler un animal",
@@ -492,5 +492,24 @@
   },
   "dogs": {
     "helperOnly": "Cette page est uniquement accessible aux helpers et admins."
+  },
+  "actions": {
+    "title": "Tu peux faire la différence",
+    "subtitle": "Touriste, expatrié ou local — chaque aide compte.",
+    "rescue": {
+      "title": "Aide à sauver les chiens errants",
+      "description": "Signalez les chiens en danger, documentez les animaux vaccinés et soutenez le programme TNVR local. Ensemble, nous suivons chaque chien de la région.",
+      "cta": "Signaler un chien"
+    },
+    "pawfriends": {
+      "title": "Découvrez les lieux dog-friendly",
+      "description": "Restaurants, cafés et commerces locaux qui accueillent les chiens — et les vétérinaires qui peuvent aider. Trouvez-les tous sur la carte.",
+      "cta": "Ouvrir la carte"
+    },
+    "help": {
+      "title": "Trouver de l'aide — pour chien et humain",
+      "description": "Chien blessé ? Humain mordu ? Notre guide Dog Aid vous guide pas à pas dans chaque urgence — en allemand, anglais, français et arabe.",
+      "cta": "Ouvrir le guide Dog Aid"
+    }
   }
 }
