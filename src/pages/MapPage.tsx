@@ -43,10 +43,8 @@ const MapPage = () => {
     return true; // vets & friends always shown
   });
 
-  // Users only see tagged (save) dogs; helpers/admins see all report types
-  const displayDogs = isElevated
-    ? (dogs || [])
-    : (dogs || []).filter((d) => d.reportType === 'save');
+  // All dogs: only visible for helpers/admins (DB enforces this via View + RLS)
+  const displayDogs = isElevated ? (dogs || []) : [];
 
   // Stats
   const taggedCount = displayDogs.filter((d) => d.reportType === 'save').length;
