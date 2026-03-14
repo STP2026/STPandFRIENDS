@@ -1101,7 +1101,6 @@ const AdminPage = () => {
                 )}
               </div>
             </TabsContent>
-          )}
 
           {/* Facilities (Admin only) */}
           {isAdmin && (
