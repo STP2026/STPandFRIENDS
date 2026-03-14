@@ -143,7 +143,6 @@ const AddDogPage = () => {
   const getSubmissionMessage = () => {
     switch (formData.reportType) {
       case 'save': return t('addDog.visibility.save');
-      case 'sos': return t('addDog.visibility.sos');
       case 'stray': return t('addDog.visibility.stray');
       default: return t('addDog.visibility.vaccination');
     }
@@ -151,7 +150,7 @@ const AddDogPage = () => {
 
   // ── SUCCESS SCREEN ──
   if (submitted || submittedOffline) {
-    const isSos = formData.reportType === 'sos';
+    const isSos = false; // SOS not selectable by users
     return (
       <div className="min-h-screen bg-background">
         <Header />

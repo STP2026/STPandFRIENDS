@@ -194,14 +194,13 @@ const Header = () => {
             <AidTooltips />
           </div>
 
-          {user && (
             <Link to="/add">
               <Button variant="hero" size="sm" className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-4">
                 <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span className="hidden sm:inline">{t('common.report')}</span>
               </Button>
             </Link>
-          )}
+
           {user ? (
             <Button 
               variant="outline" 
@@ -333,6 +332,15 @@ const Header = () => {
                 {t('common.login')}
               </Link>
             )}
+            <Link
+              to="/add"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              Hund melden
+            </Link>
+
             {user && !canAccessDashboard && (
               <Link
                 to="/become-helper"

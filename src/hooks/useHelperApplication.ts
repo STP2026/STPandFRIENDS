@@ -87,6 +87,7 @@ export function useUpdateHelperApplication() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['helper-applications'] });
       queryClient.invalidateQueries({ queryKey: ['helper-application'] });
+      queryClient.invalidateQueries({ queryKey: ['is-helper'] });
     },
   });
 }

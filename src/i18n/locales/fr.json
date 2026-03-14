@@ -68,7 +68,10 @@
     "dogAidTitle": "Vous avez trouvé un chien en détresse ?",
     "dogAidHint": "Découvrez comment aider — guide étape par étape pour touristes et locaux.",
     "loginHintTitle": "Connectez-vous pour la carte complète",
-    "loginHintDesc": "Les utilisateurs connectés voient tous les établissements et peuvent signaler des chiens."
+    "loginHintDesc": "Les utilisateurs connectés voient tous les établissements et peuvent signaler des chiens.",
+    "helperOnlyTitle": "Données chiens pour helpers uniquement",
+    "helperOnlyDesc": "Les helpers vérifiés peuvent voir tous les chiens signalés.",
+    "becomeHelper": "Devenir helper →"
   },
   "facilities": {
     "vet": "Vétérinaire",
@@ -167,12 +170,12 @@
     "successTitle": "Merci pour votre signalement !",
     "guestSuccessDesc": "Votre signalement a été reçu. Notre équipe s'en occupe.",
     "dogAidBannerTitle": "Chien blessé ou en détresse ?",
-    "dogAidBannerDesc": "Notre guide Dog Aid explique étape par étape comment aider immédiatement — même sans vétérinaire.",
+    "dogAidBannerDesc": "Notre guide Dog Aid explique étape par étape comment aider — même sans vétérinaire.",
     "dogAidHintTitle": "Chien blessé ou en détresse aiguë ?",
-    "dogAidHintDesc": "Aidez d'abord — signalez ensuite. Notre guide Dog Aid vous montre comment.",
+    "dogAidHintDesc": "Aidez d'abord — signalez ensuite.",
     "dogAidHintLink": "Ouvrir maintenant →",
     "facebookTitle": "Restez informé",
-    "facebookDesc": "Suivez-nous sur Facebook pour les mises à jour sur les chiens de la région.",
+    "facebookDesc": "Suivez-nous sur Facebook pour les mises à jour sur les chiens.",
     "registerCta": "Vous voulez aider davantage ?",
     "registerCtaDesc": "Avec un compte gratuit, vous pouvez suivre les signalements et soutenir directement notre équipe.",
     "registerCtaButton": "S'inscrire gratuitement",

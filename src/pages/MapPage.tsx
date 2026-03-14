@@ -103,6 +103,26 @@ const MapPage = () => {
             <div className="space-y-4">
               <MapLegend isElevated={isElevated} />
 
+              {/* Info banner for non-elevated users */}
+              {!isElevated && user && (
+                <div className="glass-card rounded-xl p-4 animate-fade-in border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20">
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl">🔒</span>
+                    <div>
+                      <p className="text-sm font-bold text-amber-700 dark:text-amber-400 mb-1">
+                        {t('map.helperOnlyTitle', 'Hundedaten nur für Helfer')}
+                      </p>
+                      <p className="text-xs text-muted-foreground mb-2">
+                        {t('map.helperOnlyDesc', 'Verifizierte Helfer sehen alle gemeldeten Hunde auf der Karte.')}
+                      </p>
+                      <a href="/become-helper" className="text-xs font-semibold text-amber-700 dark:text-amber-400 underline">
+                        {t('map.becomeHelper', 'Helfer werden →')}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Dog Aid hint */}
               <a
                 href="https://aid.save-the-paws.de/dog-aid"

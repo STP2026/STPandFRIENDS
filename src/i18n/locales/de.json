@@ -68,7 +68,10 @@
     "dogAidTitle": "Hund in Not gefunden?",
     "dogAidHint": "Erfahre wie du helfen kannst — Schritt-für-Schritt-Anleitung für Touristen & Einheimische.",
     "loginHintTitle": "Anmelden für die vollständige Karte",
-    "loginHintDesc": "Eingeloggte User sehen alle Einrichtungen und können Hunde melden."
+    "loginHintDesc": "Eingeloggte User sehen alle Einrichtungen und können Hunde melden.",
+    "helperOnlyTitle": "Hundedaten nur für Helfer",
+    "helperOnlyDesc": "Verifizierte Helfer sehen alle gemeldeten Hunde auf der Karte.",
+    "becomeHelper": "Helfer werden →"
   },
   "facilities": {
     "vet": "Tierarzt",

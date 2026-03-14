@@ -2,11 +2,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Dog, DbDog, DogFormData, mapDbDogToDog } from '@/types/dog';
 
-// Dogs are only visible to helpers/admins — the DB view enforces this via RLS.
-// The parameter is kept for query-key differentiation but has no effect on the query.
+// Single hook — DB view enforces visibility via RLS.
+// isElevated=true: Helper/Admin — fetches all visible dogs
+// isElevated=false: regular user — skips fetch entirely (view returns nothing useful)
 export function useDogs(isElevated = false) {
   return useQuery({
-    queryKey: ['dogs', isElevated],
+    queryKey: isElevated ? ['dogs', 'elevated'] : ['dogs', 'public'],
     queryFn: async (): Promise<Dog[]> => {
       const { data, error } = await supabase
         .from('dogs_public')
@@ -15,23 +16,15 @@ export function useDogs(isElevated = false) {
       if (error) throw error;
       return (data as DbDog[]).map(mapDbDogToDog);
     },
+    enabled: isElevated, // Don't fetch at all for regular users
     placeholderData: [],
     staleTime: 1000 * 60 * 2,
   });
 }
 
+// useAllDogs merged into useDogs — AdminPage uses this alias
 export function useAllDogs() {
-  return useQuery({
-    queryKey: ['dogs', 'all'],
-    queryFn: async (): Promise<Dog[]> => {
-      const { data, error } = await supabase
-        .from('dogs_public')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (error) throw error;
-      return (data as DbDog[]).map(mapDbDogToDog);
-    },
-  });
+  return useDogs(true);
 }
 
 export function useAddDog() {
@@ -80,9 +73,7 @@ export function useApproveDog() {
         .eq('id', dogId);
       if (error) throw error;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dogs'] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['dogs'] }),
   });
 }
 
@@ -96,9 +87,7 @@ export function useUpdateDog() {
         .eq('id', id);
       if (error) throw error;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dogs'] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['dogs'] }),
   });
 }
 
@@ -112,8 +101,6 @@ export function useDeleteDog() {
         .eq('id', dogId);
       if (error) throw error;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dogs'] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['dogs'] }),
   });
 }

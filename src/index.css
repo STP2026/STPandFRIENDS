@@ -331,3 +331,8 @@ button, a, [role="button"] {
 [dir="rtl"] select {
   text-align: right;
 }
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

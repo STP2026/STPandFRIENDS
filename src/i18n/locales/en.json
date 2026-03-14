@@ -68,7 +68,10 @@
     "dogAidTitle": "Found a dog in need?",
     "dogAidHint": "Learn how to help — step by step guide for tourists & locals.",
     "loginHintTitle": "Sign in for the full map",
-    "loginHintDesc": "Logged-in users can see all facilities and report dogs."
+    "loginHintDesc": "Logged-in users can see all facilities and report dogs.",
+    "helperOnlyTitle": "Dog data for helpers only",
+    "helperOnlyDesc": "Verified helpers can see all reported dogs on the map.",
+    "becomeHelper": "Become a helper →"
   },
   "facilities": {
     "vet": "Veterinarian",
@@ -167,7 +170,7 @@
     "successTitle": "Thank you for your report!",
     "guestSuccessDesc": "Your report has been received. Our team will take care of it.",
     "dogAidBannerTitle": "Dog injured or in need?",
-    "dogAidBannerDesc": "Our Dog Aid Guide explains step by step how to help immediately — even without a vet.",
+    "dogAidBannerDesc": "Our Dog Aid Guide explains step by step how to help — even without a vet.",
     "dogAidHintTitle": "Dog injured or in acute distress?",
     "dogAidHintDesc": "Help first — then report. Our Dog Aid Guide shows you how.",
     "dogAidHintLink": "Open now →",
