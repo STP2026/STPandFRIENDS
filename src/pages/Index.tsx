@@ -128,7 +128,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Donation */}}
+      {/* Donation */}
       <DonationSection />
 
       {/* Become a Helper */}
