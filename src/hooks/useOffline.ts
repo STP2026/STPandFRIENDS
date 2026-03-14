@@ -110,8 +110,8 @@ export function useOffline() {
     );
   }, []);
 
-  // Get pending count
-  const pendingCount = offlineQueue.filter(r => r.status === 'pending' || r.status === 'failed').length;
+  // Include 'syncing' so stuck reports are always visible and retryable
+  const pendingCount = offlineQueue.filter(r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing').length;
 
   return {
     isOnline,

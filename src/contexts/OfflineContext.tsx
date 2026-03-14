@@ -32,24 +32,18 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
   const [cachedDogs, setCachedDogs] = useState<Dog[]>([]);
   const [isSyncing, setIsSyncing] = useState(false);
 
-  // Load cached dogs on mount
   useEffect(() => {
     setCachedDogs(getCachedDogs());
   }, [getCachedDogs]);
 
-  // Fetch and cache dogs when online
   const fetchAndCacheDogs = useCallback(async () => {
     if (!isOnline) return;
-
     try {
       const { data, error } = await supabase
         .from('dogs_public')
         .select('*')
-        .eq('is_approved', true)
         .order('created_at', { ascending: false });
-
       if (error) throw error;
-
       const dogs = (data as DbDog[]).map(mapDbDogToDog);
       cacheDogs(dogs);
       setCachedDogs(dogs);
@@ -58,22 +52,34 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isOnline, cacheDogs]);
 
-  // Fetch dogs when coming back online
   useEffect(() => {
-    if (isOnline) {
-      fetchAndCacheDogs();
-    }
+    if (isOnline) fetchAndCacheDogs();
   }, [isOnline, fetchAndCacheDogs]);
 
-  // Sync offline queue when back online
   const syncQueue = useCallback(async () => {
-    if (!isOnline || pendingCount === 0) return;
+    if (!isOnline) return;
+
+    // Include 'syncing' — handles reports stuck from previous failed runs
+    const reportsToSync = offlineQueue.filter(
+      r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
+    );
+    if (reportsToSync.length === 0) return;
 
     setIsSyncing(true);
 
-    for (const report of offlineQueue) {
-      if (report.status !== 'pending' && report.status !== 'failed') continue;
-      if (report.retryCount >= 3) continue; // Max retries
+    for (const report of reportsToSync) {
+      if (report.retryCount >= 3) {
+        // Max retries — check if already in DB by ear_tag, remove if so
+        try {
+          const { data } = await supabase
+            .from('dogs')
+            .select('id')
+            .eq('ear_tag', report.data.earTag)
+            .maybeSingle();
+          if (data) removeFromQueue(report.id);
+        } catch { /* ignore */ }
+        continue;
+      }
 
       updateQueueStatus(report.id, 'syncing');
 
@@ -81,12 +87,26 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
         const formData = report.data;
         const isAutoApproved = formData.reportType !== 'save';
 
+        // Check if ear_tag already exists (duplicate from previous sync attempt)
+        const { data: existing } = await supabase
+          .from('dogs')
+          .select('id')
+          .eq('ear_tag', formData.earTag)
+          .maybeSingle();
+
+        if (existing) {
+          removeFromQueue(report.id);
+          continue;
+        }
+
         const { error } = await supabase
           .from('dogs')
           .insert({
             name: formData.name,
             ear_tag: formData.earTag,
             photo_url: formData.photo || null,
+            photo_url_2: formData.photo2 || null,
+            photo_url_3: formData.photo3 || null,
             latitude: formData.latitude,
             longitude: formData.longitude,
             location: formData.location,
@@ -100,9 +120,16 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
             urgency_level: formData.urgencyLevel || null,
           });
 
-        if (error) throw error;
-
-        removeFromQueue(report.id);
+        if (error) {
+          // Unique constraint on ear_tag → already exists → remove
+          if (error.code === '23505') {
+            removeFromQueue(report.id);
+          } else {
+            throw error;
+          }
+        } else {
+          removeFromQueue(report.id);
+        }
       } catch (e) {
         console.error('[Offline] Failed to sync report:', report.id, e);
         updateQueueStatus(report.id, 'failed');
@@ -110,31 +137,18 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     }
 
     setIsSyncing(false);
-    
-    // Refresh cached dogs after sync
     await fetchAndCacheDogs();
-  }, [isOnline, offlineQueue, pendingCount, updateQueueStatus, removeFromQueue, fetchAndCacheDogs]);
+  }, [isOnline, offlineQueue, updateQueueStatus, removeFromQueue, fetchAndCacheDogs]);
 
-  // Auto-sync when coming back online
   useEffect(() => {
-    if (isOnline && pendingCount > 0) {
-      syncQueue();
-    }
+    if (isOnline && pendingCount > 0) syncQueue();
   }, [isOnline, pendingCount, syncQueue]);
 
   return (
-    <OfflineContext.Provider
-      value={{
-        isOnline,
-        offlineQueue,
-        pendingCount,
-        lastSyncTime,
-        cachedDogs,
-        addReportToQueue: addToQueue,
-        syncQueue,
-        isSyncing,
-      }}
-    >
+    <OfflineContext.Provider value={{
+      isOnline, offlineQueue, pendingCount, lastSyncTime,
+      cachedDogs, addReportToQueue: addToQueue, syncQueue, isSyncing,
+    }}>
       {children}
     </OfflineContext.Provider>
   );
@@ -142,8 +156,6 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
 
 export function useOfflineContext() {
   const context = useContext(OfflineContext);
-  if (!context) {
-    throw new Error('useOfflineContext must be used within OfflineProvider');
-  }
+  if (!context) throw new Error('useOfflineContext must be used within OfflineProvider');
   return context;
 }

@@ -1,20 +1,17 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Dog, DbDog, DogFormData, mapDbDogToDog, ReportType } from '@/types/dog';
+import { Dog, DbDog, DogFormData, mapDbDogToDog } from '@/types/dog';
 
-// onlyApproved: true = normal user (no dogs — DB view returns nothing)
-//               false = helper/admin (all report types they can see)
-export function useDogs(onlyApproved = true) {
+// Dogs are only visible to helpers/admins — the DB view enforces this via RLS.
+// The parameter is kept for query-key differentiation but has no effect on the query.
+export function useDogs(isElevated = false) {
   return useQuery({
-    queryKey: ['dogs', onlyApproved],
+    queryKey: ['dogs', isElevated],
     queryFn: async (): Promise<Dog[]> => {
-      // The dogs_public view enforces all visibility via RLS.
-      // Normal users get an empty result from the view.
       const { data, error } = await supabase
         .from('dogs_public')
         .select('*')
         .order('created_at', { ascending: false });
-
       if (error) throw error;
       return (data as DbDog[]).map(mapDbDogToDog);
     },
@@ -27,12 +24,10 @@ export function useAllDogs() {
   return useQuery({
     queryKey: ['dogs', 'all'],
     queryFn: async (): Promise<Dog[]> => {
-      // Use the dogs_public view which masks reported_by UUID and shows reporter_name instead
       const { data, error } = await supabase
         .from('dogs_public')
         .select('*')
         .order('created_at', { ascending: false });
-      
       if (error) throw error;
       return (data as DbDog[]).map(mapDbDogToDog);
     },
@@ -41,14 +36,9 @@ export function useAllDogs() {
 
 export function useAddDog() {
   const queryClient = useQueryClient();
-  
   return useMutation({
     mutationFn: async (formData: DogFormData & { reportedBy: string }) => {
-      // Non-tagged reports (stray, sos, vaccination_wish) are auto-approved
-      // so helpers/admins see them on the map immediately.
-      // Tagged ("save") dogs require admin approval before showing to users.
       const isAutoApproved = formData.reportType !== 'save';
-      
       const { data, error } = await supabase
         .from('dogs')
         .insert({
@@ -71,7 +61,6 @@ export function useAddDog() {
         })
         .select()
         .single();
-      
       if (error) throw error;
       return mapDbDogToDog(data as DbDog);
     },
@@ -83,14 +72,12 @@ export function useAddDog() {
 
 export function useApproveDog() {
   const queryClient = useQueryClient();
-  
   return useMutation({
     mutationFn: async (dogId: string) => {
       const { error } = await supabase
         .from('dogs')
         .update({ is_approved: true })
         .eq('id', dogId);
-      
       if (error) throw error;
     },
     onSuccess: () => {
@@ -101,14 +88,12 @@ export function useApproveDog() {
 
 export function useUpdateDog() {
   const queryClient = useQueryClient();
-  
   return useMutation({
     mutationFn: async ({ id, updates }: { id: string; updates: Partial<DbDog> }) => {
       const { error } = await supabase
         .from('dogs')
         .update(updates)
         .eq('id', id);
-      
       if (error) throw error;
     },
     onSuccess: () => {
@@ -119,14 +104,12 @@ export function useUpdateDog() {
 
 export function useDeleteDog() {
   const queryClient = useQueryClient();
-  
   return useMutation({
     mutationFn: async (dogId: string) => {
       const { error } = await supabase
         .from('dogs')
         .delete()
         .eq('id', dogId);
-      
       if (error) throw error;
     },
     onSuccess: () => {
