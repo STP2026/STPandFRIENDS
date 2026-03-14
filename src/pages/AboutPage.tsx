@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Heart, ExternalLink, Shield, Syringe, Users, Globe } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logoDark from "@/assets/logo-dark.png";
 import Footer from "@/components/Footer";
@@ -102,12 +101,6 @@ const AboutPage = () => {
                     {t('about.websiteLink')}
                     <ExternalLink className="w-3 h-3" />
                   </a>
-                </Button>
-                <Button asChild variant="outline" className="gap-2">
-                  <Link to="/dogs">
-                    <Shield className="w-4 h-4" />
-                    {t('about.viewDogs')}
-                  </Link>
                 </Button>
               </div>
             </div>
