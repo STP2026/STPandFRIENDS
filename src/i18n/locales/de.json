@@ -526,5 +526,31 @@
       "description": "Hund verletzt? Mensch gebissen? Unser Dog Aid Guide führt dich Schritt für Schritt durch jeden Notfall — auf Deutsch, Englisch, Französisch und Arabisch.",
       "cta": "Dog Aid Guide öffnen"
     }
+  },
+  "pawfriends": {
+    "badge": "Lokale Unterstützer",
+    "heroTitle": "PawFriends",
+    "heroSubtitle": "Hundefreundliche Orte in der Region",
+    "heroDesc": "Restaurants, Cafés, Hotels und Shops die Hunde willkommen heißen — und den lokalen Tierschutz aktiv unterstützen. Erkennbar am PawFriends-Sticker an der Tür.",
+    "mapCta": "Alle PawFriends auf der Karte",
+    "whatTitle": "Was ist PawFriends?",
+    "whatDesc": "PawFriends verbindet hundefreundliche Unternehmen mit Touristen und Einheimischen, die Hunde lieben — und unterstützt gleichzeitig Save The Paws.",
+    "benefit1Title": "Sticker an der Tür",
+    "benefit1Desc": "Ein offizieller PawFriends-Sticker kennzeichnet dein Lokal als hundefreundlichen Ort — sichtbar für alle Touristen.",
+    "benefit2Title": "Pin auf der Karte",
+    "benefit2Desc": "Dein Eintrag erscheint auf unserer interaktiven Karte — gefunden von Tausenden Touristen und Tierfreunden aus aller Welt.",
+    "benefit3Title": "Gutes tun",
+    "benefit3Desc": "Du unterstützt damit aktiv den Tierschutz in der Region Agadir-Taghazout und hilfst uns, mehr Hunden zu helfen.",
+    "whoTitle": "Wer kann PawFriend werden?",
+    "type": {
+      "cafe": "Café & Restaurant",
+      "hotel": "Hotel & Riad",
+      "shop": "Shop & Boutique",
+      "vet": "Tierarzt & Tierpflege"
+    },
+    "currentTitle": "Aktuelle PawFriends",
+    "ctaTitle": "Jetzt PawFriend werden",
+    "ctaDesc": "Kein komplizierter Prozess — schreib uns einfach und wir kümmern uns um alles. Unverbindlich und schnell.",
+    "ctaNote": "Unverbindlich — wir melden uns innerhalb von 24 Stunden."
   }
 }

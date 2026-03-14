@@ -526,5 +526,31 @@
       "description": "Dog injured? Human bitten? Our Dog Aid Guide walks you through every emergency step by step — in German, English, French and Arabic.",
       "cta": "Open Dog Aid Guide"
     }
+  },
+  "pawfriends": {
+    "badge": "Local Supporters",
+    "heroTitle": "PawFriends",
+    "heroSubtitle": "Dog-friendly places in the region",
+    "heroDesc": "Restaurants, cafés, hotels and shops that welcome dogs — and actively support local animal welfare. Recognisable by the PawFriends sticker on the door.",
+    "mapCta": "All PawFriends on the map",
+    "whatTitle": "What is PawFriends?",
+    "whatDesc": "PawFriends connects dog-friendly businesses with tourists and locals who love dogs — while supporting Save The Paws.",
+    "benefit1Title": "Sticker on the door",
+    "benefit1Desc": "An official PawFriends sticker marks your place as dog-friendly — visible to all tourists.",
+    "benefit2Title": "Pin on the map",
+    "benefit2Desc": "Your listing appears on our interactive map — found by thousands of tourists and animal lovers worldwide.",
+    "benefit3Title": "Do some good",
+    "benefit3Desc": "You actively support animal welfare in the Agadir-Taghazout region and help us help more dogs.",
+    "whoTitle": "Who can become a PawFriend?",
+    "type": {
+      "cafe": "Café & Restaurant",
+      "hotel": "Hotel & Riad",
+      "shop": "Shop & Boutique",
+      "vet": "Vet & Pet Care"
+    },
+    "currentTitle": "Current PawFriends",
+    "ctaTitle": "Become a PawFriend now",
+    "ctaDesc": "No complicated process — just message us and we take care of everything. No commitment, fast.",
+    "ctaNote": "No commitment — we get back to you within 24 hours."
   }
 }

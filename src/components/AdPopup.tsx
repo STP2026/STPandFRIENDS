@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
   DialogContent,
@@ -14,37 +15,27 @@ const AdPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: ad, isLoading } = useActiveAdvertisement();
   const timerStartedRef = useRef(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Only show ad once per session
-    if (sessionStorage.getItem(AD_SHOWN_KEY)) {
-      return;
-    }
-
-    if (isLoading || !ad) {
-      return;
-    }
-
+    if (sessionStorage.getItem(AD_SHOWN_KEY)) return;
+    if (isLoading || !ad) return;
     if (timerStartedRef.current) return;
     timerStartedRef.current = true;
-
     const delayMs = (ad.display_delay_seconds || 20) * 1000;
-    
     const timer = setTimeout(() => {
       setIsOpen(true);
       sessionStorage.setItem(AD_SHOWN_KEY, 'true');
     }, delayMs);
-
     return () => clearTimeout(timer);
   }, [ad, isLoading]);
 
-  if (!ad) {
-    return null;
-  }
+  if (!ad) return null;
 
   const handleVisit = () => {
-    window.open(ad.target_url, '_blank', 'noopener,noreferrer');
     setIsOpen(false);
+    // Always route to PawFriends page first — external link is secondary
+    navigate('/pawfriends');
   };
 
   return (

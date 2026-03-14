@@ -25,6 +25,7 @@ const BecomeHelperPage = lazy(() => import("./pages/BecomeHelperPage"));
 const InstallPage = lazy(() => import("./pages/InstallPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+const PawFriendsPage = lazy(() => import("./pages/PawFriendsPage"));
 
 import AutoLogoutWarning from "@/components/AutoLogoutWarning";
 
@@ -83,6 +84,7 @@ const App = () => (
                 <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/pawfriends" element={<PawFriendsPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/become-helper" element={<BecomeHelperPage />} />
                 <Route path="/install" element={<InstallPage />} />

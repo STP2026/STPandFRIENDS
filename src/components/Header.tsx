@@ -134,6 +134,15 @@ const Header = () => {
             </Link>
           )}
           <Link
+            to="/pawfriends"
+            className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+              isActive("/pawfriends") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Heart className="w-4 h-4" />
+            PawFriends
+          </Link>
+          <Link
             to="/about"
             className={`flex items-center gap-1 text-sm font-medium transition-colors ${
               isActive("/about") ? "text-primary" : "text-muted-foreground hover:text-foreground"
@@ -268,6 +277,16 @@ const Header = () => {
                 {t('common.dogs')}
               </Link>
             )}
+            <Link
+              to="/pawfriends"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                isActive("/pawfriends") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Heart className="w-4 h-4" />
+              PawFriends
+            </Link>
             <Link
               to="/about"
               onClick={() => setMobileMenuOpen(false)}
