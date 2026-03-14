@@ -23,15 +23,21 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-14 sm:pt-16">
+    <section className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden pt-14 sm:pt-16">
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <img src={heroImage} alt="Hund am Strand von Taghazout" className="w-full h-full object-cover" />
         <div className="hero-overlay absolute inset-0" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 text-center">
-        <div className="max-w-3xl mx-auto animate-fade-in">
-          <img src={logoWhite} alt="Save The Paws – Agadir" className="h-28 sm:h-36 md:h-44 w-auto mx-auto mb-6 drop-shadow-lg" />
+      {/* Main content — flex-1 so it fills space above ticker */}
+      <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 text-center flex-1 flex flex-col items-center justify-center w-full">
+        <div className="max-w-3xl mx-auto animate-fade-in w-full">
+          <img
+            src={logoWhite}
+            alt="Save The Paws – Agadir"
+            className="h-28 sm:h-36 md:h-44 w-auto mx-auto mb-6 drop-shadow-lg"
+          />
 
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 border border-white/20">
             <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -68,8 +74,8 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* 4 Stats */}
-        <div className="mt-10 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto px-4">
+        {/* 4 Stats — centered */}
+        <div className="mt-10 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-2xl mx-auto px-4">
           {statItems.map((stat, index) => (
             <div
               key={stat.label}
@@ -82,14 +88,15 @@ const HeroSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Sponsor Ticker — inside z-10 container, below stats */}
+        <div className="w-full mt-6">
+          <SponsorTicker />
+        </div>
       </div>
 
-      {/* Sponsor Ticker */}
-      <div className="relative z-10 w-full">
-        <SponsorTicker />
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float z-10">
         <div className="w-6 h-10 rounded-full border-2 border-white/50 flex justify-center pt-2">
           <div className="w-1.5 h-1.5 rounded-full bg-white/70 animate-bounce" />
         </div>

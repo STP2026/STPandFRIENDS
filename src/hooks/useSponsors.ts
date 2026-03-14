@@ -15,7 +15,8 @@ export function useSponsors() {
         .from('sponsors')
         .select('*')
         .order('created_at', { ascending: true });
-      if (error) throw error;
+      // If table doesn't exist yet, return empty gracefully
+      if (error) return [];
       return (data || []).map((s: any) => ({
         id: s.id,
         name: s.name,
