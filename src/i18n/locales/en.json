@@ -262,7 +262,7 @@
       "caretaker": "Caretaker"
     },
     "status": {
-      "visible": "Visible",
+      "visible": "Approved",
       "pending": "Pending",
       "approved": "Approved",
       "rejected": "Rejected"
@@ -331,7 +331,7 @@
       "withdrawConfirm": "Do you really want to delete this rehab spot?"
     },
     "searchDogs": "Search by name, ear tag, location, sponsor...",
-    "visible": "Visible",
+    "visible": "Approved",
     "pending": "Pending",
     "showOnMap": "Show on map",
     "note": "Note",
@@ -543,7 +543,7 @@
   "pawfriends": {
     "badge": "Local Supporters",
     "heroTitle": "PawFriends",
-    "heroSubtitle": "Dog-friendly places & shop for friends",
+    "heroSubtitle": "Dog-friendly places in the region",
     "heroDesc": "Restaurants, cafés, hotels and shops that welcome dogs — and actively support local animal welfare. Recognisable by the PawFriends sticker on the door.",
     "mapCta": "All PawFriends on the map",
     "whatTitle": "What is PawFriends?",

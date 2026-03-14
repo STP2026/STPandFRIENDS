@@ -262,7 +262,7 @@
       "caretaker": "المسؤول"
     },
     "status": {
-      "visible": "ظاهر",
+      "visible": "مُوافَق عليه",
       "pending": "كيتسنّا",
       "approved": "موافق عليه",
       "rejected": "مرفوض"
@@ -331,7 +331,7 @@
       "withdrawConfirm": "واش بصّح بغيتي تمسح بلاصة التعافي هادي؟"
     },
     "searchDogs": "قلّب بالاسم، العلامة، البلاصة، الداعم...",
-    "visible": "كيبان",
+    "visible": "مُوافَق عليه",
     "pending": "كيتسنّا",
     "showOnMap": "بيّن فالخريطة",
     "note": "ملاحظة",
@@ -543,7 +543,7 @@
   "pawfriends": {
     "badge": "داعمون محليون",
     "heroTitle": "PawFriends",
-    "heroSubtitle": "أماكن صديقة للكلاب ومتجر للأصدقاء",
+    "heroSubtitle": "أماكن صديقة للكلاب في المنطقة",
     "heroDesc": "مطاعم ومقاهي وفنادق ومحلات ترحب بالكلاب — وتدعم بنشاط حماية الحيوانات المحلية. يمكن التعرف عليها من ملصق PawFriends على الباب.",
     "mapCta": "كل PawFriends على الخريطة",
     "whatTitle": "ما هو PawFriends؟",

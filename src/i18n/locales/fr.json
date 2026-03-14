@@ -262,7 +262,7 @@
       "caretaker": "Responsable"
     },
     "status": {
-      "visible": "Visible",
+      "visible": "Approuvé",
       "pending": "En attente",
       "approved": "Approuvé",
       "rejected": "Rejeté"
@@ -331,7 +331,7 @@
       "withdrawConfirm": "Voulez-vous vraiment supprimer ce spot de réhabilitation ?"
     },
     "searchDogs": "Rechercher par nom, marque, lieu, parrain...",
-    "visible": "Visible",
+    "visible": "Approuvé",
     "pending": "En attente",
     "showOnMap": "Afficher sur la carte",
     "note": "Note",
@@ -543,7 +543,7 @@
   "pawfriends": {
     "badge": "Soutiens locaux",
     "heroTitle": "PawFriends",
-    "heroSubtitle": "Lieux dog-friendly & boutique pour amis",
+    "heroSubtitle": "Lieux dog-friendly dans la région",
     "heroDesc": "Restaurants, cafés, hôtels et boutiques qui accueillent les chiens — et soutiennent activement la protection animale locale. Reconnaissables au sticker PawFriends sur la porte.",
     "mapCta": "Tous les PawFriends sur la carte",
     "whatTitle": "Qu'est-ce que PawFriends ?",
