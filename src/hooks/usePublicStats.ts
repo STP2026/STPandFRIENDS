@@ -4,36 +4,37 @@ import { supabase } from '@/integrations/supabase/client';
 interface PublicStats {
   totalDogs: number;
   vaccinatedDogs: number;
+  helperCount: number;
 }
 
-/**
- * Fetches stats visible to helpers/admins via dogs_public view.
- * Normal users get 0 from the view (RLS) — placeholderData shows fixed values.
- * +30 offset represents dogs tracked before this app launched.
- */
 export function usePublicStats() {
   return useQuery({
     queryKey: ['public-stats'],
     queryFn: async (): Promise<PublicStats> => {
-      const { count: totalCount, error: totalError } = await supabase
+      // Dogs total
+      const { count: totalCount } = await supabase
         .from('dogs_public')
         .select('*', { count: 'exact', head: true });
 
-      if (totalError) throw totalError;
-
-      const { count: vaccinatedCount, error: vacError } = await supabase
+      // Vaccinated dogs
+      const { count: vaccinatedCount } = await supabase
         .from('dogs_public')
         .select('*', { count: 'exact', head: true })
         .eq('is_vaccinated', true);
 
-      if (vacError) throw vacError;
+      // Approved helpers
+      const { count: helperCount } = await supabase
+        .from('helper_applications')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'approved');
 
       return {
         totalDogs: (totalCount || 0) + 30,
         vaccinatedDogs: (vaccinatedCount || 0) + 30,
+        helperCount: (helperCount || 0),
       };
     },
     staleTime: 1000 * 60 * 5,
-    placeholderData: { totalDogs: 30, vaccinatedDogs: 30 },
+    placeholderData: { totalDogs: 30, vaccinatedDogs: 30, helperCount: 0 },
   });
 }

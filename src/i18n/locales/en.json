@@ -26,7 +26,10 @@
     "reportAnimal": "Report Animal",
     "stats": {
       "vaccinated": "Vaccinated Dogs",
-      "users": "Users"
+      "users": "Users",
+      "rescued": "Dogs Recorded",
+      "helpers": "Active Helpers",
+      "tnvr": "TNVR Programme"
     },
     "touristHint": "Report your dog encounter and support local animal welfare — no account needed."
   },
@@ -580,5 +583,30 @@
         "donation": "€10 go directly to dog rescue."
       }
     }
+  },
+  "becomeHelper": {
+    "loginRequired": "Login required",
+    "loginRequiredDesc": "Please log in to apply as a helper.",
+    "pendingTitle": "Application received! 📬",
+    "pendingDesc": "We have received your application and will review it as soon as possible.",
+    "pendingNote": "You will be notified by email once a decision has been made.",
+    "approvedTitle": "You are a helper! 🎉",
+    "approvedDesc": "Welcome to the team! You can now see SOS reports and approve submissions.",
+    "toDashboard": "Go to Dashboard",
+    "rejectedTitle": "Application rejected",
+    "rejectedDesc": "Unfortunately your application was rejected. Please contact us if you have questions.",
+    "yourApplication": "Your application:",
+    "title": "Become a Helper 💚",
+    "description": "Actively help with rescuing and caring for animals in need.",
+    "benefitsTitle": "What helpers can do:",
+    "benefit1": "See SOS reports — Respond quickly to emergencies",
+    "benefit2": "Approve reports — Review and publish new submissions",
+    "benefit3": "Edit dog data — Keep information up to date",
+    "formTitle": "Your Application",
+    "whyLabel": "Why do you want to become a helper?",
+    "whyPlaceholder": "Tell us a little about yourself and why you want to help...",
+    "whyHint": "Share your motivation and any relevant experience.",
+    "submitting": "Sending...",
+    "submit": "Submit Application"
   }
 }

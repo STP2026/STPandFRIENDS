@@ -26,7 +26,10 @@
     "reportAnimal": "Tier melden",
     "stats": {
       "vaccinated": "Geimpfte Hunde",
-      "users": "User"
+      "users": "User",
+      "rescued": "Erfasste Hunde",
+      "helpers": "Aktive Helfer",
+      "tnvr": "TNVR-Programm"
     },
     "touristHint": "Melde deine Hundebegegnung und unterstütze den lokalen Tierschutz — kein Account nötig."
   },
@@ -580,5 +583,30 @@
         "donation": "10 € fließen direkt in die Hunderettung."
       }
     }
+  },
+  "becomeHelper": {
+    "loginRequired": "Anmeldung erforderlich",
+    "loginRequiredDesc": "Bitte melde dich an, um dich als Helfer zu bewerben.",
+    "pendingTitle": "Bewerbung eingegangen! 📬",
+    "pendingDesc": "Wir haben deine Bewerbung erhalten und werden sie so schnell wie möglich prüfen.",
+    "pendingNote": "Du wirst per E-Mail benachrichtigt, sobald eine Entscheidung getroffen wurde.",
+    "approvedTitle": "Du bist Helfer! 🎉",
+    "approvedDesc": "Willkommen im Team! Du kannst jetzt SOS-Meldungen sehen und Meldungen freigeben.",
+    "toDashboard": "Zum Dashboard",
+    "rejectedTitle": "Bewerbung abgelehnt",
+    "rejectedDesc": "Leider wurde deine Bewerbung abgelehnt. Bei Fragen kontaktiere uns gerne.",
+    "yourApplication": "Deine Bewerbung:",
+    "title": "Werde Helfer 💚",
+    "description": "Hilf aktiv bei der Rettung und Versorgung von Tieren in Not.",
+    "benefitsTitle": "Was Helfer können:",
+    "benefit1": "SOS-Meldungen sehen — Reagiere schnell auf Notfälle",
+    "benefit2": "Meldungen freigeben — Prüfe und veröffentliche neue Meldungen",
+    "benefit3": "Hunde-Daten bearbeiten — Halte Informationen aktuell",
+    "formTitle": "Deine Bewerbung",
+    "whyLabel": "Warum möchtest du Helfer werden?",
+    "whyPlaceholder": "Erzähle uns ein bisschen über dich und warum du helfen möchtest...",
+    "whyHint": "Teile uns deine Motivation und ggf. relevante Erfahrungen mit.",
+    "submitting": "Wird gesendet...",
+    "submit": "Bewerbung absenden"
   }
 }

@@ -19,7 +19,6 @@ import DirectionHandler from "./components/DirectionHandler";
 // Lazy load heavy pages — Leaflet (~150KB) only loads when map page is visited
 const MapPage = lazy(() => import("./pages/MapPage"));
 const AddDogPage = lazy(() => import("./pages/AddDogPage"));
-const DogsPage = lazy(() => import("./pages/DogsPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const BecomeHelperPage = lazy(() => import("./pages/BecomeHelperPage"));
 const InstallPage = lazy(() => import("./pages/InstallPage"));
@@ -77,7 +76,6 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/map" element={<MapPage />} />
-                <Route path="/dogs" element={<DogsPage />} />
                 <Route path="/add" element={<AddDogPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/auth/confirm" element={<AuthConfirmPage />} />

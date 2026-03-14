@@ -26,7 +26,10 @@
     "reportAnimal": "Signaler un animal",
     "stats": {
       "vaccinated": "Chiens vaccinés",
-      "users": "Utilisateurs"
+      "users": "Utilisateurs",
+      "rescued": "Chiens recensés",
+      "helpers": "Helpers actifs",
+      "tnvr": "Programme TNVR"
     },
     "touristHint": "Signalez votre rencontre avec un chien et soutenez la protection animale locale — sans inscription."
   },
@@ -580,5 +583,30 @@
         "donation": "10 € vont directement au sauvetage."
       }
     }
+  },
+  "becomeHelper": {
+    "loginRequired": "Connexion requise",
+    "loginRequiredDesc": "Veuillez vous connecter pour postuler en tant que helper.",
+    "pendingTitle": "Candidature reçue ! 📬",
+    "pendingDesc": "Nous avons reçu votre candidature et l'examinerons dès que possible.",
+    "pendingNote": "Vous serez notifié par e-mail dès qu'une décision sera prise.",
+    "approvedTitle": "Vous êtes helper ! 🎉",
+    "approvedDesc": "Bienvenue dans l'équipe ! Vous pouvez maintenant voir les signalements SOS.",
+    "toDashboard": "Aller au tableau de bord",
+    "rejectedTitle": "Candidature refusée",
+    "rejectedDesc": "Malheureusement votre candidature a été refusée. Contactez-nous pour toute question.",
+    "yourApplication": "Votre candidature :",
+    "title": "Devenir Helper 💚",
+    "description": "Aidez activement au sauvetage et aux soins des animaux en détresse.",
+    "benefitsTitle": "Ce que les helpers peuvent faire :",
+    "benefit1": "Voir les signalements SOS — Réagissez rapidement aux urgences",
+    "benefit2": "Approuver les signalements — Examinez et publiez les nouvelles soumissions",
+    "benefit3": "Modifier les données des chiens — Maintenez les informations à jour",
+    "formTitle": "Votre candidature",
+    "whyLabel": "Pourquoi voulez-vous devenir helper ?",
+    "whyPlaceholder": "Parlez-nous un peu de vous et de pourquoi vous voulez aider...",
+    "whyHint": "Partagez votre motivation et toute expérience pertinente.",
+    "submitting": "Envoi en cours...",
+    "submit": "Soumettre la candidature"
   }
 }
