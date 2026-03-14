@@ -180,7 +180,8 @@
     "registerCtaDesc": "Mit einem kostenlosen Konto kannst du Meldungen verfolgen und unser Team direkt unterstützen.",
     "registerCtaButton": "Kostenlos registrieren",
     "noAccountNeeded": "Kein Account nötig — melde direkt los!",
-    "backToHome": "Zurück zur Startseite"
+    "backToHome": "Zurück zur Startseite",
+    "locationRequired": "(Pflicht)"
   },
   "auth": {
     "login": "Anmelden",
@@ -625,5 +626,11 @@
   },
   "sponsors": {
     "label": "Unsere Sponsoren"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Diese Seite existiert nicht oder wurde verschoben. Vielleicht hilft dir die Startseite weiter.",
+    "home": "Zur Startseite",
+    "back": "Zurück"
   }
 }

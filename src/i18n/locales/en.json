@@ -180,7 +180,8 @@
     "registerCtaDesc": "With a free account you can track reports and directly support our team.",
     "registerCtaButton": "Register for free",
     "noAccountNeeded": "No account needed — report right away!",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "locationRequired": "(required)"
   },
   "auth": {
     "login": "Login",
@@ -625,5 +626,11 @@
   },
   "sponsors": {
     "label": "Our Sponsors"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page does not exist or has been moved. The home page might help.",
+    "home": "Go to home",
+    "back": "Go back"
   }
 }

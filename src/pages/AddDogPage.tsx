@@ -402,7 +402,7 @@ const AddDogPage = () => {
             <div className="glass-card rounded-xl p-6 animate-fade-in">
               <h2 className="font-display text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-primary" />
-                {t('addDog.location')}
+                {t('addDog.location')}{!selectedPosition && <span className="text-red-500 ml-1 text-xs">{t('addDog.locationRequired', '(Pflicht)')}</span>}
               </h2>
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">{t('addDog.locationHint')}</p>

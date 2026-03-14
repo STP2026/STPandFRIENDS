@@ -4,6 +4,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { OfflineProvider } from "@/contexts/OfflineContext";
 import { I18nextProvider } from "react-i18next";
 import { Suspense, lazy } from "react";
+import { Loader2 } from "lucide-react";
 import i18n from "@/i18n";
 
 // Eagerly load lightweight pages
