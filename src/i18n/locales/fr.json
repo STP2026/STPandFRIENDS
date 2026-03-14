@@ -489,5 +489,8 @@
     "successTitle": "Mot de passe modifié ! 🎉",
     "successDesc": "Votre mot de passe a été enregistré. Vous allez être redirigé vers la connexion…",
     "errorTitle": "Lien invalide"
+  },
+  "dogs": {
+    "helperOnly": "Cette page est uniquement accessible aux helpers et admins."
   }
 }

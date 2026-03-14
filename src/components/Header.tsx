@@ -122,15 +122,17 @@ const Header = () => {
             <MapPin className="w-4 h-4" />
             {t('common.map')}
           </Link>
-          <Link
-            to="/dogs"
-            className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-              isActive("/dogs") ? "text-primary" : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Heart className="w-4 h-4" />
-            {t('common.dogs')}
-          </Link>
+          {canAccessDashboard && (
+            <Link
+              to="/dogs"
+              className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                isActive("/dogs") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Heart className="w-4 h-4" />
+              {t('common.dogs')}
+            </Link>
+          )}
           <Link
             to="/about"
             className={`flex items-center gap-1 text-sm font-medium transition-colors ${
@@ -254,16 +256,18 @@ const Header = () => {
               <MapPin className="w-4 h-4" />
               {t('common.map')}
             </Link>
-            <Link
-              to="/dogs"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                isActive("/dogs") ? "text-primary" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <Heart className="w-4 h-4" />
-              {t('common.dogs')}
-            </Link>
+            {canAccessDashboard && (
+              <Link
+                to="/dogs"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                  isActive("/dogs") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Heart className="w-4 h-4" />
+                {t('common.dogs')}
+              </Link>
+            )}
             <Link
               to="/about"
               onClick={() => setMobileMenuOpen(false)}

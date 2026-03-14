@@ -6,16 +6,48 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Filter, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Search, Filter, CheckCircle, AlertCircle, Loader2, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const DogsPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState<"all" | "vaccinated" | "pending">("all");
   const { user, isAdmin } = useAuth();
   const { data: isHelper } = useIsHelper(user?.id);
   const isElevated = isAdmin || !!isHelper;
+
+  const { data: allDogs = [], isLoading } = useDogs(!isElevated);
+  // useDogs already filters by report_type via DB — no additional frontend filter needed
+
+  // Access guard: only helpers and admins
+  if (!user) {
+    navigate("/auth");
+    return null;
+  }
+  if (!isElevated) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="flex items-center justify-center min-h-[60vh] p-4">
+          <div className="glass-card rounded-xl p-8 text-center max-w-md">
+            <Shield className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            <h1 className="font-display text-2xl font-bold text-foreground mb-2">
+              {t('admin.accessDenied')}
+            </h1>
+            <p className="text-muted-foreground mb-6">
+              {t('dogs.helperOnly', 'Diese Seite ist nur für Helfer und Admins zugänglich.')}
+            </p>
+            <Button onClick={() => navigate("/")}>
+              {t('admin.goHome')}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const { data: allDogs = [], isLoading } = useDogs(!isElevated);
   // useDogs already filters by report_type via DB — no additional frontend filter needed

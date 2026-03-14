@@ -489,5 +489,8 @@
     "successTitle": "Passwort geändert! 🎉",
     "successDesc": "Dein Passwort wurde erfolgreich gesetzt. Du wirst gleich zur Anmeldung weitergeleitet…",
     "errorTitle": "Link ungültig"
+  },
+  "dogs": {
+    "helperOnly": "Diese Seite ist nur für Helfer und Admins zugänglich."
   }
 }
