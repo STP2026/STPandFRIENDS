@@ -26,10 +26,11 @@
     "reportAnimal": "Tier melden",
     "stats": {
       "vaccinated": "Geimpfte Hunde",
-      "users": "User",
+      "users": "Aktive User",
       "rescued": "Erfasste Hunde",
       "helpers": "Aktive Helfer",
-      "tnvr": "TNVR-Programm"
+      "tnvr": "TNVR-Programm",
+      "tagged": "Getaggte Hunde"
     },
     "touristHint": "Melde deine Hundebegegnung und unterstütze den lokalen Tierschutz — kein Account nötig."
   },
@@ -618,5 +619,8 @@
     "whyHint": "Teile uns deine Motivation und ggf. relevante Erfahrungen mit.",
     "submitting": "Wird gesendet...",
     "submit": "Bewerbung absenden"
+  },
+  "sponsors": {
+    "label": "Unsere Sponsoren"
   }
 }

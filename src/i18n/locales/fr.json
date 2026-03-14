@@ -26,10 +26,11 @@
     "reportAnimal": "Signaler un animal",
     "stats": {
       "vaccinated": "Chiens vaccinés",
-      "users": "Utilisateurs",
+      "users": "Utilisateurs actifs",
       "rescued": "Chiens recensés",
       "helpers": "Helpers actifs",
-      "tnvr": "Programme TNVR"
+      "tnvr": "Programme TNVR",
+      "tagged": "Chiens taggés"
     },
     "touristHint": "Signalez votre rencontre avec un chien et soutenez la protection animale locale — sans inscription."
   },
@@ -618,5 +619,8 @@
     "whyHint": "Partagez votre motivation et toute expérience pertinente.",
     "submitting": "Envoi en cours...",
     "submit": "Soumettre la candidature"
+  },
+  "sponsors": {
+    "label": "Nos sponsors"
   }
 }

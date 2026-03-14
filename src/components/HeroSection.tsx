@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePublicStats } from "@/hooks/usePublicStats";
+import SponsorTicker from "@/components/SponsorTicker";
 import heroImage from "@/assets/hero-dog.webp";
 import logoWhite from "@/assets/logo-white.webp";
 
@@ -10,14 +11,14 @@ const HeroSection = () => {
   const { t } = useTranslation();
   const { data: stats } = usePublicStats();
 
-  const totalDogs = stats?.totalDogs || 30;
-  const vaccinatedCount = stats?.vaccinatedDogs || 30;
+  const taggedDogs = stats?.taggedDogs || 30;
+  const userCount = stats?.userCount || 20;
   const helperCount = stats?.helperCount || 0;
 
   const statItems = [
-    { icon: Shield, label: t('hero.stats.vaccinated'), value: `${vaccinatedCount}+` },
-    { icon: Heart, label: t('hero.stats.rescued'), value: `${totalDogs}+` },
-    { icon: Users, label: t('hero.stats.helpers'), value: `${helperCount}+` },
+    { icon: Shield, label: t('hero.stats.tagged'), value: `${taggedDogs}+` },
+    { icon: Users, label: t('hero.stats.users'), value: `${userCount}+` },
+    { icon: Heart, label: t('hero.stats.helpers'), value: `${helperCount}+` },
     { icon: Syringe, label: t('hero.stats.tnvr'), value: 'TNVR' },
   ];
 
@@ -81,6 +82,11 @@ const HeroSection = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Sponsor Ticker */}
+      <div className="relative z-10 w-full">
+        <SponsorTicker />
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">

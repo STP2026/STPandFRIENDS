@@ -26,10 +26,11 @@
     "reportAnimal": "Report Animal",
     "stats": {
       "vaccinated": "Vaccinated Dogs",
-      "users": "Users",
+      "users": "Active Users",
       "rescued": "Dogs Recorded",
       "helpers": "Active Helpers",
-      "tnvr": "TNVR Programme"
+      "tnvr": "TNVR Programme",
+      "tagged": "Tagged Dogs"
     },
     "touristHint": "Report your dog encounter and support local animal welfare — no account needed."
   },
@@ -618,5 +619,8 @@
     "whyHint": "Share your motivation and any relevant experience.",
     "submitting": "Sending...",
     "submit": "Submit Application"
+  },
+  "sponsors": {
+    "label": "Our Sponsors"
   }
 }

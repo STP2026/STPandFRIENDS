@@ -10,6 +10,7 @@ import { useDogChangeLog, useAddDogChangeLog } from '@/hooks/useDogChangeLog';
 import { useTeamMessages, useAddTeamMessage, useDeleteTeamMessage } from '@/hooks/useTeamMessages';
 import { useFacilities, useDeleteFacility } from '@/hooks/useFacilities';
 import { useAllAdvertisements, useCreateAdvertisement, useUpdateAdvertisement, useDeleteAdvertisement } from '@/hooks/useAdvertisements';
+import { useSponsors, useAddSponsor, useDeleteSponsor } from '@/hooks/useSponsors';
 import { useRehabSpots } from '@/hooks/useRehabSpots';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -69,6 +70,7 @@ import {
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
 import PhotoUpload from '@/components/PhotoUpload';
+import SponsorTabContent from '@/components/SponsorTabContent';
 import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
 
@@ -83,6 +85,9 @@ const AdminPage = () => {
   const { data: teamMessages } = useTeamMessages();
   const { data: facilities } = useFacilities();
   const { data: advertisements } = useAllAdvertisements();
+  const { data: sponsors = [] } = useSponsors();
+  const addSponsor = useAddSponsor();
+  const deleteSponsor = useDeleteSponsor();
   const { data: rehabSpots } = useRehabSpots();
   const approveDog = useApproveDog();
   const updateDog = useUpdateDog();
@@ -541,6 +546,11 @@ const AdminPage = () => {
                       <span className="hidden sm:inline">{t('admin.tabs.ads')}</span>
                       <span className="sm:hidden">Ads</span>
                       <span>({advertisements?.length || 0})</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="sponsors" data-value="sponsors" className="gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">
+                      <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="hidden sm:inline">Sponsoren</span>
+                      <span>({sponsors.length})</span>
                     </TabsTrigger>
                     <TabsTrigger value="helpers" data-value="helpers" className="gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">
                     <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -1026,6 +1036,14 @@ const AdminPage = () => {
 
            {/* Helper Applications (Admin only) */}
            {isAdmin && (
+            <TabsContent value="sponsors">
+              <SponsorTabContent
+                sponsors={sponsors}
+                onAdd={(name) => addSponsor.mutate(name)}
+                onDelete={(id) => deleteSponsor.mutate(id)}
+              />
+            </TabsContent>
+
             <TabsContent value="helpers">
               <div className="glass-card rounded-xl p-4 sm:p-6">
                 <h2 className="font-display text-lg sm:text-xl font-bold text-foreground mb-4 flex items-center gap-2">
