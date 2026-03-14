@@ -28,7 +28,7 @@
       "vaccinated": "Vaccinated Dogs",
       "users": "Users"
     },
-    "touristHint": "Spotted an injured dog? Report it — no account needed."
+    "touristHint": "Report your dog encounter and support local animal welfare — no account needed."
   },
   "reportTypes": {
     "title": "How You Can Help",
@@ -159,7 +159,21 @@
     "additionalNotesPlaceholder": "Additional information (behavior, condition, etc.)...",
     "sosNotesPlaceholder": "Describe the emergency situation exactly...",
     "submit": "Submit Report",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "successTitle": "Thank you for your report!",
+    "guestSuccessDesc": "Your report has been received. Our team will take care of it.",
+    "dogAidBannerTitle": "Dog injured or in need?",
+    "dogAidBannerDesc": "Our Dog Aid Guide explains step by step how to help immediately — even without a vet.",
+    "dogAidHintTitle": "Dog injured or in acute distress?",
+    "dogAidHintDesc": "Help first — then report. Our Dog Aid Guide shows you how.",
+    "dogAidHintLink": "Open now →",
+    "facebookTitle": "Stay informed",
+    "facebookDesc": "Follow us on Facebook for dog updates from the region.",
+    "registerCta": "Want to help more?",
+    "registerCtaDesc": "With a free account you can track reports and directly support our team.",
+    "registerCtaButton": "Register for free",
+    "noAccountNeeded": "No account needed — report right away!",
+    "backToHome": "Back to home"
   },
   "auth": {
     "login": "Login",

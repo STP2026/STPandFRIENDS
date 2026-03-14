@@ -28,7 +28,7 @@
       "vaccinated": "كلاب ملقّحين",
       "users": "مستخدمين"
     },
-    "touristHint": "شفتي كلب مجروح؟ بلّغ عليه — بدون حساب."
+    "touristHint": "أبلغ عن لقائك بكلب وادعم حماية الحيوانات المحلية — بدون حساب."
   },
   "reportTypes": {
     "title": "كيفاش تقدر تعاون",
@@ -159,7 +159,21 @@
     "additionalNotesPlaceholder": "معلومات زايدة (سلوك، حالة، إلخ)...",
     "sosNotesPlaceholder": "وصف حالة الطوارئ بالتفصيل...",
     "submit": "صيفط التبليغ",
-    "submitting": "كيتصيفط..."
+    "submitting": "كيتصيفط...",
+    "successTitle": "شكراً على تبليغك!",
+    "guestSuccessDesc": "وصلنا تبليغك. فريقنا سيتكفل بالأمر.",
+    "dogAidBannerTitle": "كلب مجروح أو في خطر؟",
+    "dogAidBannerDesc": "دليل Dog Aid يشرح خطوة بخطوة كيف تساعد فوراً — حتى بدون طبيب بيطري.",
+    "dogAidHintTitle": "كلب مجروح أو في ضائقة حادة؟",
+    "dogAidHintDesc": "ساعد أولاً — ثم أبلغ. دليل Dog Aid يوضح كيف.",
+    "dogAidHintLink": "افتح الآن →",
+    "facebookTitle": "ابقَ على اطلاع",
+    "facebookDesc": "تابعنا على فيسبوك لمتابعة أخبار الكلاب في المنطقة.",
+    "registerCta": "هل تريد المساعدة أكثر؟",
+    "registerCtaDesc": "بحساب مجاني يمكنك متابعة البلاغات ودعم فريقنا مباشرة.",
+    "registerCtaButton": "سجّل مجاناً",
+    "noAccountNeeded": "لا حاجة لحساب — أبلغ مباشرة!",
+    "backToHome": "العودة للرئيسية"
   },
   "auth": {
     "login": "دخول",

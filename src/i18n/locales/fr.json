@@ -28,7 +28,7 @@
       "vaccinated": "Chiens vaccinés",
       "users": "Utilisateurs"
     },
-    "touristHint": "Tu as vu un chien blessé ? Signale-le — sans inscription."
+    "touristHint": "Signalez votre rencontre avec un chien et soutenez la protection animale locale — sans inscription."
   },
   "reportTypes": {
     "title": "Comment vous pouvez aider",
@@ -159,7 +159,21 @@
     "additionalNotesPlaceholder": "Informations supplémentaires (comportement, état, etc.)...",
     "sosNotesPlaceholder": "Décrivez la situation d'urgence en détail...",
     "submit": "Envoyer le signalement",
-    "submitting": "Envoi en cours..."
+    "submitting": "Envoi en cours...",
+    "successTitle": "Merci pour votre signalement !",
+    "guestSuccessDesc": "Votre signalement a été reçu. Notre équipe s'en occupe.",
+    "dogAidBannerTitle": "Chien blessé ou en détresse ?",
+    "dogAidBannerDesc": "Notre guide Dog Aid explique étape par étape comment aider immédiatement — même sans vétérinaire.",
+    "dogAidHintTitle": "Chien blessé ou en détresse aiguë ?",
+    "dogAidHintDesc": "Aidez d'abord — signalez ensuite. Notre guide Dog Aid vous montre comment.",
+    "dogAidHintLink": "Ouvrir maintenant →",
+    "facebookTitle": "Restez informé",
+    "facebookDesc": "Suivez-nous sur Facebook pour les mises à jour sur les chiens de la région.",
+    "registerCta": "Vous voulez aider davantage ?",
+    "registerCtaDesc": "Avec un compte gratuit, vous pouvez suivre les signalements et soutenir directement notre équipe.",
+    "registerCtaButton": "S'inscrire gratuitement",
+    "noAccountNeeded": "Pas de compte nécessaire — signalez directement !",
+    "backToHome": "Retour à l'accueil"
   },
   "auth": {
     "login": "Connexion",
