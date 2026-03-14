@@ -99,6 +99,7 @@ const AdminPage = () => {
 
   const [selectedDog, setSelectedDog] = useState<Dog | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('pending');
   const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [remarkDialogOpen, setRemarkDialogOpen] = useState(false);
@@ -423,7 +424,7 @@ const AdminPage = () => {
         {/* Stats Overview - Clickable Tiles */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
           <button
-            onClick={() => document.querySelector<HTMLButtonElement>('[data-value="sos"]')?.click()}
+            onClick={() => setActiveTab('sos')}
             className="glass-card rounded-xl p-4 sm:p-6 text-left transition-all hover:shadow-medium active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/50"
           >
             <div className="flex items-center gap-2 sm:gap-3">
@@ -437,7 +438,7 @@ const AdminPage = () => {
             </div>
           </button>
           <button
-            onClick={() => document.querySelector<HTMLButtonElement>('[data-value="pending"]')?.click()}
+            onClick={() => setActiveTab('pending')}
             className="glass-card rounded-xl p-4 sm:p-6 text-left transition-all hover:shadow-medium active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/50"
           >
             <div className="flex items-center gap-2 sm:gap-3">
@@ -451,7 +452,7 @@ const AdminPage = () => {
             </div>
           </button>
           <button
-            onClick={() => document.querySelector<HTMLButtonElement>('[data-value="all"]')?.click()}
+            onClick={() => setActiveTab('all')}
             className="glass-card rounded-xl p-4 sm:p-6 text-left transition-all hover:shadow-medium active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/50"
           >
             <div className="flex items-center gap-2 sm:gap-3">
@@ -467,7 +468,7 @@ const AdminPage = () => {
             </div>
           </button>
           <button
-            onClick={() => document.querySelector<HTMLButtonElement>('[data-value="messages"]')?.click()}
+            onClick={() => setActiveTab('messages')}
             className="glass-card rounded-xl p-4 sm:p-6 text-left transition-all hover:shadow-medium active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/50"
           >
             <div className="flex items-center gap-2 sm:gap-3">
@@ -482,7 +483,7 @@ const AdminPage = () => {
           </button>
           {isAdmin && (
             <button
-              onClick={() => document.querySelector<HTMLButtonElement>('[data-value="helpers"]')?.click()}
+              onClick={() => setActiveTab('helpers')}
               className="glass-card rounded-xl p-4 sm:p-6 text-left transition-all hover:shadow-medium active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/50 col-span-2 sm:col-span-1"
             >
               <div className="flex items-center gap-2 sm:gap-3">
@@ -498,7 +499,7 @@ const AdminPage = () => {
           )}
         </div>
 
-        <Tabs defaultValue="pending" className="space-y-4 sm:space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 sm:space-y-6">
           {/* Mobile-optimized scrollable tabs */}
           <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
             <TabsList className="inline-flex w-max sm:w-auto sm:flex-wrap gap-1 p-1 h-auto min-h-[44px]">
