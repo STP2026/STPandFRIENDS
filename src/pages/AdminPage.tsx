@@ -1035,7 +1035,6 @@ const AdminPage = () => {
           </TabsContent>
 
            {/* Helper Applications (Admin only) */}
-           {isAdmin && (
             <TabsContent value="sponsors">
               <SponsorTabContent
                 sponsors={sponsors}
