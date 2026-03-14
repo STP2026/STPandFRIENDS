@@ -128,55 +128,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How You Can Help */}
-      <section className="py-12 sm:py-16 bg-secondary/50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-10 animate-fade-in">
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              {t('reportTypes.title')}
-            </h2>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-              {t('reportTypes.description')}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-5xl mx-auto">
-            <div className="glass-card rounded-xl p-4 sm:p-5 text-center animate-fade-in border-l-4 border-green-500">
-              <div className="text-2xl sm:text-3xl mb-2">💚</div>
-              <h3 className="font-bold text-foreground mb-1 text-sm sm:text-base">{t('reportTypes.save.title')}</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">{t('reportTypes.save.description')}</p>
-            </div>
-            <a href="https://aid.save-the-paws.de/dog-aid" target="_blank" rel="noopener noreferrer"
-              className="glass-card rounded-xl p-4 sm:p-5 text-center animate-fade-in border-l-4 border-red-500 hover:border-red-600 transition-colors group">
-              <div className="text-2xl sm:text-3xl mb-2">🐾</div>
-              <h3 className="font-bold text-foreground mb-1 text-sm sm:text-base group-hover:text-red-600 transition-colors">{t('reportTypes.sos.title')}</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">{t('reportTypes.sos.description')}</p>
-            </a>
-            <div className="glass-card rounded-xl p-4 sm:p-5 text-center animate-fade-in border-l-4 border-amber-500">
-              <div className="text-2xl sm:text-3xl mb-2">🐕</div>
-              <h3 className="font-bold text-foreground mb-1 text-sm sm:text-base">{t('reportTypes.stray.title')}</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">{t('reportTypes.stray.description')}</p>
-            </div>
-            <div className="glass-card rounded-xl p-4 sm:p-5 text-center animate-fade-in border-l-4 border-blue-500">
-              <div className="text-2xl sm:text-3xl mb-2">💉</div>
-              <h3 className="font-bold text-foreground mb-1 text-sm sm:text-base">{t('reportTypes.vaccination.title')}</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">{t('reportTypes.vaccination.description')}</p>
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-8">
-            <Link to="/add">
-              <Button className="gap-2">
-                <Heart className="w-4 h-4" />
-                {t('hero.reportAnimal')}
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Donation */}
+      {/* Donation */}}
       <DonationSection />
 
       {/* Become a Helper */}
