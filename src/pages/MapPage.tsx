@@ -23,7 +23,7 @@ const MapPage = () => {
   const [showVaccination, setShowVaccination] = useState(showParam === 'vaccination');
 
   // Helpers/admins see ALL dogs; regular users see only approved
-  const { data: dogs, isLoading: dogsLoading } = useDogs(!isElevated);
+  const { data: dogs, isLoading: dogsLoading } = useDogs(isElevated);
   const { data: facilities, isLoading: facilitiesLoading } = useFacilities();
   
   // Parse URL params for centering on specific dog
