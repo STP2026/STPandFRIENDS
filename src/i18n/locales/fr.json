@@ -50,7 +50,7 @@
     }
   },
   "map": {
-    "description": "Découvrez tous les chiens signalés dans la région d'Agadir-Taghazout. Cliquez sur une patte pour plus de détails.",
+    "description": "Découvrez les commerces, restaurants et établissements dog-friendly de la région — et trouvez de l'aide quand vous en avez besoin.",
     "stats": "Statistiques",
     "safeDogs": "Chiens Tagged",
     "pending": "En attente",
@@ -62,8 +62,8 @@
     "vaccinationToggle": "Activer via le bouton au-dessus de la carte",
     "dogAidTitle": "Vous avez trouvé un chien en détresse ?",
     "dogAidHint": "Découvrez comment aider — guide étape par étape pour touristes et locaux.",
-    "loginHintTitle": "Connectez-vous pour voir les chiens et établissements sur la carte",
-    "loginHintDesc": "Créez un compte gratuit pour explorer la carte complète avec tous les chiens signalés et les établissements vétérinaires."
+    "loginHintTitle": "Connectez-vous pour la carte complète",
+    "loginHintDesc": "Les utilisateurs connectés voient tous les établissements et peuvent signaler des chiens."
   },
   "facilities": {
     "vet": "Vétérinaire",

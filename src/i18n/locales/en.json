@@ -50,7 +50,7 @@
     }
   },
   "map": {
-    "description": "Discover all reported dogs in the Agadir-Taghazout region. Click on a paw for more details.",
+    "description": "Discover dog-friendly shops, restaurants & facilities in the region — and find help when you need it.",
     "stats": "Statistics",
     "safeDogs": "Tagged Dogs",
     "pending": "Pending",
@@ -62,8 +62,8 @@
     "vaccinationToggle": "Toggle via button above map",
     "dogAidTitle": "Found a dog in need?",
     "dogAidHint": "Learn how to help — step by step guide for tourists & locals.",
-    "loginHintTitle": "Sign in to see dogs & facilities on the map",
-    "loginHintDesc": "Create a free account to explore the full map with all reported dogs and veterinary facilities."
+    "loginHintTitle": "Sign in for the full map",
+    "loginHintDesc": "Logged-in users can see all facilities and report dogs."
   },
   "facilities": {
     "vet": "Veterinarian",

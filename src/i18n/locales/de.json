@@ -50,9 +50,9 @@
     }
   },
   "map": {
-    "description": "Entdecke alle gemeldeten Hunde in der Region Agadir-Taghazout. Klicke auf eine Pfote für mehr Details.",
+    "description": "Entdecke hundefreundliche Shops, Restaurants & Einrichtungen in der Region — und finde Hilfe wenn du sie brauchst.",
     "stats": "Statistik",
-    "safeDogs": "Tagged Hunde",
+    "safeDogs": "Getaggte Hunde",
     "pending": "Ausstehend",
     "legend": "Legende",
     "vaccinatedDogs": "Geimpft & kastriert",
@@ -62,8 +62,8 @@
     "vaccinationToggle": "Umschalten über Button oberhalb der Karte",
     "dogAidTitle": "Hund in Not gefunden?",
     "dogAidHint": "Erfahre wie du helfen kannst — Schritt-für-Schritt-Anleitung für Touristen & Einheimische.",
-    "loginHintTitle": "Melde dich an, um Hunde und Einrichtungen auf der Karte zu sehen",
-    "loginHintDesc": "Erstelle ein kostenloses Konto und entdecke die vollständige Karte mit allen gemeldeten Hunden und tierärztlichen Einrichtungen."
+    "loginHintTitle": "Anmelden für die vollständige Karte",
+    "loginHintDesc": "Eingeloggte User sehen alle Einrichtungen und können Hunde melden."
   },
   "facilities": {
     "vet": "Tierarzt",
