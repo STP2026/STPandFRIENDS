@@ -1468,15 +1468,15 @@ const AdminPage = () => {
 
       {/* Edit Dialog */}
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
+        <DialogContent className="max-h-[90vh] flex flex-col">
+          <DialogHeader className="shrink-0">
             <DialogTitle className="flex items-center gap-2">
               <Edit className="w-5 h-5" />
               {selectedDog?.name} bearbeiten
             </DialogTitle>
           </DialogHeader>
           
-          <div className="space-y-4 py-4">
+          <div className="space-y-4 py-4 overflow-y-auto flex-1 pr-1">
             <PhotoUpload
               onPhotosUploaded={(urls) => setEditForm({ ...editForm, photoUrls: urls })}
               currentPhotoUrls={editForm.photoUrls}
@@ -1669,7 +1669,7 @@ const AdminPage = () => {
             </div>
           )}
           
-          <div className="flex gap-3 justify-end">
+          <div className="flex gap-3 justify-end shrink-0 pt-2 border-t border-border">
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
               {t('admin.buttons.cancel')}
             </Button>
