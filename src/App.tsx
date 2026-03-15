@@ -21,7 +21,6 @@ import DirectionHandler from "./components/DirectionHandler";
 const MapPage = lazy(() => import("./pages/MapPage"));
 const AddDogPage = lazy(() => import("./pages/AddDogPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
-const DogsPage = lazy(() => import("./pages/DogsPage"));
 const BecomeHelperPage = lazy(() => import("./pages/BecomeHelperPage"));
 const InstallPage = lazy(() => import("./pages/InstallPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -78,7 +77,6 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/map" element={<MapPage />} />
-                <Route path="/dogs" element={<DogsPage />} />
                 <Route path="/add" element={<AddDogPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/auth/confirm" element={<AuthConfirmPage />} />
