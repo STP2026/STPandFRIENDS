@@ -140,27 +140,25 @@ const Index = () => {
 
           {/* Card 5: Adopt — full width, same section */}
           <div className="mt-3 sm:mt-5 max-w-6xl mx-auto">
-            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in">
-              <div className="flex flex-col sm:flex-row">
-                <div className="bg-gradient-to-br from-violet-500 to-violet-700 p-8 flex items-center justify-center sm:w-44 shrink-0">
-                  <span className="text-5xl">🐶</span>
-                </div>
-                <div className="p-5 sm:p-7 flex flex-col justify-center">
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-2">
-                    {t('actions.adopt.title')}
-                  </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed max-w-2xl">
-                    {t('actions.adopt.description')}
-                  </p>
-                  <div>
-                    <a href="https://aid.save-the-paws.de/adopt" target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" className="gap-2 border-violet-500 text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-950/30">
-                        <Heart className="w-4 h-4" />
-                        {t('actions.adopt.cta')}
-                        <ArrowRight className="w-4 h-4" />
-                      </Button>
-                    </a>
-                  </div>
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in flex flex-col sm:flex-row">
+              <div className="bg-gradient-to-br from-violet-500 to-violet-700 p-4 flex items-center justify-center sm:w-36 shrink-0">
+                <span className="text-4xl">🐶</span>
+              </div>
+              <div className="p-4 sm:p-5 flex flex-col justify-center flex-1">
+                <h3 className="font-display text-base font-bold text-foreground mb-1.5">
+                  {t('actions.adopt.title')}
+                </h3>
+                <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                  {t('actions.adopt.description')}
+                </p>
+                <div>
+                  <a href="https://aid.save-the-paws.de/adopt" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="gap-2 border-violet-500 text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-950/30">
+                      <Heart className="w-3.5 h-3.5" />
+                      {t('actions.adopt.cta')}
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
