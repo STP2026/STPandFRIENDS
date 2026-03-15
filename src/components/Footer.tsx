@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logoHeader from "@/assets/logo-header.png";
+import logoHeader from "@/assets/logo.svg";
 
 // WhatsApp click-to-chat — number is NOT displayed on the page
 const WA_NUMBER = "4915756175163";
@@ -15,7 +15,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4">
           <div className="flex items-center gap-2">
-            <img src={logoHeader} alt="Save The Paws – Agadir" className="h-8 sm:h-10 w-auto" />
+            <img src={logoHeader} alt="Save The Paws – Agadir" className="h-8 sm:h-10 w-auto dark:invert" />
           </div>
 
           {/* Nav links */}

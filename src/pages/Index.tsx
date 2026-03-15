@@ -34,18 +34,18 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-6xl mx-auto items-stretch">
 
             {/* Card 1: Report */}
-            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group">
-              <div className="bg-gradient-to-br from-orange-400 to-orange-600 p-6 flex items-center justify-center">
-                <HandHeart className="w-14 h-14 text-white drop-shadow" />
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group flex flex-col h-full">
+              <div className="bg-gradient-to-br from-orange-400 to-orange-600 p-4 flex items-center justify-center">
+                <HandHeart className="w-10 h-10 text-white drop-shadow" />
               </div>
-              <div className="p-4 sm:p-5">
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                  {t('actions.rescue.title')}
+              <div className="p-4 sm:p-5 flex flex-col flex-1">
+                <h3 className="font-display text-base font-bold text-foreground mb-1.5">
+                  <>Melde Deine&nbsp;🐾<br className='hidden sm:block'/>Begegnungen</>
                 </h3>
-                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                <p className="text-xs text-muted-foreground mb-4 leading-relaxed flex-1">
                   {t('actions.rescue.description')}
                 </p>
                 <Link to="/add">
@@ -59,15 +59,15 @@ const Index = () => {
             </div>
 
             {/* Card 2: PawFriends */}
-            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.1s' }}>
-              <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 p-6 flex items-center justify-center">
-                <MapPin className="w-14 h-14 text-white drop-shadow" />
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group flex flex-col h-full" style={{ animationDelay: '0.1s' }}>
+              <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 p-4 flex items-center justify-center">
+                <MapPin className="w-10 h-10 text-white drop-shadow" />
               </div>
-              <div className="p-4 sm:p-5">
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5 flex flex-col flex-1">
+                <h3 className="font-display text-base font-bold text-foreground mb-1.5">
                   {t('actions.pawfriends.title')}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                <p className="text-xs text-muted-foreground mb-4 leading-relaxed flex-1">
                   {t('actions.pawfriends.description')}
                 </p>
                 <Link to="/pawfriends">
@@ -81,9 +81,9 @@ const Index = () => {
             </div>
 
             {/* Card 3: Dog Aid */}
-            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.2s' }}>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-6 flex items-center justify-center">
-                <svg viewBox="0 0 32 32" className="w-14 h-14 drop-shadow" aria-label="Dog Aid">
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group flex flex-col h-full" style={{ animationDelay: '0.2s' }}>
+              <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-4 flex items-center justify-center">
+                <svg viewBox="0 0 32 32" className="w-10 h-10 drop-shadow" aria-label="Dog Aid">
                   <ellipse cx="10.5" cy="9" rx="3" ry="3.5" fill="white" />
                   <ellipse cx="21.5" cy="9" rx="3" ry="3.5" fill="white" />
                   <ellipse cx="6.5" cy="16" rx="2.8" ry="3.2" fill="white" />
@@ -93,11 +93,11 @@ const Index = () => {
                   <rect x="12.5" y="20.8" width="7" height="2.4" rx="0.6" fill="#2563eb" />
                 </svg>
               </div>
-              <div className="p-4 sm:p-5">
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5 flex flex-col flex-1">
+                <h3 className="font-display text-base font-bold text-foreground mb-1.5">
                   {t('actions.dogaid.title')}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                <p className="text-xs text-muted-foreground mb-4 leading-relaxed flex-1">
                   {t('actions.dogaid.description')}
                 </p>
                 <a href="https://aid.save-the-paws.de/dog-aid" target="_blank" rel="noopener noreferrer">
@@ -111,19 +111,19 @@ const Index = () => {
             </div>
 
             {/* Card 4: First Aid (human) */}
-            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group" style={{ animationDelay: '0.3s' }}>
-              <div className="bg-gradient-to-br from-red-500 to-red-700 p-6 flex items-center justify-center">
-                <svg viewBox="0 0 32 32" className="w-14 h-14 drop-shadow" aria-label="First Aid">
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group flex flex-col h-full" style={{ animationDelay: '0.3s' }}>
+              <div className="bg-gradient-to-br from-red-500 to-red-700 p-4 flex items-center justify-center">
+                <svg viewBox="0 0 32 32" className="w-10 h-10 drop-shadow" aria-label="First Aid">
                   <path d="M16 28s-11-7.2-11-14.5C5 9.4 8.4 6 12.5 6c2.2 0 3.5 1.5 3.5 1.5S17.8 6 20 6c3.6 0 6.5 3.4 6.5 7.5C26.5 20.8 16 28 16 28z" fill="white" />
                   <rect x="14" y="11" width="4" height="10" rx="0.8" fill="#dc2626" />
                   <rect x="11" y="14" width="10" height="4" rx="0.8" fill="#dc2626" />
                 </svg>
               </div>
-              <div className="p-4 sm:p-5">
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5 flex flex-col flex-1">
+                <h3 className="font-display text-base font-bold text-foreground mb-1.5">
                   {t('actions.firstaid.title')}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                <p className="text-xs text-muted-foreground mb-4 leading-relaxed flex-1">
                   {t('actions.firstaid.description')}
                 </p>
                 <a href="https://aid.save-the-paws.de/first-aid" target="_blank" rel="noopener noreferrer">
