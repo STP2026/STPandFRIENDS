@@ -38,9 +38,17 @@ const DogsPage = () => {
             <p className="text-muted-foreground mb-6">
               {t('dogs.helperOnly', 'Diese Seite ist nur für Helfer und Admins zugänglich.')}
             </p>
-            <Button onClick={() => navigate("/")}>
-              {t('admin.goHome')}
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/become-helper">
+                <Button className="gap-2 w-full sm:w-auto">
+                  <Heart className="w-4 h-4" />
+                  {t('dogs.becomeHelper', 'Helfer werden')}
+                </Button>
+              </Link>
+              <Button variant="outline" onClick={() => navigate("/")}>
+                {t('admin.goHome')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

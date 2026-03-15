@@ -85,14 +85,14 @@ const MapPage = () => {
           <div className="grid lg:grid-cols-4 gap-6">
             <div className="lg:col-span-3">
               {isLoading ? (
-                <div className="flex items-center justify-center h-[calc(100vh-200px)] bg-secondary/50 rounded-xl">
+                <div className="flex items-center justify-center h-[calc(100svh-56px)] bg-secondary/50 rounded-xl">
                   <p className="text-muted-foreground">{t('common.loading')}</p>
                 </div>
               ) : (
                 <SafeDogMap 
                   dogs={displayDogs} 
                   facilities={displayFacilities} 
-                  height="calc(100vh - 200px)" 
+                  height="calc(100svh - 56px)" 
                   center={initialCenter}
                   zoom={initialCenter ? 15 : undefined}
                   focusDogId={dogIdParam || undefined}
@@ -104,7 +104,7 @@ const MapPage = () => {
               <MapLegend isElevated={isElevated} />
 
               {/* Info banner for non-elevated users */}
-              {!isElevated && user && (
+              {!isElevated && (
                 <div className="glass-card rounded-xl p-4 animate-fade-in border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20">
                   <div className="flex items-start gap-3">
                     <span className="text-xl">🔒</span>

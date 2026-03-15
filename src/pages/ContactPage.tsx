@@ -2,13 +2,20 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Mail, Globe, ExternalLink, MessageCircle } from "lucide-react";
+import { CONTACT } from "@/config";
 import { useTranslation } from "react-i18next";
 
-const WEBSITE_LINK = "https://save-the-paws.de";
-const IMPRESSUM_LINK = "https://save-the-paws.de/impressum";
-const WA_LINK = "https://wa.me/4915756175163";
-const FB_LINK = "https://www.facebook.com/share/g/1AsLrfAibF/?mibextid=K35XfP";
-const EMAIL = "niklas@save-the-paws.com";
+
+
+
+
+
+
+const WEBSITE_LINK = CONTACT.website;
+const IMPRESSUM_LINK = CONTACT.website + "/impressum";
+const WA_LINK = CONTACT.whatsapp;
+const FB_LINK = CONTACT.facebook;
+const EMAIL = CONTACT.email;
 
 const ContactPage = () => {
   const { t } = useTranslation();

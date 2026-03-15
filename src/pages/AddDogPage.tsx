@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, AlertTriangle, Heart, Syringe, WifiOff, Facebook, ExternalLink } from "lucide-react";
+import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, Heart, Syringe, WifiOff, Facebook, ExternalLink } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import SafeDogMap from "@/components/SafeDogMap";
 import PhotoUpload from "@/components/PhotoUpload";
@@ -109,7 +109,7 @@ const AddDogPage = () => {
       additionalInfo: formData.additionalInfo || undefined,
       reportedBy: user.id,
       reportType: formData.reportType,
-      urgencyLevel: formData.reportType === 'sos' ? formData.urgencyLevel : undefined,
+      urgencyLevel: undefined,
     };
 
     try {
@@ -134,7 +134,6 @@ const AddDogPage = () => {
   const getReportTypeIcon = (type: ReportType) => {
     switch (type) {
       case 'save': return <Heart className="w-5 h-5 text-green-500" />;
-      case 'sos': return <AlertTriangle className="w-5 h-5 text-red-500" />;
       case 'stray': return <Dog className="w-5 h-5 text-amber-500" />;
       case 'vaccination_wish': return <Syringe className="w-5 h-5 text-blue-500" />;
     }
@@ -150,7 +149,6 @@ const AddDogPage = () => {
 
   // ── SUCCESS SCREEN ──
   if (submitted || submittedOffline) {
-    const isSos = false; // SOS not selectable by users
     return (
       <div className="min-h-screen bg-background">
         <Header />
@@ -185,7 +183,7 @@ const AddDogPage = () => {
             </div>
 
             {/* Dog Aid banner — always show for sos, also show for stray as reminder */}
-            {(isSos || formData.reportType === 'stray') && (
+            {formData.reportType === 'stray' && (
               <a
                 href={DOG_AID_URL}
                 target="_blank"

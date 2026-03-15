@@ -9,7 +9,7 @@ import PhotoLightbox from "@/components/PhotoLightbox";
 
 interface DogCardProps {
   dog: Dog;
-  index: number;
+  index?: number;
 }
 
 const getReportTypeBadge = (reportType: ReportType) => {
@@ -27,7 +27,7 @@ const getReportTypeBadge = (reportType: ReportType) => {
   );
 };
 
-const DogCard = ({ dog, index }: DogCardProps) => {
+const DogCard = ({ dog, index = 0 }: DogCardProps) => {
   const { t } = useTranslation();
   const [lightboxOpen, setLightboxOpen] = useState(false);
 

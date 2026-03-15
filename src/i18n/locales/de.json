@@ -528,7 +528,8 @@
     "errorTitle": "Link ungültig"
   },
   "dogs": {
-    "helperOnly": "Diese Seite ist nur für Helfer und Admins zugänglich."
+    "helperOnly": "Diese Seite ist nur für Helfer und Admins zugänglich.",
+    "becomeHelper": "Helfer werden"
   },
   "actions": {
     "title": "Du kannst einen Unterschied machen",

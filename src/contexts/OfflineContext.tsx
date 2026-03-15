@@ -103,7 +103,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           .from('dogs')
           .insert({
             name: formData.name,
-            ear_tag: formData.earTag,
+            ear_tag: formData.earTag || null,
             photo_url: formData.photo || null,
             photo_url_2: formData.photo2 || null,
             photo_url_3: formData.photo3 || null,

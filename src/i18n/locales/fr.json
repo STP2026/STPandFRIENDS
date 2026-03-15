@@ -527,7 +527,8 @@
     "errorTitle": "Lien invalide"
   },
   "dogs": {
-    "helperOnly": "Cette page est uniquement accessible aux helpers et admins."
+    "helperOnly": "Cette page est uniquement accessible aux helpers et admins.",
+    "becomeHelper": "Devenir helper"
   },
   "actions": {
     "title": "Tu peux faire la différence",

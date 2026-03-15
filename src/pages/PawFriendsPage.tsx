@@ -2,12 +2,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { MapPin, Heart, Phone, Store, Coffee, Hotel, Stethoscope, Star, ArrowRight } from "lucide-react";
+import { CONTACT } from "@/config";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFacilities } from "@/hooks/useFacilities";
 
-const NIKLAS_WHATSAPP = "https://wa.me/4915756175163";
-const NIKLAS_PHONE = "tel:+4915756175163";
+const NIKLAS_WHATSAPP = CONTACT.whatsapp;
+const NIKLAS_PHONE = CONTACT.phone;
 
 
 const PawFriendsPage = () => {
