@@ -540,7 +540,7 @@
     "pawfriends": {
       "title": "Discover the PawFriends",
       "description": "Cool shops, restaurants and hotels that support animal welfare — always worth a visit!",
-      "cta": "Discover PawFriends"
+      "cta": "Discover now"
     },
     "help": {
       "title": "Find Help — for Dog & Human",
@@ -550,12 +550,12 @@
     "dogaid": {
       "title": "Dog in need?",
       "description": "We show you step by step how to help.",
-      "cta": "Open Dog Aid Guide"
+      "cta": "Open guide"
     },
     "firstaid": {
       "title": "Incident with a dog?",
       "description": "Whether scratch or bite: here you see what to do — quickly and clearly explained.",
-      "cta": "Open First Aid Guide"
+      "cta": "Open guide"
     },
     "adopt": {
       "title": "Adopt?",

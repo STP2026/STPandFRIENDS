@@ -41,8 +41,8 @@ const Index = () => {
               <div className="bg-gradient-to-br from-orange-400 to-orange-600 p-6 flex items-center justify-center">
                 <HandHeart className="w-14 h-14 text-white drop-shadow" />
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">
                   {t('actions.rescue.title')}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
@@ -63,8 +63,8 @@ const Index = () => {
               <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 p-6 flex items-center justify-center">
                 <MapPin className="w-14 h-14 text-white drop-shadow" />
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">
                   {t('actions.pawfriends.title')}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
@@ -73,7 +73,7 @@ const Index = () => {
                 <Link to="/pawfriends">
                   <Button variant="outline" className="w-full gap-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30">
                     <MapPin className="w-4 h-4" />
-                    {t('actions.pawfriends.cta')}
+                    {t('actions.pawfriends.cta', 'Jetzt entdecken')}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
@@ -93,8 +93,8 @@ const Index = () => {
                   <rect x="12.5" y="20.8" width="7" height="2.4" rx="0.6" fill="#2563eb" />
                 </svg>
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">
                   {t('actions.dogaid.title')}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
@@ -103,7 +103,7 @@ const Index = () => {
                 <a href="https://aid.save-the-paws.de/dog-aid" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="w-full gap-2 border-red-500 text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30">
                     <svg viewBox="0 0 32 32" className="w-4 h-4"><ellipse cx="10.5" cy="9" rx="3" ry="3.5" fill="currentColor" /><ellipse cx="21.5" cy="9" rx="3" ry="3.5" fill="currentColor" /><ellipse cx="6.5" cy="16" rx="2.8" ry="3.2" fill="currentColor" /><ellipse cx="25.5" cy="16" rx="2.8" ry="3.2" fill="currentColor" /><ellipse cx="16" cy="22" rx="7" ry="6" fill="currentColor" /></svg>
-                    {t('actions.dogaid.cta')}
+                    {t('actions.dogaid.cta', 'Zum Guide')}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </a>
@@ -119,8 +119,8 @@ const Index = () => {
                   <rect x="11" y="14" width="10" height="4" rx="0.8" fill="#dc2626" />
                 </svg>
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+              <div className="p-4 sm:p-5">
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">
                   {t('actions.firstaid.title')}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
@@ -129,7 +129,7 @@ const Index = () => {
                 <a href="https://aid.save-the-paws.de/first-aid" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="w-full gap-2 border-blue-500 text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30">
                     <Heart className="w-4 h-4" />
-                    {t('actions.firstaid.cta')}
+                    {t('actions.firstaid.cta', 'Zum Guide')}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </a>
@@ -137,36 +137,35 @@ const Index = () => {
             </div>
 
           </div>
-        </div>
-      </section>
 
-      {/* Card 5: Adopt */}
-      <section className="py-6 sm:py-8 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in">
-            <div className="flex flex-col sm:flex-row">
-              <div className="bg-gradient-to-br from-violet-500 to-violet-700 p-8 sm:p-10 flex items-center justify-center sm:w-48 shrink-0">
-                <span className="text-6xl">🐶</span>
-              </div>
-              <div className="p-6 sm:p-8 flex flex-col justify-center">
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-3">
-                  {t('actions.adopt.title')}
-                </h3>
-                <p className="text-sm sm:text-base text-muted-foreground mb-5 leading-relaxed max-w-2xl">
-                  {t('actions.adopt.description')}
-                </p>
-                <div>
-                  <a href="https://aid.save-the-paws.de/adopt" target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" className="gap-2 border-violet-500 text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-950/30">
-                      <Heart className="w-4 h-4" />
-                      {t('actions.adopt.cta')}
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </a>
+          {/* Card 5: Adopt — full width, same section */}
+          <div className="mt-3 sm:mt-5 max-w-6xl mx-auto">
+            <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in">
+              <div className="flex flex-col sm:flex-row">
+                <div className="bg-gradient-to-br from-violet-500 to-violet-700 p-8 flex items-center justify-center sm:w-44 shrink-0">
+                  <span className="text-5xl">🐶</span>
+                </div>
+                <div className="p-5 sm:p-7 flex flex-col justify-center">
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-2">
+                    {t('actions.adopt.title')}
+                  </h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed max-w-2xl">
+                    {t('actions.adopt.description')}
+                  </p>
+                  <div>
+                    <a href="https://aid.save-the-paws.de/adopt" target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" className="gap-2 border-violet-500 text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-950/30">
+                        <Heart className="w-4 h-4" />
+                        {t('actions.adopt.cta')}
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -177,7 +176,7 @@ const Index = () => {
       {!isHelper && (
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="glass-card rounded-2xl p-8 text-center max-w-2xl mx-auto animate-fade-in border border-primary/20">
+            <div className="glass-card rounded-2xl p-8 text-center max-w-3xl mx-auto animate-fade-in border border-primary/20">
               <Users className="w-14 h-14 text-primary mx-auto mb-4" />
               <h2 className="font-display text-2xl font-bold text-foreground mb-3">
                 {t('helperCta.title')}

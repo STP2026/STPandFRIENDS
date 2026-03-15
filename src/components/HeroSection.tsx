@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { usePublicStats } from "@/hooks/usePublicStats";
 import SponsorTicker from "@/components/SponsorTicker";
 import heroImage from "@/assets/hero-dog.webp";
-import logoWhite from "@/assets/logo-header.png";
+import logoWhite from "@/assets/logo.svg";
 
 const HeroSection = () => {
   const { t } = useTranslation();

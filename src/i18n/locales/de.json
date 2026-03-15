@@ -541,7 +541,7 @@
     "pawfriends": {
       "title": "Entdecke die PawFriends",
       "description": "Coole Läden, Restaurants und Hotels die den Tierschutz unterstützen — immer einen Besuch wert!",
-      "cta": "PawFriends entdecken"
+      "cta": "Jetzt entdecken"
     },
     "help": {
       "title": "Finde Hilfe — für Hund und Mensch",
@@ -551,12 +551,12 @@
     "dogaid": {
       "title": "Hund in Not?",
       "description": "Wir zeigen dir Schritt für Schritt wie du helfen kannst.",
-      "cta": "Dog Aid Guide öffnen"
+      "cta": "Zum Guide"
     },
     "firstaid": {
       "title": "Vorfall mit Hund?",
       "description": "Ob Kratzer oder Biss: hier siehst du, was zu tun ist — schnell und klar erklärt.",
-      "cta": "First Aid Guide öffnen"
+      "cta": "Zum Guide"
     },
     "adopt": {
       "title": "Adoptieren?",

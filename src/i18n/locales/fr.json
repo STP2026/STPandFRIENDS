@@ -540,7 +540,7 @@
     "pawfriends": {
       "title": "Découvrez les PawFriends",
       "description": "Boutiques, restaurants et hôtels qui soutiennent la protection animale — toujours une bonne adresse !",
-      "cta": "Découvrir les PawFriends"
+      "cta": "Découvrir maintenant"
     },
     "help": {
       "title": "Trouver de l'aide — pour chien et humain",
@@ -550,12 +550,12 @@
     "dogaid": {
       "title": "Chien en détresse ?",
       "description": "Nous vous montrons étape par étape comment aider.",
-      "cta": "Ouvrir le Dog Aid Guide"
+      "cta": "Ouvrir le guide"
     },
     "firstaid": {
       "title": "Incident avec un chien ?",
       "description": "Griffure ou morsure : voici ce qu'il faut faire — expliqué rapidement et clairement.",
-      "cta": "Ouvrir le First Aid Guide"
+      "cta": "Ouvrir le guide"
     },
     "adopt": {
       "title": "Adopter ?",

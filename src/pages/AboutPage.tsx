@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Heart, ExternalLink, Shield, Syringe, Users, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logoDark from "@/assets/logo-header.png";
+import logoDark from "@/assets/logo.svg";
 import Footer from "@/components/Footer";
 
 const GOFUNDME_LINK = "https://gofund.me/26e9f81e7";
