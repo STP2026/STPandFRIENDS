@@ -115,7 +115,7 @@
   },
   "addDog": {
     "title": "Report Animal",
-    "description": "Help animals in need in the Agadir-Taghazout region",
+    "description": "Report your dog encounter and support the helper community in documenting, tracking and supporting local free-roaming dogs.",
     "loginRequired": "Login Required",
     "loginRequiredDesc": "Please log in to report an animal.",
     "reportSent": "Report Sent!",
@@ -181,7 +181,9 @@
     "registerCtaButton": "Register for free",
     "noAccountNeeded": "No account needed — report right away!",
     "backToHome": "Back to home",
-    "locationRequired": "(required)"
+    "locationRequired": "(required)",
+    "communityNote": "All reports are registered by local animal welfare and made available to helpers.",
+    "photoHint": "Try to capture the animal and its special features as clearly as possible: ear tag, markings, face, peculiarities ..."
   },
   "auth": {
     "login": "Login",
@@ -434,7 +436,12 @@
     },
     "online": {
       "title": "Online"
-    }
+    },
+    "facebook": {
+      "description": "Follow us and the dogs on Facebook — get in touch, see latest updates and become part of the community.",
+      "cta": "Open Facebook group"
+    },
+    "impressum": "Legal notice"
   },
   "mapPopup": {
     "mobileVet": "Mobile Vet",
@@ -483,7 +490,13 @@
     "appText1": "The community spirit of this app is a central factor in all local animal welfare work. Every report, every donation and every visit to a PawFriend strengthens the network — and makes animal welfare more capable of acting.",
     "appText2": "Only with your support can animal welfare remain capable of action and bring about real change with growing awareness. A big task — but together we can save lives today.",
     "websiteLink": "Visit Website",
-    "viewDogs": "View All Dogs"
+    "viewDogs": "View All Dogs",
+    "tnvr": {
+      "subtitle": "Trap · Neuter · Vaccinate · Return",
+      "desc1": "TNVR is the only humane and truly effective method to counter street dog overpopulation. Dogs are caught, neutered, vaccinated and released back — instead of being killed.",
+      "desc2": "Without neutering, a dog population grows uncontrolled. TNVR breaks this cycle sustainably: treated animals stay in their territory but prevent new, unvaccinated dogs from moving in.",
+      "goal": "🎯 TNVR is one of the main goals of Save The Paws in the Agadir-Taghazout region."
+    }
   },
   "photo": {
     "invalidType": "Please select an image",
@@ -536,13 +549,18 @@
     },
     "dogaid": {
       "title": "Dog in need?",
-      "description": "We tell you how to help — step by step, even without a vet.",
+      "description": "We show you step by step how to help.",
       "cta": "Open Dog Aid Guide"
     },
     "firstaid": {
       "title": "Incident with a dog?",
       "description": "Whether scratch or bite: here you see what to do — quickly and clearly explained.",
       "cta": "Open First Aid Guide"
+    },
+    "adopt": {
+      "title": "Adopt?",
+      "description": "Have you fallen in love with a dog — or want to give a Moroccan street dog a home? It's possible. Find out how adoption works and which dogs are looking for a new home.",
+      "cta": "Go to adoption page"
     }
   },
   "pawfriends": {

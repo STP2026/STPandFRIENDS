@@ -1,134 +1,133 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { MapPin, Mail, Globe, ExternalLink, MessageCircle } from "lucide-react";
+import { Mail, Globe, ExternalLink, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const WEBSITE_LINK = "https://save-the-paws.de";
-
-// WhatsApp click-to-chat — number is NOT displayed on the page
-const WA_NUMBER = "4915756175163";
-const WA_LINK = `https://wa.me/${WA_NUMBER}`;
-
-interface AddressCardProps {
-  label: string;
-  lines: string[];
-  note?: string;
-}
-
-const AddressCard = ({ label, lines, note }: AddressCardProps) => (
-  <div className="glass-card rounded-xl p-5 sm:p-6 animate-fade-in">
-    <div className="flex items-start gap-3">
-      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 flex-shrink-0">
-        <MapPin className="w-5 h-5 text-primary" />
-      </div>
-      <div>
-        <h3 className="font-bold text-foreground text-sm mb-1">{label}</h3>
-        {lines.map((line, i) => (
-          <p key={i} className="text-sm text-muted-foreground">{line}</p>
-        ))}
-        {note && (
-          <p className="text-xs text-muted-foreground/70 mt-2 italic">{note}</p>
-        )}
-      </div>
-    </div>
-  </div>
-);
+const IMPRESSUM_LINK = "https://save-the-paws.de/impressum";
+const WA_LINK = "https://wa.me/4915756175163";
+const FB_LINK = "https://www.facebook.com/share/g/1AsLrfAibF/?mibextid=K35XfP";
+const EMAIL = "niklas@save-the-paws.com";
 
 const ContactPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
-      <main className="pt-20 pb-16">
+      <main className="flex-1 pt-20 pb-16">
         {/* Hero */}
         <section className="bg-gradient-to-b from-primary/10 to-background py-12 sm:py-16">
           <div className="container mx-auto px-4 max-w-3xl text-center animate-fade-in">
             <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
             <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3 leading-tight">
-              {t('contact.title')}
+              {t('contact.title', 'Kontakt')}
             </h1>
             <p className="text-muted-foreground text-base sm:text-lg">
-              {t('contact.subtitle')}
+              {t('contact.subtitle', 'Wir freuen uns von dir zu hören.')}
             </p>
           </div>
         </section>
 
         <section className="py-10 sm:py-14">
-          <div className="container mx-auto px-4 max-w-3xl space-y-6">
+          <div className="container mx-auto px-4 max-w-2xl space-y-5">
 
-            {/* WhatsApp CTA */}
-            <div className="glass-card rounded-2xl p-6 sm:p-8 text-center border border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20 animate-fade-in">
-              <MessageCircle className="w-10 h-10 text-green-600 mx-auto mb-3" />
-              <h2 className="font-display text-xl font-bold text-foreground mb-2">
-                {t('contact.whatsapp.title')}
-              </h2>
-              <p className="text-muted-foreground text-sm mb-5 max-w-md mx-auto">
-                {t('contact.whatsapp.description')}
-              </p>
-              <Button asChild size="lg" className="gap-2 bg-green-600 hover:bg-green-700 text-white">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="w-5 h-5" />
-                  {t('contact.whatsapp.cta')}
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
-
-            {/* Addresses */}
-            <div>
-              <h2 className="font-display text-xl font-bold text-foreground mb-4">
-                {t('contact.addresses.title')}
-              </h2>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <AddressCard
-                  label={t('contact.addresses.germany.label')}
-                  lines={[
-                    "Save The Paws e.V.",
-                    "Musterstraße 1",
-                    "12345 Musterstadt",
-                    "Germany",
-                  ]}
-                  note={t('contact.addresses.germany.note')}
-                />
-
-                <AddressCard
-                  label={t('contact.addresses.morocco.label')}
-                  lines={[
-                    "Save The Paws",
-                    "Rue Example 10",
-                    "Agadir 80000",
-                    "Morocco",
-                  ]}
-                  note={t('contact.addresses.morocco.note')}
-                />
+            {/* WhatsApp */}
+            <div className="glass-card rounded-2xl p-6 sm:p-8 border border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20 animate-fade-in">
+              <div className="flex items-start gap-4">
+                <div className="bg-green-600 p-3 rounded-xl shrink-0">
+                  <MessageCircle className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="font-display text-lg font-bold text-foreground mb-1">
+                    WhatsApp
+                  </h2>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {t('contact.whatsapp.description', 'Schreib uns direkt — wir antworten so schnell wie möglich.')}
+                  </p>
+                  <Button asChild className="gap-2 bg-green-600 hover:bg-green-700 text-white">
+                    <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="w-4 h-4" />
+                      {t('contact.whatsapp.cta', 'WhatsApp öffnen')}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
 
-            {/* Email & Website */}
+            {/* Email */}
+            <div className="glass-card rounded-xl p-5 sm:p-6 animate-fade-in">
+              <div className="flex items-start gap-4">
+                <div className="bg-primary/10 p-3 rounded-xl shrink-0">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h2 className="font-display text-base font-bold text-foreground mb-1">E-Mail</h2>
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="text-sm text-primary hover:underline"
+                  >
+                    {EMAIL}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Facebook */}
+            <div className="glass-card rounded-2xl p-6 sm:p-8 border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20 animate-fade-in">
+              <div className="flex items-start gap-4">
+                <div className="bg-blue-600 p-3 rounded-xl shrink-0">
+                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h2 className="font-display text-lg font-bold text-foreground mb-1">
+                    Facebook
+                  </h2>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {t('contact.facebook.description', 'Folge uns und den Hunden auf Facebook — tritt mit uns in Kontakt, sieh aktuelle Updates und werde Teil der Community.')}
+                  </p>
+                  <Button asChild variant="outline" className="gap-2 border-blue-500 text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30">
+                    <a href={FB_LINK} target="_blank" rel="noopener noreferrer">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                      {t('contact.facebook.cta', 'Facebook-Gruppe öffnen')}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Website & Impressum */}
             <div className="glass-card rounded-xl p-5 sm:p-6 animate-fade-in">
               <h3 className="font-bold text-foreground text-sm mb-3">
-                {t('contact.online.title')}
+                {t('contact.online.title', 'Website & Impressum')}
               </h3>
               <div className="space-y-3">
-                <a
-                  href="mailto:info@save-the-paws.de"
-                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Mail className="w-4 h-4 text-primary" />
-                  info@save-the-paws.de
-                </a>
                 <a
                   href={WEBSITE_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Globe className="w-4 h-4 text-primary" />
+                  <Globe className="w-4 h-4 text-primary shrink-0" />
                   save-the-paws.de
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href={IMPRESSUM_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Globe className="w-4 h-4 text-primary shrink-0" />
+                  {t('contact.impressum', 'Impressum')} (save-the-paws.de)
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>

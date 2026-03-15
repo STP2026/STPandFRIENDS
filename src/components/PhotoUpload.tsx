@@ -124,6 +124,10 @@ const PhotoUpload = ({ onPhotosUploaded, currentPhotoUrls }: PhotoUploadProps) =
         </span>
       </div>
 
+      <p className="text-xs text-muted-foreground/80 bg-secondary/50 px-3 py-2 rounded-lg leading-relaxed">
+        📸 {t('addDog.photoHint', 'Versuche, das Tier und seine besonderen Merkmale bestmöglich zu erfassen: Ohrmarke, Zeichnung, Gesicht, Auffälligkeiten ...')}
+      </p>
+
       <div className="grid grid-cols-3 gap-2">
         {([0, 1, 2] as const).map((slot) => (
           <div key={slot} className="relative">

@@ -276,12 +276,7 @@ const AddDogPage = () => {
             <p className="text-muted-foreground">
               {t('addDog.description')}
             </p>
-            {!user && (
-              <div className="mt-3 inline-flex items-center gap-2 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 px-3 py-2 rounded-lg text-sm font-medium">
-                <CheckCircle className="w-4 h-4 shrink-0" />
-                {t('addDog.noAccountNeeded', 'Kein Account nötig — melde direkt los!')}
-              </div>
-            )}
+
           </div>
 
           {/* Dog Aid hint — prominent above the form */}
@@ -343,6 +338,10 @@ const AddDogPage = () => {
                 {formData.reportType === 'save' && t('addDog.visibility.save')}
                 {formData.reportType === 'stray' && t('addDog.visibility.stray')}
                 {formData.reportType === 'vaccination_wish' && t('addDog.visibility.vaccination')}
+              </p>
+              <p className="mt-2 text-xs text-muted-foreground/70 flex items-center gap-1.5">
+                <span>ℹ️</span>
+                {t('addDog.communityNote', 'Alle Meldungen werden durch den lokalen Tierschutz registriert und stehen Helfern zur Verfügung.')}
               </p>
               {formData.reportType === 'vaccination_wish' && (
                 <div className="mt-4">

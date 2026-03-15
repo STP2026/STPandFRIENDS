@@ -107,7 +107,8 @@
   "helperCta": {
     "title": "Werde ein Helfer!",
     "description": "Als Helfer kannst du SOS-Meldungen sehen, Meldungen freigeben und aktiv bei der Rettung von Tieren mithelfen.",
-    "apply": "Als Helfer bewerben"
+    "apply": "Als Helfer bewerben",
+    "descriptionGuest": "Werde Teil der Community und hilf aktiv: Als verifizierter Helfer kannst du Meldungen einsehen, freigeben und den lokalen Tierschutz direkt unterstützen. Oder registriere dich zunächst als User."
   },
   "footer": {
     "brand": "Save The Paws",
@@ -115,7 +116,7 @@
   },
   "addDog": {
     "title": "Tier melden",
-    "description": "Hilf Tieren in Not in der Region Agadir-Taghazout",
+    "description": "Melde Deine tierische Hundebegegnung und unterstütze die Helfer-Community bei der Erfassung, Nachverfolgung und Unterstützung der lokalen freilebenden Hunde.",
     "loginRequired": "Anmeldung erforderlich",
     "loginRequiredDesc": "Bitte melde dich an, um ein Tier zu melden.",
     "reportSent": "Meldung gesendet!",
@@ -181,7 +182,9 @@
     "registerCtaButton": "Kostenlos registrieren",
     "noAccountNeeded": "Kein Account nötig — melde direkt los!",
     "backToHome": "Zurück zur Startseite",
-    "locationRequired": "(Pflicht)"
+    "locationRequired": "(Pflicht)",
+    "communityNote": "Alle Meldungen werden durch den lokalen Tierschutz registriert und stehen Helfern zur Verfügung.",
+    "photoHint": "Versuche, das Tier und seine besonderen Merkmale bestmöglich zu erfassen: Ohrmarke, Zeichnung, Gesicht, Auffälligkeiten ..."
   },
   "auth": {
     "login": "Anmelden",
@@ -434,7 +437,12 @@
     },
     "online": {
       "title": "Online"
-    }
+    },
+    "facebook": {
+      "description": "Folge uns und den Hunden auf Facebook — tritt mit uns in Kontakt, sieh aktuelle Updates und werde Teil der Community.",
+      "cta": "Facebook-Gruppe öffnen"
+    },
+    "impressum": "Impressum"
   },
   "mapPopup": {
     "mobileVet": "Mobiler Tierarzt",
@@ -483,7 +491,13 @@
     "appText1": "Der Community-Gedanke dieser App ist ein zentraler Faktor jeglicher Arbeit des lokalen Tierschutzes. Jede Meldung, jede Spende und jeder Besuch bei einem PawFriend stärkt das Netzwerk — und macht den Tierschutz handlungsfähiger.",
     "appText2": "Nur mit Deiner Unterstützung kann der Tierschutz handlungsfähig sein und mit wachsender Aufmerksamkeit für echte Veränderung sorgen. Eine große Aufgabe — doch gemeinsam können wir heute Leben retten.",
     "websiteLink": "Zur Website",
-    "viewDogs": "Alle Hunde ansehen"
+    "viewDogs": "Alle Hunde ansehen",
+    "tnvr": {
+      "subtitle": "Trap · Neuter · Vaccinate · Return",
+      "desc1": "TNVR ist die einzige humane und gleichzeitig einzige wirklich effektive Methode, um der Überpopulation von Straßenhunden entgegenzuwirken. Hunde werden eingefangen, kastriert, geimpft und wieder freigelassen — statt getötet.",
+      "desc2": "Ohne Kastration wächst eine Hundepopulation unkontrolliert. TNVR durchbricht diesen Kreislauf nachhaltig: Die behandelten Tiere verhindern das Nachrücken neuer, ungeimpfter Hunde.",
+      "goal": "🎯 TNVR ist eines der Hauptziele von Save The Paws in der Region Agadir-Taghazout."
+    }
   },
   "photo": {
     "invalidType": "Bitte wähle ein Bild aus",
@@ -536,13 +550,18 @@
     },
     "dogaid": {
       "title": "Hund in Not?",
-      "description": "Wir sagen dir wie du helfen kannst — Schritt für Schritt, auch ohne Tierarzt.",
+      "description": "Wir zeigen dir Schritt für Schritt wie du helfen kannst.",
       "cta": "Dog Aid Guide öffnen"
     },
     "firstaid": {
       "title": "Vorfall mit Hund?",
       "description": "Ob Kratzer oder Biss: hier siehst du, was zu tun ist — schnell und klar erklärt.",
       "cta": "First Aid Guide öffnen"
+    },
+    "adopt": {
+      "title": "Adoptieren?",
+      "description": "Du hast dich in einen Hund verliebt — oder möchtest einem Straßenhund aus Marokko ein Zuhause geben? Das ist möglich. Erfahre hier wie die Adoption abläuft und welche Hunde ein neues Zuhause suchen.",
+      "cta": "Zur Adoptions-Seite"
     }
   },
   "pawfriends": {

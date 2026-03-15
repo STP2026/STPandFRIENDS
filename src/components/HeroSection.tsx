@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { usePublicStats } from "@/hooks/usePublicStats";
 import SponsorTicker from "@/components/SponsorTicker";
 import heroImage from "@/assets/hero-dog.webp";
-import logoWhite from "@/assets/logo-white.webp";
+import logoWhite from "@/assets/logo-header.png";
 
 const HeroSection = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden pt-14 sm:pt-16">
+    <section className="relative min-h-[67svh] sm:min-h-[75svh] flex flex-col items-center justify-center overflow-hidden pt-14 sm:pt-16">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img src={heroImage} alt="Hund am Strand von Taghazout" className="w-full h-full object-cover" />
@@ -29,12 +29,12 @@ const HeroSection = () => {
       </div>
 
       {/* Main content — flex-1 so it fills space above ticker */}
-      <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 text-center flex-1 flex flex-col items-center justify-center w-full">
+      <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12 text-center flex-1 flex flex-col items-center justify-center w-full">
         <div className="max-w-3xl mx-auto animate-fade-in w-full">
           <img
             src={logoWhite}
             alt="Save The Paws – Agadir"
-            className="h-28 sm:h-36 md:h-44 w-auto mx-auto mb-6 drop-shadow-lg"
+            className="h-20 sm:h-28 md:h-36 w-auto mx-auto mb-4 drop-shadow-lg invert"
           />
 
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 border border-white/20">

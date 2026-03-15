@@ -34,7 +34,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-6xl mx-auto">
 
             {/* Card 1: Report */}
             <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in group">
@@ -140,11 +140,41 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Card 5: Adopt */}
+      <section className="py-6 sm:py-8 bg-secondary/30">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="glass-card rounded-2xl overflow-hidden border border-border animate-fade-in">
+            <div className="flex flex-col sm:flex-row">
+              <div className="bg-gradient-to-br from-violet-500 to-violet-700 p-8 sm:p-10 flex items-center justify-center sm:w-48 shrink-0">
+                <span className="text-6xl">🐶</span>
+              </div>
+              <div className="p-6 sm:p-8 flex flex-col justify-center">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-3">
+                  {t('actions.adopt.title')}
+                </h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-5 leading-relaxed max-w-2xl">
+                  {t('actions.adopt.description')}
+                </p>
+                <div>
+                  <a href="https://aid.save-the-paws.de/adopt" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="gap-2 border-violet-500 text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-950/30">
+                      <Heart className="w-4 h-4" />
+                      {t('actions.adopt.cta')}
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Donation */}
       <DonationSection />
 
-      {/* Become a Helper */}
-      {user && !isHelper && (
+      {/* Become a Helper — shown to all (guests + logged-in non-helpers) */}
+      {!isHelper && (
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="glass-card rounded-2xl p-8 text-center max-w-2xl mx-auto animate-fade-in border border-primary/20">

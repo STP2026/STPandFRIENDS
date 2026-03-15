@@ -100,7 +100,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 glass-card border-b animate-fade-in">
       <div className="container mx-auto px-2 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logoHeader} alt="Save The Paws – Agadir" className="h-10 sm:h-12 w-auto" />
+          <img src={logoHeader} alt="Save The Paws – Agadir" className="h-10 sm:h-12 w-auto dark:invert" />
         </Link>
 
         {/* Desktop Nav */}

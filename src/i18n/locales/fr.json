@@ -115,7 +115,7 @@
   },
   "addDog": {
     "title": "Signaler un animal",
-    "description": "Aidez les animaux en détresse dans la région d'Agadir-Taghazout",
+    "description": "Signalez votre rencontre avec un chien et soutenez la communauté de helpers.",
     "loginRequired": "Connexion requise",
     "loginRequiredDesc": "Veuillez vous connecter pour signaler un animal.",
     "reportSent": "Signalement envoyé !",
@@ -181,7 +181,9 @@
     "registerCtaButton": "S'inscrire gratuitement",
     "noAccountNeeded": "Pas de compte nécessaire — signalez directement !",
     "backToHome": "Retour à l'accueil",
-    "locationRequired": "(obligatoire)"
+    "locationRequired": "(obligatoire)",
+    "communityNote": "Tous les signalements sont enregistrés par la protection animale locale et mis à disposition des helpers.",
+    "photoHint": "Essayez de capturer l'animal et ses caractéristiques: tatouage, dessins, visage, particularités ..."
   },
   "auth": {
     "login": "Connexion",
@@ -434,7 +436,12 @@
     },
     "online": {
       "title": "En ligne"
-    }
+    },
+    "facebook": {
+      "description": "Suivez-nous et les chiens sur Facebook — contactez-nous et rejoignez la communauté.",
+      "cta": "Ouvrir le groupe Facebook"
+    },
+    "impressum": "Mentions légales"
   },
   "mapPopup": {
     "mobileVet": "Vétérinaire mobile",
@@ -483,7 +490,13 @@
     "appText1": "L'esprit communautaire de cette application est un facteur central de tout le travail de protection animale locale. Chaque signalement, chaque don et chaque visite chez un PawFriend renforce le réseau — et rend la protection animale plus efficace.",
     "appText2": "Ce n'est qu'avec votre soutien que la protection animale peut rester capable d'agir et créer de vrais changements avec une attention croissante. Une grande tâche — mais ensemble, nous pouvons sauver des vies aujourd'hui.",
     "websiteLink": "Visiter le site",
-    "viewDogs": "Voir tous les chiens"
+    "viewDogs": "Voir tous les chiens",
+    "tnvr": {
+      "subtitle": "Piéger · Stériliser · Vacciner · Relâcher",
+      "desc1": "TNVR est la seule méthode humaine et efficace pour lutter contre la surpopulation de chiens errants. Les chiens sont capturés, stérilisés, vaccinés et relâchés — au lieu d'être tués.",
+      "desc2": "Sans stérilisation, une population de chiens croît sans contrôle. TNVR brise ce cycle durablement.",
+      "goal": "🎯 TNVR est l'un des principaux objectifs de Save The Paws dans la région d'Agadir-Taghazout."
+    }
   },
   "photo": {
     "invalidType": "Veuillez sélectionner une image",
@@ -536,13 +549,18 @@
     },
     "dogaid": {
       "title": "Chien en détresse ?",
-      "description": "Nous vous disons comment aider — étape par étape, même sans vétérinaire.",
+      "description": "Nous vous montrons étape par étape comment aider.",
       "cta": "Ouvrir le Dog Aid Guide"
     },
     "firstaid": {
       "title": "Incident avec un chien ?",
       "description": "Griffure ou morsure : voici ce qu'il faut faire — expliqué rapidement et clairement.",
       "cta": "Ouvrir le First Aid Guide"
+    },
+    "adopt": {
+      "title": "Adopter ?",
+      "description": "Vous êtes tombé amoureux d'un chien — ou voulez offrir un foyer à un chien errant du Maroc ? C'est possible. Découvrez comment fonctionne l'adoption.",
+      "cta": "Page d'adoption"
     }
   },
   "pawfriends": {
