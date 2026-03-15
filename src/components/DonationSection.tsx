@@ -56,7 +56,7 @@ const DonationSection = ({ variant = "full" }: DonationSectionProps) => {
   }
 
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-b from-primary/5 to-background">
+    <section className="py-8 sm:py-10 bg-gradient-to-b from-primary/5 to-background">
       <div className="container mx-auto px-4">
         <div className="glass-card rounded-2xl p-6 sm:p-10 max-w-3xl mx-auto text-center animate-fade-in border border-primary/20">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">

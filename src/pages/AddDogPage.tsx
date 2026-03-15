@@ -332,11 +332,11 @@ const AddDogPage = () => {
                   );
                 })}
               </div>
-              <p className="mt-4 text-sm text-muted-foreground bg-secondary/50 p-3 rounded-lg">
-                {formData.reportType === 'save' && t('addDog.visibility.save')}
-                {formData.reportType === 'stray' && t('addDog.visibility.stray')}
-                {formData.reportType === 'vaccination_wish' && t('addDog.visibility.vaccination')}
-              </p>
+              {formData.reportType === 'save' && (
+                <p className="mt-4 text-sm text-muted-foreground bg-secondary/50 p-3 rounded-lg">
+                  {t('addDog.visibility.save')}
+                </p>
+              )}
               <p className="mt-2 text-xs text-muted-foreground/70 flex items-center gap-1.5">
                 <span>ℹ️</span>
                 {t('addDog.communityNote', 'Alle Meldungen werden durch den lokalen Tierschutz registriert und stehen Helfern zur Verfügung.')}
