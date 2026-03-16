@@ -42,7 +42,11 @@
       "adopt": "Adoption info",
       "helper": "Become a helper",
       "contact": "Contact & Support"
-    }
+    },
+    "ticker1": "Report your dog encounter — no account needed",
+    "ticker2": "Open map — discover PawFriends & facilities",
+    "ticker3": "Join the community — become a helper or donor",
+    "ticker4": "Adoption possible — give a dog a home"
   },
   "reportTypes": {
     "title": "How You Can Help",
@@ -560,7 +564,7 @@
     },
     "dogaid": {
       "title": "Dog in need?",
-      "description": "We show you step by step how to help — even without a vet on site.",
+      "description": "Step-by-step guide for dog first aid. Learn how to help — and when help is needed.",
       "cta": "Open guide"
     },
     "firstaid": {

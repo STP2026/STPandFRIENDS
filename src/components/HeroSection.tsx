@@ -14,17 +14,6 @@ const HeroSection = () => {
   const taggedDogs = stats?.taggedDogs || 30;
   const userCount = stats?.userCount || 20;
 
-  const quickLinks = [
-    { key: 'hero.quick.report', href: '/add', internal: true },
-    { key: 'hero.quick.rescue', href: 'https://aid.save-the-paws.de/dog-aid', internal: false },
-    { key: 'hero.quick.rabies', href: 'https://aid.save-the-paws.de/first-aid', internal: false },
-    { key: 'hero.quick.pawfriends', href: '/pawfriends', internal: true },
-    { key: 'hero.quick.donate', href: 'https://gofund.me/26e9f81e7', internal: false },
-    { key: 'hero.quick.adopt', href: 'https://aid.save-the-paws.de/adopt', internal: false },
-    { key: 'hero.quick.helper', href: '/become-helper', internal: true },
-    { key: 'hero.quick.contact', href: '/contact', internal: true },
-  ];
-
   return (
     <section className="relative min-h-[67svh] sm:min-h-[75svh] flex flex-col items-center justify-center overflow-hidden pt-14 sm:pt-16">
       {/* Background */}
@@ -57,23 +46,25 @@ const HeroSection = () => {
             {t('hero.description')}
           </p>
 
-          {/* Quick links strip — scrollable on mobile */}
-          <div className="flex gap-2 overflow-x-auto pb-1 justify-start sm:justify-center px-4 mb-5 sm:mb-7 scrollbar-none">
-            {quickLinks.map((link) =>
-              link.internal ? (
-                <Link key={link.key} to={link.href} className="shrink-0">
-                  <span className="inline-block bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white/90 text-xs px-3 py-1 rounded-full border border-white/20 transition-colors whitespace-nowrap">
-                    {t(link.key)}
-                  </span>
-                </Link>
-              ) : (
-                <a key={link.key} href={link.href} target="_blank" rel="noopener noreferrer" className="shrink-0">
-                  <span className="inline-block bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white/90 text-xs px-3 py-1 rounded-full border border-white/20 transition-colors whitespace-nowrap">
-                    {t(link.key)}
-                  </span>
-                </a>
-              )
-            )}
+          {/* Ticker — dezente durchlaufende Zeile */}
+          <div className="overflow-hidden w-full mb-5 sm:mb-7">
+            <div
+              className="flex whitespace-nowrap text-xs sm:text-sm text-white/70 font-medium"
+              style={{ animation: 'ticker-scroll 30s linear infinite', width: 'max-content' }}
+            >
+              {[0, 1, 2].map((i) => (
+                <span key={i} className="inline-flex items-center gap-3 px-4">
+                  <span>{t('hero.ticker1', 'Melde deine Hundebegegnung — kein Account nötig')}</span>
+                  <span className="opacity-40">🐾</span>
+                  <span>{t('hero.ticker2', 'Karte öffnen — PawFriends & Einrichtungen entdecken')}</span>
+                  <span className="opacity-40">🐾</span>
+                  <span>{t('hero.ticker3', 'Teil der Community werden — Helfer oder Spender')}</span>
+                  <span className="opacity-40">🐾</span>
+                  <span>{t('hero.ticker4', 'Adoption möglich — einem Hund ein Zuhause geben')}</span>
+                  <span className="opacity-40">🐾</span>
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* CTA Buttons */}

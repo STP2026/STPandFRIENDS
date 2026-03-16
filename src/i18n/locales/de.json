@@ -42,7 +42,11 @@
       "adopt": "Adoptions-Infos",
       "helper": "Helfer werden",
       "contact": "Kontakt & Support"
-    }
+    },
+    "ticker1": "Melde deine Hundebegegnung — kein Account nötig",
+    "ticker2": "Karte öffnen — PawFriends & Einrichtungen entdecken",
+    "ticker3": "Teil der Community werden — Helfer oder Spender",
+    "ticker4": "Adoption möglich — einem Hund ein Zuhause geben"
   },
   "reportTypes": {
     "title": "Wie du helfen kannst",
@@ -561,7 +565,7 @@
     },
     "dogaid": {
       "title": "Hund in Not?",
-      "description": "Wir zeigen dir Schritt für Schritt wie du helfen kannst — auch ohne Tierarzt vor Ort.",
+      "description": "Schritt-für-Schritt-Anleitung für Hunde-Ersthilfe. Erfahre wie du helfen kannst (und wann Hilfe nötig ist).",
       "cta": "Zum Guide"
     },
     "firstaid": {
