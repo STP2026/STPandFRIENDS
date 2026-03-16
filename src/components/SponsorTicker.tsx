@@ -7,13 +7,12 @@ const SponsorTicker = () => {
 
   if (sponsors.length === 0) return null;
 
-  // Duplicate list for seamless loop
   const items = [...sponsors, ...sponsors];
 
   return (
-    <div className="w-full overflow-hidden bg-white/10 backdrop-blur-sm border-t border-white/10 py-2 mt-4">
-      <div className="flex items-center gap-2 mb-0.5 justify-center">
-        <span className="text-white/50 text-xs uppercase tracking-widest shrink-0">
+    <div className="w-full overflow-hidden">
+      <div className="flex items-center justify-center gap-2 mb-0.5">
+        <span className="text-white/70 text-xs uppercase tracking-widest shrink-0">
           {t('sponsors.label', 'Unsere Sponsoren')}
         </span>
       </div>
@@ -28,9 +27,9 @@ const SponsorTicker = () => {
           {items.map((sponsor, i) => (
             <span
               key={`${sponsor.id}-${i}`}
-              className="inline-flex items-center gap-1.5 text-white/80 text-sm font-medium"
+              className="inline-flex items-center gap-1.5 text-white text-sm font-medium"
             >
-              <span className="text-red-400">❤️</span>
+              <span>❤️</span>
               {sponsor.name}
             </span>
           ))}

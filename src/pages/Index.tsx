@@ -192,7 +192,7 @@ const Index = () => {
       <DonationSection />
 
       {/* Sponsor Ticker */}
-      <div className="py-2 bg-secondary/30">
+      <div className="bg-orange-500 py-2">
         <SponsorTicker />
       </div>
 
