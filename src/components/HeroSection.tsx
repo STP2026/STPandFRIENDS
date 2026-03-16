@@ -94,6 +94,7 @@ const HeroSection = () => {
             <p className="text-xs text-white/70 mt-0.5">{t('hero.stats.users')}</p>
           </div>
         </div>
+      </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float z-10">
