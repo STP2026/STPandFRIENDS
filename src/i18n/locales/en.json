@@ -20,7 +20,7 @@
     "region": "Agadir - Taghazout Region",
     "title": "Save The",
     "titleHighlight": "Paws",
-    "description": "Get involved for the street dogs of the Agadir-Taghazout region — report animals, find dog-friendly places, and help in emergencies.",
+    "description": "You have a ❤️ for dogs and want to help? Support local animal welfare and the TNVR programme with us — and become a lifesaver!",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Explore Map",
     "reportAnimal": "Report Animal",
@@ -32,7 +32,17 @@
       "tnvr": "TNVR Programme",
       "tagged": "Tagged Dogs"
     },
-    "touristHint": "Report your dog encounter and support local animal welfare — no account needed."
+    "touristHint": "",
+    "quick": {
+      "report": "Report dog encounters",
+      "rescue": "Dog rescue guide",
+      "rabies": "Rabies guide",
+      "pawfriends": "Discover PawFriends",
+      "donate": "Become a donor",
+      "adopt": "Adoption info",
+      "helper": "Become a helper",
+      "contact": "Contact & Support"
+    }
   },
   "reportTypes": {
     "title": "How You Can Help",
@@ -534,14 +544,14 @@
     "title": "You Can Make a Difference",
     "subtitle": "Whether tourist, expat, or local — every bit of help counts.",
     "rescue": {
-      "title": "Report your dog encounters",
-      "description": "Help us document and protect the street dogs of the region.",
-      "cta": "Report a dog"
+      "title": "Report a dog",
+      "description": "Report your dog encounter and help us document the street dogs of the region.",
+      "cta": "Report now"
     },
     "pawfriends": {
-      "title": "Discover the PawFriends",
-      "description": "Cool shops, restaurants and hotels that support animal welfare — always worth a visit!",
-      "cta": "Discover now"
+      "title": "Discover PawFriends",
+      "description": "Dog-friendly shops, cafés and hotels that actively support animal welfare.",
+      "cta": "Open map"
     },
     "help": {
       "title": "Find Help — for Dog & Human",
@@ -550,18 +560,23 @@
     },
     "dogaid": {
       "title": "Dog in need?",
-      "description": "We show you step by step how to help.",
+      "description": "We show you step by step how to help — even without a vet on site.",
       "cta": "Open guide"
     },
     "firstaid": {
-      "title": "Incident with a dog?",
-      "description": "Whether scratch or bite: here you see what to do — quickly and clearly explained.",
+      "title": "Rabies guide",
+      "description": "Rabies is a serious issue in Morocco. Find out what to do after a scratch or bite incident.",
       "cta": "Open guide"
     },
     "adopt": {
-      "title": "Adopt?",
-      "description": "Have you fallen in love with a dog — or want to give a Moroccan street dog a home? It's possible. Find out how adoption works and which dogs are looking for a new home.",
-      "cta": "Go to adoption page"
+      "title": "Adopt a Paw 🐾",
+      "description": "Want to give a dog a home? Find all the information about adoption here.",
+      "cta": "Adoption info"
+    },
+    "support": {
+      "title": "Become a supporter",
+      "description": "Your donation saves lives. Every contribution goes directly into the TNVR programme and emergency care.",
+      "cta": "Donate now"
     }
   },
   "pawfriends": {

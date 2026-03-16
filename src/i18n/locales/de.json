@@ -20,7 +20,7 @@
     "region": "Region Agadir - Taghazout",
     "title": "Save The",
     "titleHighlight": "Paws",
-    "description": "Engagiere dich für die Straßenhunde der Region Agadir-Taghazout — melde Tiere, finde hundefreundliche Orte und hilf in Notfällen.",
+    "description": "Du hast ein ❤️ für Hunde und möchtest helfen? Unterstütze mit uns den lokalen Tierschutz und das TNVR-Programm — und werde zum Lebensretter!",
     "slogan": "Together, we save lives. 💚",
     "exploreMap": "Karte erkunden",
     "reportAnimal": "Tier melden",
@@ -32,7 +32,17 @@
       "tnvr": "TNVR-Programm",
       "tagged": "Getaggte Hunde"
     },
-    "touristHint": "Melde deine Hundebegegnung und unterstütze den lokalen Tierschutz — kein Account nötig."
+    "touristHint": "",
+    "quick": {
+      "report": "Hundebegegnungen melden",
+      "rescue": "Leitfaden zur Hunderettung",
+      "rabies": "Tollwut-Leitfaden",
+      "pawfriends": "PawFriends entdecken",
+      "donate": "Spender werden",
+      "adopt": "Adoptions-Infos",
+      "helper": "Helfer werden",
+      "contact": "Kontakt & Support"
+    }
   },
   "reportTypes": {
     "title": "Wie du helfen kannst",
@@ -535,14 +545,14 @@
     "title": "Du kannst einen Unterschied machen",
     "subtitle": "Ob Urlauber, Expat oder Einheimischer — jede Hilfe zählt.",
     "rescue": {
-      "title": "Melde deine Hundebegegnungen",
-      "description": "Hilf uns, die Straßenhunde der Region zu erfassen und zu schützen.",
-      "cta": "Hund melden"
+      "title": "Hund melden",
+      "description": "Melde deine Hundebegegnung und hilf uns, die Straßenhunde der Region zu dokumentieren.",
+      "cta": "Jetzt melden"
     },
     "pawfriends": {
-      "title": "Entdecke die PawFriends",
-      "description": "Coole Läden, Restaurants und Hotels die den Tierschutz unterstützen — immer einen Besuch wert!",
-      "cta": "Jetzt entdecken"
+      "title": "Entdecke PawFriends",
+      "description": "Hundefreundliche Läden, Cafés und Hotels die den Tierschutz aktiv unterstützen.",
+      "cta": "Zur Karte"
     },
     "help": {
       "title": "Finde Hilfe — für Hund und Mensch",
@@ -551,18 +561,23 @@
     },
     "dogaid": {
       "title": "Hund in Not?",
-      "description": "Wir zeigen dir Schritt für Schritt wie du helfen kannst.",
+      "description": "Wir zeigen dir Schritt für Schritt wie du helfen kannst — auch ohne Tierarzt vor Ort.",
       "cta": "Zum Guide"
     },
     "firstaid": {
-      "title": "Vorfall mit Hund?",
-      "description": "Ob Kratzer oder Biss: hier siehst du, was zu tun ist — schnell und klar erklärt.",
-      "cta": "Zum Guide"
+      "title": "Tollwut-Leitfaden",
+      "description": "Tollwut ist in Marokko ein ernstes Thema. Was nach einem Kratz- oder Beiß­vorfall zu tun ist, erfährst du hier.",
+      "cta": "Zum Leitfaden"
     },
     "adopt": {
-      "title": "Adoptieren?",
-      "description": "Du hast dich in einen Hund verliebt — oder möchtest einem Straßenhund aus Marokko ein Zuhause geben? Das ist möglich. Erfahre hier wie die Adoption abläuft und welche Hunde ein neues Zuhause suchen.",
-      "cta": "Zur Adoptions-Seite"
+      "title": "Adopt a Paw 🐾",
+      "description": "Du möchtest einem Hund ein Zuhause geben? Hier findest du alle Infos zur Adoption.",
+      "cta": "Adoptions-Infos"
+    },
+    "support": {
+      "title": "Supporter werden",
+      "description": "Deine Spende rettet Leben. Jeder Beitrag fließt direkt ins TNVR-Programm und die Notversorgung.",
+      "cta": "Jetzt spenden"
     }
   },
   "pawfriends": {
