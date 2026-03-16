@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePublicStats } from "@/hooks/usePublicStats";
-import SponsorTicker from "@/components/SponsorTicker";
 import heroImage from "@/assets/hero-dog.webp";
 import logoWhite from "@/assets/logo.svg";
 
@@ -95,12 +94,6 @@ const HeroSection = () => {
             <p className="text-xs text-white/70 mt-0.5">{t('hero.stats.users')}</p>
           </div>
         </div>
-
-        {/* Sponsor Ticker */}
-        <div className="w-full mt-6">
-          <SponsorTicker />
-        </div>
-      </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float z-10">

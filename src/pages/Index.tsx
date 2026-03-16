@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import DonationSection from "@/components/DonationSection";
+import SponsorTicker from "@/components/SponsorTicker";
 import AdPopup from "@/components/AdPopup";
 import { ArrowRight, Heart, MapPin, Users, Stethoscope, HandHeart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -189,6 +190,11 @@ const Index = () => {
 
             {/* Donation */}
       <DonationSection />
+
+      {/* Sponsor Ticker */}
+      <div className="py-2 bg-secondary/30">
+        <SponsorTicker />
+      </div>
 
       {/* Become a Helper — shown to all (guests + logged-in non-helpers) */}
       {!isHelper && (
