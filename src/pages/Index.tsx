@@ -192,9 +192,7 @@ const Index = () => {
       <DonationSection />
 
       {/* Sponsor Ticker */}
-      <div className="bg-orange-500 py-2">
-        <SponsorTicker />
-      </div>
+      <SponsorTicker />
 
       {/* Become a Helper — shown to all (guests + logged-in non-helpers) */}
       {!isHelper && (

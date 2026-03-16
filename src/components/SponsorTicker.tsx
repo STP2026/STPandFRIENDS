@@ -10,7 +10,10 @@ const SponsorTicker = () => {
   const items = [...sponsors, ...sponsors];
 
   return (
-    <div className="w-full overflow-hidden">
+    <div
+      className="w-full overflow-hidden py-2"
+      style={{ background: 'var(--gradient-warm)' }}
+    >
       <div className="flex items-center justify-center gap-2 mb-0.5">
         <span className="text-white/70 text-xs uppercase tracking-widest shrink-0">
           {t('sponsors.label', 'Unsere Sponsoren')}
@@ -27,9 +30,9 @@ const SponsorTicker = () => {
           {items.map((sponsor, i) => (
             <span
               key={`${sponsor.id}-${i}`}
-              className="inline-flex items-center gap-1.5 text-white text-sm font-medium"
+              className="inline-flex items-center gap-1.5 text-white text-sm font-medium drop-shadow-sm"
             >
-              <span>❤️</span>
+              <span className="text-white">❤️</span>
               {sponsor.name}
             </span>
           ))}
