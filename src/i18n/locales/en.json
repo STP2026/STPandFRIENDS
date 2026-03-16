@@ -43,10 +43,10 @@
       "helper": "Become a helper",
       "contact": "Contact & Support"
     },
-    "ticker1": "Report your dog encounter — no account needed",
-    "ticker2": "Open map — discover PawFriends & facilities",
-    "ticker3": "Join the community — become a helper or donor",
-    "ticker4": "Adoption possible — give a dog a home"
+    "ticker1": "Report your dog encounter and support local animal welfare",
+    "ticker2": "Discover dog-friendly places — restaurants, cafés & PawFriends",
+    "ticker3": "Dog in need? Our step-by-step guide helps immediately",
+    "ticker4": "No account needed — report and help right away"
   },
   "reportTypes": {
     "title": "How You Can Help",
@@ -555,7 +555,7 @@
     "pawfriends": {
       "title": "Discover PawFriends",
       "description": "Dog-friendly shops, cafés and hotels that actively support animal welfare.",
-      "cta": "Open map"
+      "cta": "Discover PawFriends"
     },
     "help": {
       "title": "Find Help — for Dog & Human",
@@ -573,9 +573,9 @@
       "cta": "Open guide"
     },
     "adopt": {
-      "title": "Adopt a Paw 🐾",
+      "title": "Adopt a dog",
       "description": "Want to give a dog a home? Find all the information about adoption here.",
-      "cta": "Adoption info"
+      "cta": "To the Paws"
     },
     "support": {
       "title": "Become a supporter",

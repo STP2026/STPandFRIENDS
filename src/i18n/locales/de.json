@@ -43,10 +43,10 @@
       "helper": "Helfer werden",
       "contact": "Kontakt & Support"
     },
-    "ticker1": "Melde deine Hundebegegnung — kein Account nötig",
-    "ticker2": "Karte öffnen — PawFriends & Einrichtungen entdecken",
-    "ticker3": "Teil der Community werden — Helfer oder Spender",
-    "ticker4": "Adoption möglich — einem Hund ein Zuhause geben"
+    "ticker1": "Melde deine Hundebegegnung und unterstütze den lokalen Tierschutz",
+    "ticker2": "Entdecke hundefreundliche Orte — Restaurants, Cafés & PawFriends",
+    "ticker3": "Hund in Not? Unsere Schritt-für-Schritt-Anleitung hilft sofort",
+    "ticker4": "Kein Account nötig — direkt melden und helfen"
   },
   "reportTypes": {
     "title": "Wie du helfen kannst",
@@ -556,7 +556,7 @@
     "pawfriends": {
       "title": "Entdecke PawFriends",
       "description": "Hundefreundliche Läden, Cafés und Hotels die den Tierschutz aktiv unterstützen.",
-      "cta": "Zur Karte"
+      "cta": "PawFriends entdecken"
     },
     "help": {
       "title": "Finde Hilfe — für Hund und Mensch",
@@ -574,9 +574,9 @@
       "cta": "Zum Leitfaden"
     },
     "adopt": {
-      "title": "Adopt a Paw 🐾",
+      "title": "Hund adoptieren",
       "description": "Du möchtest einem Hund ein Zuhause geben? Hier findest du alle Infos zur Adoption.",
-      "cta": "Adoptions-Infos"
+      "cta": "Zu den Paws"
     },
     "support": {
       "title": "Supporter werden",

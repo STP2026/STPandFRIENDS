@@ -43,10 +43,10 @@
       "helper": "Devenir helper",
       "contact": "Contact & Support"
     },
-    "ticker1": "Signalez votre rencontre — sans compte requis",
-    "ticker2": "Ouvrir la carte — PawFriends & établissements",
-    "ticker3": "Rejoindre la communauté — helper ou donateur",
-    "ticker4": "Adoption possible — donnez un foyer à un chien"
+    "ticker1": "Signalez votre rencontre et soutenez la protection animale locale",
+    "ticker2": "Découvrez des lieux dog-friendly — restaurants, cafés & PawFriends",
+    "ticker3": "Chien en détresse ? Notre guide étape par étape aide immédiatement",
+    "ticker4": "Sans compte — signalez et aidez directement"
   },
   "reportTypes": {
     "title": "Comment vous pouvez aider",
@@ -555,7 +555,7 @@
     "pawfriends": {
       "title": "Découvrir PawFriends",
       "description": "Boutiques, cafés et hôtels dog-friendly qui soutiennent activement la protection animale.",
-      "cta": "Voir la carte"
+      "cta": "Découvrir PawFriends"
     },
     "help": {
       "title": "Trouver de l'aide — pour chien et humain",
@@ -573,9 +573,9 @@
       "cta": "Ouvrir le guide"
     },
     "adopt": {
-      "title": "Adopt a Paw 🐾",
+      "title": "Adopter un chien",
       "description": "Vous voulez donner un foyer à un chien ? Trouvez toutes les infos sur l'adoption ici.",
-      "cta": "Infos adoption"
+      "cta": "Vers les Paws"
     },
     "support": {
       "title": "Devenir supporter",

@@ -49,19 +49,19 @@ const HeroSection = () => {
           {/* Ticker — dezente durchlaufende Zeile */}
           <div className="overflow-hidden w-full mb-5 sm:mb-7">
             <div
-              className="flex whitespace-nowrap text-xs sm:text-sm text-white/70 font-medium"
-              style={{ animation: 'ticker-scroll 30s linear infinite', width: 'max-content' }}
+              className="flex whitespace-nowrap text-xs sm:text-sm text-orange-200 font-medium"
+              style={{ animation: 'ticker-scroll 45s linear infinite', width: 'max-content' }}
             >
               {[0, 1, 2].map((i) => (
                 <span key={i} className="inline-flex items-center gap-3 px-4">
-                  <span>{t('hero.ticker1', 'Melde deine Hundebegegnung — kein Account nötig')}</span>
-                  <span className="opacity-40">🐾</span>
-                  <span>{t('hero.ticker2', 'Karte öffnen — PawFriends & Einrichtungen entdecken')}</span>
-                  <span className="opacity-40">🐾</span>
-                  <span>{t('hero.ticker3', 'Teil der Community werden — Helfer oder Spender')}</span>
-                  <span className="opacity-40">🐾</span>
-                  <span>{t('hero.ticker4', 'Adoption möglich — einem Hund ein Zuhause geben')}</span>
-                  <span className="opacity-40">🐾</span>
+                  <span>{t('hero.ticker1')}</span>
+                  <span className="opacity-50">🐾</span>
+                  <span>{t('hero.ticker2')}</span>
+                  <span className="opacity-50">🐾</span>
+                  <span>{t('hero.ticker3')}</span>
+                  <span className="opacity-50">🐾</span>
+                  <span>{t('hero.ticker4')}</span>
+                  <span className="opacity-50">🐾</span>
                 </span>
               ))}
             </div>

@@ -192,7 +192,7 @@ const Index = () => {
 
       {/* Become a Helper — shown to all (guests + logged-in non-helpers) */}
       {!isHelper && (
-        <section className="py-8 sm:py-10">
+        <section className="py-5 sm:py-7">
           <div className="container mx-auto px-4">
             <div className="glass-card rounded-2xl p-8 text-center max-w-3xl mx-auto animate-fade-in border border-primary/20">
               <Users className="w-14 h-14 text-primary mx-auto mb-4" />
