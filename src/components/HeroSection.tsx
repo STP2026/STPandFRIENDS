@@ -50,18 +50,16 @@ const HeroSection = () => {
           <div className="overflow-hidden w-full mb-5 sm:mb-7">
             <div
               className="flex whitespace-nowrap text-xs sm:text-sm text-orange-200 font-medium"
-              style={{ animation: 'ticker-scroll 45s linear infinite', width: 'max-content' }}
+              style={{ animation: 'ticker-scroll 55s linear infinite', width: 'max-content' }}
             >
-              {[0, 1, 2].map((i) => (
-                <span key={i} className="inline-flex items-center gap-3 px-4">
-                  <span>{t('hero.ticker1')}</span>
-                  <span className="opacity-50">🐾</span>
-                  <span>{t('hero.ticker2')}</span>
-                  <span className="opacity-50">🐾</span>
-                  <span>{t('hero.ticker3')}</span>
-                  <span className="opacity-50">🐾</span>
-                  <span>{t('hero.ticker4')}</span>
-                  <span className="opacity-50">🐾</span>
+              {[0, 1].map((i) => (
+                <span key={i} className="inline-flex items-center">
+                  {['ticker1','ticker2','ticker3','ticker4','ticker5','ticker6','ticker7','ticker8'].map((key) => (
+                    <span key={key} className="inline-flex items-center gap-3 px-3">
+                      <span>{t(`hero.${key}`)}</span>
+                      <span className="opacity-40">🐾</span>
+                    </span>
+                  ))}
                 </span>
               ))}
             </div>

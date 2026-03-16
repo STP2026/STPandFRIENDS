@@ -52,7 +52,7 @@ const Index = () => {
                   {t('actions.rescue.description')}
                 </p>
                 <Link to="/add">
-                  <Button className="w-full gap-1.5 text-xs sm:text-sm" size="sm">
+                  <Button variant="outline" className="w-full gap-1.5 text-xs sm:text-sm border-orange-500 text-orange-700 hover:bg-orange-50 dark:hover:bg-orange-950/30" size="sm">
                     <Heart className="w-3.5 h-3.5" />
                     {t('actions.rescue.cta')}
                   </Button>

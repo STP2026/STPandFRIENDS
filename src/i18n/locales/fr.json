@@ -43,10 +43,14 @@
       "helper": "Devenir helper",
       "contact": "Contact & Support"
     },
-    "ticker1": "Signalez votre rencontre et soutenez la protection animale locale",
-    "ticker2": "Découvrez des lieux dog-friendly — restaurants, cafés & PawFriends",
-    "ticker3": "Chien en détresse ? Notre guide étape par étape aide immédiatement",
-    "ticker4": "Sans compte — signalez et aidez directement"
+    "ticker1": "Ce que vous pouvez faire",
+    "ticker2": "Ce que nous faisons",
+    "ticker3": "Premiers secours",
+    "ticker4": "Adoptions",
+    "ticker5": "Adresses importantes",
+    "ticker6": "Dons",
+    "ticker7": "Communauté",
+    "ticker8": "Karma"
   },
   "reportTypes": {
     "title": "Comment vous pouvez aider",
@@ -555,7 +559,7 @@
     "pawfriends": {
       "title": "Découvrir PawFriends",
       "description": "Boutiques, cafés et hôtels dog-friendly qui soutiennent activement la protection animale.",
-      "cta": "Découvrir PawFriends"
+      "cta": "Ouvrir la carte"
     },
     "help": {
       "title": "Trouver de l'aide — pour chien et humain",
