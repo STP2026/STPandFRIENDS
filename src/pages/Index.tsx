@@ -204,7 +204,7 @@ const Index = () => {
                 {t('helperCta.title')}
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                {t('helperCta.description')}
+                {user ? t('helperCta.description') : t('helperCta.descriptionGuest')}
               </p>
               <Link to="/become-helper">
                 <Button className="gap-2">

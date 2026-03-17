@@ -125,7 +125,8 @@
   "helperCta": {
     "title": "Become a Helper!",
     "description": "As a helper, you can see SOS reports, approve submissions, and actively help rescue animals.",
-    "apply": "Apply as Helper"
+    "apply": "Apply as Helper",
+    "descriptionGuest": "Become part of the community and help actively: as a verified helper you can view reports, approve submissions and directly support local animal welfare. Or register first as a user."
   },
   "footer": {
     "brand": "Save The Paws",

@@ -125,7 +125,8 @@
   "helperCta": {
     "title": "Devenez aidant !",
     "description": "En tant qu'aidant, vous pouvez voir les signalements SOS, approuver les soumissions et aider activement au sauvetage des animaux.",
-    "apply": "Postuler comme aidant"
+    "apply": "Postuler comme aidant",
+    "descriptionGuest": "Rejoignez la communauté et aidez activement : en tant que helper vérifié, vous pouvez consulter les signalements, les approuver et soutenir directement la protection animale locale. Ou inscrivez-vous d'abord comme utilisateur."
   },
   "footer": {
     "brand": "Save The Paws",
