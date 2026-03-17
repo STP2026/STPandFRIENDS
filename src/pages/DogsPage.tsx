@@ -6,9 +6,9 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Filter, CheckCircle, AlertCircle, Loader2, Shield } from "lucide-react";
+import { Search, Filter, CheckCircle, AlertCircle, Loader2, Shield, Heart } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const DogsPage = () => {
   const { t } = useTranslation();

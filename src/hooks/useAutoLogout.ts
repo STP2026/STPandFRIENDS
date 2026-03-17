@@ -71,7 +71,7 @@ export function useAutoLogout(timeoutMs = INACTIVITY_TIMEOUT_MS) {
     let lastReset = Date.now();
     const throttledReset = () => {
       const now = Date.now();
-      if (now - lastReset > 30_000) {
+      if (now - lastReset > 5_000) {
         lastReset = now;
         resetTimer();
       }

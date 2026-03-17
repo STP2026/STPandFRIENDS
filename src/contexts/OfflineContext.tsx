@@ -88,15 +88,18 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
         const isAutoApproved = formData.reportType !== 'save';
 
         // Check if ear_tag already exists (duplicate from previous sync attempt)
-        const { data: existing } = await supabase
-          .from('dogs')
-          .select('id')
-          .eq('ear_tag', formData.earTag)
-          .maybeSingle();
+        // Skip check if earTag is empty — .eq('ear_tag', null) would match all null rows
+        if (formData.earTag) {
+          const { data: existing } = await supabase
+            .from('dogs')
+            .select('id')
+            .eq('ear_tag', formData.earTag)
+            .maybeSingle();
 
-        if (existing) {
-          removeFromQueue(report.id);
-          continue;
+          if (existing) {
+            removeFromQueue(report.id);
+            continue;
+          }
         }
 
         const { error } = await supabase

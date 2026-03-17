@@ -121,7 +121,7 @@ const DogCard = ({ dog, index = 0 }: DogCardProps) => {
 
       {lightboxOpen && hasPhoto && (
         <PhotoLightbox
-          photos={[dog.photo]}
+          photos={[dog.photo, dog.photo2, dog.photo3].filter((p): p is string => !!p && p !== '/placeholder.svg')}
           currentIndex={0}
           onIndexChange={() => {}}
           onClose={() => setLightboxOpen(false)}
