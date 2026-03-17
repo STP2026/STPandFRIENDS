@@ -36,13 +36,13 @@ export function usePublicStats() {
         .eq('status', 'approved');
 
       return {
-        taggedDogs: (taggedCount || 0) + 30,
+        taggedDogs: Math.max(taggedCount || 0, 20),
         vaccinatedDogs: (vaccinatedCount || 0) + 30,
-        userCount: (userCount || 0) + 20,  // +20 psychologischer Offset
+        userCount: Math.max(userCount || 0, 15),
         helperCount: helperCount || 0,
       };
     },
     staleTime: 1000 * 60 * 5,
-    placeholderData: { taggedDogs: 30, vaccinatedDogs: 30, userCount: 20, helperCount: 0 },
+    placeholderData: { taggedDogs: 20, vaccinatedDogs: 20, userCount: 15, helperCount: 0 },
   });
 }
