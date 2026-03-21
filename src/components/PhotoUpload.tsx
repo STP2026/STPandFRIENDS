@@ -49,11 +49,18 @@ const PhotoUpload = ({ onPhotosUploaded, currentPhotoUrls }: PhotoUploadProps) =
   );
   const [uploading, setUploading] = useState<[boolean, boolean, boolean]>([false, false, false]);
   const [errors, setErrors] = useState<[string, string, string]>(['', '', '']);
-  const fileInputRefs = [
+  const cameraInputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+  const galleryInputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+  // Keep fileInputRefs as alias for gallery (used in removePhoto)
+  const fileInputRefs = galleryInputRefs;
 
   const uploadSlot = async (file: File, slot: 0 | 1 | 2) => {
     if (!file.type.startsWith('image/')) {
@@ -131,12 +138,19 @@ const PhotoUpload = ({ onPhotosUploaded, currentPhotoUrls }: PhotoUploadProps) =
       <div className="grid grid-cols-3 gap-2">
         {([0, 1, 2] as const).map((slot) => (
           <div key={slot} className="relative">
-            {/* Hidden file input */}
+            {/* Hidden inputs: camera + gallery */}
             <input
-              ref={fileInputRefs[slot]}
+              ref={cameraInputRefs[slot]}
               type="file"
               accept="image/*"
               capture="environment"
+              onChange={handleFileSelect(slot)}
+              className="hidden"
+            />
+            <input
+              ref={galleryInputRefs[slot]}
+              type="file"
+              accept="image/*"
               onChange={handleFileSelect(slot)}
               className="hidden"
             />
@@ -167,27 +181,34 @@ const PhotoUpload = ({ onPhotosUploaded, currentPhotoUrls }: PhotoUploadProps) =
               </div>
             ) : (
               <div
-                onClick={() => {
-                  // Only allow adding if previous slots are filled (sequential)
-                  if (slot === 0 || previews[slot - 1]) {
-                    fileInputRefs[slot].current?.click();
-                  }
-                }}
-                className={`aspect-square border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-1 transition-colors
+                className={`aspect-square border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-1.5 transition-colors
                   ${(slot === 0 || previews[slot - 1])
-                    ? 'border-border hover:border-primary/50 hover:bg-secondary/30 cursor-pointer'
-                    : 'border-border/30 opacity-40 cursor-not-allowed'
+                    ? 'border-border'
+                    : 'border-border/30 opacity-40 pointer-events-none'
                   }`}
               >
-                {slot === 0 ? (
+                {(slot === 0 || previews[slot - 1]) ? (
                   <>
-                    <Camera className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-xs text-muted-foreground text-center leading-tight px-1">
-                      {t('photo.takeOrUpload', 'Photo')}
-                    </span>
+                    <button
+                      type="button"
+                      onClick={() => cameraInputRefs[slot].current?.click()}
+                      className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-md hover:bg-secondary/50 transition-colors w-full"
+                    >
+                      <Camera className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">{t('photo.camera', 'Kamera')}</span>
+                    </button>
+                    <div className="w-8 h-px bg-border" />
+                    <button
+                      type="button"
+                      onClick={() => galleryInputRefs[slot].current?.click()}
+                      className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-md hover:bg-secondary/50 transition-colors w-full"
+                    >
+                      <Upload className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">{t('photo.gallery', 'Galerie')}</span>
+                    </button>
                   </>
                 ) : (
-                  <Plus className="w-5 h-5 text-muted-foreground" />
+                  <Plus className="w-5 h-5 text-muted-foreground/30" />
                 )}
               </div>
             )}
@@ -199,35 +220,6 @@ const PhotoUpload = ({ onPhotosUploaded, currentPhotoUrls }: PhotoUploadProps) =
         ))}
       </div>
 
-      {/* Camera / Gallery buttons for slot 0 when empty */}
-      {!previews[0] && (
-        <div className="flex gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            className="flex-1 gap-2"
-            onClick={() => fileInputRefs[0].current?.click()}
-          >
-            <Camera className="w-4 h-4" />
-            {t('photo.camera', 'Camera')}
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            className="flex-1 gap-2"
-            onClick={() => {
-              if (fileInputRefs[0].current) {
-                fileInputRefs[0].current.removeAttribute('capture');
-                fileInputRefs[0].current.click();
-                setTimeout(() => fileInputRefs[0].current?.setAttribute('capture', 'environment'), 100);
-              }
-            }}
-          >
-            <Upload className="w-4 h-4" />
-            {t('photo.gallery', 'Gallery')}
-          </Button>
-        </div>
-      )}
     </div>
   );
 };

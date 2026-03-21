@@ -524,8 +524,8 @@
     "uploadError": "فشل التحميل. يرجى المحاولة مرة أخرى.",
     "takeOrUpload": "صورة",
     "tapHere": "اضغط هنا لاختيار صورة",
-    "camera": "الكاميرا",
-    "gallery": "المعرض",
+    "camera": "كاميرا",
+    "gallery": "معرض",
     "photos": "الصور"
   },
   "autoLogout": {
