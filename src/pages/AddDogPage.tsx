@@ -39,7 +39,7 @@ const AddDogPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { isOnline, addReportToQueue, pendingCount } = useOfflineContext();
+  const { isOnline, addReportToQueue, pendingCount, syncQueue } = useOfflineContext();
   const addDogMutation = useAddDog();
   const [submitted, setSubmitted] = useState(false);
   const [submittedOffline, setSubmittedOffline] = useState(false);
@@ -113,19 +113,14 @@ const AddDogPage = () => {
     };
 
     try {
-      if (isOnline) {
-        await addDogMutation.mutateAsync(reportData);
-        setSubmitted(true);
-      } else {
-        addReportToQueue(reportData);
-        setSubmittedOffline(true);
-      }
+      // Always try direct submit first — isOnline is unreliable on mobile data
+      await addDogMutation.mutateAsync(reportData);
+      setSubmitted(true);
     } catch (error) {
-      console.error('Error submitting dog');
-      if (isOnline) {
-        addReportToQueue(reportData);
-        setSubmittedOffline(true);
-      }
+      // Direct submit failed — save to offline queue for later sync
+      console.error('Submit failed, saving to offline queue:', error);
+      addReportToQueue(reportData);
+      setSubmittedOffline(true);
     } finally {
       setIsSubmitting(false);
     }

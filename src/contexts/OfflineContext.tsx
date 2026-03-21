@@ -27,6 +27,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     addToQueue,
     removeFromQueue,
     updateQueueStatus,
+    verifyConnectivity,
   } = useOffline();
 
   const [cachedDogs, setCachedDogs] = useState<Dog[]>([]);
@@ -57,7 +58,9 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
   }, [isOnline, fetchAndCacheDogs]);
 
   const syncQueue = useCallback(async () => {
-    if (!isOnline) return;
+    // Do a real connectivity check — navigator.onLine lies on mobile data
+    const reallyOnline = await verifyConnectivity?.();
+    if (!reallyOnline) return;
 
     // Include 'syncing' — handles reports stuck from previous failed runs
     const reportsToSync = offlineQueue.filter(
@@ -146,6 +149,19 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isOnline && pendingCount > 0) syncQueue();
   }, [isOnline, pendingCount, syncQueue]);
+
+  // Sync when app comes back to foreground (e.g. switching from WiFi settings)
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        verifyConnectivity?.().then(online => {
+          if (online && pendingCount > 0) syncQueue();
+        });
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [pendingCount, syncQueue, verifyConnectivity]);
 
   return (
     <OfflineContext.Provider value={{
