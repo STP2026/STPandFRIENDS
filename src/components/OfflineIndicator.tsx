@@ -1,71 +1,78 @@
+import { useState, useEffect } from 'react';
 import { useOfflineContext } from '@/contexts/OfflineContext';
-import { WifiOff, CloudOff, RefreshCw, Check, AlertCircle } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { WifiOff, RefreshCw, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 const OfflineIndicator = () => {
-  const { isOnline, pendingCount, isSyncing, syncQueue, lastSyncTime } = useOfflineContext();
+  const { pendingCount, isSyncing, syncQueue, verifyAndSync } = useOfflineContext();
   const { t } = useTranslation();
+  const [syncSuccess, setSyncSuccess] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  // Don't show anything if online and no pending items
-  if (isOnline && pendingCount === 0 && !isSyncing) return null;
+  // Show when there are pending reports
+  useEffect(() => {
+    if (pendingCount > 0 || isSyncing) {
+      setVisible(true);
+      setSyncSuccess(false);
+    }
+  }, [pendingCount, isSyncing]);
 
-  const formatLastSync = () => {
-    if (!lastSyncTime) return '';
-    const diff = Date.now() - lastSyncTime;
-    const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return t('offline.justNow', 'Gerade eben');
-    if (minutes < 60) return t('offline.minutesAgo', 'vor {{count}} Min.', { count: minutes });
-    const hours = Math.floor(minutes / 60);
-    return t('offline.hoursAgo', 'vor {{count}} Std.', { count: hours });
+  // Hide success message after 4s
+  useEffect(() => {
+    if (syncSuccess) {
+      const t = setTimeout(() => {
+        setSyncSuccess(false);
+        setVisible(false);
+      }, 4000);
+      return () => clearTimeout(t);
+    }
+  }, [syncSuccess]);
+
+  if (!visible) return null;
+
+  const handleSync = async () => {
+    const ok = await verifyAndSync();
+    if (ok) setSyncSuccess(true);
   };
 
-  return (
-    <div className={`fixed top-16 left-0 right-0 z-40 px-4 py-2 transition-all ${
-      isOnline ? 'bg-primary/90' : 'bg-destructive/90'
-    }`}>
-      <div className="container mx-auto flex items-center justify-between text-sm text-white">
-        <div className="flex items-center gap-2">
-          {!isOnline ? (
-            <>
-              <WifiOff className="w-4 h-4" />
-              <span>{t('offline.noConnection', 'Offline-Modus')}</span>
-              {lastSyncTime && (
-                <span className="opacity-75 text-xs">
-                  ({t('offline.lastSync', 'Letzte Sync')}: {formatLastSync()})
-                </span>
-              )}
-            </>
-          ) : isSyncing ? (
-            <>
-              <RefreshCw className="w-4 h-4 animate-spin" />
-              <span>{t('offline.syncing', 'Synchronisiere...')}</span>
-            </>
-          ) : pendingCount > 0 ? (
-            <>
-              <CloudOff className="w-4 h-4" />
-              <span>
-                {t('offline.pendingReports', '{{count}} Meldung(en) warten', { count: pendingCount })}
-              </span>
-            </>
-          ) : (
-            <>
-              <Check className="w-4 h-4" />
-              <span>{t('offline.synced', 'Synchronisiert')}</span>
-            </>
-          )}
+  if (syncSuccess) {
+    return (
+      <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm">
+        <div className="flex items-center gap-3 bg-green-600 text-white px-4 py-3 rounded-xl shadow-lg">
+          <CheckCircle className="w-5 h-5 shrink-0" />
+          <span className="text-sm font-medium">
+            {t('offline.syncSuccess', 'Meldungen erfolgreich übertragen!')}
+          </span>
         </div>
+      </div>
+    );
+  }
 
-        {isOnline && pendingCount > 0 && !isSyncing && (
+  return (
+    <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm">
+      <div className="flex items-center gap-3 bg-amber-600 text-white px-4 py-3 rounded-xl shadow-lg">
+        <WifiOff className="w-5 h-5 shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium leading-tight">
+            {isSyncing
+              ? t('offline.syncing', 'Synchronisiere...')
+              : t('offline.pendingBanner', 'Schlechte Verbindung — {{count}} Meldung(en) ausstehend', { count: pendingCount })
+            }
+          </p>
+        </div>
+        {!isSyncing && (
           <Button
             size="sm"
-            variant="secondary"
-            onClick={() => syncQueue()}
-            className="h-7 text-xs"
+            onClick={handleSync}
+            className="shrink-0 h-8 bg-white text-amber-700 hover:bg-amber-50 text-xs font-medium"
           >
             <RefreshCw className="w-3 h-3 mr-1" />
-            {t('offline.syncNow', 'Jetzt sync')}
+            {t('offline.syncNow', 'Synchronisieren')}
           </Button>
+        )}
+        {isSyncing && (
+          <RefreshCw className="w-4 h-4 animate-spin shrink-0 opacity-75" />
         )}
       </div>
     </div>

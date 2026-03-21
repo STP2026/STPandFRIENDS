@@ -676,5 +676,11 @@
     "description": "Diese Seite existiert nicht oder wurde verschoben. Vielleicht hilft dir die Startseite weiter.",
     "home": "Zur Startseite",
     "back": "Zurück"
+  },
+  "offline": {
+    "pendingBanner": "Schlechte Verbindung — {{count}} Meldung(en) ausstehend",
+    "syncNow": "Synchronisieren",
+    "syncing": "Synchronisiere...",
+    "syncSuccess": "Meldungen erfolgreich übertragen!"
   }
 }

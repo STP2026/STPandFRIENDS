@@ -676,5 +676,11 @@
     "description": "Cette page n'existe pas ou a été déplacée. La page d'accueil peut vous aider.",
     "home": "Accueil",
     "back": "Retour"
+  },
+  "offline": {
+    "pendingBanner": "Mauvaise connexion — {{count}} signalement(s) en attente",
+    "syncNow": "Synchroniser",
+    "syncing": "Synchronisation...",
+    "syncSuccess": "Signalements envoyés avec succès !"
   }
 }

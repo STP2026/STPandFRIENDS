@@ -14,12 +14,12 @@ export interface OfflineReport {
   retryCount: number;
 }
 
-// Real connectivity check — pings Supabase health endpoint
-// navigator.onLine is unreliable on mobile data (returns true even when request fails)
-async function checkRealConnectivity(): Promise<boolean> {
+// Real connectivity check against Supabase
+// navigator.onLine is unreliable on mobile data
+export async function checkRealConnectivity(): Promise<boolean> {
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30_000);
+    const timeout = setTimeout(() => controller.abort(), 8000);
     const { error } = await supabase
       .from('sponsors')
       .select('id', { head: true, count: 'exact' })
@@ -33,12 +33,12 @@ async function checkRealConnectivity(): Promise<boolean> {
 }
 
 export function useOffline() {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(true); // optimistic default
   const [offlineQueue, setOfflineQueue] = useState<OfflineReport[]>([]);
   const [lastSyncTime, setLastSyncTime] = useState<number | null>(null);
   const checkingRef = useRef(false);
 
-  // Load offline queue from localStorage
+  // Load from localStorage
   useEffect(() => {
     const stored = localStorage.getItem(OFFLINE_QUEUE_KEY);
     if (stored) {
@@ -48,39 +48,33 @@ export function useOffline() {
     if (lastSync) setLastSyncTime(parseInt(lastSync));
   }, []);
 
-  // Save offline queue to localStorage
+  // Persist queue
   useEffect(() => {
     localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(offlineQueue));
   }, [offlineQueue]);
 
-  // Real connectivity check — runs on browser online event + every 30s when queue pending
-  const verifyConnectivity = useCallback(async () => {
-    if (checkingRef.current) return;
+  const verifyConnectivity = useCallback(async (): Promise<boolean> => {
+    if (checkingRef.current) return isOnline;
     checkingRef.current = true;
     const real = await checkRealConnectivity();
     setIsOnline(real);
     checkingRef.current = false;
     return real;
-  }, []);
+  }, [isOnline]);
 
-  // Listen for online/offline events
+  // Browser online/offline events + initial check
   useEffect(() => {
     const handleOnline = () => verifyConnectivity();
     const handleOffline = () => setIsOnline(false);
-
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
-
-    // Initial real check
     verifyConnectivity();
-
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
   }, [verifyConnectivity]);
 
-  // Cache dogs data
   const cacheDogs = useCallback((dogs: Dog[]) => {
     try {
       localStorage.setItem(DOGS_CACHE_KEY, JSON.stringify(dogs));
@@ -90,7 +84,6 @@ export function useOffline() {
     } catch { /* ignore */ }
   }, []);
 
-  // Get cached dogs
   const getCachedDogs = useCallback((): Dog[] => {
     try {
       const stored = localStorage.getItem(DOGS_CACHE_KEY);
@@ -99,7 +92,6 @@ export function useOffline() {
     return [];
   }, []);
 
-  // Add report to offline queue
   const addToQueue = useCallback((data: DogFormData & { reportedBy: string }): OfflineReport => {
     const report: OfflineReport = {
       id: `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,

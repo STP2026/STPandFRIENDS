@@ -676,5 +676,11 @@
     "description": "This page does not exist or has been moved. The home page might help.",
     "home": "Go to home",
     "back": "Go back"
+  },
+  "offline": {
+    "pendingBanner": "Bad connection — {{count}} report(s) pending",
+    "syncNow": "Sync now",
+    "syncing": "Syncing...",
+    "syncSuccess": "Reports uploaded successfully!"
   }
 }
