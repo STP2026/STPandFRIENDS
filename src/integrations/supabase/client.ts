@@ -18,11 +18,16 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     storage: localStorage,
     persistSession: true,
     autoRefreshToken: true,
-    // Required for email verification callbacks in Supabase v2:
-    // Automatically reads token_hash / access_token from the URL on page load
     detectSessionInUrl: true,
-    // PKCE is the secure default for SPAs in Supabase v2
-    // Without this, email verification links may not work correctly
     flowType: 'pkce',
-  }
+  },
+  global: {
+    // Extended timeout for slow mobile connections (default is ~10s)
+    fetch: (url, options) => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30_000); // 30s
+      return fetch(url, { ...options, signal: controller.signal })
+        .finally(() => clearTimeout(timeout));
+    },
+  },
 });

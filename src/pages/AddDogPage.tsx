@@ -113,12 +113,22 @@ const AddDogPage = () => {
     };
 
     try {
-      // Always try direct submit first — isOnline is unreliable on mobile data
-      await addDogMutation.mutateAsync(reportData);
-      setSubmitted(true);
-    } catch (error) {
-      // Direct submit failed — save to offline queue for later sync
-      console.error('Submit failed, saving to offline queue:', error);
+      // Try up to 3 times with delay — for slow 4G connections in Morocco
+      let lastError: unknown;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          await addDogMutation.mutateAsync(reportData);
+          setSubmitted(true);
+          return;
+        } catch (err) {
+          lastError = err;
+          if (attempt < 3) {
+            await new Promise(r => setTimeout(r, 3000 * attempt)); // 3s, 6s
+          }
+        }
+      }
+      // All attempts failed — save to offline queue
+      console.error('All submit attempts failed, saving to offline queue:', lastError);
       addReportToQueue(reportData);
       setSubmittedOffline(true);
     } finally {
