@@ -202,7 +202,8 @@
     "backToHome": "Back to home",
     "locationRequired": "(required)",
     "communityNote": "All reports are registered by local animal welfare and made available to helpers.",
-    "photoHint": "Try to capture the animal and its special features as clearly as possible: ear tag, markings, face, peculiarities ..."
+    "photoHint": "Try to capture the animal and its special features as clearly as possible: ear tag, markings, face, peculiarities ...",
+    "slowConnection": "Slow connection — attempt {{attempt}} of 3..."
   },
   "auth": {
     "login": "Login",

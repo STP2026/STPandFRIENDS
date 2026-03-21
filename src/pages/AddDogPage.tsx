@@ -44,6 +44,7 @@ const AddDogPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submittedOffline, setSubmittedOffline] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitAttempt, setSubmitAttempt] = useState(0);
   const [selectedPosition, setSelectedPosition] = useState<{ lat: number; lng: number } | null>(null);
 
   const [formData, setFormData] = useState({
@@ -116,9 +117,11 @@ const AddDogPage = () => {
       // Try up to 3 times with delay — for slow 4G connections in Morocco
       let lastError: unknown;
       for (let attempt = 1; attempt <= 3; attempt++) {
+        setSubmitAttempt(attempt);
         try {
           await addDogMutation.mutateAsync(reportData);
           setSubmitted(true);
+          setSubmitAttempt(0);
           return;
         } catch (err) {
           lastError = err;
@@ -127,6 +130,7 @@ const AddDogPage = () => {
           }
         }
       }
+      setSubmitAttempt(0);
       // All attempts failed — save to offline queue
       console.error('All submit attempts failed, saving to offline queue:', lastError);
       addReportToQueue(reportData);
@@ -473,6 +477,11 @@ const AddDogPage = () => {
                 {isSubmitting ? t('addDog.submitting') : t('addDog.submit')}
               </Button>
             </div>
+            {isSubmitting && submitAttempt > 1 && (
+              <p className="text-xs text-center text-amber-600 dark:text-amber-400 mt-3 animate-fade-in">
+                {t('addDog.slowConnection', 'Langsame Verbindung — Versuch {{attempt}} von 3...', { attempt: submitAttempt })}
+              </p>
+            )}
           </form>
         </div>
       </main>

@@ -202,7 +202,8 @@
     "backToHome": "Zurück zur Startseite",
     "locationRequired": "(Pflicht)",
     "communityNote": "Alle Meldungen werden durch den lokalen Tierschutz registriert und stehen Helfern zur Verfügung.",
-    "photoHint": "Versuche, das Tier und seine besonderen Merkmale bestmöglich zu erfassen: Ohrmarke, Zeichnung, Gesicht, Auffälligkeiten ..."
+    "photoHint": "Versuche, das Tier und seine besonderen Merkmale bestmöglich zu erfassen: Ohrmarke, Zeichnung, Gesicht, Auffälligkeiten ...",
+    "slowConnection": "Langsame Verbindung — Versuch {{attempt}} von 3..."
   },
   "auth": {
     "login": "Anmelden",

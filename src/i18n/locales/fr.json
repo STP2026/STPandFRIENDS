@@ -202,7 +202,8 @@
     "backToHome": "Retour à l'accueil",
     "locationRequired": "(obligatoire)",
     "communityNote": "Tous les signalements sont enregistrés par la protection animale locale et mis à disposition des helpers.",
-    "photoHint": "Essayez de capturer l'animal et ses caractéristiques: tatouage, dessins, visage, particularités ..."
+    "photoHint": "Essayez de capturer l'animal et ses caractéristiques: tatouage, dessins, visage, particularités ...",
+    "slowConnection": "Connexion lente — tentative {{attempt}} sur 3..."
   },
   "auth": {
     "login": "Connexion",
