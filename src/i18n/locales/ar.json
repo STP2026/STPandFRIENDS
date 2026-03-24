@@ -206,7 +206,8 @@
     "slowConnection": "اتصال بطيء — محاولة {{attempt}} من 3...",
     "photoRequired": "يرجى التقاط صورة واحدة على الأقل",
     "uploadingPhoto": "جارٍ رفع الصورة...",
-    "saveLater": "إرسال لاحقاً"
+    "saveLater": "إرسال لاحقاً",
+    "anotherReport": "بلاغ آخر"
   },
   "auth": {
     "login": "دخول",

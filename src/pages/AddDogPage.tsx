@@ -168,6 +168,8 @@ const AddDogPage = () => {
     };
 
     try {
+      // Reset mutation state before new submit (prevents stale state from previous submit)
+      addDogMutation.reset();
       // Try up to 3 times with delay — for slow 4G connections in Morocco
       let lastError: unknown;
       let insertedDog: Awaited<ReturnType<typeof addDogMutation.mutateAsync>> | null = null;
@@ -331,7 +333,27 @@ const AddDogPage = () => {
               </div>
             )}
 
-            <div className="text-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                onClick={() => {
+                  // Full state reset for new report
+                  setSubmitted(false);
+                  setSubmittedOffline(false);
+                  setHasPhoto(false);
+                  setIsPhotoUploading(false);
+                  setSelectedPosition(null);
+                  setSubmitAttempt(0);
+                  setFormData({
+                    name: '', earTag: '', photoUrls: ['', '', ''] as [string, string, string],
+                    location: '', isVaccinated: false, vaccination1Date: '', vaccination2Date: '',
+                    additionalInfo: '', reportType: 'stray', urgencyLevel: '',
+                  });
+                  addDogMutation.reset();
+                }}
+                className="gap-2"
+              >
+                {t('addDog.anotherReport', 'Weitere Meldung')}
+              </Button>
               <Button onClick={() => navigate("/")} variant="outline">
                 {t('addDog.backToHome', 'Zurück zur Startseite')}
               </Button>

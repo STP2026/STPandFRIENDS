@@ -206,7 +206,8 @@
     "slowConnection": "Langsame Verbindung — Versuch {{attempt}} von 3...",
     "photoRequired": "Bitte mindestens 1 Foto aufnehmen",
     "uploadingPhoto": "Foto wird hochgeladen...",
-    "saveLater": "Später senden"
+    "saveLater": "Später senden",
+    "anotherReport": "Weitere Meldung"
   },
   "auth": {
     "login": "Anmelden",

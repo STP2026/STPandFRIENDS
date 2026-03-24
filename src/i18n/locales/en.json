@@ -206,7 +206,8 @@
     "slowConnection": "Slow connection — attempt {{attempt}} of 3...",
     "photoRequired": "Please take at least 1 photo",
     "uploadingPhoto": "Uploading photo...",
-    "saveLater": "Send later"
+    "saveLater": "Send later",
+    "anotherReport": "Another report"
   },
   "auth": {
     "login": "Login",
