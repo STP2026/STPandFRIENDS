@@ -105,7 +105,7 @@ const AdminPage = () => {
   useEffect(() => { fetchGuestReports(); }, [fetchGuestReports]);
 
   const handleConvertGuestReport = async (r: any) => {
-    // Insert into dogs table and mark guest_report as reviewed
+    // Insert into dogs table with admin as reporter (RLS: reported_by = auth.uid())
     const { error } = await supabase.from('dogs').insert({
       name: r.name || 'Unbekannt (Gast-Meldung)',
       latitude: r.latitude,
@@ -118,7 +118,7 @@ const AdminPage = () => {
       report_type: r.report_type || 'stray',
       is_approved: false,
       is_vaccinated: false,
-      reported_by: null,
+      reported_by: user?.id ?? null,
       ear_tag: null,
     });
     if (!error) {

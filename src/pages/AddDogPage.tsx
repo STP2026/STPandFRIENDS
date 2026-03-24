@@ -598,7 +598,7 @@ const AddDogPage = () => {
                 disabled={!selectedPosition || !hasPhoto || isPhotoUploading || isSubmitting}
                 onClick={async () => {
                   if (!user) {
-                    // Guest: insert directly into guest_reports (offline-first)
+                    // Guest: insert directly into guest_reports including photos
                     try {
                       await supabase.from('guest_reports').insert({
                         report_type: formData.reportType,
@@ -607,7 +607,9 @@ const AddDogPage = () => {
                         location: formData.location,
                         additional_info: formData.additionalInfo || null,
                         name: formData.name || null,
-                        photo_url: null, photo_url_2: null, photo_url_3: null,
+                        photo_url: formData.photoUrls[0] || null,
+                        photo_url_2: formData.photoUrls[1] || null,
+                        photo_url_3: formData.photoUrls[2] || null,
                       });
                     } catch { /* silent fail — no queue for guests */ }
                     setSubmittedOffline(true);
