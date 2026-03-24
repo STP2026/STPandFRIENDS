@@ -203,7 +203,10 @@
     "locationRequired": "(Pflicht)",
     "communityNote": "Alle Meldungen werden durch den lokalen Tierschutz registriert und stehen Helfern zur Verfügung.",
     "photoHint": "Versuche, das Tier und seine besonderen Merkmale bestmöglich zu erfassen: Ohrmarke, Zeichnung, Gesicht, Auffälligkeiten ...",
-    "slowConnection": "Langsame Verbindung — Versuch {{attempt}} von 3..."
+    "slowConnection": "Langsame Verbindung — Versuch {{attempt}} von 3...",
+    "photoRequired": "Bitte mindestens 1 Foto aufnehmen",
+    "uploadingPhoto": "Foto wird hochgeladen...",
+    "saveLater": "Später senden"
   },
   "auth": {
     "login": "Anmelden",
@@ -526,7 +529,9 @@
     "tapHere": "Tippe hier, um ein Foto auszuwählen",
     "camera": "Kamera",
     "gallery": "Galerie",
-    "photos": "Fotos"
+    "photos": "Fotos",
+    "localSaveHint": "Fotos werden lokal gespeichert und beim Senden übertragen",
+    "required": "(min. 1 Pflicht)"
   },
   "autoLogout": {
     "warning": "Du wirst in {{seconds}} Sekunden automatisch abgemeldet.",

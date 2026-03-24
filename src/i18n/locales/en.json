@@ -203,7 +203,10 @@
     "locationRequired": "(required)",
     "communityNote": "All reports are registered by local animal welfare and made available to helpers.",
     "photoHint": "Try to capture the animal and its special features as clearly as possible: ear tag, markings, face, peculiarities ...",
-    "slowConnection": "Slow connection — attempt {{attempt}} of 3..."
+    "slowConnection": "Slow connection — attempt {{attempt}} of 3...",
+    "photoRequired": "Please take at least 1 photo",
+    "uploadingPhoto": "Uploading photo...",
+    "saveLater": "Send later"
   },
   "auth": {
     "login": "Login",
@@ -526,7 +529,9 @@
     "tapHere": "Tap here to select a photo",
     "camera": "Camera",
     "gallery": "Gallery",
-    "photos": "Photos"
+    "photos": "Photos",
+    "localSaveHint": "Photos are saved locally and uploaded on submit",
+    "required": "(min. 1 required)"
   },
   "autoLogout": {
     "warning": "You will be automatically logged out in {{seconds}} seconds.",

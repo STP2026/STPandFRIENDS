@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, Heart, Syringe, WifiOff, Facebook, ExternalLink } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import SafeDogMap from "@/components/SafeDogMap";
-import PhotoUpload from "@/components/PhotoUpload";
+import PhotoUpload, { uploadBase64ToStorage } from "@/components/PhotoUpload";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAddDog } from "@/hooks/useDogs";
 import { useOfflineContext } from "@/contexts/OfflineContext";
@@ -45,6 +45,8 @@ const AddDogPage = () => {
   const [submittedOffline, setSubmittedOffline] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitAttempt, setSubmitAttempt] = useState(0);
+  const [hasPhoto, setHasPhoto] = useState(false);
+  const [isPhotoUploading, setIsPhotoUploading] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState<{ lat: number; lng: number } | null>(null);
 
   const [formData, setFormData] = useState({
@@ -70,27 +72,53 @@ const AddDogPage = () => {
 
     // Guest report: insert into guest_reports table
     if (!user) {
+      // Guest: submit text data first, upload photos after
+      const isBase64 = (s: string) => s?.startsWith('data:');
       try {
-        const { error } = await supabase
-          .from('guest_reports')
-          .insert({
-            report_type: formData.reportType,
-            latitude: selectedPosition.lat,
-            longitude: selectedPosition.lng,
-            location: formData.location,
-            photo_url: formData.photoUrls[0] || null,
-            photo_url_2: formData.photoUrls[1] || null,
-            photo_url_3: formData.photoUrls[2] || null,
-            additional_info: formData.additionalInfo || null,
-            name: formData.name || null,
-          });
-        if (error) throw error;
+        let lastErr: unknown;
+        let inserted = false;
+        for (let attempt = 1; attempt <= 3; attempt++) {
+          setSubmitAttempt(attempt);
+          try {
+            const { error } = await supabase.from('guest_reports').insert({
+              report_type: formData.reportType,
+              latitude: selectedPosition.lat,
+              longitude: selectedPosition.lng,
+              location: formData.location,
+              additional_info: formData.additionalInfo || null,
+              name: formData.name || null,
+              photo_url: null, photo_url_2: null, photo_url_3: null,
+            });
+            if (error) throw error;
+            inserted = true;
+            setSubmitAttempt(0);
+            break;
+          } catch (err) {
+            lastErr = err;
+            if (attempt < 3) await new Promise(r => setTimeout(r, 3000 * attempt));
+          }
+        }
         setSubmitted(true);
+        // Photos upload silently in background (guest — no user ID, use anon path)
+        if (inserted) {
+          formData.photoUrls.forEach(async (photo, idx) => {
+            if (!photo || !isBase64(photo)) return;
+            try {
+              const res = await fetch(photo);
+              const blob = await res.blob();
+              const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
+              await supabase.storage.from('dog-photos').upload(
+                `guest/${Date.now()}-${idx}.jpg`, file,
+                { cacheControl: '3600', upsert: false }
+              );
+            } catch { /* silent — photo upload is best-effort for guests */ }
+          });
+        }
       } catch (err) {
         console.error('Guest report error:', err);
-        // Still show success — don't leave tourist hanging
         setSubmitted(true);
       } finally {
+        setSubmitAttempt(0);
         setIsSubmitting(false);
       }
       return;
@@ -113,28 +141,56 @@ const AddDogPage = () => {
       urgencyLevel: undefined,
     };
 
+    // Strip base64 photos from DB payload — send text data first
+    const photosToUpload = [reportData.photo, reportData.photo2, reportData.photo3];
+    const isBase64 = (s: string) => s?.startsWith('data:');
+    const dbPayload = {
+      ...reportData,
+      photo: isBase64(reportData.photo) ? '' : reportData.photo,
+      photo2: isBase64(reportData.photo2) ? '' : reportData.photo2,
+      photo3: isBase64(reportData.photo3) ? '' : reportData.photo3,
+    };
+
     try {
       // Try up to 3 times with delay — for slow 4G connections in Morocco
       let lastError: unknown;
+      let insertedDog: Awaited<ReturnType<typeof addDogMutation.mutateAsync>> | null = null;
       for (let attempt = 1; attempt <= 3; attempt++) {
         setSubmitAttempt(attempt);
         try {
-          await addDogMutation.mutateAsync(reportData);
-          setSubmitted(true);
+          insertedDog = await addDogMutation.mutateAsync(dbPayload);
           setSubmitAttempt(0);
-          return;
+          break;
         } catch (err) {
           lastError = err;
           if (attempt < 3) {
-            await new Promise(r => setTimeout(r, 3000 * attempt)); // 3s, 6s
+            await new Promise(r => setTimeout(r, 3000 * attempt));
           }
         }
       }
-      setSubmitAttempt(0);
-      // All attempts failed — save to offline queue
-      console.error('All submit attempts failed, saving to offline queue:', lastError);
-      addReportToQueue(reportData);
-      setSubmittedOffline(true);
+
+      if (!insertedDog) {
+        // All attempts failed — save full payload (with base64 photos) to queue
+        console.error('All submit attempts failed, saving to offline queue:', lastError);
+        addReportToQueue(reportData);
+        setSubmittedOffline(true);
+        return;
+      }
+
+      setSubmitted(true);
+
+      // Upload photos in background after successful DB insert
+      const dogId = insertedDog.id;
+      if (dogId && user) {
+        photosToUpload.forEach(async (photo, idx) => {
+          if (!photo || !isBase64(photo)) return;
+          const url = await uploadBase64ToStorage(photo, user.id, idx);
+          if (url) {
+            const field = idx === 0 ? 'photo_url' : `photo_url_${idx + 1}`;
+            await supabase.from('dogs').update({ [field]: url }).eq('id', dogId);
+          }
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -398,7 +454,7 @@ const AddDogPage = () => {
                   {t('addDog.photo')}
                 </Label>
                 <PhotoUpload
-                  onPhotosUploaded={(urls) => setFormData({ ...formData, photoUrls: urls })}
+                  onPhotosChanged={(urls) => setFormData({ ...formData, photoUrls: urls })}
                   currentPhotoUrls={formData.photoUrls}
                 />
               </div>
@@ -469,14 +525,50 @@ const AddDogPage = () => {
                 {t('common.cancel')}
               </Button>
               <Button
+                type="button"
+                variant="outline"
+                className="gap-2 text-muted-foreground"
+                disabled={!selectedPosition || !hasPhoto || isPhotoUploading || isSubmitting}
+                onClick={() => {
+                  // Save to offline queue immediately — sync later
+                  const reportData = {
+                    name: formData.name, earTag: formData.earTag,
+                    photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
+                    photo3: formData.photoUrls[2] || '',
+                    latitude: selectedPosition?.lat ?? 0,
+                    longitude: selectedPosition?.lng ?? 0,
+                    location: formData.location, isVaccinated: formData.isVaccinated,
+                    vaccination1Date: formData.vaccination1Date, vaccination2Date: formData.vaccination2Date,
+                    additionalInfo: formData.additionalInfo, reportedBy: user?.id || '',
+                    reportType: formData.reportType, urgencyLevel: undefined,
+                    photoUrls: formData.photoUrls,
+                  };
+                  addReportToQueue(reportData);
+                  setSubmittedOffline(true);
+                }}
+              >
+                {t('addDog.saveLater', 'Später senden')}
+              </Button>
+              <Button
                 type="submit"
                 className="flex-1 sm:flex-none gap-2"
-                disabled={isSubmitting || !selectedPosition}
+                disabled={isSubmitting || !selectedPosition || !hasPhoto || isPhotoUploading}
               >
                 {getReportTypeIcon(formData.reportType)}
                 {isSubmitting ? t('addDog.submitting') : t('addDog.submit')}
               </Button>
             </div>
+            {!hasPhoto && !isSubmitting && (
+              <p className="text-xs text-center text-red-500 mt-2">
+                {t('addDog.photoRequired', 'Bitte mindestens 1 Foto aufnehmen')}
+              </p>
+            )}
+            {isPhotoUploading && (
+              <p className="text-xs text-center text-primary mt-2 flex items-center justify-center gap-1.5">
+                <span className="animate-spin inline-block w-3 h-3 border-2 border-primary border-t-transparent rounded-full" />
+                {t('addDog.uploadingPhoto', 'Foto wird hochgeladen...')}
+              </p>
+            )}
             {isSubmitting && submitAttempt > 1 && (
               <p className="text-xs text-center text-amber-600 dark:text-amber-400 mt-3 animate-fade-in">
                 {t('addDog.slowConnection', 'Langsame Verbindung — Versuch {{attempt}} von 3...', { attempt: submitAttempt })}

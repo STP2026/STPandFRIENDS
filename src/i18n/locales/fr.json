@@ -203,7 +203,10 @@
     "locationRequired": "(obligatoire)",
     "communityNote": "Tous les signalements sont enregistrés par la protection animale locale et mis à disposition des helpers.",
     "photoHint": "Essayez de capturer l'animal et ses caractéristiques: tatouage, dessins, visage, particularités ...",
-    "slowConnection": "Connexion lente — tentative {{attempt}} sur 3..."
+    "slowConnection": "Connexion lente — tentative {{attempt}} sur 3...",
+    "photoRequired": "Veuillez prendre au moins 1 photo",
+    "uploadingPhoto": "Chargement de la photo...",
+    "saveLater": "Envoyer plus tard"
   },
   "auth": {
     "login": "Connexion",
@@ -526,7 +529,9 @@
     "tapHere": "Appuyez ici pour sélectionner une photo",
     "camera": "Caméra",
     "gallery": "Galerie",
-    "photos": "Photos"
+    "photos": "Photos",
+    "localSaveHint": "Les photos sont sauvegardées localement et envoyées à la soumission",
+    "required": "(min. 1 requis)"
   },
   "autoLogout": {
     "warning": "Vous serez déconnecté automatiquement dans {{seconds}} secondes.",
