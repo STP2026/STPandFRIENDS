@@ -86,6 +86,24 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           if (existing) { removeFromQueue(report.id); continue; }
         }
 
+        // Guest entries (reportedBy='__guest__') → guest_reports table
+        if (formData.reportedBy === '__guest__') {
+          const { error } = await supabase.from('guest_reports').insert({
+            report_type: formData.reportType,
+            latitude: formData.latitude,
+            longitude: formData.longitude,
+            location: formData.location,
+            name: formData.name || null,
+            additional_info: formData.additionalInfo || null,
+            photo_url: formData.photo || null,
+            photo_url_2: formData.photo2 || null,
+            photo_url_3: formData.photo3 || null,
+          });
+          if (error) throw error;
+          removeFromQueue(report.id);
+          continue;
+        }
+
         const isAutoApproved = formData.reportType !== 'save';
         const { error } = await supabase.from('dogs').insert({
           name: formData.name,

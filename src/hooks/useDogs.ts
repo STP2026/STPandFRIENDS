@@ -2,12 +2,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Dog, DbDog, DogFormData, mapDbDogToDog } from '@/types/dog';
 
-// Single hook — DB view enforces visibility via RLS.
-// isElevated=true: Helper/Admin — fetches all visible dogs
-// isElevated=false: regular user — skips fetch entirely (view returns nothing useful)
-export function useDogs(isElevated = false) {
+// Single hook — DB view enforces visibility via RLS + security_invoker.
+// isElevated=true:  Helper/Admin — sees all dogs (stray/vac/sos + save + own)
+// isElevated=false: Regular logged-in user — sees own dogs + approved save dogs
+// isElevated=null:  Guest — no fetch (not logged in)
+export function useDogs(isElevated: boolean | null = null) {
+  const isLoggedIn = isElevated !== null;
   return useQuery({
-    queryKey: isElevated ? ['dogs', 'elevated'] : ['dogs', 'public'],
+    queryKey: isElevated ? ['dogs', 'elevated'] : ['dogs', 'own'],
     queryFn: async (): Promise<Dog[]> => {
       const { data, error } = await supabase
         .from('dogs_public')
@@ -16,7 +18,7 @@ export function useDogs(isElevated = false) {
       if (error) throw error;
       return (data as DbDog[]).map(mapDbDogToDog);
     },
-    enabled: isElevated, // Don't fetch at all for regular users
+    enabled: isLoggedIn, // Fetch for any logged-in user — view handles what they see
     placeholderData: [],
     staleTime: 1000 * 60 * 2,
   });

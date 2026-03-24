@@ -86,7 +86,9 @@ const AddDogPage = () => {
               location: formData.location,
               additional_info: formData.additionalInfo || null,
               name: formData.name || null,
-              photo_url: null, photo_url_2: null, photo_url_3: null,
+              photo_url: formData.photoUrls[0] || null,
+              photo_url_2: formData.photoUrls[1] || null,
+              photo_url_3: formData.photoUrls[2] || null,
             });
             if (error) throw error;
             inserted = true;
@@ -115,6 +117,8 @@ const AddDogPage = () => {
         } else {
           // All attempts failed — save to offline queue for later sync
           console.error('Guest report failed after 3 attempts:', lastErr);
+          // Guest offline queue: use special marker reportedBy='__guest__'
+          // OfflineContext checks this and routes to guest_reports table
           addReportToQueue({
             name: formData.name, earTag: '',
             photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
@@ -123,7 +127,7 @@ const AddDogPage = () => {
             location: formData.location, isVaccinated: false,
             vaccination1Date: '', vaccination2Date: '',
             additionalInfo: formData.additionalInfo || '',
-            reportedBy: '', // guest — empty
+            reportedBy: '__guest__',
             reportType: formData.reportType, urgencyLevel: undefined,
             photoUrls: formData.photoUrls,
           });

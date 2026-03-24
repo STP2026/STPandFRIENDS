@@ -22,8 +22,11 @@ const MapPage = () => {
   const showParam = searchParams.get('show');
   const [showVaccination, setShowVaccination] = useState(showParam === 'vaccination');
 
-  // Helpers/admins see ALL dogs; regular users see only approved
-  const { data: dogs, isLoading: dogsLoading } = useDogs(isElevated);
+  // isElevated=true: helper/admin (all dogs)
+  // isElevated=false: regular logged-in user (own dogs + approved save)
+  // null: guest (no fetch)
+  const dogsFetchMode = !user ? null : isElevated ? true : false;
+  const { data: dogs, isLoading: dogsLoading } = useDogs(dogsFetchMode);
   const { data: facilities, isLoading: facilitiesLoading } = useFacilities();
   
   // Parse URL params for centering on specific dog
@@ -43,8 +46,8 @@ const MapPage = () => {
     return true; // vets & friends always shown
   });
 
-  // All dogs: only visible for helpers/admins (DB enforces this via View + RLS)
-  const displayDogs = isElevated ? (dogs || []) : [];
+  // Elevated: all dogs | Regular user: own dogs | Guest: empty
+  const displayDogs = user ? (dogs || []) : [];
 
   // Stats
   const taggedCount = displayDogs.filter((d) => d.reportType === 'save').length;
