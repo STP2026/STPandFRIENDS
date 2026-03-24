@@ -109,7 +109,24 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
       const compressed = await compressImage(file);
       setSlotProgress(slot, 55);
 
-      const fileName = `${user?.id ?? 'guest'}/${Date.now()}-${slot}.jpg`;
+      if (!user?.id) {
+        // Guest: no storage access — keep compressed blob as base64 data URL
+        const reader = new FileReader();
+        const base64 = await new Promise<string>((resolve, reject) => {
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(compressed);
+        });
+        setSlotProgress(slot, 100);
+        const newPreviews = [...previews] as [string,string,string];
+        newPreviews[slot] = base64;
+        setPreviews(newPreviews);
+        onPhotosUploaded(newPreviews);
+        return;
+      }
+
+      // Logged-in user: upload to storage
+      const fileName = `${user.id}/${Date.now()}-${slot}.jpg`;
       const { data, error: uploadError } = await supabase.storage
         .from('dog-photos')
         .upload(fileName, compressed, { contentType: 'image/jpeg', upsert: true });
