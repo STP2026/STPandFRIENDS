@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
@@ -66,7 +66,7 @@ import {
   Bandage,
   MapPin,
   ArrowUpDown,
-  MessageCircle,
+  X,
 } from 'lucide-react';
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
@@ -74,104 +74,6 @@ import PhotoUpload from '@/components/PhotoUpload';
 import SponsorTabContent from '@/components/SponsorTabContent';
 import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
-
-// ── Guest Reports Tab ────────────────────────────────────────────────────────
-const GuestReportsTab = () => {
-  const { t } = useTranslation();
-  const [guestReports, setGuestReports] = useState<any[]>([]);
-  const [guestLoading, setGuestLoading] = useState(true);
-
-  const fetchGuestReports = async () => {
-    setGuestLoading(true);
-    const { data } = await supabase
-      .from('guest_reports')
-      .select('*')
-      .order('created_at', { ascending: false });
-    setGuestReports(data || []);
-    setGuestLoading(false);
-  };
-
-  useEffect(() => { fetchGuestReports(); }, []);
-
-  const markReviewed = async (id: string) => {
-    await supabase.from('guest_reports').update({ reviewed: true }).eq('id', id);
-    fetchGuestReports();
-  };
-
-  if (guestLoading) return (
-    <div className="p-8 text-center text-muted-foreground">{t('common.loading', 'Lade...')}</div>
-  );
-  if (guestReports.length === 0) return (
-    <div className="glass-card rounded-xl p-8 text-center text-muted-foreground">
-      <MessageCircle className="w-10 h-10 mx-auto mb-3 opacity-30" />
-      <p>{t('admin.guestReports.empty', 'Keine Gast-Meldungen vorhanden.')}</p>
-    </div>
-  );
-
-  const unreviewed = guestReports.filter(r => !r.reviewed).length;
-
-  return (
-    <div className="space-y-3">
-      <p className="text-sm text-muted-foreground mb-4">
-        {t('admin.guestReports.desc', 'Meldungen von nicht eingeloggten Besuchern.')}
-        {unreviewed > 0 && (
-          <span className="ml-2 font-medium text-amber-600 dark:text-amber-400">
-            {unreviewed} ungeprüft
-          </span>
-        )}
-      </p>
-      {guestReports.map((r) => (
-        <div
-          key={r.id}
-          className={`glass-card rounded-xl p-4 border ${
-            r.reviewed
-              ? 'opacity-50'
-              : 'border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-950/10'
-          }`}
-        >
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1 flex-wrap">
-                <span className="text-sm font-medium">
-                  {r.name || t('admin.guestReports.unnamed', 'Unbekannt')}
-                </span>
-                <span className="text-xs bg-secondary px-2 py-0.5 rounded-full capitalize">
-                  {r.report_type}
-                </span>
-                {r.reviewed && (
-                  <span className="text-xs text-green-600 dark:text-green-400">✓ geprüft</span>
-                )}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                {r.location || `${r.latitude?.toFixed(4)}, ${r.longitude?.toFixed(4)}`}
-              </p>
-              {r.additional_info && (
-                <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{r.additional_info}</p>
-              )}
-              <p className="text-xs text-muted-foreground/60 mt-1">
-                {new Date(r.created_at).toLocaleDateString('de-DE', {
-                  day: '2-digit', month: '2-digit', year: 'numeric',
-                  hour: '2-digit', minute: '2-digit',
-                })}
-              </p>
-            </div>
-            {!r.reviewed && (
-              <Button
-                size="sm"
-                variant="outline"
-                className="shrink-0 text-xs"
-                onClick={() => markReviewed(r.id)}
-              >
-                {t('admin.guestReports.markReviewed', 'Als geprüft markieren')}
-              </Button>
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-// ─────────────────────────────────────────────────────────────────────────────
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -189,6 +91,46 @@ const AdminPage = () => {
   const deleteSponsor = useDeleteSponsor();
   const { data: rehabSpots } = useRehabSpots();
   const approveDog = useApproveDog();
+
+  // Guest reports — shown in pending tab alongside unreviewed dogs
+  const [guestReports, setGuestReports] = useState<any[]>([]);
+  const fetchGuestReports = useCallback(async () => {
+    const { data } = await supabase
+      .from('guest_reports')
+      .select('*')
+      .eq('reviewed', false)
+      .order('created_at', { ascending: false });
+    setGuestReports(data || []);
+  }, []);
+  useEffect(() => { fetchGuestReports(); }, [fetchGuestReports]);
+
+  const handleConvertGuestReport = async (r: any) => {
+    // Insert into dogs table and mark guest_report as reviewed
+    const { error } = await supabase.from('dogs').insert({
+      name: r.name || 'Unbekannt (Gast-Meldung)',
+      latitude: r.latitude,
+      longitude: r.longitude,
+      location: r.location,
+      additional_info: r.additional_info || null,
+      photo_url: r.photo_url || null,
+      photo_url_2: r.photo_url_2 || null,
+      photo_url_3: r.photo_url_3 || null,
+      report_type: r.report_type || 'stray',
+      is_approved: false,
+      is_vaccinated: false,
+      reported_by: null,
+      ear_tag: null,
+    });
+    if (!error) {
+      await supabase.from('guest_reports').update({ reviewed: true }).eq('id', r.id);
+      fetchGuestReports();
+    }
+  };
+
+  const handleDismissGuestReport = async (id: string) => {
+    await supabase.from('guest_reports').update({ reviewed: true }).eq('id', id);
+    fetchGuestReports();
+  };
   const updateDog = useUpdateDog();
   const deleteDog = useDeleteDog();
   const updateHelperApplication = useUpdateHelperApplication();
@@ -550,7 +492,7 @@ const AdminPage = () => {
                 <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="min-w-0">
-                <p className="text-xl sm:text-2xl font-bold text-foreground">{pendingDogs.length}</p>
+                <p className="text-xl sm:text-2xl font-bold text-foreground">{pendingDogs.length + guestReports.length}</p>
                 <p className="text-xs sm:text-sm text-muted-foreground truncate">{t('admin.tabs.pending')}</p>
               </div>
             </div>
@@ -611,7 +553,7 @@ const AdminPage = () => {
                 <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="hidden xs:inline">{t('admin.tabs.pending')}</span>
                 <span className="xs:hidden">Ausstd.</span>
-                <span>({pendingDogs.length})</span>
+                <span>({pendingDogs.length + guestReports.length})</span>
               </TabsTrigger>
               <TabsTrigger value="sos" data-value="sos" className="gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">
                 <AlertTriangle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -655,10 +597,7 @@ const AdminPage = () => {
                     <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     {t('admin.tabs.helpers')} ({pendingApplications.length})
                   </TabsTrigger>
-                  <TabsTrigger value="guest-reports" data-value="guest-reports" className="gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">
-                    <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    {t('admin.tabs.guestReports', 'Gast-Meldungen')}
-                  </TabsTrigger>
+
                 </>
               )}
             </TabsList>
@@ -672,7 +611,44 @@ const AdminPage = () => {
                 {t('admin.pendingApprovals')}
               </h2>
               
-              {pendingDogs.length === 0 ? (
+              {/* Guest reports — unreviewed */}
+              {guestReports.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-amber-600 dark:text-amber-400 mb-3 flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-amber-500"></span>
+                    {guestReports.length} Gast-Meldung(en) — nicht registrierte Besucher
+                  </h3>
+                  <div className="space-y-2">
+                    {guestReports.map((r) => (
+                      <div key={r.id} className="border border-amber-200 dark:border-amber-800 rounded-xl p-4 bg-amber-50/30 dark:bg-amber-950/10">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1 flex-wrap">
+                              <span className="text-sm font-medium">{r.name || 'Unbekannt'}</span>
+                              <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full">Gast</span>
+                              <span className="text-xs bg-secondary px-2 py-0.5 rounded-full capitalize">{r.report_type}</span>
+                            </div>
+                            <p className="text-xs text-muted-foreground">{r.location || `${r.latitude?.toFixed(4)}, ${r.longitude?.toFixed(4)}`}</p>
+                            {r.additional_info && <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{r.additional_info}</p>}
+                            <p className="text-xs text-muted-foreground/60 mt-1">{new Date(r.created_at).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                          </div>
+                          <div className="flex gap-2 shrink-0">
+                            <Button size="sm" variant="outline" className="text-xs gap-1" onClick={() => handleConvertGuestReport(r)}>
+                              <CheckCircle className="w-3.5 h-3.5" />
+                              Als Hund anlegen
+                            </Button>
+                            <Button size="sm" variant="ghost" className="text-xs text-muted-foreground" onClick={() => handleDismissGuestReport(r.id)}>
+                              <X className="w-3.5 h-3.5" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {pendingDogs.length === 0 && guestReports.length === 0 ? (
                 <p className="text-center py-8 text-muted-foreground">{t('admin.noPending')}</p>
               ) : (
                 <>
@@ -1486,12 +1462,7 @@ const AdminPage = () => {
 
           )}
 
-          {/* Guest Reports Tab (Admin only) */}
-          {isAdmin && (
-            <TabsContent value="guest-reports">
-              <GuestReportsTab />
-            </TabsContent>
-          )}
+
 
         </Tabs>
       </main>
