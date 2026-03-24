@@ -31,6 +31,30 @@ const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promi
     img.src = objectUrl;
   });
 
+
+// Exported helper — uploads a base64 data URL to Supabase storage
+// Used by AddDogPage to upload locally cached photos after offline sync
+export async function uploadBase64ToStorage(
+  base64DataUrl: string,
+  userId: string,
+  slot: number
+): Promise<string | null> {
+  try {
+    const res = await fetch(base64DataUrl);
+    const blob = await res.blob();
+    const fileName = `${userId}/${Date.now()}-${slot}.jpg`;
+    const { data, error } = await supabase.storage
+      .from('dog-photos')
+      .upload(fileName, blob, { contentType: 'image/jpeg', upsert: true });
+    if (error) throw error;
+    const { data: { publicUrl } } = supabase.storage.from('dog-photos').getPublicUrl(data.path);
+    return publicUrl;
+  } catch (e) {
+    console.error('[PhotoUpload] uploadBase64ToStorage failed:', e);
+    return null;
+  }
+}
+
 const MAX_PHOTOS = 3;
 
 const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, currentPhotoUrls }: PhotoUploadProps) => {
