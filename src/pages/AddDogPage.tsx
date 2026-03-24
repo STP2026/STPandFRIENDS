@@ -150,10 +150,13 @@ const AddDogPage = () => {
       photo2: formData.photoUrls[1] || '',
       photo3: formData.photoUrls[2] || '',
       isVaccinated: formData.isVaccinated,
-      additionalInfo: formData.additionalInfo || undefined,
+      vaccination1Date: formData.vaccination1Date || '',
+      vaccination2Date: formData.vaccination2Date || '',
+      additionalInfo: formData.additionalInfo || '',
       reportedBy: user.id,
       reportType: formData.reportType,
       urgencyLevel: undefined,
+      photoUrls: formData.photoUrls,
     };
 
     // Strip base64 photos from DB payload — send text data first
@@ -215,20 +218,7 @@ const AddDogPage = () => {
         return;
       }
 
-      // Quick verification: confirm record exists in DB before showing success
-      const { data: verify } = await supabase
-        .from('dogs')
-        .select('id')
-        .eq('id', insertedId)
-        .single();
-
-      if (!verify?.id) {
-        // Insert returned an ID but record not found — treat as failure
-        addReportToQueue(reportData);
-        setSubmittedOffline(true);
-        return;
-      }
-
+      // Insert returned a valid ID — trust it succeeded
       setSubmitted(true);
 
       // Upload photos in background after successful DB insert
