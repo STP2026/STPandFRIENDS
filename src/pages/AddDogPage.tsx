@@ -70,10 +70,11 @@ const AddDogPage = () => {
     if (!selectedPosition) return;
     setIsSubmitting(true);
 
+    const isBase64 = (s: string) => s?.startsWith('data:');
+
     // Guest report: insert into guest_reports table
     if (!user) {
       // Guest: submit text data first, upload photos after
-      const isBase64 = (s: string) => s?.startsWith('data:');
       try {
         let lastErr: unknown;
         let inserted = false;
@@ -143,7 +144,6 @@ const AddDogPage = () => {
 
     // Strip base64 photos from DB payload — send text data first
     const photosToUpload = [reportData.photo, reportData.photo2, reportData.photo3];
-    const isBase64 = (s: string) => s?.startsWith('data:');
     const dbPayload = {
       ...reportData,
       photo: isBase64(reportData.photo) ? '' : reportData.photo,
@@ -454,7 +454,9 @@ const AddDogPage = () => {
                   {t('addDog.photo')}
                 </Label>
                 <PhotoUpload
-                  onPhotosChanged={(urls) => setFormData({ ...formData, photoUrls: urls })}
+                  onPhotosUploaded={(urls) => setFormData({ ...formData, photoUrls: urls })}
+                  onUploadingChange={setIsPhotoUploading}
+                  onHasPhotoChange={setHasPhoto}
                   currentPhotoUrls={formData.photoUrls}
                 />
               </div>
