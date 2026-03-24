@@ -261,7 +261,8 @@
       "rehab": "Spots Réhab",
       "facilities": "Établissements",
       "ads": "Publicités",
-      "helpers": "Aidants"
+      "helpers": "Aidants",
+      "guestReports": "Signalements invités"
     },
     "pendingApprovals": "Approbations en attente",
     "noPending": "Aucun signalement en attente.",
@@ -369,7 +370,13 @@
     "caretakerPrompt": "Qui s'occupe de ce chien ?",
     "caretakerClick": "Cliquer pour assigner",
     "caretakerEmpty": "+ assigner",
-    "caretakerUnassigned": "Non assigné"
+    "caretakerUnassigned": "Non assigné",
+    "guestReports": {
+      "empty": "Aucun signalement invité disponible.",
+      "desc": "Signalements de visiteurs non connectés.",
+      "unnamed": "Inconnu",
+      "markReviewed": "Marquer comme examiné"
+    }
   },
   "helper": {
     "title": "Devenez Aidant 💚",

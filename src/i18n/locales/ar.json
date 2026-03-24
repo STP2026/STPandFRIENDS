@@ -261,7 +261,8 @@
       "rehab": "أماكن التعافي",
       "facilities": "المرافق",
       "ads": "الإعلانات",
-      "helpers": "المتطوعين"
+      "helpers": "المتطوعين",
+      "guestReports": "بلاغات الزوار"
     },
     "pendingApprovals": "كيتسنّاو الموافقة",
     "noPending": "ما كاين حتى تبليغ كيتسنّا.",
@@ -369,7 +370,13 @@
     "caretakerPrompt": "شكون اللي كيتكلف بهاد الكلب؟",
     "caretakerClick": "كليكي باش تعيّن",
     "caretakerEmpty": "+ عيّن",
-    "caretakerUnassigned": "غير معيّن"
+    "caretakerUnassigned": "غير معيّن",
+    "guestReports": {
+      "empty": "لا توجد بلاغات من الزوار.",
+      "desc": "بلاغات من زوار غير مسجلين.",
+      "unnamed": "مجهول",
+      "markReviewed": "وضع علامة كمراجَع"
+    }
   },
   "helper": {
     "title": "ولّي متطوع 💚",

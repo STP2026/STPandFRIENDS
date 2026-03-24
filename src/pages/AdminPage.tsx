@@ -66,6 +66,7 @@ import {
   Bandage,
   MapPin,
   ArrowUpDown,
+  MessageCircle,
 } from 'lucide-react';
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
@@ -73,6 +74,104 @@ import PhotoUpload from '@/components/PhotoUpload';
 import SponsorTabContent from '@/components/SponsorTabContent';
 import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
+
+// ── Guest Reports Tab ────────────────────────────────────────────────────────
+const GuestReportsTab = () => {
+  const { t } = useTranslation();
+  const [guestReports, setGuestReports] = useState<any[]>([]);
+  const [guestLoading, setGuestLoading] = useState(true);
+
+  const fetchGuestReports = async () => {
+    setGuestLoading(true);
+    const { data } = await supabase
+      .from('guest_reports')
+      .select('*')
+      .order('created_at', { ascending: false });
+    setGuestReports(data || []);
+    setGuestLoading(false);
+  };
+
+  useEffect(() => { fetchGuestReports(); }, []);
+
+  const markReviewed = async (id: string) => {
+    await supabase.from('guest_reports').update({ reviewed: true }).eq('id', id);
+    fetchGuestReports();
+  };
+
+  if (guestLoading) return (
+    <div className="p-8 text-center text-muted-foreground">{t('common.loading', 'Lade...')}</div>
+  );
+  if (guestReports.length === 0) return (
+    <div className="glass-card rounded-xl p-8 text-center text-muted-foreground">
+      <MessageCircle className="w-10 h-10 mx-auto mb-3 opacity-30" />
+      <p>{t('admin.guestReports.empty', 'Keine Gast-Meldungen vorhanden.')}</p>
+    </div>
+  );
+
+  const unreviewed = guestReports.filter(r => !r.reviewed).length;
+
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-muted-foreground mb-4">
+        {t('admin.guestReports.desc', 'Meldungen von nicht eingeloggten Besuchern.')}
+        {unreviewed > 0 && (
+          <span className="ml-2 font-medium text-amber-600 dark:text-amber-400">
+            {unreviewed} ungeprüft
+          </span>
+        )}
+      </p>
+      {guestReports.map((r) => (
+        <div
+          key={r.id}
+          className={`glass-card rounded-xl p-4 border ${
+            r.reviewed
+              ? 'opacity-50'
+              : 'border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-950/10'
+          }`}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <span className="text-sm font-medium">
+                  {r.name || t('admin.guestReports.unnamed', 'Unbekannt')}
+                </span>
+                <span className="text-xs bg-secondary px-2 py-0.5 rounded-full capitalize">
+                  {r.report_type}
+                </span>
+                {r.reviewed && (
+                  <span className="text-xs text-green-600 dark:text-green-400">✓ geprüft</span>
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {r.location || `${r.latitude?.toFixed(4)}, ${r.longitude?.toFixed(4)}`}
+              </p>
+              {r.additional_info && (
+                <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{r.additional_info}</p>
+              )}
+              <p className="text-xs text-muted-foreground/60 mt-1">
+                {new Date(r.created_at).toLocaleDateString('de-DE', {
+                  day: '2-digit', month: '2-digit', year: 'numeric',
+                  hour: '2-digit', minute: '2-digit',
+                })}
+              </p>
+            </div>
+            {!r.reviewed && (
+              <Button
+                size="sm"
+                variant="outline"
+                className="shrink-0 text-xs"
+                onClick={() => markReviewed(r.id)}
+              >
+                {t('admin.guestReports.markReviewed', 'Als geprüft markieren')}
+              </Button>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+// ─────────────────────────────────────────────────────────────────────────────
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -555,6 +654,10 @@ const AdminPage = () => {
                     <TabsTrigger value="helpers" data-value="helpers" className="gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">
                     <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     {t('admin.tabs.helpers')} ({pendingApplications.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="guest-reports" data-value="guest-reports" className="gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">
+                    <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    {t('admin.tabs.guestReports', 'Gast-Meldungen')}
                   </TabsTrigger>
                 </>
               )}
@@ -1379,6 +1482,11 @@ const AdminPage = () => {
                   </>
                 )}
               </div>
+            </TabsContent>
+
+            {/* Guest Reports Tab */}
+            <TabsContent value="guest-reports">
+              <GuestReportsTab />
             </TabsContent>
           )}
         </Tabs>

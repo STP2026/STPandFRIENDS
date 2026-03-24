@@ -261,7 +261,8 @@
       "rehab": "Rehab-Spots",
       "facilities": "Einrichtungen",
       "ads": "Werbung",
-      "helpers": "Helfer"
+      "helpers": "Helfer",
+      "guestReports": "Gast-Meldungen"
     },
     "pendingApprovals": "Ausstehende Freigaben",
     "noPending": "Keine ausstehenden Meldungen.",
@@ -369,7 +370,13 @@
     "caretakerPrompt": "Wer betreut diesen Hund?",
     "caretakerClick": "Klicken zum Zuweisen",
     "caretakerEmpty": "+ zuweisen",
-    "caretakerUnassigned": "Nicht zugewiesen"
+    "caretakerUnassigned": "Nicht zugewiesen",
+    "guestReports": {
+      "empty": "Keine Gast-Meldungen vorhanden.",
+      "desc": "Meldungen von nicht eingeloggten Besuchern.",
+      "unnamed": "Unbekannt",
+      "markReviewed": "Als geprüft markieren"
+    }
   },
   "helper": {
     "title": "Werde Helfer 💚",

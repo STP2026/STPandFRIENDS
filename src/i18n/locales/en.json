@@ -261,7 +261,8 @@
       "rehab": "Rehab Spots",
       "facilities": "Facilities",
       "ads": "Advertisements",
-      "helpers": "Helpers"
+      "helpers": "Helpers",
+      "guestReports": "Guest reports"
     },
     "pendingApprovals": "Pending Approvals",
     "noPending": "No pending reports.",
@@ -369,7 +370,13 @@
     "caretakerPrompt": "Who is responsible for this dog?",
     "caretakerClick": "Click to assign",
     "caretakerEmpty": "+ assign",
-    "caretakerUnassigned": "Unassigned"
+    "caretakerUnassigned": "Unassigned",
+    "guestReports": {
+      "empty": "No guest reports available.",
+      "desc": "Reports from non-logged-in visitors.",
+      "unnamed": "Unknown",
+      "markReviewed": "Mark as reviewed"
+    }
   },
   "helper": {
     "title": "Become a Helper 💚",

@@ -99,9 +99,9 @@ const AddDogPage = () => {
             if (attempt < 3) await new Promise(r => setTimeout(r, 3000 * attempt));
           }
         }
-        setSubmitted(true);
-        // Photos upload silently in background (guest — no user ID, use anon path)
         if (inserted) {
+          setSubmitted(true);
+          // Photos upload silently in background
           formData.photoUrls.forEach(async (photo, idx) => {
             if (!photo || !isBase64(photo)) return;
             try {
@@ -112,12 +112,28 @@ const AddDogPage = () => {
                 `guest/${Date.now()}-${idx}.jpg`, file,
                 { cacheControl: '3600', upsert: false }
               );
-            } catch { /* silent — photo upload is best-effort for guests */ }
+            } catch { /* silent — best-effort */ }
           });
+        } else {
+          // All attempts failed — save to offline queue for later sync
+          console.error('Guest report failed after 3 attempts:', lastErr);
+          addReportToQueue({
+            name: formData.name, earTag: '',
+            photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
+            photo3: formData.photoUrls[2] || '',
+            latitude: selectedPosition.lat, longitude: selectedPosition.lng,
+            location: formData.location, isVaccinated: false,
+            vaccination1Date: '', vaccination2Date: '',
+            additionalInfo: formData.additionalInfo || '',
+            reportedBy: '', // guest — empty
+            reportType: formData.reportType, urgencyLevel: undefined,
+            photoUrls: formData.photoUrls,
+          });
+          setSubmittedOffline(true);
         }
       } catch (err) {
         console.error('Guest report error:', err);
-        setSubmitted(true);
+        setSubmittedOffline(true);
       } finally {
         setSubmitAttempt(0);
         setIsSubmitting(false);
@@ -531,22 +547,38 @@ const AddDogPage = () => {
                 variant="outline"
                 className="gap-2 text-muted-foreground"
                 disabled={!selectedPosition || !hasPhoto || isPhotoUploading || isSubmitting}
-                onClick={() => {
-                  // Save to offline queue immediately — sync later
-                  const reportData = {
-                    name: formData.name, earTag: formData.earTag,
-                    photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
-                    photo3: formData.photoUrls[2] || '',
-                    latitude: selectedPosition?.lat ?? 0,
-                    longitude: selectedPosition?.lng ?? 0,
-                    location: formData.location, isVaccinated: formData.isVaccinated,
-                    vaccination1Date: formData.vaccination1Date, vaccination2Date: formData.vaccination2Date,
-                    additionalInfo: formData.additionalInfo, reportedBy: user?.id || '',
-                    reportType: formData.reportType, urgencyLevel: undefined,
-                    photoUrls: formData.photoUrls,
-                  };
-                  addReportToQueue(reportData);
-                  setSubmittedOffline(true);
+                onClick={async () => {
+                  if (!user) {
+                    // Guest: insert directly into guest_reports (offline-first)
+                    try {
+                      await supabase.from('guest_reports').insert({
+                        report_type: formData.reportType,
+                        latitude: selectedPosition?.lat ?? 0,
+                        longitude: selectedPosition?.lng ?? 0,
+                        location: formData.location,
+                        additional_info: formData.additionalInfo || null,
+                        name: formData.name || null,
+                        photo_url: null, photo_url_2: null, photo_url_3: null,
+                      });
+                    } catch { /* silent fail — no queue for guests */ }
+                    setSubmittedOffline(true);
+                  } else {
+                    // Logged-in user: save to offline queue → syncs to dogs table later
+                    const reportData = {
+                      name: formData.name, earTag: formData.earTag,
+                      photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
+                      photo3: formData.photoUrls[2] || '',
+                      latitude: selectedPosition?.lat ?? 0,
+                      longitude: selectedPosition?.lng ?? 0,
+                      location: formData.location, isVaccinated: formData.isVaccinated,
+                      vaccination1Date: formData.vaccination1Date, vaccination2Date: formData.vaccination2Date,
+                      additionalInfo: formData.additionalInfo, reportedBy: user.id,
+                      reportType: formData.reportType, urgencyLevel: undefined,
+                      photoUrls: formData.photoUrls,
+                    };
+                    addReportToQueue(reportData);
+                    setSubmittedOffline(true);
+                  }
                 }}
               >
                 {t('addDog.saveLater', 'Später senden')}
