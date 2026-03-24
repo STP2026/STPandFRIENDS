@@ -65,7 +65,8 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     setIsSyncing(true);
 
     for (const report of reportsToSync) {
-      if (report.retryCount >= 5) {
+      if (report.retryCount >= 3) {
+        console.error('[Offline] Max retries reached, dropping report:', report.id);
         removeFromQueue(report.id);
         continue;
       }
@@ -102,7 +103,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           reported_by: formData.reportedBy,
           is_approved: isAutoApproved,
           report_type: formData.reportType,
-          urgency_level: undefined,
+          urgency_level: null,
         });
 
         if (error) {
@@ -114,9 +115,16 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
         } else {
           removeFromQueue(report.id);
         }
-      } catch (e) {
-        console.error('[Offline] Sync failed for report:', report.id, e);
-        updateQueueStatus(report.id, 'failed');
+      } catch (e: any) {
+        const errMsg = e?.message || e?.code || String(e);
+        console.error('[Offline] Sync failed:', report.id, errMsg);
+        // RLS / permission errors → drop immediately (won't fix by retrying)
+        if (e?.code === '42501' || errMsg.includes('permission') || errMsg.includes('policy')) {
+          console.error('[Offline] RLS/permission error — dropping report');
+          removeFromQueue(report.id);
+        } else {
+          updateQueueStatus(report.id, 'failed');
+        }
       }
     }
 
@@ -129,10 +137,13 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     const online = await verifyConnectivity();
     if (!online) return false;
     await syncQueue();
-    // Return true if all reports cleared
-    return offlineQueue.filter(
+    // Wait briefly for React state to update after async queue operations
+    await new Promise(r => setTimeout(r, 300));
+    // Success = no reports remain in failed/pending state
+    const remaining = offlineQueue.filter(
       r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
-    ).length === 0;
+    ).length;
+    return remaining === 0;
   }, [verifyConnectivity, syncQueue, offlineQueue]);
 
   // Auto-sync when coming back online
