@@ -1484,12 +1484,15 @@ const AdminPage = () => {
               </div>
             </TabsContent>
 
-            {/* Guest Reports Tab */}
+          )}
+
+          {/* Guest Reports Tab (Admin only) */}
+          {isAdmin && (
             <TabsContent value="guest-reports">
               <GuestReportsTab />
             </TabsContent>
-
           )}
+
         </Tabs>
       </main>
 
