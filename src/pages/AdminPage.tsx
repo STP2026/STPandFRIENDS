@@ -1488,6 +1488,7 @@ const AdminPage = () => {
             <TabsContent value="guest-reports">
               <GuestReportsTab />
             </TabsContent>
+
           )}
         </Tabs>
       </main>
