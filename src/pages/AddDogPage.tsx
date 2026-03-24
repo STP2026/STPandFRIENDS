@@ -11,7 +11,6 @@ import { useNavigate, Link } from "react-router-dom";
 import SafeDogMap from "@/components/SafeDogMap";
 import PhotoUpload, { uploadBase64ToStorage } from "@/components/PhotoUpload";
 import { useAuth } from "@/contexts/AuthContext";
-import { useAddDog } from "@/hooks/useDogs";
 import { useOfflineContext } from "@/contexts/OfflineContext";
 import { supabase } from "@/integrations/supabase/client";
 import { ReportType, REPORT_TYPE_LABELS, USER_REPORT_TYPES } from "@/types/dog";
@@ -40,7 +39,6 @@ const AddDogPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isOnline, addReportToQueue, pendingCount, syncQueue } = useOfflineContext();
-  const addDogMutation = useAddDog();
   const [submitted, setSubmitted] = useState(false);
   const [submittedOffline, setSubmittedOffline] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -168,27 +166,47 @@ const AddDogPage = () => {
     };
 
     try {
-      // Reset mutation state before new submit (prevents stale state from previous submit)
-      addDogMutation.reset();
-      // Try up to 3 times with delay — for slow 4G connections in Morocco
+      // Direct Supabase insert — bypasses React Query mutation state issues
+      const isAutoApproved = formData.reportType !== 'save';
+      let insertedId: string | null = null;
       let lastError: unknown;
-      let insertedDog: Awaited<ReturnType<typeof addDogMutation.mutateAsync>> | null = null;
+
       for (let attempt = 1; attempt <= 3; attempt++) {
         setSubmitAttempt(attempt);
         try {
-          insertedDog = await addDogMutation.mutateAsync(dbPayload);
+          const { data, error } = await supabase
+            .from('dogs')
+            .insert({
+              name: dbPayload.name,
+              ear_tag: dbPayload.earTag || null,
+              photo_url: dbPayload.photo || null,
+              photo_url_2: dbPayload.photo2 || null,
+              photo_url_3: dbPayload.photo3 || null,
+              latitude: dbPayload.latitude,
+              longitude: dbPayload.longitude,
+              location: dbPayload.location,
+              is_vaccinated: dbPayload.isVaccinated,
+              vaccination1_date: dbPayload.vaccination1Date || null,
+              vaccination2_date: dbPayload.vaccination2Date || null,
+              additional_info: dbPayload.additionalInfo || null,
+              reported_by: dbPayload.reportedBy,
+              is_approved: isAutoApproved,
+              report_type: dbPayload.reportType,
+              urgency_level: null,
+            })
+            .select('id')
+            .single();
+          if (error) throw error;
+          insertedId = data?.id ?? null;
           setSubmitAttempt(0);
           break;
         } catch (err) {
           lastError = err;
-          if (attempt < 3) {
-            await new Promise(r => setTimeout(r, 3000 * attempt));
-          }
+          if (attempt < 3) await new Promise(r => setTimeout(r, 3000 * attempt));
         }
       }
 
-      if (!insertedDog) {
-        // All attempts failed — save full payload (with base64 photos) to queue
+      if (!insertedId) {
         console.error('All submit attempts failed, saving to offline queue:', lastError);
         addReportToQueue(reportData);
         setSubmittedOffline(true);
@@ -198,7 +216,7 @@ const AddDogPage = () => {
       setSubmitted(true);
 
       // Upload photos in background after successful DB insert
-      const dogId = insertedDog.id;
+      const dogId = insertedId;
       if (dogId && user) {
         photosToUpload.forEach(async (photo, idx) => {
           if (!photo || !isBase64(photo)) return;
@@ -348,7 +366,6 @@ const AddDogPage = () => {
                     location: '', isVaccinated: false, vaccination1Date: '', vaccination2Date: '',
                     additionalInfo: '', reportType: 'stray', urgencyLevel: '',
                   });
-                  addDogMutation.reset();
                 }}
                 className="gap-2"
               >
