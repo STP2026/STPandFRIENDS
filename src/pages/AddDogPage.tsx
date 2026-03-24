@@ -197,7 +197,9 @@ const AddDogPage = () => {
             .select('id')
             .single();
           if (error) throw error;
-          insertedId = data?.id ?? null;
+          // data can be null if request was aborted mid-flight (iOS Safari)
+          if (!data?.id) throw new Error('Insert returned no ID — request may have been aborted');
+          insertedId = data.id;
           setSubmitAttempt(0);
           break;
         } catch (err) {
@@ -208,6 +210,20 @@ const AddDogPage = () => {
 
       if (!insertedId) {
         console.error('All submit attempts failed, saving to offline queue:', lastError);
+        addReportToQueue(reportData);
+        setSubmittedOffline(true);
+        return;
+      }
+
+      // Quick verification: confirm record exists in DB before showing success
+      const { data: verify } = await supabase
+        .from('dogs')
+        .select('id')
+        .eq('id', insertedId)
+        .single();
+
+      if (!verify?.id) {
+        // Insert returned an ID but record not found — treat as failure
         addReportToQueue(reportData);
         setSubmittedOffline(true);
         return;
