@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, Heart, Syringe, WifiOff, Facebook, ExternalLink } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import SafeDogMap from "@/components/SafeDogMap";
-import PhotoUpload from "@/components/PhotoUpload";
+import PhotoUpload, { uploadBase64ToStorage } from "@/components/PhotoUpload";
 import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useOfflineContext } from "@/contexts/OfflineContext";
@@ -103,6 +103,28 @@ const AddDogPage = () => {
     };
   };
 
+  /**
+   * Resolve photo URLs for DB insert.
+   * If photos are already Storage URLs → use them directly.
+   * If photos are base64 (offline capture while online) → upload to Storage first.
+   * Returns [url1, url2, url3] ready for the dogs table.
+   */
+  const resolvePhotoUrls = async (): Promise<[string, string, string]> => {
+    const urls = [...formData.photoUrls] as [string, string, string];
+    if (!user?.id) return urls;
+
+    for (let i = 0; i < 3; i++) {
+      const b64 = formData.photoBase64[i];
+      if (b64 && b64.startsWith('data:')) {
+        const publicUrl = await uploadBase64ToStorage(b64, user.id, i);
+        if (publicUrl) {
+          urls[i] = publicUrl;
+        }
+      }
+    }
+    return urls;
+  };
+
   // ── SUBMIT ──────────────────────────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +139,6 @@ const AddDogPage = () => {
         for (let attempt = 1; attempt <= 3; attempt++) {
           setSubmitAttempt(attempt);
           try {
-            // Guest photos: use base64 directly (TEXT columns in guest_reports)
             const photoUrl = formData.photoBase64[0] || formData.photoUrls[0] || null;
             const photoUrl2 = formData.photoBase64[1] || formData.photoUrls[1] || null;
             const photoUrl3 = formData.photoBase64[2] || formData.photoUrls[2] || null;
@@ -144,7 +165,6 @@ const AddDogPage = () => {
         if (succeeded) {
           setSubmitted(true);
         } else {
-          // Offline queue with guest marker
           const payload = buildQueuePayload();
           if (payload) addReportToQueue(payload);
           setSubmittedOffline(true);
@@ -163,47 +183,38 @@ const AddDogPage = () => {
     // ── LOGGED-IN USER / HELPER / ADMIN ──
     const isAutoApproved = isElevated ? true : formData.reportType !== 'save';
 
-    const payload = {
-      name: formData.name || null,
-      ear_tag: formData.earTag || null,
-      photo_url: formData.photoUrls[0] || null,
-      photo_url_2: formData.photoUrls[1] || null,
-      photo_url_3: formData.photoUrls[2] || null,
-      latitude: selectedPosition.lat,
-      longitude: selectedPosition.lng,
-      location: formData.location || null,
-      is_vaccinated: formData.isVaccinated,
-      vaccination1_date: formData.vaccination1Date || null,
-      vaccination2_date: formData.vaccination2Date || null,
-      additional_info: formData.additionalInfo || null,
-      reported_by: user.id,
-      is_approved: isAutoApproved,
-      report_type: formData.reportType,
-      urgency_level: null as string | null,
-      gender: formData.gender || null,
-    };
-
     try {
       // Ensure JWT is valid before writing
       const sessionOk = await ensureValidSession();
       if (!sessionOk) {
-        // Session gone → queue for later
         const queueData = buildQueuePayload();
         if (queueData) addReportToQueue(queueData);
         setSubmittedOffline(true);
         return;
       }
 
-      // Check if photos are base64 (offline capture) → need to queue instead of direct insert
-      const hasBase64Photos = formData.photoBase64.some(b => b && b.startsWith('data:'));
-      if (hasBase64Photos) {
-        // Photos are local base64 — can't insert Storage URLs that don't exist yet.
-        // Queue the report; sync will upload photos first, then insert.
-        const queueData = buildQueuePayload();
-        if (queueData) addReportToQueue(queueData);
-        setSubmittedOffline(true);
-        return;
-      }
+      // Resolve photos: upload any base64 to Storage first
+      const photoUrls = await resolvePhotoUrls();
+
+      const payload = {
+        name: formData.name || null,
+        ear_tag: formData.earTag || null,
+        photo_url: photoUrls[0] || null,
+        photo_url_2: photoUrls[1] || null,
+        photo_url_3: photoUrls[2] || null,
+        latitude: selectedPosition.lat,
+        longitude: selectedPosition.lng,
+        location: formData.location || null,
+        is_vaccinated: formData.isVaccinated,
+        vaccination1_date: formData.vaccination1Date || null,
+        vaccination2_date: formData.vaccination2Date || null,
+        additional_info: formData.additionalInfo || null,
+        reported_by: user.id,
+        is_approved: isAutoApproved,
+        report_type: formData.reportType,
+        urgency_level: null as string | null,
+        gender: formData.gender || null,
+      };
 
       let succeeded = false;
       for (let attempt = 1; attempt <= 3; attempt++) {
