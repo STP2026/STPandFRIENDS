@@ -1,6 +1,6 @@
-import { supabase } from '@/integrations/supabase/client';
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import { useAllDogs, useApproveDog, useUpdateDog, useDeleteDog } from '@/hooks/useDogs';
@@ -111,7 +111,7 @@ const AdminPage = () => {
   }, []);
   useEffect(() => { fetchGuestReports(); }, [fetchGuestReports]);
 
-const handleConvertGuestReport = async (r: any) => {
+  const handleConvertGuestReport = async (r: any) => {
     // If guest photos are base64, upload to Storage first
     const isBase64 = (s: string | null) => s && s.startsWith('data:');
     let photoUrl = r.photo_url || null;
@@ -260,6 +260,8 @@ const handleConvertGuestReport = async (r: any) => {
     caretaker: '',
     reportType: '' as string,
     photoUrls: ['', '', ''] as [string, string, string],
+    gender: '' as '' | 'male' | 'female',
+    additionalInfo: '',
   });
 
   const canAccess = isAdmin || isHelper;
@@ -320,6 +322,8 @@ const handleConvertGuestReport = async (r: any) => {
       caretaker: dog.caretaker || '',
       reportType: dog.reportType,
       photoUrls: [dog.photo !== '/placeholder.svg' ? dog.photo : '', dog.photo2 || '', dog.photo3 || ''] as [string, string, string],
+      gender: (dog.gender as '' | 'male' | 'female') || '',
+      additionalInfo: dog.additionalInfo || '',
     });
     setEditDialogOpen(true);
   };
@@ -352,6 +356,12 @@ const handleConvertGuestReport = async (r: any) => {
     if (editForm.reportType !== selectedDog.reportType) {
       changes.report_type = editForm.reportType;
     }
+    if (editForm.gender !== (selectedDog.gender || '')) {
+      changes.gender = editForm.gender || null;
+    }
+    if (editForm.additionalInfo !== (selectedDog.additionalInfo || '')) {
+      changes.additional_info = editForm.additionalInfo || null;
+    }
     
     await updateDog.mutateAsync({
       id: selectedDog.id,
@@ -367,6 +377,8 @@ const handleConvertGuestReport = async (r: any) => {
         photo_url: editForm.photoUrls[0] || null,
         photo_url_2: editForm.photoUrls[1] || null,
         photo_url_3: editForm.photoUrls[2] || null,
+        gender: editForm.gender || null,
+        additional_info: editForm.additionalInfo || null,
       },
     });
 
@@ -1656,13 +1668,35 @@ const handleConvertGuestReport = async (r: any) => {
                 onCheckedChange={(checked) => setEditForm({ ...editForm, isVaccinated: checked })}
               />
             </div>
-            
-            <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
-               <Label htmlFor="approved">{t('admin.vaccination.visibleToUsers')}</Label>
-               <Switch
-                id="approved"
-                checked={editForm.isApproved}
-                onCheckedChange={(checked) => setEditForm({ ...editForm, isApproved: checked })}
+
+            {/* Gender */}
+            <div className="space-y-2">
+              <Label>{t('addDog.gender', 'Geschlecht')}</Label>
+              <div className="flex gap-2">
+                {([['', '—'], ['male', '♂ ' + t('addDog.genderMale', 'Männlich')], ['female', '♀ ' + t('addDog.genderFemale', 'Weiblich')]] as [string, string][]).map(([val, label]) => (
+                  <button key={val} type="button"
+                    onClick={() => setEditForm({ ...editForm, gender: val as '' | 'male' | 'female' })}
+                    className={`flex-1 py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${
+                      editForm.gender === val ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:border-primary/50'
+                    }`}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Additional Info / Bemerkungen */}
+            <div className="space-y-2">
+              <Label htmlFor="editAdditionalInfo" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                {t('addDog.additionalNotes', 'Zusätzliche Notizen')}
+              </Label>
+              <Textarea
+                id="editAdditionalInfo"
+                placeholder={t('addDog.additionalNotesPlaceholder', 'Weitere Informationen (Verhalten, Zustand, etc.)...')}
+                value={editForm.additionalInfo}
+                onChange={(e) => setEditForm({ ...editForm, additionalInfo: e.target.value })}
+                rows={3}
               />
             </div>
 
