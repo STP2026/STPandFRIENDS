@@ -207,7 +207,10 @@
     "photoRequired": "Veuillez prendre au moins 1 photo",
     "uploadingPhoto": "Chargement de la photo...",
     "saveLater": "Envoyer plus tard",
-    "anotherReport": "Nouveau signalement"
+    "anotherReport": "Nouveau signalement",
+    "gender": "Sexe",
+    "genderMale": "Mâle",
+    "genderFemale": "Femelle"
   },
   "auth": {
     "login": "Connexion",

@@ -48,6 +48,7 @@ const AddDogPage = () => {
     additionalInfo: "",
     reportType: "stray" as ReportType,
     urgencyLevel: "",
+    gender: "" as "" | "male" | "female",
   });
 
   const handleLocationSelect = (lat: number, lng: number) => {
@@ -97,6 +98,7 @@ const AddDogPage = () => {
               photo_url: formData.photoUrls[0] || null,
               photo_url_2: formData.photoUrls[1] || null,
               photo_url_3: formData.photoUrls[2] || null,
+              gender: formData.gender || null,
             });
             if (error) throw error;
             succeeded = true;
@@ -159,12 +161,10 @@ const AddDogPage = () => {
       is_approved: isAutoApproved,
       report_type: formData.reportType,
       urgency_level: null as string | null,
+      gender: formData.gender || null,
     };
 
     try {
-      // Refresh session before insert — prevents stale JWT after long admin portal usage
-      await supabase.auth.refreshSession();
-
       let succeeded = false;
       let lastErr: unknown;
 
@@ -200,6 +200,7 @@ const AddDogPage = () => {
           reportType: formData.reportType,
           urgencyLevel: undefined,
           photoUrls: formData.photoUrls,
+          gender: formData.gender || undefined,
         });
         setSubmittedOffline(true);
       }
@@ -225,6 +226,7 @@ const AddDogPage = () => {
           photo_url: formData.photoUrls[0] || null,
           photo_url_2: formData.photoUrls[1] || null,
           photo_url_3: formData.photoUrls[2] || null,
+          gender: formData.gender || null,
         });
       } catch { /* silent */ }
       setSubmittedOffline(true);
@@ -460,6 +462,21 @@ const AddDogPage = () => {
                   </div>
                 )}
               </div>
+              <div className="mt-4 space-y-2">
+                <Label>{t('addDog.gender', 'Geschlecht')} <span className="text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span></Label>
+                <div className="flex gap-2">
+                  {([['', '—'], ['male', '♂ ' + t('addDog.genderMale', 'Männlich')], ['female', '♀ ' + t('addDog.genderFemale', 'Weiblich')]] as [string, string][]).map(([val, label]) => (
+                    <button key={val} type="button"
+                      onClick={() => setFormData(prev => ({ ...prev, gender: val as '' | 'male' | 'female' }))}
+                      className={`flex-1 py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${
+                        formData.gender === val ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:border-primary/50'
+                      }`}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="mt-4 space-y-2">
                 <Label className="flex items-center gap-2">
                   <Camera className="w-4 h-4" />

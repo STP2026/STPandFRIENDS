@@ -207,7 +207,10 @@
     "photoRequired": "يرجى التقاط صورة واحدة على الأقل",
     "uploadingPhoto": "جارٍ رفع الصورة...",
     "saveLater": "إرسال لاحقاً",
-    "anotherReport": "بلاغ آخر"
+    "anotherReport": "بلاغ آخر",
+    "gender": "الجنس",
+    "genderMale": "ذكر",
+    "genderFemale": "أنثى"
   },
   "auth": {
     "login": "دخول",

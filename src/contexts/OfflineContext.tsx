@@ -122,6 +122,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           is_approved: isAutoApproved,
           report_type: formData.reportType,
           urgency_level: null,
+          gender: (formData as any).gender || null,
         });
 
         if (error) {

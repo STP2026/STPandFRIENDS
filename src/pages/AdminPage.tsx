@@ -75,6 +75,12 @@ import SponsorTabContent from '@/components/SponsorTabContent';
 import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
 
+const genderSymbol = (gender?: string | null) => {
+  if (gender === 'male') return <span title="Männlich" className="text-blue-500 font-bold ml-1">♂</span>;
+  if (gender === 'female') return <span title="Weiblich" className="text-pink-500 font-bold ml-1">♀</span>;
+  return null;
+};
+
 const AdminPage = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -120,6 +126,7 @@ const AdminPage = () => {
       is_vaccinated: false,
       reported_by: user?.id ?? null,
       ear_tag: null,
+      gender: r.gender || null,
     });
     if (!error) {
       await supabase.from('guest_reports').update({ reviewed: true }).eq('id', r.id);
@@ -624,7 +631,7 @@ const AdminPage = () => {
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
-                              <span className="text-sm font-medium">{r.name || 'Unbekannt'}</span>
+                              <span className="text-sm font-medium">{r.name || 'Unbekannt'}{genderSymbol(r.gender)}</span>
                               <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full">Gast</span>
                               <span className="text-xs bg-secondary px-2 py-0.5 rounded-full capitalize">{r.report_type}</span>
                             </div>
@@ -660,7 +667,7 @@ const AdminPage = () => {
                           <img src={dog.photo} alt={dog.name} className="w-16 h-16 rounded-lg object-cover shrink-0 cursor-zoom-in" onClick={() => openLightbox(dog)} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2 mb-1">
-                              <h3 className="font-medium text-foreground truncate">{dog.name}</h3>
+                              <h3 className="font-medium text-foreground truncate">{dog.name}{genderSymbol(dog.gender)}</h3>
                               {getReportTypeBadge(dog.reportType)}
                             </div>
                             <p className="text-sm text-muted-foreground truncate">{dog.location}</p>
@@ -706,7 +713,7 @@ const AdminPage = () => {
                             <TableCell>
                               <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover cursor-zoom-in" onClick={() => openLightbox(dog)} />
                             </TableCell>
-                            <TableCell className="font-medium">{dog.name}</TableCell>
+                            <TableCell className="font-medium">{dog.name}{genderSymbol(dog.gender)}</TableCell>
                             <TableCell>{getReportTypeBadge(dog.reportType)}</TableCell>
                             <TableCell className="max-w-[150px] truncate">{dog.location}</TableCell>
                             <TableCell>{formatDate(dog.createdAt)}</TableCell>
@@ -828,7 +835,7 @@ const AdminPage = () => {
                           <img src={dog.photo} alt={dog.name} className="w-14 h-14 rounded-lg object-cover shrink-0 cursor-zoom-in" onClick={() => openLightbox(dog)} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2 mb-1">
-                              <h3 className="font-medium text-foreground truncate">{dog.name}</h3>
+                              <h3 className="font-medium text-foreground truncate">{dog.name}{genderSymbol(dog.gender)}</h3>
                               <Badge variant={dog.isApproved ? 'default' : 'secondary'} className="text-xs shrink-0">
                                 {dog.isApproved ? t('admin.visible', 'Visible') : t('admin.pending', 'Pending')}
                               </Badge>
@@ -937,7 +944,7 @@ const AdminPage = () => {
                             <TableCell>
                               <img src={dog.photo} alt={dog.name} className="w-12 h-12 rounded-lg object-cover cursor-zoom-in" onClick={() => openLightbox(dog)} />
                             </TableCell>
-                            <TableCell className="font-medium">{dog.name}</TableCell>
+                            <TableCell className="font-medium">{dog.name}{genderSymbol(dog.gender)}</TableCell>
                             <TableCell className="text-xs font-mono">{dog.earTag || '-'}</TableCell>
                             <TableCell>{getReportTypeBadge(dog.reportType)}</TableCell>
                             <TableCell className="max-w-[120px] truncate">{dog.location}</TableCell>

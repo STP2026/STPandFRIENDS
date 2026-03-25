@@ -23,6 +23,7 @@ export interface Dog {
   urgencyLevel?: string | null;
   sponsorName?: string | null;
   caretaker?: string | null;
+  gender?: string | null;
 }
 
 export interface DogFormData {
@@ -40,6 +41,7 @@ export interface DogFormData {
   additionalInfo?: string;
   reportType: ReportType;
   urgencyLevel?: string;
+  gender?: string;
 }
 
 export interface DbDog {
@@ -66,6 +68,7 @@ export interface DbDog {
   urgency_level: string | null;
   sponsor_name: string | null;
   caretaker: string | null;
+  gender?: string | null;
 }
 
 export function mapDbDogToDog(dbDog: DbDog): Dog {
@@ -92,6 +95,7 @@ export function mapDbDogToDog(dbDog: DbDog): Dog {
     urgencyLevel: dbDog.urgency_level,
     sponsorName: dbDog.sponsor_name,
     caretaker: dbDog.caretaker,
+    gender: dbDog.gender || null,
   };
 }
 

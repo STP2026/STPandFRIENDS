@@ -207,7 +207,10 @@
     "photoRequired": "Bitte mindestens 1 Foto aufnehmen",
     "uploadingPhoto": "Foto wird hochgeladen...",
     "saveLater": "Später senden",
-    "anotherReport": "Weitere Meldung"
+    "anotherReport": "Weitere Meldung",
+    "gender": "Geschlecht",
+    "genderMale": "Männlich",
+    "genderFemale": "Weiblich"
   },
   "auth": {
     "login": "Anmelden",
