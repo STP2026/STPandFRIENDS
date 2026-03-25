@@ -155,13 +155,20 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
     const online = await verifyConnectivity();
     if (!online) return false;
     await syncQueue();
-    // Wait briefly for React state to update after async queue operations
-    await new Promise(r => setTimeout(r, 300));
-    // Success = no reports remain in failed/pending state
-    const remaining = offlineQueue.filter(
-      r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
-    ).length;
-    return remaining === 0;
+    // Read queue directly from localStorage — avoids stale React closure state
+    await new Promise(r => setTimeout(r, 200));
+    try {
+      const stored = localStorage.getItem('stp_offline_queue');
+      const queue: OfflineReport[] = stored ? JSON.parse(stored) : [];
+      const remaining = queue.filter(
+        r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
+      ).length;
+      return remaining === 0;
+    } catch {
+      return offlineQueue.filter(
+        r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
+      ).length === 0;
+    }
   }, [verifyConnectivity, syncQueue, offlineQueue]);
 
   // Auto-sync when coming back online

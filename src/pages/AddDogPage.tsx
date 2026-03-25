@@ -162,6 +162,9 @@ const AddDogPage = () => {
     };
 
     try {
+      // Refresh session before insert — prevents stale JWT after long admin portal usage
+      await supabase.auth.refreshSession();
+
       let succeeded = false;
       let lastErr: unknown;
 
