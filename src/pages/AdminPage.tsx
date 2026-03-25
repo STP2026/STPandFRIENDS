@@ -71,7 +71,7 @@ import {
 } from 'lucide-react';
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
-import PhotoUpload from '@/components/PhotoUpload';
+import PhotoUpload, { uploadBase64ToStorage } from '@/components/PhotoUpload';
 import SponsorTabContent from '@/components/SponsorTabContent';
 import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
@@ -111,17 +111,34 @@ const AdminPage = () => {
   }, []);
   useEffect(() => { fetchGuestReports(); }, [fetchGuestReports]);
 
-  const handleConvertGuestReport = async (r: any) => {
-    // Insert into dogs table with admin as reporter (RLS: reported_by = auth.uid())
+const handleConvertGuestReport = async (r: any) => {
+    // If guest photos are base64, upload to Storage first
+    const isBase64 = (s: string | null) => s && s.startsWith('data:');
+    let photoUrl = r.photo_url || null;
+    let photoUrl2 = r.photo_url_2 || null;
+    let photoUrl3 = r.photo_url_3 || null;
+
+    if (user?.id) {
+      if (isBase64(photoUrl)) {
+        photoUrl = await uploadBase64ToStorage(photoUrl, user.id, 0) || null;
+      }
+      if (isBase64(photoUrl2)) {
+        photoUrl2 = await uploadBase64ToStorage(photoUrl2, user.id, 1) || null;
+      }
+      if (isBase64(photoUrl3)) {
+        photoUrl3 = await uploadBase64ToStorage(photoUrl3, user.id, 2) || null;
+      }
+    }
+
     const { error } = await supabase.from('dogs').insert({
       name: r.name || 'Unbekannt (Gast-Meldung)',
       latitude: r.latitude,
       longitude: r.longitude,
       location: r.location,
       additional_info: r.additional_info || null,
-      photo_url: r.photo_url || null,
-      photo_url_2: r.photo_url_2 || null,
-      photo_url_3: r.photo_url_3 || null,
+      photo_url: photoUrl,
+      photo_url_2: photoUrl2,
+      photo_url_3: photoUrl3,
       report_type: r.report_type || 'stray',
       is_approved: true,
       is_vaccinated: false,
@@ -129,10 +146,12 @@ const AdminPage = () => {
       ear_tag: null,
       gender: r.gender || null,
     });
-    if (!error) {
-      await supabase.from('guest_reports').update({ reviewed: true }).eq('id', r.id);
-      fetchGuestReports();
+    if (error) {
+      alert('Fehler: ' + error.message);
+      return;
     }
+    await supabase.from('guest_reports').update({ reviewed: true }).eq('id', r.id);
+    fetchGuestReports();
   };
 
   const handleDismissGuestReport = async (id: string) => {
