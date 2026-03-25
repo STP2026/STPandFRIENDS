@@ -73,6 +73,22 @@ const AddDogPage = () => {
     });
   };
 
+  // ── SESSION GUARD ───────────────────────────────────────────────────────────
+  // Ensures we have a valid JWT before any DB write.
+  // Mobile browsers suspend background tabs — the token can expire silently.
+  const ensureValidSession = async (): Promise<boolean> => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return false;
+    // If token expires within 60s, refresh proactively
+    const expiresAt = session.expires_at ?? 0;
+    const nowSecs = Math.floor(Date.now() / 1000);
+    if (expiresAt - nowSecs < 60) {
+      const { error } = await supabase.auth.refreshSession();
+      if (error) return false;
+    }
+    return true;
+  };
+
   // ── SUBMIT ──────────────────────────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -165,6 +181,26 @@ const AddDogPage = () => {
     };
 
     try {
+      // Ensure JWT is valid before writing — prevents silent RLS failure after long sessions
+      const sessionOk = await ensureValidSession();
+      if (!sessionOk) {
+        addReportToQueue({
+          name: formData.name, earTag: formData.earTag,
+          photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
+          photo3: formData.photoUrls[2] || '',
+          latitude: selectedPosition.lat, longitude: selectedPosition.lng,
+          location: formData.location, isVaccinated: formData.isVaccinated,
+          vaccination1Date: formData.vaccination1Date,
+          vaccination2Date: formData.vaccination2Date,
+          additionalInfo: formData.additionalInfo || '',
+          reportedBy: user.id, reportType: formData.reportType,
+          urgencyLevel: undefined, photoUrls: formData.photoUrls,
+          gender: formData.gender || undefined,
+        });
+        setSubmittedOffline(true);
+        return;
+      }
+
       let succeeded = false;
       let lastErr: unknown;
 

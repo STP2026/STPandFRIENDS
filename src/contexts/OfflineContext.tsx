@@ -56,7 +56,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
   }, [cacheDogs]);
 
   // Core sync logic — sends all pending reports to Supabase
-  const syncQueue = useCallback(async () => {
+  const syncQueue = useCallback(async (): Promise<number> => {
     const reportsToSync = offlineQueue.filter(
       r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
     );
@@ -149,28 +149,19 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
 
     setIsSyncing(false);
     fetchAndCacheDogs();
+    // Return count of items that could not be synced
+    const stored = localStorage.getItem('stp_offline_queue');
+    const remaining: OfflineReport[] = stored ? JSON.parse(stored) : [];
+    return remaining.filter(r => r.status === 'pending' || r.status === 'failed').length;
   }, [offlineQueue, updateQueueStatus, removeFromQueue, fetchAndCacheDogs]);
 
   // Manual sync: verify connectivity first, then sync, return success
   const verifyAndSync = useCallback(async (): Promise<boolean> => {
     const online = await verifyConnectivity();
     if (!online) return false;
-    await syncQueue();
-    // Read queue directly from localStorage — avoids stale React closure state
-    await new Promise(r => setTimeout(r, 200));
-    try {
-      const stored = localStorage.getItem('stp_offline_queue');
-      const queue: OfflineReport[] = stored ? JSON.parse(stored) : [];
-      const remaining = queue.filter(
-        r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
-      ).length;
-      return remaining === 0;
-    } catch {
-      return offlineQueue.filter(
-        r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
-      ).length === 0;
-    }
-  }, [verifyConnectivity, syncQueue, offlineQueue]);
+    const remaining = await syncQueue();
+    return remaining === 0;
+  }, [verifyConnectivity, syncQueue]);
 
   // Auto-sync when coming back online
   useEffect(() => {
