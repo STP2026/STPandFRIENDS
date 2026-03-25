@@ -122,7 +122,7 @@ const AdminPage = () => {
       photo_url_2: r.photo_url_2 || null,
       photo_url_3: r.photo_url_3 || null,
       report_type: r.report_type || 'stray',
-      is_approved: false,
+      is_approved: true,
       is_vaccinated: false,
       reported_by: user?.id ?? null,
       ear_tag: null,
