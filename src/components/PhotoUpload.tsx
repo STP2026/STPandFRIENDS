@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
-import { Camera, Upload, X, Loader2, Plus } from 'lucide-react';
+import { Camera, Upload, X, Loader2, Plus, WifiOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
+import { useOfflineContext } from '@/contexts/OfflineContext';
 import { useTranslation } from 'react-i18next';
 
 interface PhotoUploadProps {
@@ -10,6 +11,11 @@ interface PhotoUploadProps {
   onUploadingChange?: (uploading: boolean) => void;
   onHasPhotoChange?: (hasPhoto: boolean) => void;
   currentPhotoUrls?: [string, string, string];
+  /**
+   * Called whenever base64 data changes (for offline queue storage).
+   * Only fires when photos are stored as base64 (guest or offline).
+   */
+  onBase64Change?: (base64s: [string, string, string]) => void;
 }
 
 const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promise<Blob> =>
@@ -31,9 +37,20 @@ const compressImage = (file: File, maxWidthPx = 1200, qualityJpeg = 0.82): Promi
     img.src = objectUrl;
   });
 
+/** Convert a Blob to a base64 data URL */
+function blobToBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
 
-// Exported helper — uploads a base64 data URL to Supabase storage
-// Used by AddDogPage to upload locally cached photos after offline sync
+/**
+ * Uploads a base64 data URL to Supabase Storage.
+ * Used during offline queue sync to convert locally cached photos to public URLs.
+ */
 export async function uploadBase64ToStorage(
   base64DataUrl: string,
   userId: string,
@@ -49,20 +66,22 @@ export async function uploadBase64ToStorage(
     if (error) throw error;
     const { data: { publicUrl } } = supabase.storage.from('dog-photos').getPublicUrl(data.path);
     return publicUrl;
-  } catch (e) {
-    console.error('[PhotoUpload] uploadBase64ToStorage failed:', e);
+  } catch {
     return null;
   }
 }
 
 const MAX_PHOTOS = 3;
 
-const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, currentPhotoUrls }: PhotoUploadProps) => {
+const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, currentPhotoUrls, onBase64Change }: PhotoUploadProps) => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { isOnline } = useOfflineContext();
 
   const emptyUrls: [string, string, string] = ['', '', ''];
   const [previews, setPreviews] = useState<[string, string, string]>(currentPhotoUrls ?? emptyUrls);
+  // Store base64 separately — previews may contain object URLs or public URLs
+  const [base64Store, setBase64Store] = useState<[string, string, string]>(['', '', '']);
   const [uploading, setUploading] = useState<[boolean, boolean, boolean]>([false, false, false]);
   const [progress, setProgress] = useState<[number, number, number]>([0, 0, 0]);
   const [errors, setErrors] = useState<[string, string, string]>(['', '', '']);
@@ -75,7 +94,6 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
 
   const setSlotUploading = (slot: 0|1|2, val: boolean) => {
     setUploading(prev => { const u = [...prev] as [boolean,boolean,boolean]; u[slot] = val; return u; });
-    // Notify parent if any slot is uploading
     const newState = [false, false, false] as [boolean,boolean,boolean];
     newState[slot] = val;
     onUploadingChange?.(val || uploading.some((v, i) => i !== slot && v));
@@ -83,6 +101,22 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
 
   const setSlotProgress = (slot: 0|1|2, val: number) => {
     setProgress(prev => { const p = [...prev] as [number,number,number]; p[slot] = val; return p; });
+  };
+
+  /** Store photo as base64 — used for guests and offline logged-in users */
+  const storeAsBase64 = async (compressed: Blob, slot: 0|1|2, currentPreviews: [string,string,string]) => {
+    const base64 = await blobToBase64(compressed);
+    setSlotProgress(slot, 100);
+
+    const newPreviews = [...currentPreviews] as [string,string,string];
+    newPreviews[slot] = base64; // base64 is also a valid image src for preview
+    setPreviews(newPreviews);
+    onPhotosUploaded(newPreviews);
+
+    const newBase64 = [...base64Store] as [string,string,string];
+    newBase64[slot] = base64;
+    setBase64Store(newBase64);
+    onBase64Change?.(newBase64);
   };
 
   const uploadSlot = async (file: File, slot: 0|1|2) => {
@@ -101,7 +135,9 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
 
     // Show local preview immediately
     const objectUrl = URL.createObjectURL(file);
-    setPreviews(prev => { const p = [...prev] as [string,string,string]; p[slot] = objectUrl; return p; });
+    const currentPreviews = [...previews] as [string,string,string];
+    currentPreviews[slot] = objectUrl;
+    setPreviews(currentPreviews);
     onHasPhotoChange?.(true);
 
     try {
@@ -109,38 +145,36 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
       const compressed = await compressImage(file);
       setSlotProgress(slot, 55);
 
-      if (!user?.id) {
-        // Guest: no storage access — keep compressed blob as base64 data URL
-        const reader = new FileReader();
-        const base64 = await new Promise<string>((resolve, reject) => {
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = reject;
-          reader.readAsDataURL(compressed);
-        });
-        setSlotProgress(slot, 100);
-        const newPreviews = [...previews] as [string,string,string];
-        newPreviews[slot] = base64;
-        setPreviews(newPreviews);
-        onPhotosUploaded(newPreviews);
+      // ── DECISION: base64 or Storage upload? ──
+      // Guest → always base64 (no Storage access)
+      // Logged-in + offline → base64 (upload fails without network)
+      // Logged-in + online → try Storage, fall back to base64
+      if (!user?.id || !isOnline) {
+        await storeAsBase64(compressed, slot, currentPreviews);
         return;
       }
 
-      // Logged-in user: upload to storage
-      const fileName = `${user.id}/${Date.now()}-${slot}.jpg`;
-      const { data, error: uploadError } = await supabase.storage
-        .from('dog-photos')
-        .upload(fileName, compressed, { contentType: 'image/jpeg', upsert: true });
+      // Logged-in + online → upload to Storage
+      try {
+        const fileName = `${user.id}/${Date.now()}-${slot}.jpg`;
+        const { data, error: uploadError } = await supabase.storage
+          .from('dog-photos')
+          .upload(fileName, compressed, { contentType: 'image/jpeg', upsert: true });
 
-      if (uploadError) throw uploadError;
-      setSlotProgress(slot, 85);
+        if (uploadError) throw uploadError;
+        setSlotProgress(slot, 85);
 
-      const { data: { publicUrl } } = supabase.storage.from('dog-photos').getPublicUrl(data.path);
-      setSlotProgress(slot, 100);
+        const { data: { publicUrl } } = supabase.storage.from('dog-photos').getPublicUrl(data.path);
+        setSlotProgress(slot, 100);
 
-      const newPreviews = [...previews] as [string,string,string];
-      newPreviews[slot] = publicUrl;
-      setPreviews(newPreviews);
-      onPhotosUploaded(newPreviews);
+        const newPreviews = [...currentPreviews] as [string,string,string];
+        newPreviews[slot] = publicUrl;
+        setPreviews(newPreviews);
+        onPhotosUploaded(newPreviews);
+      } catch {
+        // Storage upload failed (possibly network dropped mid-upload) → fall back to base64
+        await storeAsBase64(compressed, slot, currentPreviews);
+      }
     } catch {
       setErrors(prev => { const e = [...prev] as [string,string,string]; e[slot] = t('photo.uploadError', 'Upload fehlgeschlagen. Bitte erneut versuchen.'); return e; });
       setPreviews(prev => { const p = [...prev] as [string,string,string]; p[slot] = ''; return p; });
@@ -162,16 +196,24 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
     newPreviews[slot] = '';
     setPreviews(newPreviews);
     onPhotosUploaded(newPreviews);
+
+    const newBase64 = [...base64Store] as [string,string,string];
+    newBase64[slot] = '';
+    setBase64Store(newBase64);
+    onBase64Change?.(newBase64);
+
     if (fileInputRefs[slot].current) fileInputRefs[slot].current!.value = '';
     if (cameraInputRefs[slot].current) cameraInputRefs[slot].current!.value = '';
     onHasPhotoChange?.(newPreviews.some(p => !!p));
   };
 
   const isAnyUploading = uploading.some(Boolean);
-  // Overall progress bar — average of active slots
   const totalProgress = isAnyUploading
     ? Math.round(progress.reduce((a, b) => a + b, 0) / uploading.filter(Boolean).length || 0)
     : 0;
+
+  // Detect if photos are stored locally (base64)
+  const hasLocalPhotos = !isOnline || !user?.id;
 
   return (
     <div className="space-y-3">
@@ -190,6 +232,15 @@ const PhotoUpload = ({ onPhotosUploaded, onUploadingChange, onHasPhotoChange, cu
             className="h-full bg-primary rounded-full transition-all duration-300"
             style={{ width: `${totalProgress}%` }}
           />
+        </div>
+      )}
+
+      {hasLocalPhotos && filledCount > 0 && (
+        <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <WifiOff className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+          <span className="text-xs text-amber-700 dark:text-amber-300">
+            {t('photo.offlineNote', 'Fotos werden lokal gespeichert und beim Senden hochgeladen.')}
+          </span>
         </div>
       )}
 

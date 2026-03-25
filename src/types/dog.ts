@@ -42,6 +42,14 @@ export interface DogFormData {
   reportType: ReportType;
   urgencyLevel?: string;
   gender?: string;
+  /** Pre-computed at submit time so offline sync doesn't lose role context */
+  isAutoApproved?: boolean;
+  /**
+   * Base64 data URLs for photos captured while offline.
+   * When syncing, these are uploaded to Storage first, then replaced with public URLs.
+   * Index 0/1/2 correspond to photo/photo2/photo3.
+   */
+  photoBase64?: [string, string, string];
 }
 
 export interface DbDog {

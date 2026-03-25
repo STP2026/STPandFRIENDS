@@ -542,7 +542,8 @@
     "gallery": "Gallery",
     "photos": "Photos",
     "localSaveHint": "Photos are saved locally and uploaded on submit",
-    "required": "(min. 1 required)"
+    "required": "(min. 1 required)",
+    "offlineNote": "Photos saved locally — will upload when submitting."
   },
   "autoLogout": {
     "warning": "You will be automatically logged out in {{seconds}} seconds.",

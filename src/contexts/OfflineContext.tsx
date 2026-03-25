@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useCallback, useState } fr
 import { supabase } from '@/integrations/supabase/client';
 import { useOffline, OfflineReport } from '@/hooks/useOffline';
 import { Dog, DbDog, mapDbDogToDog } from '@/types/dog';
+import { ensureValidSession } from '@/lib/sessionGuard';
+import { uploadBase64ToStorage } from '@/components/PhotoUpload';
 
 interface OfflineContextType {
   isOnline: boolean;
@@ -10,8 +12,7 @@ interface OfflineContextType {
   lastSyncTime: number | null;
   cachedDogs: Dog[];
   addReportToQueue: (data: OfflineReport['data']) => OfflineReport;
-  syncQueue: () => Promise<void>;
-  // verifyAndSync: checks real connectivity then syncs — used by manual sync button
+  syncQueue: () => Promise<number>;
   verifyAndSync: () => Promise<boolean>;
   isSyncing: boolean;
   verifyConnectivity: () => Promise<boolean>;
@@ -50,23 +51,40 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
       const dogs = (data as DbDog[]).map(mapDbDogToDog);
       cacheDogs(dogs);
       setCachedDogs(dogs);
-    } catch (e) {
-      console.error('[Offline] Failed to fetch dogs:', e);
+    } catch {
+      // Silently fail — cached data is still available
     }
   }, [cacheDogs]);
+
+  /**
+   * Upload base64 photos to Storage and return public URLs.
+   * Returns [url1, url2, url3] — empty string for slots without base64 data.
+   */
+  const uploadQueuedPhotos = async (
+    base64s: [string, string, string],
+    userId: string
+  ): Promise<[string, string, string]> => {
+    const urls: [string, string, string] = ['', '', ''];
+    for (let i = 0; i < 3; i++) {
+      if (base64s[i] && base64s[i].startsWith('data:')) {
+        const url = await uploadBase64ToStorage(base64s[i], userId, i);
+        urls[i] = url || '';
+      }
+    }
+    return urls;
+  };
 
   // Core sync logic — sends all pending reports to Supabase
   const syncQueue = useCallback(async (): Promise<number> => {
     const reportsToSync = offlineQueue.filter(
       r => r.status === 'pending' || r.status === 'failed' || r.status === 'syncing'
     );
-    if (reportsToSync.length === 0) return;
+    if (reportsToSync.length === 0) return 0;
 
     setIsSyncing(true);
 
     for (const report of reportsToSync) {
       if (report.retryCount >= 3) {
-        console.error('[Offline] Max retries reached, dropping report:', report.id);
         removeFromQueue(report.id);
         continue;
       }
@@ -75,6 +93,40 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
 
       try {
         const formData = report.data;
+
+        // ── GUEST PATH ──
+        if (formData.reportedBy === '__guest__') {
+          // Guests: base64 photos go directly into TEXT columns (no Storage)
+          const photoUrl = formData.photoBase64?.[0] || formData.photo || null;
+          const photoUrl2 = formData.photoBase64?.[1] || formData.photo2 || null;
+          const photoUrl3 = formData.photoBase64?.[2] || formData.photo3 || null;
+
+          const { error } = await supabase.from('guest_reports').insert({
+            report_type: formData.reportType,
+            latitude: formData.latitude,
+            longitude: formData.longitude,
+            location: formData.location,
+            name: formData.name || null,
+            additional_info: formData.additionalInfo || null,
+            photo_url: photoUrl,
+            photo_url_2: photoUrl2,
+            photo_url_3: photoUrl3,
+            gender: formData.gender || null,
+          });
+          if (error) throw error;
+          removeFromQueue(report.id);
+          continue;
+        }
+
+        // ── LOGGED-IN USER PATH ──
+        // Session guard: ensure JWT is valid before writing
+        const sessionOk = await ensureValidSession();
+        if (!sessionOk) {
+          // Session invalid — keep in queue, don't count as retry
+          // (will succeed on next sync when user has an active session)
+          updateQueueStatus(report.id, 'pending');
+          continue;
+        }
 
         // Skip ear_tag duplicate check if null
         if (formData.earTag) {
@@ -86,31 +138,31 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           if (existing) { removeFromQueue(report.id); continue; }
         }
 
-        // Guest entries (reportedBy='__guest__') → guest_reports table
-        if (formData.reportedBy === '__guest__') {
-          const { error } = await supabase.from('guest_reports').insert({
-            report_type: formData.reportType,
-            latitude: formData.latitude,
-            longitude: formData.longitude,
-            location: formData.location,
-            name: formData.name || null,
-            additional_info: formData.additionalInfo || null,
-            photo_url: formData.photo || null,
-            photo_url_2: formData.photo2 || null,
-            photo_url_3: formData.photo3 || null,
-          });
-          if (error) throw error;
-          removeFromQueue(report.id);
-          continue;
+        // Upload base64 photos to Storage if present
+        let photoUrl = formData.photo || null;
+        let photoUrl2 = formData.photo2 || null;
+        let photoUrl3 = formData.photo3 || null;
+
+        if (formData.photoBase64 && formData.photoBase64.some(b => b && b.startsWith('data:'))) {
+          const uploadedUrls = await uploadQueuedPhotos(
+            formData.photoBase64,
+            formData.reportedBy
+          );
+          // Use uploaded URLs where available, keep existing URLs as fallback
+          if (uploadedUrls[0]) photoUrl = uploadedUrls[0];
+          if (uploadedUrls[1]) photoUrl2 = uploadedUrls[1];
+          if (uploadedUrls[2]) photoUrl3 = uploadedUrls[2];
         }
 
-        const isAutoApproved = formData.reportType !== 'save';
+        // Use pre-computed isAutoApproved from queue data (preserves role context from submit time)
+        const isAutoApproved = formData.isAutoApproved ?? (formData.reportType !== 'save');
+
         const { error } = await supabase.from('dogs').insert({
           name: formData.name,
           ear_tag: formData.earTag || null,
-          photo_url: formData.photo || null,
-          photo_url_2: formData.photo2 || null,
-          photo_url_3: formData.photo3 || null,
+          photo_url: photoUrl,
+          photo_url_2: photoUrl2,
+          photo_url_3: photoUrl3,
           latitude: formData.latitude,
           longitude: formData.longitude,
           location: formData.location,
@@ -122,7 +174,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           is_approved: isAutoApproved,
           report_type: formData.reportType,
           urgency_level: null,
-          gender: (formData as any).gender || null,
+          gender: formData.gender || null,
         });
 
         if (error) {
@@ -136,11 +188,10 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (e: any) {
         const errMsg = e?.message || e?.code || String(e);
-        console.error('[Offline] Sync failed:', report.id, errMsg);
-        // RLS / permission errors → drop immediately (won't fix by retrying)
+        // RLS / permission errors → keep in queue but don't retry endlessly
+        // (unlike before: we don't drop immediately, because session might fix it)
         if (e?.code === '42501' || errMsg.includes('permission') || errMsg.includes('policy')) {
-          console.error('[Offline] RLS/permission error — dropping report');
-          removeFromQueue(report.id);
+          updateQueueStatus(report.id, 'failed');
         } else {
           updateQueueStatus(report.id, 'failed');
         }
@@ -149,6 +200,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
 
     setIsSyncing(false);
     fetchAndCacheDogs();
+
     // Return count of items that could not be synced
     const stored = localStorage.getItem('stp_offline_queue');
     const remaining: OfflineReport[] = stored ? JSON.parse(stored) : [];

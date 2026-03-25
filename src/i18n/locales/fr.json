@@ -542,7 +542,8 @@
     "gallery": "Galerie",
     "photos": "Photos",
     "localSaveHint": "Les photos sont sauvegardées localement et envoyées à la soumission",
-    "required": "(min. 1 requis)"
+    "required": "(min. 1 requis)",
+    "offlineNote": "Photos enregistrées localement — envoi lors de la soumission."
   },
   "autoLogout": {
     "warning": "Vous serez déconnecté automatiquement dans {{seconds}} secondes.",

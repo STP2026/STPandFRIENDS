@@ -14,6 +14,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useOfflineContext } from "@/contexts/OfflineContext";
 import { supabase } from "@/integrations/supabase/client";
+import { ensureValidSession } from "@/lib/sessionGuard";
 import { ReportType, REPORT_TYPE_LABELS, USER_REPORT_TYPES } from "@/types/dog";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +27,7 @@ const AddDogPage = () => {
   const { user, isAdmin } = useAuth();
   const { data: isHelper } = useIsHelper(user?.id);
   const isElevated = isAdmin || !!isHelper;
-  const { addReportToQueue } = useOfflineContext();
+  const { addReportToQueue, isOnline } = useOfflineContext();
 
   const [submitted, setSubmitted] = useState(false);
   const [submittedOffline, setSubmittedOffline] = useState(false);
@@ -41,6 +42,7 @@ const AddDogPage = () => {
     name: "",
     earTag: "",
     photoUrls: ["", "", ""] as [string, string, string],
+    photoBase64: ["", "", ""] as [string, string, string],
     location: "",
     isVaccinated: false,
     vaccination1Date: "",
@@ -67,26 +69,38 @@ const AddDogPage = () => {
     setFormData({
       name: "", earTag: "",
       photoUrls: ["", "", ""] as [string, string, string],
+      photoBase64: ["", "", ""] as [string, string, string],
       location: "", isVaccinated: false,
       vaccination1Date: "", vaccination2Date: "",
       additionalInfo: "", reportType: "stray", urgencyLevel: "",
+      gender: "",
     });
   };
 
-  // ── SESSION GUARD ───────────────────────────────────────────────────────────
-  // Ensures we have a valid JWT before any DB write.
-  // Mobile browsers suspend background tabs — the token can expire silently.
-  const ensureValidSession = async (): Promise<boolean> => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return false;
-    // If token expires within 60s, refresh proactively
-    const expiresAt = session.expires_at ?? 0;
-    const nowSecs = Math.floor(Date.now() / 1000);
-    if (expiresAt - nowSecs < 60) {
-      const { error } = await supabase.auth.refreshSession();
-      if (error) return false;
-    }
-    return true;
+  // ── Build queue payload — reusable for submit + saveLater ──
+  const buildQueuePayload = () => {
+    if (!selectedPosition) return null;
+    const isAutoApproved = isElevated ? true : formData.reportType !== 'save';
+    return {
+      name: formData.name,
+      earTag: formData.earTag,
+      photo: formData.photoUrls[0] || '',
+      photo2: formData.photoUrls[1] || '',
+      photo3: formData.photoUrls[2] || '',
+      latitude: selectedPosition.lat,
+      longitude: selectedPosition.lng,
+      location: formData.location,
+      isVaccinated: formData.isVaccinated,
+      vaccination1Date: formData.vaccination1Date,
+      vaccination2Date: formData.vaccination2Date,
+      additionalInfo: formData.additionalInfo || '',
+      reportedBy: user?.id || '__guest__',
+      reportType: formData.reportType,
+      urgencyLevel: undefined as string | undefined,
+      gender: formData.gender || undefined,
+      isAutoApproved,
+      photoBase64: formData.photoBase64 as [string, string, string],
+    };
   };
 
   // ── SUBMIT ──────────────────────────────────────────────────────────────────
@@ -100,10 +114,14 @@ const AddDogPage = () => {
     if (!user) {
       try {
         let succeeded = false;
-        let lastErr: unknown;
         for (let attempt = 1; attempt <= 3; attempt++) {
           setSubmitAttempt(attempt);
           try {
+            // Guest photos: use base64 directly (TEXT columns in guest_reports)
+            const photoUrl = formData.photoBase64[0] || formData.photoUrls[0] || null;
+            const photoUrl2 = formData.photoBase64[1] || formData.photoUrls[1] || null;
+            const photoUrl3 = formData.photoBase64[2] || formData.photoUrls[2] || null;
+
             const { error } = await supabase.from('guest_reports').insert({
               report_type: formData.reportType,
               latitude: selectedPosition.lat,
@@ -111,16 +129,15 @@ const AddDogPage = () => {
               location: formData.location || null,
               additional_info: formData.additionalInfo || null,
               name: formData.name || null,
-              photo_url: formData.photoUrls[0] || null,
-              photo_url_2: formData.photoUrls[1] || null,
-              photo_url_3: formData.photoUrls[2] || null,
+              photo_url: photoUrl,
+              photo_url_2: photoUrl2,
+              photo_url_3: photoUrl3,
               gender: formData.gender || null,
             });
             if (error) throw error;
             succeeded = true;
             break;
-          } catch (err) {
-            lastErr = err;
+          } catch {
             if (attempt < 3) await new Promise(r => setTimeout(r, 2000 * attempt));
           }
         }
@@ -128,23 +145,13 @@ const AddDogPage = () => {
           setSubmitted(true);
         } else {
           // Offline queue with guest marker
-          addReportToQueue({
-            name: formData.name, earTag: '',
-            photo: formData.photoUrls[0] || '',
-            photo2: formData.photoUrls[1] || '',
-            photo3: formData.photoUrls[2] || '',
-            latitude: selectedPosition.lat, longitude: selectedPosition.lng,
-            location: formData.location, isVaccinated: false,
-            vaccination1Date: '', vaccination2Date: '',
-            additionalInfo: formData.additionalInfo || '',
-            reportedBy: '__guest__',
-            reportType: formData.reportType,
-            urgencyLevel: undefined,
-            photoUrls: formData.photoUrls,
-          });
+          const payload = buildQueuePayload();
+          if (payload) addReportToQueue(payload);
           setSubmittedOffline(true);
         }
       } catch {
+        const payload = buildQueuePayload();
+        if (payload) addReportToQueue(payload);
         setSubmittedOffline(true);
       } finally {
         setSubmitAttempt(0);
@@ -154,10 +161,6 @@ const AddDogPage = () => {
     }
 
     // ── LOGGED-IN USER / HELPER / ADMIN ──
-    // Photos from PhotoUpload are already public Storage URLs for logged-in users.
-    // No base64 stripping needed — PhotoUpload uploads immediately on selection.
-    // Elevated (helper/admin): all reports auto-approved → go straight to overview
-    // Regular user: only save needs manual approval
     const isAutoApproved = isElevated ? true : formData.reportType !== 'save';
 
     const payload = {
@@ -181,39 +184,36 @@ const AddDogPage = () => {
     };
 
     try {
-      // Ensure JWT is valid before writing — prevents silent RLS failure after long sessions
+      // Ensure JWT is valid before writing
       const sessionOk = await ensureValidSession();
       if (!sessionOk) {
-        addReportToQueue({
-          name: formData.name, earTag: formData.earTag,
-          photo: formData.photoUrls[0] || '', photo2: formData.photoUrls[1] || '',
-          photo3: formData.photoUrls[2] || '',
-          latitude: selectedPosition.lat, longitude: selectedPosition.lng,
-          location: formData.location, isVaccinated: formData.isVaccinated,
-          vaccination1Date: formData.vaccination1Date,
-          vaccination2Date: formData.vaccination2Date,
-          additionalInfo: formData.additionalInfo || '',
-          reportedBy: user.id, reportType: formData.reportType,
-          urgencyLevel: undefined, photoUrls: formData.photoUrls,
-          gender: formData.gender || undefined,
-        });
+        // Session gone → queue for later
+        const queueData = buildQueuePayload();
+        if (queueData) addReportToQueue(queueData);
+        setSubmittedOffline(true);
+        return;
+      }
+
+      // Check if photos are base64 (offline capture) → need to queue instead of direct insert
+      const hasBase64Photos = formData.photoBase64.some(b => b && b.startsWith('data:'));
+      if (hasBase64Photos) {
+        // Photos are local base64 — can't insert Storage URLs that don't exist yet.
+        // Queue the report; sync will upload photos first, then insert.
+        const queueData = buildQueuePayload();
+        if (queueData) addReportToQueue(queueData);
         setSubmittedOffline(true);
         return;
       }
 
       let succeeded = false;
-      let lastErr: unknown;
-
       for (let attempt = 1; attempt <= 3; attempt++) {
         setSubmitAttempt(attempt);
         try {
-          // INSERT without .select() — avoids SELECT RLS blocking the response
           const { error } = await supabase.from('dogs').insert(payload);
           if (error) throw error;
           succeeded = true;
           break;
-        } catch (err) {
-          lastErr = err;
+        } catch {
           if (attempt < 3) await new Promise(r => setTimeout(r, 2000 * attempt));
         }
       }
@@ -221,23 +221,8 @@ const AddDogPage = () => {
       if (succeeded) {
         setSubmitted(true);
       } else {
-        // Save to offline queue — syncs when connection improves
-        addReportToQueue({
-          name: formData.name, earTag: formData.earTag,
-          photo: formData.photoUrls[0] || '',
-          photo2: formData.photoUrls[1] || '',
-          photo3: formData.photoUrls[2] || '',
-          latitude: selectedPosition.lat, longitude: selectedPosition.lng,
-          location: formData.location, isVaccinated: formData.isVaccinated,
-          vaccination1Date: formData.vaccination1Date,
-          vaccination2Date: formData.vaccination2Date,
-          additionalInfo: formData.additionalInfo || '',
-          reportedBy: user.id,
-          reportType: formData.reportType,
-          urgencyLevel: undefined,
-          photoUrls: formData.photoUrls,
-          gender: formData.gender || undefined,
-        });
+        const queueData = buildQueuePayload();
+        if (queueData) addReportToQueue(queueData);
         setSubmittedOffline(true);
       }
     } finally {
@@ -247,43 +232,11 @@ const AddDogPage = () => {
   };
 
   // ── SPÄTER SENDEN ────────────────────────────────────────────────────────────
-  const handleSaveLater = async () => {
+  const handleSaveLater = () => {
     if (!selectedPosition) return;
-    if (!user) {
-      // Guest: try direct insert, fall back silently
-      try {
-        await supabase.from('guest_reports').insert({
-          report_type: formData.reportType,
-          latitude: selectedPosition.lat,
-          longitude: selectedPosition.lng,
-          location: formData.location || null,
-          additional_info: formData.additionalInfo || null,
-          name: formData.name || null,
-          photo_url: formData.photoUrls[0] || null,
-          photo_url_2: formData.photoUrls[1] || null,
-          photo_url_3: formData.photoUrls[2] || null,
-          gender: formData.gender || null,
-        });
-      } catch { /* silent */ }
-      setSubmittedOffline(true);
-    } else {
-      addReportToQueue({
-        name: formData.name, earTag: formData.earTag,
-        photo: formData.photoUrls[0] || '',
-        photo2: formData.photoUrls[1] || '',
-        photo3: formData.photoUrls[2] || '',
-        latitude: selectedPosition.lat, longitude: selectedPosition.lng,
-        location: formData.location, isVaccinated: formData.isVaccinated,
-        vaccination1Date: formData.vaccination1Date,
-        vaccination2Date: formData.vaccination2Date,
-        additionalInfo: formData.additionalInfo || '',
-        reportedBy: user.id,
-        reportType: formData.reportType,
-        urgencyLevel: undefined,
-        photoUrls: formData.photoUrls,
-      });
-      setSubmittedOffline(true);
-    }
+    const queueData = buildQueuePayload();
+    if (queueData) addReportToQueue(queueData);
+    setSubmittedOffline(true);
   };
 
   const getReportTypeIcon = (type: ReportType) => {
@@ -523,6 +476,7 @@ const AddDogPage = () => {
                   onUploadingChange={setIsPhotoUploading}
                   onHasPhotoChange={setHasPhoto}
                   currentPhotoUrls={formData.photoUrls}
+                  onBase64Change={(b64s) => setFormData(prev => ({ ...prev, photoBase64: b64s }))}
                 />
               </div>
             </div>

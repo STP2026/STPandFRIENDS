@@ -542,7 +542,8 @@
     "gallery": "Galerie",
     "photos": "Fotos",
     "localSaveHint": "Fotos werden lokal gespeichert und beim Senden übertragen",
-    "required": "(min. 1 Pflicht)"
+    "required": "(min. 1 Pflicht)",
+    "offlineNote": "Fotos werden lokal gespeichert und beim Senden hochgeladen."
   },
   "autoLogout": {
     "warning": "Du wirst in {{seconds}} Sekunden automatisch abgemeldet.",
