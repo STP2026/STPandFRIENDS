@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useOffline, OfflineReport } from '@/hooks/useOffline';
 import { Dog, DbDog, mapDbDogToDog } from '@/types/dog';
 import { ensureValidSession } from '@/lib/sessionGuard';
-import { uploadBase64ToStorage } from '@/components/PhotoUpload';
+import { uploadBase64ToStorage } from '@/lib/photoStorage';
 
 interface OfflineContextType {
   isOnline: boolean;

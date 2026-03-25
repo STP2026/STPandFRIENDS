@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Dog, DbDog, DogFormData, mapDbDogToDog } from '@/types/dog';
+import { Dog, DbDog, mapDbDogToDog } from '@/types/dog';
 
 // Single hook — DB view enforces visibility via RLS + security_invoker.
 // isElevated=true:  Helper/Admin — sees all dogs (stray/vac/sos + save + own)
@@ -27,42 +27,6 @@ export function useDogs(isElevated: boolean | null = null) {
 // useAllDogs merged into useDogs — AdminPage uses this alias
 export function useAllDogs() {
   return useDogs(true);
-}
-
-export function useAddDog() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (formData: DogFormData & { reportedBy: string }) => {
-      const isAutoApproved = formData.reportType !== 'save';
-      const { data, error } = await supabase
-        .from('dogs')
-        .insert({
-          name: formData.name,
-          ear_tag: formData.earTag || null,
-          photo_url: formData.photo || null,
-          photo_url_2: formData.photo2 || null,
-          photo_url_3: formData.photo3 || null,
-          latitude: formData.latitude,
-          longitude: formData.longitude,
-          location: formData.location,
-          is_vaccinated: formData.isVaccinated,
-          vaccination1_date: formData.vaccination1Date || null,
-          vaccination2_date: formData.vaccination2Date || null,
-          additional_info: formData.additionalInfo || null,
-          reported_by: formData.reportedBy,
-          is_approved: isAutoApproved,
-          report_type: formData.reportType,
-          urgency_level: formData.urgencyLevel || null,
-        })
-        .select()
-        .single();
-      if (error) throw error;
-      return mapDbDogToDog(data as DbDog);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dogs'] });
-    },
-  });
 }
 
 export function useApproveDog() {

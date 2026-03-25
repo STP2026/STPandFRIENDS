@@ -9,7 +9,8 @@ import { Switch } from "@/components/ui/switch";
 import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, Heart, Syringe, WifiOff, Facebook, ExternalLink } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import SafeDogMap from "@/components/SafeDogMap";
-import PhotoUpload, { uploadBase64ToStorage } from "@/components/PhotoUpload";
+import PhotoUpload from "@/components/PhotoUpload";
+import { uploadBase64ToStorage } from "@/lib/photoStorage";
 import { useAuth } from "@/contexts/AuthContext";
 import { useIsHelper } from "@/hooks/useHelperApplication";
 import { useOfflineContext } from "@/contexts/OfflineContext";
@@ -488,6 +489,7 @@ const AddDogPage = () => {
                   onHasPhotoChange={setHasPhoto}
                   currentPhotoUrls={formData.photoUrls}
                   onBase64Change={(b64s) => setFormData(prev => ({ ...prev, photoBase64: b64s }))}
+                  isOnline={isOnline}
                 />
               </div>
             </div>

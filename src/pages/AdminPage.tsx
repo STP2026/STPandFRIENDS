@@ -71,7 +71,8 @@ import {
 } from 'lucide-react';
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
-import PhotoUpload, { uploadBase64ToStorage } from '@/components/PhotoUpload';
+import PhotoUpload from '@/components/PhotoUpload';
+import { uploadBase64ToStorage } from '@/lib/photoStorage';
 import SponsorTabContent from '@/components/SponsorTabContent';
 import PhotoLightbox from '@/components/PhotoLightbox';
 import RehabSpotsTab from '@/components/RehabSpotsTab';
@@ -1815,20 +1816,6 @@ const AdminPage = () => {
               </div>
             )}
           </div>
-
-          {/* Caretaker in convert dialog */}
-          {!selectedDog?.reportType?.match(/save/) && (
-            <div className="space-y-2">
-              <Label htmlFor="caretaker-convert">{t('admin.table.caretaker', 'Caretaker')}</Label>
-              <Input
-                id="caretaker-convert"
-                type="text"
-                placeholder={t('admin.caretakerPrompt', 'Who is responsible for this dog?')}
-                value={editForm.caretaker}
-                onChange={(e) => setEditForm({ ...editForm, caretaker: e.target.value })}
-              />
-            </div>
-          )}
           
           <div className="flex gap-3 justify-end shrink-0 pt-2 border-t border-border">
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
