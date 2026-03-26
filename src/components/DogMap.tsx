@@ -6,6 +6,17 @@ import { Facility } from "@/types/facility";
 import { MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+/** Escape HTML special characters to prevent XSS in Leaflet popups */
+const esc = (str: string | null | undefined): string => {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 // Fix for default marker icons in Vite
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -354,19 +365,19 @@ const DogMap = ({
         <div style="padding: 12px; min-width: 200px;">
           <div style="display: flex; align-items: flex-start; gap: 12px;">
             <img
-              src="${dog.photo}"
-              alt="${dog.name}"
+              src="${esc(dog.photo)}"
+              alt="${esc(dog.name)}"
               style="width: 64px; height: 64px; border-radius: 8px; object-fit: cover;"
               onerror="this.src='/placeholder.svg'"
             />
             <div style="flex: 1;">
-              <h3 style="font-weight: bold; font-size: 16px; margin: 0;">${dog.name}</h3>
-              <p style="font-size: 12px; color: #666; margin: 4px 0 0 0;">${t('mapPopup.earTag', 'Ear Tag')}: ${dog.earTag}</p>
+              <h3 style="font-weight: bold; font-size: 16px; margin: 0;">${esc(dog.name)}</h3>
+              <p style="font-size: 12px; color: #666; margin: 4px 0 0 0;">${t('mapPopup.earTag', 'Ear Tag')}: ${esc(dog.earTag)}</p>
             </div>
           </div>
           
           <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 14px; color: #666;">${dog.location || t('mapPopup.unknownLocation', 'Unknown location')}</span>
+            <span style="font-size: 14px; color: #666;">${esc(dog.location) || t('mapPopup.unknownLocation', 'Unknown location')}</span>
           </div>
           
           <div style="margin-top: 8px; display: flex; align-items: center; gap: 8px; color: ${dog.isVaccinated ? '#2d9a6e' : '#d4a72c'};">
@@ -378,11 +389,11 @@ const DogMap = ({
           ${dog.sponsorName ? `
           <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #dc2626;">
             <span style="font-size: 14px;">❤️</span>
-            <span style="font-size: 13px; font-weight: 500;">${t('mapPopup.sponsor', 'Sponsor')}: ${dog.sponsorName}</span>
+            <span style="font-size: 13px; font-weight: 500;">${t('mapPopup.sponsor', 'Sponsor')}: ${esc(dog.sponsorName)}</span>
           </div>
           ` : ''}
           
-          ${dog.additionalInfo ? `<p style="margin-top: 8px; font-size: 14px; color: #666;">${dog.additionalInfo}</p>` : ''}
+          ${dog.additionalInfo ? `<p style="margin-top: 8px; font-size: 14px; color: #666;">${esc(dog.additionalInfo)}</p>` : ''}
         </div>
       `;
 
@@ -436,21 +447,21 @@ const DogMap = ({
         <div style="padding: 12px; min-width: 220px;">
           ${facility.photoUrl ? `
             <img
-              src="${facility.photoUrl}"
-              alt="${facility.name}"
+              src="${esc(facility.photoUrl)}"
+              alt="${esc(facility.name)}"
               style="width: 100%; height: 100px; border-radius: 8px; object-fit: cover; margin-bottom: 12px;"
               onerror="this.style.display='none'"
             />
           ` : ''}
           <div>
-            <span style="font-size: 12px; color: ${facility.type === 'vet' ? '#dc2626' : '#2563eb'}; font-weight: 600;">${typeLabel}</span>
-            <h3 style="font-weight: bold; font-size: 16px; margin: 4px 0 8px 0;">${facility.name}</h3>
+            <span style="font-size: 12px; color: ${facility.type === 'vet' ? '#dc2626' : '#2563eb'}; font-weight: 600;">${esc(typeLabel)}</span>
+            <h3 style="font-weight: bold; font-size: 16px; margin: 4px 0 8px 0;">${esc(facility.name)}</h3>
           </div>
           
-          ${facility.address ? `<p style="font-size: 13px; color: #666; margin: 4px 0;">📍 ${facility.address}</p>` : ''}
-          ${facility.phone ? `<p style="font-size: 13px; color: #666; margin: 4px 0;">📞 ${facility.phone}</p>` : ''}
-          ${facility.website ? `<p style="font-size: 13px; margin: 4px 0;"><a href="${facility.website}" target="_blank" style="color: #2563eb;">🌐 Website</a></p>` : ''}
-          ${facility.description ? `<p style="margin-top: 8px; font-size: 13px; color: #666;">${facility.description}</p>` : ''}
+          ${facility.address ? `<p style="font-size: 13px; color: #666; margin: 4px 0;">📍 ${esc(facility.address)}</p>` : ''}
+          ${facility.phone ? `<p style="font-size: 13px; color: #666; margin: 4px 0;">📞 ${esc(facility.phone)}</p>` : ''}
+          ${facility.website ? `<p style="font-size: 13px; margin: 4px 0;"><a href="${esc(facility.website)}" target="_blank" rel="noopener" style="color: #2563eb;">🌐 Website</a></p>` : ''}
+          ${facility.description ? `<p style="margin-top: 8px; font-size: 13px; color: #666;">${esc(facility.description)}</p>` : ''}
           <p style="margin-top: 8px;"><a href="https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: #2563eb; font-weight: 500; text-decoration: none;">📍 ${t('mapPopup.navigate', 'Navigate with Google Maps')}</a></p>
         </div>
       `;
