@@ -107,6 +107,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
             longitude: formData.longitude,
             location: formData.location,
             name: formData.name || null,
+            ear_tag: formData.earTag || null,
             additional_info: formData.additionalInfo || null,
             photo_url: photoUrl,
             photo_url_2: photoUrl2,

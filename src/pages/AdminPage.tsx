@@ -144,7 +144,7 @@ const AdminPage = () => {
       is_approved: true,
       is_vaccinated: false,
       reported_by: user?.id ?? null,
-      ear_tag: null,
+      ear_tag: r.ear_tag || null,
       gender: r.gender || null,
     });
     if (error) {

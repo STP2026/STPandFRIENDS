@@ -151,6 +151,7 @@ const AddDogPage = () => {
               location: formData.location || null,
               additional_info: formData.additionalInfo || null,
               name: formData.name || null,
+              ear_tag: formData.earTag || null,
               photo_url: photoUrl,
               photo_url_2: photoUrl2,
               photo_url_3: photoUrl3,
@@ -450,18 +451,16 @@ const AddDogPage = () => {
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} />
                 </div>
-                {user && (
-                  <div className="space-y-2">
-                    <Label htmlFor="earTag" className="flex items-center gap-2">
-                      <Tag className="w-4 h-4" />
-                      {t('addDog.earTag')}
-                      <span className="text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span>
-                    </Label>
-                    <Input id="earTag" placeholder={t('addDog.earTagPlaceholder')}
-                      value={formData.earTag}
-                      onChange={(e) => setFormData(prev => ({ ...prev, earTag: e.target.value }))} />
-                  </div>
-                )}
+                <div className="space-y-2">
+                  <Label htmlFor="earTag" className="flex items-center gap-2">
+                    <Tag className="w-4 h-4" />
+                    {t('addDog.earTag')}
+                    <span className="text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span>
+                  </Label>
+                  <Input id="earTag" placeholder={t('addDog.earTagPlaceholder')}
+                    value={formData.earTag}
+                    onChange={(e) => setFormData(prev => ({ ...prev, earTag: e.target.value }))} />
+                </div>
               </div>
               <div className="mt-4 space-y-2">
                 <Label>{t('addDog.gender', 'Geschlecht')} <span className="text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span></Label>
