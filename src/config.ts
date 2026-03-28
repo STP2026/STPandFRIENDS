@@ -5,7 +5,7 @@ export const CONTACT = {
   email: import.meta.env.VITE_CONTACT_EMAIL || 'niklas@save-the-paws.com',
   facebook: 'https://www.facebook.com/share/g/1AsLrfAibF/?mibextid=K35XfP',
   website: 'https://save-the-paws.de',
-  gofundme: 'https://gofund.me/26e9f81e7',
+  gofundme: 'https://www.gofundme.com/f/kastrationsprogramm-in-agadir',
   dogAid: 'https://aid.save-the-paws.de/dog-aid',
   firstAid: 'https://aid.save-the-paws.de/first-aid',
   adopt: 'https://aid.save-the-paws.de/adopt',

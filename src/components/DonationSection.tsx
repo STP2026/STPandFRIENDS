@@ -9,7 +9,7 @@ interface DonationSectionProps {
 const DonationSection = ({ variant = "full" }: DonationSectionProps) => {
   const { t } = useTranslation();
   
-  const GOFUNDME_LINK = "https://gofund.me/26e9f81e7";
+  const GOFUNDME_LINK = "https://www.gofundme.com/f/kastrationsprogramm-in-agadir";
 
   if (variant === "afterReport") {
     return (

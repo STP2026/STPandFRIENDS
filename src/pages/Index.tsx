@@ -73,7 +73,7 @@ const Index = () => {
                 <p className="text-xs text-muted-foreground mb-4 leading-relaxed flex-1">
                   {t('actions.support.description')}
                 </p>
-                <a href="https://gofund.me/26e9f81e7" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.gofundme.com/f/kastrationsprogramm-in-agadir" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="w-full gap-1.5 text-xs sm:text-sm border-amber-500 text-amber-700 hover:bg-amber-50 dark:hover:bg-amber-950/30" size="sm">
                     <Heart className="w-3.5 h-3.5" />
                     {t('actions.support.cta')}

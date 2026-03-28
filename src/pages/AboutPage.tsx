@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import logoDark from "@/assets/logo.svg";
 import Footer from "@/components/Footer";
 
-const GOFUNDME_LINK = "https://gofund.me/26e9f81e7";
+const GOFUNDME_LINK = "https://www.gofundme.com/f/kastrationsprogramm-in-agadir";
 const WEBSITE_LINK  = "https://save-the-paws.de";
 
 const AboutPage = () => {
