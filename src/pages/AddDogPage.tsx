@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import DonationSection from "@/components/DonationSection";
 import { Button } from "@/components/ui/button";
@@ -38,6 +38,31 @@ const AddDogPage = () => {
   const [isPhotoUploading, setIsPhotoUploading] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState<{ lat: number; lng: number } | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // H8: Guest rate limiting — 2 min cooldown between reports
+  const GUEST_COOLDOWN_MS = 2 * 60 * 1000;
+  const GUEST_COOLDOWN_KEY = 'stp_guest_last_report';
+  const getGuestCooldownRemaining = (): number => {
+    if (user) return 0;
+    try {
+      const last = localStorage.getItem(GUEST_COOLDOWN_KEY);
+      if (!last) return 0;
+      const remaining = GUEST_COOLDOWN_MS - (Date.now() - parseInt(last));
+      return remaining > 0 ? remaining : 0;
+    } catch { return 0; }
+  };
+  const [guestCooldown, setGuestCooldown] = useState(getGuestCooldownRemaining);
+
+  // Tick down cooldown every second when active
+  useEffect(() => {
+    if (user || guestCooldown <= 0) return;
+    const interval = setInterval(() => {
+      const remaining = getGuestCooldownRemaining();
+      setGuestCooldown(remaining);
+      if (remaining <= 0) clearInterval(interval);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [guestCooldown > 0]); // eslint-disable-line
 
   const [formData, setFormData] = useState({
     name: "",
@@ -135,6 +160,14 @@ const AddDogPage = () => {
 
     // ── GUEST ──
     if (!user) {
+      // Rate limiting: check cooldown
+      const cooldownLeft = getGuestCooldownRemaining();
+      if (cooldownLeft > 0) {
+        setSubmitError(t('addDog.cooldownActive', 'Bitte warte {{seconds}}s bevor du erneut meldest.', { seconds: Math.ceil(cooldownLeft / 1000) }));
+        setIsSubmitting(false);
+        return;
+      }
+
       try {
         let succeeded = false;
         for (let attempt = 1; attempt <= 3; attempt++) {
@@ -165,6 +198,9 @@ const AddDogPage = () => {
           }
         }
         if (succeeded) {
+          // Stamp cooldown
+          try { localStorage.setItem(GUEST_COOLDOWN_KEY, Date.now().toString()); } catch {}
+          setGuestCooldown(GUEST_COOLDOWN_MS);
           setSubmitted(true);
         } else {
           const payload = buildQueuePayload();

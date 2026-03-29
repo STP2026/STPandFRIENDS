@@ -14,6 +14,7 @@ import AuthConfirmPage from "./pages/AuthConfirmPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFound from "./pages/NotFound";
 import InstallPWA from "./components/InstallPWA";
+import UpdatePrompt from "./components/UpdatePrompt";
 import OfflineIndicator from "./components/OfflineIndicator";
 import AppErrorBoundary from "./components/AppErrorBoundary";
 import DirectionHandler from "./components/DirectionHandler";
@@ -94,6 +95,7 @@ const App = () => (
             </Suspense>
             </AppErrorBoundary>
             <InstallPWA />
+            <UpdatePrompt />
           </BrowserRouter>
         </OfflineProvider>
       </AuthProvider>

@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import { useAllDogs, useApproveDog, useUpdateDog, useDeleteDog } from '@/hooks/useDogs';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAllHelperApplications, useUpdateHelperApplication } from '@/hooks/useHelperApplication';
 import { useIsHelper } from '@/hooks/useHelperApplication';
 import { useLatestRemarks, useDogRemarks, useAddDogRemark } from '@/hooks/useDogRemarks';
@@ -99,6 +100,7 @@ const AdminPage = () => {
   const deleteSponsor = useDeleteSponsor();
   const { data: rehabSpots } = useRehabSpots();
   const approveDog = useApproveDog();
+  const queryClient = useQueryClient();
 
   // Guest reports — shown in pending tab alongside unreviewed dogs
   const [guestReports, setGuestReports] = useState<any[]>([]);
@@ -111,6 +113,24 @@ const AdminPage = () => {
     setGuestReports(data || []);
   }, []);
   useEffect(() => { fetchGuestReports(); }, [fetchGuestReports]);
+
+  // ── REALTIME: auto-refresh when new reports arrive ──
+  useEffect(() => {
+    const channel = supabase
+      .channel('admin-realtime')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'dogs' }, () => {
+        queryClient.invalidateQueries({ queryKey: ['dogs'] });
+      })
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'dogs' }, () => {
+        queryClient.invalidateQueries({ queryKey: ['dogs'] });
+      })
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guest_reports' }, () => {
+        fetchGuestReports();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [queryClient, fetchGuestReports]);
 
   const handleConvertGuestReport = async (r: any) => {
     // If guest photos are base64, upload to Storage first

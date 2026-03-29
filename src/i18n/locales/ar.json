@@ -210,7 +210,8 @@
     "anotherReport": "بلاغ آخر",
     "gender": "الجنس",
     "genderMale": "ذكر",
-    "genderFemale": "أنثى"
+    "genderFemale": "أنثى",
+    "cooldownActive": "يرجى الانتظار {{seconds}} ثانية قبل الإرسال مرة أخرى."
   },
   "auth": {
     "login": "دخول",
@@ -467,7 +468,9 @@
     "androidStep2": "اختار \"نصّب التطبيق\" ولا \"زيد للشاشة الرئيسية\"",
     "androidStep3": "كليكي على \"نصّب\" للتأكيد",
     "desktopMessage": "حل هاد الصفحة على التيليفون ديالك باش تنصّب التطبيق.",
-    "skipInstall": "كمّل بلا تنصيب"
+    "skipInstall": "كمّل بلا تنصيب",
+    "updateAvailable": "نسخة جديدة متاحة",
+    "updateNow": "تحديث"
   },
   "contact": {
     "navLabel": "اتصل بينا",

@@ -210,7 +210,8 @@
     "anotherReport": "Another report",
     "gender": "Gender",
     "genderMale": "Male",
-    "genderFemale": "Female"
+    "genderFemale": "Female",
+    "cooldownActive": "Please wait {{seconds}}s before submitting again."
   },
   "auth": {
     "login": "Login",
@@ -467,7 +468,9 @@
     "androidStep2": "Select \"Install app\" or \"Add to Home screen\"",
     "androidStep3": "Tap \"Install\" to confirm",
     "desktopMessage": "Open this page on your mobile device to install the app.",
-    "skipInstall": "Continue without installing"
+    "skipInstall": "Continue without installing",
+    "updateAvailable": "New version available",
+    "updateNow": "Update"
   },
   "contact": {
     "navLabel": "Contact",

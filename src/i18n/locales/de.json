@@ -210,7 +210,8 @@
     "anotherReport": "Weitere Meldung",
     "gender": "Geschlecht",
     "genderMale": "Männlich",
-    "genderFemale": "Weiblich"
+    "genderFemale": "Weiblich",
+    "cooldownActive": "Bitte warte {{seconds}}s bevor du erneut meldest."
   },
   "auth": {
     "login": "Anmelden",
@@ -467,7 +468,9 @@
     "androidStep2": "Wähle \"App installieren\" oder \"Zum Startbildschirm\"",
     "androidStep3": "Tippe auf \"Installieren\" zum Bestätigen",
     "desktopMessage": "Öffne diese Seite auf deinem Handy, um die App zu installieren.",
-    "skipInstall": "Ohne Installation fortfahren"
+    "skipInstall": "Ohne Installation fortfahren",
+    "updateAvailable": "Neue Version verfügbar",
+    "updateNow": "Laden"
   },
   "contact": {
     "navLabel": "Kontakt",
