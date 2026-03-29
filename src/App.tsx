@@ -15,6 +15,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFound from "./pages/NotFound";
 import InstallPWA from "./components/InstallPWA";
 import OfflineIndicator from "./components/OfflineIndicator";
+import AppErrorBoundary from "./components/AppErrorBoundary";
 import DirectionHandler from "./components/DirectionHandler";
 
 // Lazy load heavy pages — Leaflet (~150KB) only loads when map page is visited
@@ -73,6 +74,7 @@ const App = () => (
           <BrowserRouter>
             <DirectionHandler />
             <OfflineIndicator />
+            <AppErrorBoundary>
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -90,6 +92,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
+            </AppErrorBoundary>
             <InstallPWA />
           </BrowserRouter>
         </OfflineProvider>

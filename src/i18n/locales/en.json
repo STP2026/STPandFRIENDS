@@ -380,6 +380,27 @@
       "desc": "Reports from non-logged-in visitors.",
       "unnamed": "Unknown",
       "markReviewed": "Mark as reviewed"
+    },
+    "guestReportCount": "{{count}} guest report(s) — unregistered visitors",
+    "guestDefaultName": "Unknown (guest report)",
+    "convertToDog": "Create as dog",
+    "markAsAttention": "Mark as \"Attention\"",
+    "attentionDesc": "Dog needs urgent help",
+    "convertToTagged": "Convert to \"Tagged\"",
+    "taggedDesc": "Dog was vaccinated, neutered & tagged",
+    "addSponsor": "Add sponsor",
+    "sponsorPlaceholder": "Sponsor name",
+    "sponsorThanks": "Thank you for your help, {{name}}!",
+    "vacPassport": "Vaccination passport",
+    "vacPassportPlaceholder": "e.g. passport number or info",
+    "remarks": {
+      "title": "Remarks: {{name}}",
+      "placeholder": "New remark...",
+      "empty": "No remarks."
+    },
+    "changelog": {
+      "title": "Change log: {{name}}",
+      "empty": "No changes recorded."
     }
   },
   "helper": {

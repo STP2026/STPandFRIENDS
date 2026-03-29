@@ -73,7 +73,7 @@ export default function AddFacilityDialog({ open, onOpenChange }: AddFacilityDia
       resetForm();
       onOpenChange(false);
     } catch (error) {
-      console.error('Error adding facility');
+      // Facility error handled by toast notification
       toast.error('Fehler beim Hinzufügen der Einrichtung');
     }
   };

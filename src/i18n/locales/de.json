@@ -380,6 +380,27 @@
       "desc": "Meldungen von nicht eingeloggten Besuchern.",
       "unnamed": "Unbekannt",
       "markReviewed": "Als geprüft markieren"
+    },
+    "guestReportCount": "{{count}} Gast-Meldung(en) — nicht registrierte Besucher",
+    "guestDefaultName": "Unbekannt (Gast-Meldung)",
+    "convertToDog": "Als Hund anlegen",
+    "markAsAttention": "Als \"Attention\" markieren",
+    "attentionDesc": "Hund braucht dringend Hilfe",
+    "convertToTagged": "In \"Tagged\" umwandeln",
+    "taggedDesc": "Hund wurde geimpft, kastriert & getaggt",
+    "addSponsor": "Sponsor hinzufügen",
+    "sponsorPlaceholder": "Name des Sponsors",
+    "sponsorThanks": "Danke für Deine Hilfe, {{name}}!",
+    "vacPassport": "Impfpass",
+    "vacPassportPlaceholder": "z.B. Impfpass-Nummer oder Info",
+    "remarks": {
+      "title": "Bemerkungen: {{name}}",
+      "placeholder": "Neue Bemerkung...",
+      "empty": "Keine Bemerkungen."
+    },
+    "changelog": {
+      "title": "Änderungslog: {{name}}",
+      "empty": "Keine Änderungen protokolliert."
     }
   },
   "helper": {

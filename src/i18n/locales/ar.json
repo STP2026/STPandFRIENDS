@@ -380,6 +380,27 @@
       "desc": "بلاغات من زوار غير مسجلين.",
       "unnamed": "مجهول",
       "markReviewed": "وضع علامة كمراجَع"
+    },
+    "guestReportCount": "{{count}} بلاغ(ات) زوار — غير مسجلين",
+    "guestDefaultName": "غير معروف (بلاغ زائر)",
+    "convertToDog": "إنشاء ككلب",
+    "markAsAttention": "وضع علامة \"انتباه\"",
+    "attentionDesc": "الكلب يحتاج مساعدة عاجلة",
+    "convertToTagged": "تحويل إلى \"موسوم\"",
+    "taggedDesc": "تم تطعيم الكلب وخصيه ووسمه",
+    "addSponsor": "إضافة راعي",
+    "sponsorPlaceholder": "اسم الراعي",
+    "sponsorThanks": "شكراً لمساعدتك، {{name}}!",
+    "vacPassport": "جواز التطعيم",
+    "vacPassportPlaceholder": "مثل رقم الجواز أو معلومات",
+    "remarks": {
+      "title": "ملاحظات: {{name}}",
+      "placeholder": "ملاحظة جديدة...",
+      "empty": "لا توجد ملاحظات."
+    },
+    "changelog": {
+      "title": "سجل التغييرات: {{name}}",
+      "empty": "لم يتم تسجيل أي تغييرات."
     }
   },
   "helper": {

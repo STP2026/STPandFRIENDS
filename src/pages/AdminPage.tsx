@@ -132,7 +132,7 @@ const AdminPage = () => {
     }
 
     const { error } = await supabase.from('dogs').insert({
-      name: r.name || 'Unbekannt (Gast-Meldung)',
+      name: r.name || t('admin.guestDefaultName', 'Unbekannt (Gast-Meldung)'),
       latitude: r.latitude,
       longitude: r.longitude,
       location: r.location,
@@ -656,7 +656,7 @@ const AdminPage = () => {
                 <div className="mb-6">
                   <h3 className="text-sm font-medium text-amber-600 dark:text-amber-400 mb-3 flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-amber-500"></span>
-                    {guestReports.length} Gast-Meldung(en) — nicht registrierte Besucher
+                    {t('admin.guestReportCount', '{{count}} Gast-Meldung(en) — nicht registrierte Besucher', { count: guestReports.length })}
                   </h3>
                   <div className="space-y-2">
                     {guestReports.map((r) => (
@@ -675,7 +675,7 @@ const AdminPage = () => {
                           <div className="flex gap-2 shrink-0">
                             <Button size="sm" variant="outline" className="text-xs gap-1" onClick={() => handleConvertGuestReport(r)}>
                               <CheckCircle className="w-3.5 h-3.5" />
-                              Als Hund anlegen
+                              {t('admin.convertToDog', 'Als Hund anlegen')}
                             </Button>
                             <Button size="sm" variant="ghost" className="text-xs text-muted-foreground" onClick={() => handleDismissGuestReport(r.id)}>
                               <X className="w-3.5 h-3.5" />
@@ -1650,12 +1650,12 @@ const AdminPage = () => {
             <div className="space-y-2">
               <Label htmlFor="vacPassport" className="flex items-center gap-2">
                 <FileText className="w-4 h-4" />
-                Impfpass
+                {t('admin.vacPassport', 'Impfpass')}
               </Label>
               <Input
                 id="vacPassport"
                 type="text"
-                placeholder="z.B. Impfpass-Nummer oder Info"
+                placeholder={t('admin.vacPassportPlaceholder', 'z.B. Impfpass-Nummer oder Info')}
                 value={editForm.vaccinationPassport}
                 onChange={(e) => setEditForm({ ...editForm, vaccinationPassport: e.target.value })}
               />
@@ -1705,19 +1705,19 @@ const AdminPage = () => {
               <div className="space-y-2 border-t border-border pt-4">
                 <Label htmlFor="sponsor" className="flex items-center gap-2 text-red-600">
                   <Heart className="w-4 h-4 fill-red-600" />
-                  Sponsor hinzufügen
+                  {t('admin.addSponsor', 'Sponsor hinzufügen')}
                 </Label>
                 <Input
                   id="sponsor"
                   type="text"
-                  placeholder="Name des Sponsors"
+                  placeholder={t('admin.sponsorPlaceholder', 'Name des Sponsors')}
                   value={editForm.sponsorName}
                   onChange={(e) => setEditForm({ ...editForm, sponsorName: e.target.value })}
                 />
                 {editForm.sponsorName && (
                   <p className="text-sm text-red-600 flex items-center gap-1">
                     <Heart className="w-3 h-3 fill-red-600" />
-                    Danke für Deine Hilfe, {editForm.sponsorName}!
+                    {t('admin.sponsorThanks', 'Danke für Deine Hilfe, {{name}}!', { name: editForm.sponsorName })}
                   </p>
                 )}
               </div>
@@ -1743,10 +1743,10 @@ const AdminPage = () => {
                     <div>
                       <Label className="flex items-center gap-2 font-medium">
                         <AlertTriangle className={`w-4 h-4 ${editForm.reportType === 'sos' ? 'text-red-600' : 'text-muted-foreground'}`} />
-                        🚨 Als "Attention" markieren
+                        🚨 {t('admin.markAsAttention', 'Als "Attention" markieren')}
                       </Label>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Hund braucht dringend Hilfe
+                        {t('admin.attentionDesc', 'Hund braucht dringend Hilfe')}
                       </p>
                     </div>
                     <Switch
@@ -1771,10 +1771,10 @@ const AdminPage = () => {
                     <div>
                       <Label className="flex items-center gap-2 font-medium">
                         <CheckCircle className={`w-4 h-4 ${editForm.reportType === 'save' ? 'text-green-600' : 'text-muted-foreground'}`} />
-                        In "Tagged" umwandeln
+                        {t('admin.convertToTagged', 'In "Tagged" umwandeln')}
                       </Label>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Hund wurde geimpft, kastriert & getaggt
+                        {t('admin.taggedDesc', 'Hund wurde geimpft, kastriert & getaggt')}
                       </p>
                     </div>
                     <Switch
@@ -1802,12 +1802,12 @@ const AdminPage = () => {
                   <div className="space-y-2">
                     <Label htmlFor="sponsor-convert" className="flex items-center gap-2 text-red-600">
                       <Heart className="w-4 h-4 fill-red-600" />
-                      Sponsor hinzufügen
+                      {t('admin.addSponsor', 'Sponsor hinzufügen')}
                     </Label>
                     <Input
                       id="sponsor-convert"
                       type="text"
-                      placeholder="Name des Sponsors"
+                      placeholder={t('admin.sponsorPlaceholder', 'Name des Sponsors')}
                       value={editForm.sponsorName}
                       onChange={(e) => setEditForm({ ...editForm, sponsorName: e.target.value })}
                     />
@@ -1874,6 +1874,7 @@ function RemarkDialog({
   setNewRemark: (v: string) => void;
   onAddRemark: () => void;
 }) {
+  const { t } = useTranslation();
   const { data: remarks } = useDogRemarks(dog?.id || '');
 
   return (
@@ -1882,14 +1883,14 @@ function RemarkDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <StickyNote className="w-5 h-5" />
-            Bemerkungen: {dog?.name}
+            {t('admin.remarks.title', 'Bemerkungen: {{name}}', { name: dog?.name })}
           </DialogTitle>
         </DialogHeader>
         
         <div className="space-y-4">
           <div className="flex gap-2">
             <Textarea
-              placeholder="Neue Bemerkung..."
+              placeholder={t('admin.remarks.placeholder', 'Neue Bemerkung...')}
               value={newRemark}
               onChange={(e) => setNewRemark(e.target.value)}
               className="flex-1"
@@ -1902,7 +1903,7 @@ function RemarkDialog({
           <ScrollArea className="h-[300px]">
             <div className="space-y-3">
               {remarks?.length === 0 ? (
-                <p className="text-center py-4 text-muted-foreground">Keine Bemerkungen.</p>
+                <p className="text-center py-4 text-muted-foreground">{t('admin.remarks.empty', 'Keine Bemerkungen.')}</p>
               ) : (
                 remarks?.map((remark) => (
                   <div key={remark.id} className="bg-secondary/30 rounded-lg p-3">
@@ -1934,6 +1935,7 @@ function ChangeLogDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const { t } = useTranslation();
   const { data: changeLog } = useDogChangeLog(dog?.id || '');
 
   const formatChanges = (changes: unknown): string => {
@@ -1955,14 +1957,14 @@ function ChangeLogDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <History className="w-5 h-5" />
-            Änderungslog: {dog?.name}
+            {t('admin.changelog.title', 'Änderungslog: {{name}}', { name: dog?.name })}
           </DialogTitle>
         </DialogHeader>
         
         <ScrollArea className="h-[400px]">
           <div className="space-y-3">
             {changeLog?.length === 0 ? (
-              <p className="text-center py-4 text-muted-foreground">Keine Änderungen protokolliert.</p>
+              <p className="text-center py-4 text-muted-foreground">{t('admin.changelog.empty', 'Keine Änderungen protokolliert.')}</p>
             ) : (
               changeLog?.map((entry) => (
                 <div key={entry.id} className="bg-secondary/30 rounded-lg p-3">

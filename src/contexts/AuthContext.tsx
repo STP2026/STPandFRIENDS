@@ -71,14 +71,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .maybeSingle();
 
       if (error) {
-        console.error('Error checking admin role:', (error as any)?.code || 'unknown');
+        // Auth role check failed silently — user treated as non-admin
         setIsAdmin(false);
         return;
       }
 
       setIsAdmin(!!data);
     } catch (err) {
-      console.error('Error checking admin role:', (err as any)?.code || 'unknown');
+      // Auth role check failed silently — user treated as non-admin
       setIsAdmin(false);
     }
   };

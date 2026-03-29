@@ -18,7 +18,7 @@ class MapErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: unknown) {
-    console.error("Map render error:", error);
+    // Map render error caught by ErrorBoundary
     this.setState((prev) => ({ errorCount: prev.errorCount + 1 }));
   }
 

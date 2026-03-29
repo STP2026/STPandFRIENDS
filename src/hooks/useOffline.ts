@@ -48,9 +48,16 @@ export function useOffline() {
     if (lastSync) setLastSyncTime(parseInt(lastSync));
   }, []);
 
-  // Persist queue
+  // Persist queue — wrapped in try/catch because base64 photos can
+  // exceed the ~5MB localStorage limit on some browsers
   useEffect(() => {
-    localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(offlineQueue));
+    try {
+      localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(offlineQueue));
+    } catch {
+      // Storage full — queue is still in memory and will sync when online,
+      // but won't survive a page reload. This is acceptable: the user
+      // will get a success screen and the sync attempt happens immediately.
+    }
   }, [offlineQueue]);
 
   const verifyConnectivity = useCallback(async (): Promise<boolean> => {

@@ -380,6 +380,27 @@
       "desc": "Signalements de visiteurs non connectés.",
       "unnamed": "Inconnu",
       "markReviewed": "Marquer comme examiné"
+    },
+    "guestReportCount": "{{count}} signalement(s) visiteur(s) — non inscrits",
+    "guestDefaultName": "Inconnu (signalement visiteur)",
+    "convertToDog": "Créer en tant que chien",
+    "markAsAttention": "Marquer comme \"Attention\"",
+    "attentionDesc": "Le chien a besoin d'aide urgente",
+    "convertToTagged": "Convertir en \"Tagué\"",
+    "taggedDesc": "Chien vacciné, stérilisé et tagué",
+    "addSponsor": "Ajouter un sponsor",
+    "sponsorPlaceholder": "Nom du sponsor",
+    "sponsorThanks": "Merci pour ton aide, {{name}} !",
+    "vacPassport": "Carnet de vaccination",
+    "vacPassportPlaceholder": "ex. numéro de carnet ou info",
+    "remarks": {
+      "title": "Remarques : {{name}}",
+      "placeholder": "Nouvelle remarque...",
+      "empty": "Aucune remarque."
+    },
+    "changelog": {
+      "title": "Journal des modifications : {{name}}",
+      "empty": "Aucune modification enregistrée."
     }
   },
   "helper": {

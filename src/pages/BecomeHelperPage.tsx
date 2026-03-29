@@ -25,7 +25,7 @@ const BecomeHelperPage = () => {
     try {
       await applyMutation.mutateAsync({ userId: user.id, message: message.trim() });
     } catch (error) {
-      console.error('Error submitting application');
+      // Submission error handled by toast notification
     } finally {
       setIsSubmitting(false);
     }
