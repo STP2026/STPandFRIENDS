@@ -402,7 +402,8 @@
     "changelog": {
       "title": "Change log: {{name}}",
       "empty": "No changes recorded."
-    }
+    },
+    "convertError": "Conversion failed"
   },
   "helper": {
     "title": "Become a Helper 💚",

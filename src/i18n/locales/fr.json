@@ -402,7 +402,8 @@
     "changelog": {
       "title": "Journal des modifications : {{name}}",
       "empty": "Aucune modification enregistrée."
-    }
+    },
+    "convertError": "Échec de la conversion"
   },
   "helper": {
     "title": "Devenez Aidant 💚",

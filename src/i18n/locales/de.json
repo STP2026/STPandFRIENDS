@@ -402,7 +402,8 @@
     "changelog": {
       "title": "Änderungslog: {{name}}",
       "empty": "Keine Änderungen protokolliert."
-    }
+    },
+    "convertError": "Konvertierung fehlgeschlagen"
   },
   "helper": {
     "title": "Werde Helfer 💚",

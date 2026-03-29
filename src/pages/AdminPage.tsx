@@ -168,7 +168,8 @@ const AdminPage = () => {
       gender: r.gender || null,
     });
     if (error) {
-      alert('Fehler: ' + error.message);
+      const { toast } = await import('sonner');
+      toast.error(t('admin.convertError', 'Konvertierung fehlgeschlagen'), { description: error.message });
       return;
     }
     await supabase.from('guest_reports').update({ reviewed: true }).eq('id', r.id);
