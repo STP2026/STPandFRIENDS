@@ -28,8 +28,10 @@ const InstallPage = lazy(() => import("./pages/InstallPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PawFriendsPage = lazy(() => import("./pages/PawFriendsPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 
 import AutoLogoutWarning from "@/components/AutoLogoutWarning";
+import CookieConsent from "@/components/CookieConsent";
 
 // Loading fallback for lazy pages
 const PageLoader = () => (
@@ -90,12 +92,14 @@ const App = () => (
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/become-helper" element={<BecomeHelperPage />} />
                 <Route path="/install" element={<InstallPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
             </AppErrorBoundary>
             <InstallPWA />
             <UpdatePrompt />
+            <CookieConsent />
           </BrowserRouter>
         </OfflineProvider>
       </AuthProvider>

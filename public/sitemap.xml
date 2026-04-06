@@ -7,5 +7,6 @@
   <url><loc>https://help.save-the-paws.com/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://help.save-the-paws.com/pawfriends</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://help.save-the-paws.com/become-helper</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://help.save-the-paws.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://help.save-the-paws.com/install</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
 </urlset>

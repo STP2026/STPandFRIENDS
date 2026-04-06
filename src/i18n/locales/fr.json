@@ -402,8 +402,7 @@
     "changelog": {
       "title": "Journal des modifications : {{name}}",
       "empty": "Aucune modification enregistrée."
-    },
-    "convertError": "Échec de la conversion"
+    }
   },
   "helper": {
     "title": "Devenez Aidant 💚",
@@ -724,5 +723,36 @@
     "syncNow": "Synchroniser",
     "syncing": "Synchronisation...",
     "syncSuccess": "Signalements envoyés avec succès !"
+  },
+  "privacy": {
+    "bannerTitle": "Confidentialité & Cookies",
+    "bannerText": "Cette application n'utilise que des données techniquement nécessaires (session de connexion, file d'attente hors ligne) et charge les données cartographiques d'OpenStreetMap. Aucun cookie de suivi n'est utilisé et aucune donnée n'est partagée avec des annonceurs.",
+    "learnMore": "En savoir plus",
+    "accept": "Compris",
+    "pageTitle": "Politique de confidentialité",
+    "lastUpdated": "Dernière mise à jour : Mars 2026",
+    "responsibleTitle": "Responsable",
+    "dataCollectedTitle": "Quelles données sont traitées ?",
+    "reportDataTitle": "Signalements de chiens",
+    "reportDataDesc": "Lorsque vous signalez un chien, nous enregistrons : localisation (coordonnées GPS), photo(s), nom/description, marque auriculaire, sexe et notes supplémentaires. Pour les utilisateurs connectés, le signalement est lié à votre compte.",
+    "accountDataTitle": "Compte utilisateur",
+    "accountDataDesc": "Lors de l'inscription, nous enregistrons votre adresse e-mail et un nom d'affichage choisi. Les mots de passe sont hachés par Supabase Auth et ne sont pas accessibles par nous.",
+    "guestDataTitle": "Signalements visiteurs",
+    "guestDataDesc": "Les visiteurs peuvent signaler sans compte. Aucune adresse e-mail ou identification personnelle n'est collectée — uniquement les données du signalement.",
+    "localStorageTitle": "Stockage local (Cookies & localStorage)",
+    "localStorageDesc": "Cette application n'utilise pas de cookies de suivi ou publicitaires. Nous utilisons uniquement un stockage local techniquement nécessaire :",
+    "ls1": "Session de connexion (Supabase Auth Token)",
+    "ls2": "File d'attente hors ligne pour signalements en cas de mauvaise connexion",
+    "ls3": "Données cartographiques en cache pour utilisation hors ligne",
+    "ls4": "Invite d'installation PWA (si déjà affichée)",
+    "ls5": "Avis de confidentialité (si déjà confirmé)",
+    "externalTitle": "Services externes",
+    "supabaseDesc": "Base de données et authentification. Serveurs dans l'UE (Francfort). Politique de confidentialité : supabase.com/privacy",
+    "osmDesc": "Les tuiles cartographiques sont chargées depuis les serveurs OpenStreetMap. Votre adresse IP est transmise à OSM. Politique de confidentialité : wiki.osmfoundation.org/wiki/Privacy_Policy",
+    "vercelDesc": "Hébergement de l'application. Politique de confidentialité : vercel.com/legal/privacy-policy",
+    "noTrackingTitle": "Pas de suivi",
+    "noTrackingDesc": "Save The Paws n'utilise aucun outil d'analyse (pas de Google Analytics, pas de Meta Pixel, pas de suivi). Nous ne collectons pas de statistiques d'utilisation et ne partageons aucune donnée avec des annonceurs ou des tiers.",
+    "deletionTitle": "Information & Suppression",
+    "deletionDesc": "Vous avez le droit d'accès, de rectification et de suppression de vos données. Contactez-nous par e-mail et nous nous en occuperons dans les 30 jours."
   }
 }

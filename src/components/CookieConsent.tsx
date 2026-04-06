@@ -1,0 +1,78 @@
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+const CONSENT_KEY = 'stp_privacy_consent';
+const CONSENT_VERSION = '1'; // Bump this when privacy policy changes
+
+/**
+ * DSGVO-compliant privacy consent banner.
+ * 
+ * Save The Paws uses:
+ * - localStorage for session, offline queue, and PWA state (essential, no consent needed)
+ * - Supabase Auth (essential for login functionality)
+ * - OpenStreetMap tiles (external, loads map tiles from OSM servers)
+ * - Google Maps links (only on user click, no tracking)
+ * 
+ * No analytics, no tracking cookies, no third-party advertising.
+ * The banner informs about essential data processing and links to the privacy page.
+ */
+const CookieConsent = () => {
+  const { t } = useTranslation();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    try {
+      const consent = localStorage.getItem(CONSENT_KEY);
+      if (consent !== CONSENT_VERSION) {
+        // Small delay so the page content loads first
+        const timer = setTimeout(() => setVisible(true), 1500);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // localStorage not available — banner won't show, but app still works
+    }
+  }, []);
+
+  const handleAccept = () => {
+    try { localStorage.setItem(CONSENT_KEY, CONSENT_VERSION); } catch {}
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 animate-fade-in">
+      <div className="bg-background/95 backdrop-blur-md border-t border-border shadow-lg">
+        <div className="container mx-auto px-4 py-4 max-w-3xl">
+          <div className="flex items-start gap-3">
+            <Shield className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-foreground font-medium mb-1">
+                {t('privacy.bannerTitle', 'Datenschutz & Cookies')}
+              </p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                {t('privacy.bannerText', 'Diese App nutzt ausschließlich technisch notwendige Daten (Login-Session, Offline-Warteschlange) und lädt Kartendaten von OpenStreetMap. Es werden keine Tracking-Cookies gesetzt und keine Daten an Werbeanbieter weitergegeben.')}
+                {' '}
+                <Link to="/privacy" className="underline text-primary hover:text-primary/80">
+                  {t('privacy.learnMore', 'Mehr erfahren')}
+                </Link>
+              </p>
+            </div>
+            <Button
+              size="sm"
+              onClick={handleAccept}
+              className="shrink-0"
+            >
+              {t('privacy.accept', 'Verstanden')}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CookieConsent;

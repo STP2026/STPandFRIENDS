@@ -402,8 +402,7 @@
     "changelog": {
       "title": "Change log: {{name}}",
       "empty": "No changes recorded."
-    },
-    "convertError": "Conversion failed"
+    }
   },
   "helper": {
     "title": "Become a Helper 💚",
@@ -724,5 +723,36 @@
     "syncNow": "Sync now",
     "syncing": "Syncing...",
     "syncSuccess": "Reports uploaded successfully!"
+  },
+  "privacy": {
+    "bannerTitle": "Privacy & Cookies",
+    "bannerText": "This app only uses technically necessary data (login session, offline queue) and loads map data from OpenStreetMap. No tracking cookies are set and no data is shared with advertisers.",
+    "learnMore": "Learn more",
+    "accept": "Got it",
+    "pageTitle": "Privacy Policy",
+    "lastUpdated": "Last updated: March 2026",
+    "responsibleTitle": "Responsible",
+    "dataCollectedTitle": "What data is processed?",
+    "reportDataTitle": "Dog reports",
+    "reportDataDesc": "When you report a dog, we store: location (GPS coordinates), photo(s), name/description, ear tag, gender and additional notes. For logged-in users, the report is linked to your account.",
+    "accountDataTitle": "User account",
+    "accountDataDesc": "When registering, we store your email address and a chosen display name. Passwords are hashed by Supabase Auth and cannot be viewed by us.",
+    "guestDataTitle": "Guest reports",
+    "guestDataDesc": "Guests can report without an account. No email or personal identification is collected — only the report data itself.",
+    "localStorageTitle": "Local storage (Cookies & localStorage)",
+    "localStorageDesc": "This app does not set tracking or advertising cookies. We only use technically necessary local storage:",
+    "ls1": "Login session (Supabase Auth Token)",
+    "ls2": "Offline queue for reports during poor connectivity",
+    "ls3": "Cached map data for offline use",
+    "ls4": "PWA install prompt (whether already shown)",
+    "ls5": "Privacy notice (whether already acknowledged)",
+    "externalTitle": "External services",
+    "supabaseDesc": "Database and authentication. Servers in the EU (Frankfurt). Privacy policy: supabase.com/privacy",
+    "osmDesc": "Map tiles are loaded from OpenStreetMap servers. Your IP address is transmitted to OSM. Privacy policy: wiki.osmfoundation.org/wiki/Privacy_Policy",
+    "vercelDesc": "App hosting. Privacy policy: vercel.com/legal/privacy-policy",
+    "noTrackingTitle": "No tracking",
+    "noTrackingDesc": "Save The Paws does not use any analytics tools (no Google Analytics, no Meta Pixel, no tracking). We do not collect usage statistics and do not share data with advertisers or third parties.",
+    "deletionTitle": "Information & Deletion",
+    "deletionDesc": "You have the right to information, correction and deletion of your data. Contact us by email and we will take care of it within 30 days."
   }
 }
