@@ -77,6 +77,7 @@ const AddDogPage = () => {
     reportType: "stray" as ReportType,
     urgencyLevel: "",
     gender: "" as "" | "male" | "female",
+    reportedByName: "",
   });
 
   const handleLocationSelect = (lat: number, lng: number) => {
@@ -99,7 +100,7 @@ const AddDogPage = () => {
       location: "", isVaccinated: false,
       vaccination1Date: "", vaccination2Date: "",
       additionalInfo: "", reportType: "stray", urgencyLevel: "",
-      gender: "",
+      gender: "", reportedByName: "",
     });
   };
 
@@ -124,6 +125,7 @@ const AddDogPage = () => {
       reportType: formData.reportType,
       urgencyLevel: undefined as string | undefined,
       gender: formData.gender || undefined,
+      reportedByName: formData.reportedByName || undefined,
       isAutoApproved,
       photoBase64: formData.photoBase64 as [string, string, string],
     };
@@ -189,6 +191,7 @@ const AddDogPage = () => {
               photo_url_2: photoUrl2,
               photo_url_3: photoUrl3,
               gender: formData.gender || null,
+              reported_by_name: formData.reportedByName || null,
             });
             if (error) throw error;
             succeeded = true;
@@ -252,6 +255,7 @@ const AddDogPage = () => {
         report_type: formData.reportType,
         urgency_level: null as string | null,
         gender: formData.gender || null,
+        reported_by_name: formData.reportedByName || null,
       };
 
       let succeeded = false;
@@ -511,6 +515,18 @@ const AddDogPage = () => {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Reported by name — optional */}
+              <div className="mt-4 space-y-2">
+                <Label htmlFor="reportedByName">
+                  {t('addDog.reportedByName', 'Gemeldet von')}
+                  <span className="ml-1 text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span>
+                </Label>
+                <Input id="reportedByName"
+                  placeholder={t('addDog.reportedByNamePlaceholder', 'Dein Name (z.B. für Touristen-Meldungen)')}
+                  value={formData.reportedByName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, reportedByName: e.target.value }))} />
               </div>
 
               <div className="mt-4 space-y-2">

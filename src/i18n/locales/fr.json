@@ -211,7 +211,9 @@
     "gender": "Sexe",
     "genderMale": "Mâle",
     "genderFemale": "Femelle",
-    "cooldownActive": "Veuillez patienter {{seconds}}s avant de soumettre à nouveau."
+    "cooldownActive": "Veuillez patienter {{seconds}}s avant de soumettre à nouveau.",
+    "reportedByName": "Signalé par",
+    "reportedByNamePlaceholder": "Votre nom (ex. pour signalements de touristes)"
   },
   "auth": {
     "login": "Connexion",

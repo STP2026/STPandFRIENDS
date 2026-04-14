@@ -69,6 +69,7 @@ import {
   MapPin,
   ArrowUpDown,
   X,
+  Tag,
 } from 'lucide-react';
 import { Dog, REPORT_TYPE_LABELS, ReportType } from '@/types/dog';
 import AddFacilityDialog from '@/components/AddFacilityDialog';
@@ -273,6 +274,8 @@ const AdminPage = () => {
     is_active: true,
   });
   const [editForm, setEditForm] = useState({
+    name: '',
+    earTag: '',
     vaccination1Date: '',
     vaccination2Date: '',
     vaccinationPassport: '',
@@ -284,6 +287,7 @@ const AdminPage = () => {
     photoUrls: ['', '', ''] as [string, string, string],
     gender: '' as '' | 'male' | 'female',
     additionalInfo: '',
+    reportedByName: '',
   });
 
   const canAccess = isAdmin || isHelper;
@@ -335,6 +339,8 @@ const AdminPage = () => {
   const handleEdit = (dog: Dog) => {
     setSelectedDog(dog);
     setEditForm({
+      name: dog.name || '',
+      earTag: dog.earTag || '',
       vaccination1Date: dog.vaccination1Date || '',
       vaccination2Date: dog.vaccination2Date || '',
       vaccinationPassport: dog.vaccinationPassport || '',
@@ -346,6 +352,7 @@ const AdminPage = () => {
       photoUrls: [dog.photo !== '/placeholder.svg' ? dog.photo : '', dog.photo2 || '', dog.photo3 || ''] as [string, string, string],
       gender: (dog.gender as '' | 'male' | 'female') || '',
       additionalInfo: dog.additionalInfo || '',
+      reportedByName: dog.reportedByName || '',
     });
     setEditDialogOpen(true);
   };
@@ -354,6 +361,12 @@ const AdminPage = () => {
     if (!selectedDog) return;
     
     const changes: Record<string, unknown> = {};
+    if (editForm.name !== (selectedDog.name || '')) {
+      changes.name = editForm.name;
+    }
+    if (editForm.earTag !== (selectedDog.earTag || '')) {
+      changes.ear_tag = editForm.earTag || null;
+    }
     if (editForm.vaccination1Date !== (selectedDog.vaccination1Date || '')) {
       changes.vaccination1_date = editForm.vaccination1Date || null;
     }
@@ -384,10 +397,15 @@ const AdminPage = () => {
     if (editForm.additionalInfo !== (selectedDog.additionalInfo || '')) {
       changes.additional_info = editForm.additionalInfo || null;
     }
+    if (editForm.reportedByName !== (selectedDog.reportedByName || '')) {
+      changes.reported_by_name = editForm.reportedByName || null;
+    }
     
     await updateDog.mutateAsync({
       id: selectedDog.id,
       updates: {
+        name: editForm.name,
+        ear_tag: editForm.earTag || null,
         vaccination1_date: editForm.vaccination1Date || null,
         vaccination2_date: editForm.vaccination2Date || null,
         vaccination_passport: editForm.vaccinationPassport || null,
@@ -401,6 +419,7 @@ const AdminPage = () => {
         photo_url_3: editForm.photoUrls[2] || null,
         gender: editForm.gender || null,
         additional_info: editForm.additionalInfo || null,
+        reported_by_name: editForm.reportedByName || null,
       },
     });
 
@@ -1633,15 +1652,72 @@ const AdminPage = () => {
           <DialogHeader className="shrink-0">
             <DialogTitle className="flex items-center gap-2">
               <Edit className="w-5 h-5" />
-              {selectedDog?.name} bearbeiten
+              {editForm.name || selectedDog?.name} {t('admin.buttons.edit', 'bearbeiten')}
             </DialogTitle>
           </DialogHeader>
           
           <div className="space-y-4 py-4 overflow-y-auto flex-1 pr-1">
+            {/* Name + Ear Tag */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="edit-name">{t('addDog.name', 'Name')}</Label>
+                <Input
+                  id="edit-name"
+                  type="text"
+                  value={editForm.name}
+                  onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-earTag" className="flex items-center gap-2">
+                  <Tag className="w-4 h-4" />
+                  {t('addDog.earTag', 'Ohrmarke')}
+                </Label>
+                <Input
+                  id="edit-earTag"
+                  type="text"
+                  placeholder={t('addDog.earTagPlaceholder', 'z.B. TAG-001')}
+                  value={editForm.earTag}
+                  onChange={(e) => setEditForm({ ...editForm, earTag: e.target.value })}
+                />
+              </div>
+            </div>
+
             <PhotoUpload
               onPhotosUploaded={(urls) => setEditForm({ ...editForm, photoUrls: urls })}
               currentPhotoUrls={editForm.photoUrls}
             />
+
+            {/* Name + Ear Tag */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="editName" className="flex items-center gap-2">
+                  <DogIcon className="w-4 h-4" />
+                  {t('addDog.name', 'Name')}
+                </Label>
+                <Input
+                  id="editName"
+                  type="text"
+                  placeholder={t('addDog.namePlaceholder', 'z.B. Lucky')}
+                  value={editForm.name}
+                  onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="editEarTag" className="flex items-center gap-2">
+                  <Tag className="w-4 h-4" />
+                  {t('addDog.earTag', 'Ohrmarke')}
+                </Label>
+                <Input
+                  id="editEarTag"
+                  type="text"
+                  placeholder={t('addDog.earTagPlaceholder', 'z.B. TAG-001')}
+                  value={editForm.earTag}
+                  onChange={(e) => setEditForm({ ...editForm, earTag: e.target.value })}
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
                <Label htmlFor="vac1" className="flex items-center gap-2">
                  <Calendar className="w-4 h-4" />
@@ -1719,6 +1795,20 @@ const AdminPage = () => {
                 value={editForm.additionalInfo}
                 onChange={(e) => setEditForm({ ...editForm, additionalInfo: e.target.value })}
                 rows={3}
+              />
+            </div>
+
+            {/* Reported by name */}
+            <div className="space-y-2">
+              <Label htmlFor="editReportedByName" className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                {t('addDog.reportedByName', 'Gemeldet von')}
+              </Label>
+              <Input
+                id="editReportedByName"
+                placeholder={t('addDog.reportedByNamePlaceholder', 'Dein Name (z.B. für Touristen-Meldungen)')}
+                value={editForm.reportedByName}
+                onChange={(e) => setEditForm({ ...editForm, reportedByName: e.target.value })}
               />
             </div>
 

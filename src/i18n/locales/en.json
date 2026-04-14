@@ -211,7 +211,9 @@
     "gender": "Gender",
     "genderMale": "Male",
     "genderFemale": "Female",
-    "cooldownActive": "Please wait {{seconds}}s before submitting again."
+    "cooldownActive": "Please wait {{seconds}}s before submitting again.",
+    "reportedByName": "Reported by",
+    "reportedByNamePlaceholder": "Your name (e.g. for tourist reports)"
   },
   "auth": {
     "login": "Login",

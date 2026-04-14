@@ -24,6 +24,7 @@ export interface Dog {
   sponsorName?: string | null;
   caretaker?: string | null;
   gender?: string | null;
+  reportedByName?: string | null;
 }
 
 export interface DogFormData {
@@ -42,6 +43,8 @@ export interface DogFormData {
   reportType: ReportType;
   urgencyLevel?: string;
   gender?: string;
+  /** Optional: free-text name of the person reporting (for guests/field workers) */
+  reportedByName?: string;
   /** Pre-computed at submit time so offline sync doesn't lose role context */
   isAutoApproved?: boolean;
   /**
@@ -77,6 +80,7 @@ export interface DbDog {
   sponsor_name: string | null;
   caretaker: string | null;
   gender?: string | null;
+  reported_by_name?: string | null;
 }
 
 export function mapDbDogToDog(dbDog: DbDog): Dog {
@@ -104,6 +108,7 @@ export function mapDbDogToDog(dbDog: DbDog): Dog {
     sponsorName: dbDog.sponsor_name,
     caretaker: dbDog.caretaker,
     gender: dbDog.gender || null,
+    reportedByName: dbDog.reported_by_name || null,
   };
 }
 

@@ -211,7 +211,9 @@
     "gender": "الجنس",
     "genderMale": "ذكر",
     "genderFemale": "أنثى",
-    "cooldownActive": "يرجى الانتظار {{seconds}} ثانية قبل الإرسال مرة أخرى."
+    "cooldownActive": "يرجى الانتظار {{seconds}} ثانية قبل الإرسال مرة أخرى.",
+    "reportedByName": "أبلغ عنه",
+    "reportedByNamePlaceholder": "اسمك (مثلاً للبلاغات السياحية)"
   },
   "auth": {
     "login": "دخول",

@@ -211,7 +211,9 @@
     "gender": "Geschlecht",
     "genderMale": "Männlich",
     "genderFemale": "Weiblich",
-    "cooldownActive": "Bitte warte {{seconds}}s bevor du erneut meldest."
+    "cooldownActive": "Bitte warte {{seconds}}s bevor du erneut meldest.",
+    "reportedByName": "Gemeldet von",
+    "reportedByNamePlaceholder": "Dein Name (z.B. für Touristen-Meldungen)"
   },
   "auth": {
     "login": "Anmelden",

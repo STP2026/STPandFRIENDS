@@ -113,6 +113,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
             photo_url_2: photoUrl2,
             photo_url_3: photoUrl3,
             gender: formData.gender || null,
+            reported_by_name: formData.reportedByName || null,
           });
           if (error) throw error;
           removeFromQueue(report.id);
@@ -176,6 +177,7 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           report_type: formData.reportType,
           urgency_level: null,
           gender: formData.gender || null,
+          reported_by_name: formData.reportedByName || null,
         });
 
         if (error) {
