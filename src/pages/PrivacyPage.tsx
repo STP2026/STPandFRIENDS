@@ -28,8 +28,11 @@ const PrivacyPage = () => {
                 {t('privacy.responsibleTitle', 'Verantwortlich')}
               </h2>
               <p className="text-sm text-muted-foreground">
-                Save The Paws — Niklas Schlichting<br />
-                E-Mail: {CONTACT.email}<br />
+                Save The Paws e.V.<br />
+                Schillerstraße 38<br />
+                72250 Freudenstadt<br />
+                Deutschland<br />
+                E-Mail: <a href="mailto:savethepawsagadir@gmail.com" className="underline text-primary hover:text-primary/80" dir="ltr">savethepawsagadir@gmail.com</a><br />
                 Web: {CONTACT.website}
               </p>
             </section>

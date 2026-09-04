@@ -29,6 +29,7 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PawFriendsPage = lazy(() => import("./pages/PawFriendsPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const ImpressumPage = lazy(() => import("./pages/ImpressumPage"));
 
 import AutoLogoutWarning from "@/components/AutoLogoutWarning";
 import CookieConsent from "@/components/CookieConsent";
@@ -94,6 +95,7 @@ const App = () => (
                 <Route path="/become-helper" element={<BecomeHelperPage />} />
                 <Route path="/install" element={<InstallPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/impressum" element={<ImpressumPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

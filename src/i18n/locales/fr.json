@@ -130,7 +130,9 @@
   },
   "footer": {
     "brand": "Save The Paws",
-    "madeWith": "Fait avec ❤️ pour les animaux à Agadir & Taghazout"
+    "madeWith": "Fait avec ❤️ pour les animaux à Agadir & Taghazout",
+    "imprint": "Mentions légales",
+    "privacy": "Confidentialité"
   },
   "addDog": {
     "title": "Signaler un animal",
@@ -769,5 +771,14 @@
     "title": "Avis juridique important",
     "body": "Depuis août 2026, la loi n° 19.25 relative à la gestion des animaux errants est en vigueur au Maroc. Son article 5 interdit aux particuliers de nourrir, d'héberger ou de soigner les animaux errants sans autorisation officielle (amendes de 1 500 à 3 000 MAD). La prise en charge est prévue via des centres communaux. Informe-toi sur la situation juridique actuelle et décide sous ta propre responsabilité de la manière dont tu souhaites aider.",
     "accept": "Compris"
+  },
+  "imprint": {
+    "pageTitle": "Mentions légales",
+    "boardTitle": "Représentée par le conseil d'administration",
+    "registerTitle": "Registre des associations",
+    "registerNumber": "Numéro d'enregistrement",
+    "contactTitle": "Contact",
+    "charityTitle": "Utilité publique",
+    "charityText": "Save The Paws e.V. poursuit des buts d'utilité publique. Par avis de l'administration fiscale de Freudenstadt du 14/08/2026, il a été constaté conformément à l'art. 60a al. 1 du code fiscal allemand (AO) que les statuts de l'association remplissent les conditions statutaires des art. 51, 59, 60 et 61 AO. Le but statutaire d'utilité publique est la promotion de la protection des animaux conformément à l'art. 52 al. 2 phrase 1 n° 14 AO."
   }
 }

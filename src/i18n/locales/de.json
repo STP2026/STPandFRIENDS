@@ -130,7 +130,9 @@
   },
   "footer": {
     "brand": "Save The Paws",
-    "madeWith": "Made with ❤️ für die Tiere in Agadir & Taghazout"
+    "madeWith": "Made with ❤️ für die Tiere in Agadir & Taghazout",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
   },
   "addDog": {
     "title": "Tier melden",
@@ -769,5 +771,14 @@
     "title": "Wichtiger rechtlicher Hinweis",
     "body": "Seit August 2026 gilt in Marokko das Gesetz Nr. 19.25 zum Umgang mit streunenden Tieren. Artikel 5 untersagt Privatpersonen das Füttern, Unterbringen und Behandeln von Straßentieren ohne behördliche Genehmigung (Geldbußen 1.500–3.000 MAD). Die Versorgung soll über kommunale Zentren erfolgen. Bitte informiere dich über die aktuelle Rechtslage und entscheide eigenverantwortlich, wie du helfen möchtest.",
     "accept": "Verstanden"
+  },
+  "imprint": {
+    "pageTitle": "Impressum",
+    "boardTitle": "Vertreten durch den Vorstand",
+    "registerTitle": "Vereinsregister",
+    "registerNumber": "Vereinsregister",
+    "contactTitle": "Kontakt",
+    "charityTitle": "Gemeinnützigkeit",
+    "charityText": "Save The Paws e.V. verfolgt gemeinnützige Zwecke. Mit Bescheid des Finanzamts Freudenstadt vom 14.08.2026 wurde gemäß § 60a Abs. 1 AO festgestellt, dass die Satzung des Vereins die satzungsmäßigen Voraussetzungen nach §§ 51, 59, 60 und 61 AO erfüllt. Satzungsmäßiger gemeinnütziger Zweck ist die Förderung des Tierschutzes gemäß § 52 Abs. 2 Satz 1 Nr. 14 AO."
   }
 }

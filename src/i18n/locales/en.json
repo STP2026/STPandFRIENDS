@@ -130,7 +130,9 @@
   },
   "footer": {
     "brand": "Save The Paws",
-    "madeWith": "Made with ❤️ for the animals in Agadir & Taghazout"
+    "madeWith": "Made with ❤️ for the animals in Agadir & Taghazout",
+    "imprint": "Legal Notice",
+    "privacy": "Privacy"
   },
   "addDog": {
     "title": "Report Animal",
@@ -769,5 +771,14 @@
     "title": "Important legal notice",
     "body": "Since August 2026, Law No. 19.25 on the handling of stray animals has been in force in Morocco. Article 5 prohibits private individuals from feeding, sheltering or treating street animals without official authorisation (fines of 1,500–3,000 MAD). Care is intended to be provided through municipal centres. Please inform yourself about the current legal situation and decide on your own responsibility how you wish to help.",
     "accept": "Understood"
+  },
+  "imprint": {
+    "pageTitle": "Legal Notice",
+    "boardTitle": "Represented by the board",
+    "registerTitle": "Register of associations",
+    "registerNumber": "Register number",
+    "contactTitle": "Contact",
+    "charityTitle": "Charitable status",
+    "charityText": "Save The Paws e.V. pursues charitable purposes. By notice of the Freudenstadt tax office dated 14 August 2026, it was determined pursuant to Section 60a (1) of the German Fiscal Code (AO) that the association’s statutes meet the statutory requirements of Sections 51, 59, 60 and 61 AO. The charitable purpose under its statutes is the promotion of animal welfare pursuant to Section 52 (2) sentence 1 no. 14 AO."
   }
 }

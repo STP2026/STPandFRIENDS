@@ -44,10 +44,16 @@ const Footer = () => {
               <MessageCircle className="w-4 h-4" />
               WhatsApp
             </a>
+            <Link to="/impressum" className="hover:text-foreground transition-colors">
+              {t('footer.imprint', 'Impressum')}
+            </Link>
+            <Link to="/privacy" className="hover:text-foreground transition-colors">
+              {t('footer.privacy', 'Datenschutz')}
+            </Link>
           </nav>
 
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Niklas Schlichting
+            © {new Date().getFullYear()} Save The Paws e.V.
           </p>
         </div>
       </div>
