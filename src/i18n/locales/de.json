@@ -213,7 +213,15 @@
     "genderFemale": "Weiblich",
     "cooldownActive": "Bitte warte {{seconds}}s bevor du erneut meldest.",
     "reportedByName": "Gemeldet von",
-    "reportedByNamePlaceholder": "Dein Name (z.B. für Touristen-Meldungen)"
+    "reportedByNamePlaceholder": "Dein Name (z.B. für Touristen-Meldungen)",
+    "senderTitle": "Deine Kontaktdaten",
+    "senderHint": "Damit unser Team dich bei Rückfragen zu deiner Meldung erreichen kann.",
+    "reporterEmail": "E-Mail-Adresse",
+    "reporterEmailPlaceholder": "deine@email.de",
+    "consentLabel": "Ich stimme zu, dass mein Name und meine E-Mail-Adresse zur Bearbeitung dieser Meldung gespeichert werden.",
+    "nameRequired": "Bitte gib deinen Namen an.",
+    "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse an.",
+    "consentRequired": "Bitte stimme der Speicherung deiner Kontaktdaten zu."
   },
   "auth": {
     "login": "Anmelden",
@@ -728,19 +736,19 @@
   },
   "privacy": {
     "bannerTitle": "Datenschutz & Cookies",
-    "bannerText": "Diese App nutzt ausschließlich technisch notwendige Daten (Login-Session, Offline-Warteschlange) und lädt Kartendaten von OpenStreetMap. Es werden keine Tracking-Cookies gesetzt und keine Daten an Werbeanbieter weitergegeben.",
+    "bannerText": "Diese App nutzt ausschließlich technisch notwendige Daten (Login-Session, Offline-Warteschlange) und lädt Kartendaten von OpenStreetMap. Bei Hunde-Meldungen speichern wir Name, E-Mail-Adresse und Meldezeitpunkt für Rückfragen. Es werden keine Tracking-Cookies gesetzt und keine Daten an Werbeanbieter weitergegeben.",
     "learnMore": "Mehr erfahren",
     "accept": "Verstanden",
     "pageTitle": "Datenschutzerklärung",
-    "lastUpdated": "Stand: März 2026",
+    "lastUpdated": "Stand: September 2026",
     "responsibleTitle": "Verantwortlich",
     "dataCollectedTitle": "Welche Daten werden verarbeitet?",
     "reportDataTitle": "Hunde-Meldungen",
-    "reportDataDesc": "Wenn du einen Hund meldest, speichern wir: Standort (GPS-Koordinaten), Foto(s), Name/Beschreibung, Ohrmarke, Geschlecht und zusätzliche Notizen. Bei eingeloggten Nutzern wird die Meldung mit deinem Benutzerkonto verknüpft.",
+    "reportDataDesc": "Wenn du einen Hund meldest, speichern wir: Standort (GPS-Koordinaten), Foto(s), Name/Beschreibung, Ohrmarke, Geschlecht, zusätzliche Notizen sowie deinen Namen, deine E-Mail-Adresse und den Zeitpunkt der Meldung. Deine Absenderdaten dienen ausschließlich der Bearbeitung der Meldung und Rückfragen; sie werden nicht öffentlich angezeigt. Bei eingeloggten Nutzern wird die Meldung zusätzlich mit deinem Benutzerkonto verknüpft.",
     "accountDataTitle": "Benutzerkonto",
     "accountDataDesc": "Bei der Registrierung speichern wir deine E-Mail-Adresse und einen selbst gewählten Anzeigenamen. Passwörter werden von Supabase Auth gehasht und sind für uns nicht einsehbar.",
     "guestDataTitle": "Gast-Meldungen",
-    "guestDataDesc": "Gäste können ohne Konto melden. Dabei wird keine E-Mail oder persönliche Identifikation erhoben — nur die Meldungsdaten selbst.",
+    "guestDataDesc": "Gäste können ohne Konto melden. Auch dabei erheben wir Name und E-Mail-Adresse als Absender — ausschließlich zur Bearbeitung der Meldung und für Rückfragen. Diese Daten werden nicht öffentlich angezeigt und nicht an Dritte weitergegeben.",
     "localStorageTitle": "Lokale Speicherung (Cookies & localStorage)",
     "localStorageDesc": "Diese App setzt keine Tracking- oder Werbe-Cookies. Wir nutzen ausschließlich technisch notwendige lokale Speicherung:",
     "ls1": "Login-Session (Supabase Auth Token)",
@@ -756,5 +764,10 @@
     "noTrackingDesc": "Save The Paws nutzt keine Analytics-Tools (kein Google Analytics, kein Meta Pixel, kein Tracking). Wir erheben keine Nutzungsstatistiken und geben keine Daten an Werbeanbieter oder Dritte weiter.",
     "deletionTitle": "Auskunft & Löschung",
     "deletionDesc": "Du hast das Recht auf Auskunft, Berichtigung und Löschung deiner Daten. Kontaktiere uns per E-Mail und wir kümmern uns innerhalb von 30 Tagen darum."
+  },
+  "lawNotice": {
+    "title": "Wichtiger rechtlicher Hinweis",
+    "body": "Seit August 2026 gilt in Marokko das Gesetz Nr. 19.25 zum Umgang mit streunenden Tieren. Artikel 5 untersagt Privatpersonen das Füttern, Unterbringen und Behandeln von Straßentieren ohne behördliche Genehmigung (Geldbußen 1.500–3.000 MAD). Die Versorgung soll über kommunale Zentren erfolgen. Bitte informiere dich über die aktuelle Rechtslage und entscheide eigenverantwortlich, wie du helfen möchtest.",
+    "accept": "Verstanden"
   }
 }

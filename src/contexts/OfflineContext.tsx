@@ -114,6 +114,9 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
             photo_url_3: photoUrl3,
             gender: formData.gender || null,
             reported_by_name: formData.reportedByName || null,
+            reporter_email: formData.reporterEmail || null,
+            // Real report moment = when it was queued, not when it synced
+            reported_at: new Date(report.timestamp).toISOString(),
           });
           if (error) throw error;
           removeFromQueue(report.id);
@@ -178,6 +181,9 @@ export function OfflineProvider({ children }: { children: React.ReactNode }) {
           urgency_level: null,
           gender: formData.gender || null,
           reported_by_name: formData.reportedByName || null,
+          reporter_email: formData.reporterEmail || null,
+          // Real report moment = when it was queued, not when it synced
+          reported_at: new Date(report.timestamp).toISOString(),
         });
 
         if (error) {

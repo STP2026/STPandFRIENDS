@@ -213,7 +213,15 @@
     "genderFemale": "Female",
     "cooldownActive": "Please wait {{seconds}}s before submitting again.",
     "reportedByName": "Reported by",
-    "reportedByNamePlaceholder": "Your name (e.g. for tourist reports)"
+    "reportedByNamePlaceholder": "Your name (e.g. for tourist reports)",
+    "senderTitle": "Your contact details",
+    "senderHint": "So our team can reach you if we have questions about your report.",
+    "reporterEmail": "Email address",
+    "reporterEmailPlaceholder": "you@email.com",
+    "consentLabel": "I agree that my name and email address will be stored to process this report.",
+    "nameRequired": "Please enter your name.",
+    "emailInvalid": "Please enter a valid email address.",
+    "consentRequired": "Please agree to the storage of your contact details."
   },
   "auth": {
     "login": "Login",
@@ -728,19 +736,19 @@
   },
   "privacy": {
     "bannerTitle": "Privacy & Cookies",
-    "bannerText": "This app only uses technically necessary data (login session, offline queue) and loads map data from OpenStreetMap. No tracking cookies are set and no data is shared with advertisers.",
+    "bannerText": "This app only uses technically necessary data (login session, offline queue) and loads map data from OpenStreetMap. For dog reports we store your name, email address and report time for follow-up questions. No tracking cookies are set and no data is shared with advertisers.",
     "learnMore": "Learn more",
     "accept": "Got it",
     "pageTitle": "Privacy Policy",
-    "lastUpdated": "Last updated: March 2026",
+    "lastUpdated": "Last updated: September 2026",
     "responsibleTitle": "Responsible",
     "dataCollectedTitle": "What data is processed?",
     "reportDataTitle": "Dog reports",
-    "reportDataDesc": "When you report a dog, we store: location (GPS coordinates), photo(s), name/description, ear tag, gender and additional notes. For logged-in users, the report is linked to your account.",
+    "reportDataDesc": "When you report a dog, we store: location (GPS coordinates), photo(s), name/description, ear tag, gender, additional notes, as well as your name, your email address and the time of the report. Your sender details are used exclusively to process the report and for follow-up questions; they are never displayed publicly. For logged-in users, the report is additionally linked to your account.",
     "accountDataTitle": "User account",
     "accountDataDesc": "When registering, we store your email address and a chosen display name. Passwords are hashed by Supabase Auth and cannot be viewed by us.",
     "guestDataTitle": "Guest reports",
-    "guestDataDesc": "Guests can report without an account. No email or personal identification is collected — only the report data itself.",
+    "guestDataDesc": "Guests can report without an account. We still collect name and email address as the sender of the report — exclusively for processing and follow-up questions. This data is never displayed publicly and never shared with third parties.",
     "localStorageTitle": "Local storage (Cookies & localStorage)",
     "localStorageDesc": "This app does not set tracking or advertising cookies. We only use technically necessary local storage:",
     "ls1": "Login session (Supabase Auth Token)",
@@ -756,5 +764,10 @@
     "noTrackingDesc": "Save The Paws does not use any analytics tools (no Google Analytics, no Meta Pixel, no tracking). We do not collect usage statistics and do not share data with advertisers or third parties.",
     "deletionTitle": "Information & Deletion",
     "deletionDesc": "You have the right to information, correction and deletion of your data. Contact us by email and we will take care of it within 30 days."
+  },
+  "lawNotice": {
+    "title": "Important legal notice",
+    "body": "Since August 2026, Law No. 19.25 on the handling of stray animals has been in force in Morocco. Article 5 prohibits private individuals from feeding, sheltering or treating street animals without official authorisation (fines of 1,500–3,000 MAD). Care is intended to be provided through municipal centres. Please inform yourself about the current legal situation and decide on your own responsibility how you wish to help.",
+    "accept": "Understood"
   }
 }

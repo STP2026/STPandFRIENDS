@@ -17,7 +17,7 @@ const PrivacyPage = () => {
               {t('privacy.pageTitle', 'Datenschutzerklärung')}
             </h1>
             <p className="text-sm text-muted-foreground">
-              {t('privacy.lastUpdated', 'Stand: März 2026')}
+              {t('privacy.lastUpdated', 'Stand: September 2026')}
             </p>
           </div>
 
@@ -43,7 +43,7 @@ const PrivacyPage = () => {
               <div className="space-y-3 text-sm text-muted-foreground">
                 <div>
                   <p className="font-medium text-foreground">{t('privacy.reportDataTitle', 'Hunde-Meldungen')}</p>
-                  <p>{t('privacy.reportDataDesc', 'Wenn du einen Hund meldest, speichern wir: Standort (GPS-Koordinaten), Foto(s), Name/Beschreibung, Ohrmarke, Geschlecht und zusätzliche Notizen. Bei eingeloggten Nutzern wird die Meldung mit deinem Benutzerkonto verknüpft.')}</p>
+                  <p>{t('privacy.reportDataDesc', 'Wenn du einen Hund meldest, speichern wir: Standort (GPS-Koordinaten), Foto(s), Name/Beschreibung, Ohrmarke, Geschlecht, zusätzliche Notizen sowie deinen Namen, deine E-Mail-Adresse und den Zeitpunkt der Meldung. Deine Absenderdaten dienen ausschließlich der Bearbeitung der Meldung und Rückfragen; sie werden nicht öffentlich angezeigt. Bei eingeloggten Nutzern wird die Meldung zusätzlich mit deinem Benutzerkonto verknüpft.')}</p>
                 </div>
                 <div>
                   <p className="font-medium text-foreground">{t('privacy.accountDataTitle', 'Benutzerkonto')}</p>
@@ -51,7 +51,7 @@ const PrivacyPage = () => {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">{t('privacy.guestDataTitle', 'Gast-Meldungen')}</p>
-                  <p>{t('privacy.guestDataDesc', 'Gäste können ohne Konto melden. Dabei wird keine E-Mail oder persönliche Identifikation erhoben — nur die Meldungsdaten selbst.')}</p>
+                  <p>{t('privacy.guestDataDesc', 'Gäste können ohne Konto melden. Auch dabei erheben wir Name und E-Mail-Adresse als Absender — ausschließlich zur Bearbeitung der Meldung und für Rückfragen. Diese Daten werden nicht öffentlich angezeigt und nicht an Dritte weitergegeben.')}</p>
                 </div>
               </div>
             </section>

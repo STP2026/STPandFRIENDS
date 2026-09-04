@@ -167,6 +167,10 @@ const AdminPage = () => {
       reported_by: user?.id ?? null,
       ear_tag: r.ear_tag || null,
       gender: r.gender || null,
+      // v100: preserve sender + original report moment through conversion
+      reported_by_name: r.reported_by_name || null,
+      reporter_email: r.reporter_email || null,
+      reported_at: r.reported_at || r.created_at || null,
     });
     if (error) {
       const { toast } = await import('sonner');
@@ -710,7 +714,15 @@ const AdminPage = () => {
                             </div>
                             <p className="text-xs text-muted-foreground">{r.location || `${r.latitude?.toFixed(4)}, ${r.longitude?.toFixed(4)}`}</p>
                             {r.additional_info && <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{r.additional_info}</p>}
-                            <p className="text-xs text-muted-foreground/60 mt-1">{new Date(r.created_at).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                            {(r.reported_by_name || r.reporter_email) && (
+                              <p className="text-xs text-muted-foreground mt-1">
+                                👤 {r.reported_by_name || '—'}
+                                {r.reporter_email && (
+                                  <> · <a href={`mailto:${r.reporter_email}`} className="underline text-primary hover:text-primary/80" dir="ltr">{r.reporter_email}</a></>
+                                )}
+                              </p>
+                            )}
+                            <p className="text-xs text-muted-foreground/60 mt-1">{new Date(r.reported_at || r.created_at).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
                           </div>
                           <div className="flex gap-2 shrink-0">
                             <Button size="sm" variant="outline" className="text-xs gap-1" onClick={() => handleConvertGuestReport(r)}>
@@ -1810,6 +1822,15 @@ const AdminPage = () => {
                 value={editForm.reportedByName}
                 onChange={(e) => setEditForm({ ...editForm, reportedByName: e.target.value })}
               />
+              {(selectedDog?.reporterEmail || selectedDog?.reportedAt) && (
+                <p className="text-xs text-muted-foreground pt-1">
+                  {selectedDog?.reporterEmail && (
+                    <>✉️ <a href={`mailto:${selectedDog.reporterEmail}`} className="underline text-primary hover:text-primary/80" dir="ltr">{selectedDog.reporterEmail}</a></>
+                  )}
+                  {selectedDog?.reporterEmail && selectedDog?.reportedAt && ' · '}
+                  {selectedDog?.reportedAt && new Date(selectedDog.reportedAt).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                </p>
+              )}
             </div>
 
             {selectedDog?.reportType === 'save' && (

@@ -25,6 +25,10 @@ export interface Dog {
   caretaker?: string | null;
   gender?: string | null;
   reportedByName?: string | null;
+  /** Sender email — only present when fetched from the dogs table (admin), never in dogs_public */
+  reporterEmail?: string | null;
+  /** Actual moment the report was made (client-side) — survives offline sync */
+  reportedAt?: string | null;
 }
 
 export interface DogFormData {
@@ -43,8 +47,10 @@ export interface DogFormData {
   reportType: ReportType;
   urgencyLevel?: string;
   gender?: string;
-  /** Optional: free-text name of the person reporting (for guests/field workers) */
+  /** Name of the person reporting — required for all reports since v100 (optional in type for old queue entries) */
   reportedByName?: string;
+  /** Email of the person reporting — required for all reports since v100 (optional in type for old queue entries) */
+  reporterEmail?: string;
   /** Pre-computed at submit time so offline sync doesn't lose role context */
   isAutoApproved?: boolean;
   /**
@@ -81,6 +87,8 @@ export interface DbDog {
   caretaker: string | null;
   gender?: string | null;
   reported_by_name?: string | null;
+  reporter_email?: string | null;
+  reported_at?: string | null;
 }
 
 export function mapDbDogToDog(dbDog: DbDog): Dog {
@@ -109,6 +117,8 @@ export function mapDbDogToDog(dbDog: DbDog): Dog {
     caretaker: dbDog.caretaker,
     gender: dbDog.gender || null,
     reportedByName: dbDog.reported_by_name || null,
+    reporterEmail: dbDog.reporter_email || null,
+    reportedAt: dbDog.reported_at || null,
   };
 }
 

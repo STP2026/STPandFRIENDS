@@ -213,7 +213,15 @@
     "genderFemale": "Femelle",
     "cooldownActive": "Veuillez patienter {{seconds}}s avant de soumettre à nouveau.",
     "reportedByName": "Signalé par",
-    "reportedByNamePlaceholder": "Votre nom (ex. pour signalements de touristes)"
+    "reportedByNamePlaceholder": "Votre nom (ex. pour signalements de touristes)",
+    "senderTitle": "Tes coordonnées",
+    "senderHint": "Pour que notre équipe puisse te contacter en cas de questions sur ton signalement.",
+    "reporterEmail": "Adresse e-mail",
+    "reporterEmailPlaceholder": "toi@email.fr",
+    "consentLabel": "J'accepte que mon nom et mon adresse e-mail soient enregistrés pour le traitement de ce signalement.",
+    "nameRequired": "Merci d'indiquer ton nom.",
+    "emailInvalid": "Merci d'indiquer une adresse e-mail valide.",
+    "consentRequired": "Merci d'accepter l'enregistrement de tes coordonnées."
   },
   "auth": {
     "login": "Connexion",
@@ -728,19 +736,19 @@
   },
   "privacy": {
     "bannerTitle": "Confidentialité & Cookies",
-    "bannerText": "Cette application n'utilise que des données techniquement nécessaires (session de connexion, file d'attente hors ligne) et charge les données cartographiques d'OpenStreetMap. Aucun cookie de suivi n'est utilisé et aucune donnée n'est partagée avec des annonceurs.",
+    "bannerText": "Cette application n'utilise que des données techniquement nécessaires (session de connexion, file d'attente hors ligne) et charge les données cartographiques d'OpenStreetMap. Pour les signalements de chiens, nous enregistrons ton nom, ton adresse e-mail et l'heure du signalement pour d'éventuelles questions. Aucun cookie de suivi n'est utilisé et aucune donnée n'est transmise à des annonceurs.",
     "learnMore": "En savoir plus",
     "accept": "Compris",
     "pageTitle": "Politique de confidentialité",
-    "lastUpdated": "Dernière mise à jour : Mars 2026",
+    "lastUpdated": "Dernière mise à jour : septembre 2026",
     "responsibleTitle": "Responsable",
     "dataCollectedTitle": "Quelles données sont traitées ?",
     "reportDataTitle": "Signalements de chiens",
-    "reportDataDesc": "Lorsque vous signalez un chien, nous enregistrons : localisation (coordonnées GPS), photo(s), nom/description, marque auriculaire, sexe et notes supplémentaires. Pour les utilisateurs connectés, le signalement est lié à votre compte.",
+    "reportDataDesc": "Lorsque tu signales un chien, nous enregistrons : la position (coordonnées GPS), photo(s), nom/description, marque d'oreille, sexe, notes supplémentaires, ainsi que ton nom, ton adresse e-mail et l'heure du signalement. Tes coordonnées servent exclusivement au traitement du signalement et aux questions éventuelles ; elles ne sont jamais affichées publiquement. Pour les utilisateurs connectés, le signalement est en outre lié à ton compte.",
     "accountDataTitle": "Compte utilisateur",
     "accountDataDesc": "Lors de l'inscription, nous enregistrons votre adresse e-mail et un nom d'affichage choisi. Les mots de passe sont hachés par Supabase Auth et ne sont pas accessibles par nous.",
     "guestDataTitle": "Signalements visiteurs",
-    "guestDataDesc": "Les visiteurs peuvent signaler sans compte. Aucune adresse e-mail ou identification personnelle n'est collectée — uniquement les données du signalement.",
+    "guestDataDesc": "Les invités peuvent signaler sans compte. Nous recueillons néanmoins le nom et l'adresse e-mail de l'expéditeur — exclusivement pour le traitement du signalement et les questions éventuelles. Ces données ne sont jamais affichées publiquement ni transmises à des tiers.",
     "localStorageTitle": "Stockage local (Cookies & localStorage)",
     "localStorageDesc": "Cette application n'utilise pas de cookies de suivi ou publicitaires. Nous utilisons uniquement un stockage local techniquement nécessaire :",
     "ls1": "Session de connexion (Supabase Auth Token)",
@@ -756,5 +764,10 @@
     "noTrackingDesc": "Save The Paws n'utilise aucun outil d'analyse (pas de Google Analytics, pas de Meta Pixel, pas de suivi). Nous ne collectons pas de statistiques d'utilisation et ne partageons aucune donnée avec des annonceurs ou des tiers.",
     "deletionTitle": "Information & Suppression",
     "deletionDesc": "Vous avez le droit d'accès, de rectification et de suppression de vos données. Contactez-nous par e-mail et nous nous en occuperons dans les 30 jours."
+  },
+  "lawNotice": {
+    "title": "Avis juridique important",
+    "body": "Depuis août 2026, la loi n° 19.25 relative à la gestion des animaux errants est en vigueur au Maroc. Son article 5 interdit aux particuliers de nourrir, d'héberger ou de soigner les animaux errants sans autorisation officielle (amendes de 1 500 à 3 000 MAD). La prise en charge est prévue via des centres communaux. Informe-toi sur la situation juridique actuelle et décide sous ta propre responsabilité de la manière dont tu souhaites aider.",
+    "accept": "Compris"
   }
 }

@@ -32,6 +32,7 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 
 import AutoLogoutWarning from "@/components/AutoLogoutWarning";
 import CookieConsent from "@/components/CookieConsent";
+import LawNoticeModal from "@/components/LawNoticeModal";
 
 // Loading fallback for lazy pages
 const PageLoader = () => (
@@ -100,6 +101,7 @@ const App = () => (
             <InstallPWA />
             <UpdatePrompt />
             <CookieConsent />
+            <LawNoticeModal />
           </BrowserRouter>
         </OfflineProvider>
       </AuthProvider>

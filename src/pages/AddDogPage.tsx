@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, Heart, Syringe, WifiOff, Facebook, ExternalLink } from "lucide-react";
+import { Dog, Camera, MapPin, Tag, FileText, CheckCircle, Heart, Syringe, WifiOff, Facebook, ExternalLink, Mail, Scale } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate, Link } from "react-router-dom";
 import SafeDogMap from "@/components/SafeDogMap";
 import PhotoUpload from "@/components/PhotoUpload";
@@ -78,7 +79,16 @@ const AddDogPage = () => {
     urgencyLevel: "",
     gender: "" as "" | "male" | "female",
     reportedByName: "",
+    reporterEmail: "",
   });
+  const [consentGiven, setConsentGiven] = useState(false);
+
+  // Prefill sender email from account for logged-in users
+  useEffect(() => {
+    if (user?.email) {
+      setFormData(prev => (prev.reporterEmail ? prev : { ...prev, reporterEmail: user.email! }));
+    }
+  }, [user?.email]);
 
   const handleLocationSelect = (lat: number, lng: number) => {
     setSelectedPosition({ lat, lng });
@@ -101,7 +111,26 @@ const AddDogPage = () => {
       vaccination1Date: "", vaccination2Date: "",
       additionalInfo: "", reportType: "stray", urgencyLevel: "",
       gender: "", reportedByName: "",
+      reporterEmail: user?.email || "",
     });
+    setConsentGiven(false);
+  };
+
+  // ── Sender validation — required for ALL reports (guest + logged-in) ──
+  const validateSender = (): boolean => {
+    if (!formData.reportedByName.trim()) {
+      setSubmitError(t('addDog.nameRequired', 'Bitte gib deinen Namen an.'));
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.reporterEmail.trim())) {
+      setSubmitError(t('addDog.emailInvalid', 'Bitte gib eine gültige E-Mail-Adresse an.'));
+      return false;
+    }
+    if (!consentGiven) {
+      setSubmitError(t('addDog.consentRequired', 'Bitte stimme der Speicherung deiner Kontaktdaten zu.'));
+      return false;
+    }
+    return true;
   };
 
   // ── Build queue payload — reusable for submit + saveLater ──
@@ -125,7 +154,8 @@ const AddDogPage = () => {
       reportType: formData.reportType,
       urgencyLevel: undefined as string | undefined,
       gender: formData.gender || undefined,
-      reportedByName: formData.reportedByName || undefined,
+      reportedByName: formData.reportedByName.trim() || undefined,
+      reporterEmail: formData.reporterEmail.trim() || undefined,
       isAutoApproved,
       photoBase64: formData.photoBase64 as [string, string, string],
     };
@@ -157,8 +187,9 @@ const AddDogPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedPosition) return;
-    setIsSubmitting(true);
     setSubmitError(null);
+    if (!validateSender()) return;
+    setIsSubmitting(true);
 
     // ── GUEST ──
     if (!user) {
@@ -191,7 +222,9 @@ const AddDogPage = () => {
               photo_url_2: photoUrl2,
               photo_url_3: photoUrl3,
               gender: formData.gender || null,
-              reported_by_name: formData.reportedByName || null,
+              reported_by_name: formData.reportedByName.trim() || null,
+              reporter_email: formData.reporterEmail.trim() || null,
+              reported_at: new Date().toISOString(),
             });
             if (error) throw error;
             succeeded = true;
@@ -255,7 +288,9 @@ const AddDogPage = () => {
         report_type: formData.reportType,
         urgency_level: null as string | null,
         gender: formData.gender || null,
-        reported_by_name: formData.reportedByName || null,
+        reported_by_name: formData.reportedByName.trim() || null,
+        reporter_email: formData.reporterEmail.trim() || null,
+        reported_at: new Date().toISOString(),
       };
 
       let succeeded = false;
@@ -287,6 +322,8 @@ const AddDogPage = () => {
   // ── SPÄTER SENDEN ────────────────────────────────────────────────────────────
   const handleSaveLater = () => {
     if (!selectedPosition) return;
+    setSubmitError(null);
+    if (!validateSender()) return;
     const queueData = buildQueuePayload();
     if (queueData) addReportToQueue(queueData);
     setSubmittedOffline(true);
@@ -430,6 +467,21 @@ const AddDogPage = () => {
             </div>
           </a>
 
+          {/* Law 19.25 notice — permanent on report page (v100) */}
+          <div className="glass-card rounded-xl p-4 mb-6 border border-amber-300 dark:border-amber-700 bg-amber-50/50 dark:bg-amber-950/20 animate-fade-in">
+            <div className="flex items-start gap-3">
+              <Scale className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-1">
+                  {t('lawNotice.title', 'Wichtiger rechtlicher Hinweis')}
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {t('lawNotice.body', 'Seit August 2026 gilt in Marokko das Gesetz Nr. 19.25 zum Umgang mit streunenden Tieren. Artikel 5 untersagt Privatpersonen das Füttern, Unterbringen und Behandeln von Straßentieren ohne behördliche Genehmigung (Geldbußen 1.500–3.000 MAD). Die Versorgung soll über kommunale Zentren erfolgen. Bitte informiere dich über die aktuelle Rechtslage und entscheide eigenverantwortlich, wie du helfen möchtest.')}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Report Type */}
             <div className="glass-card rounded-xl p-6 animate-fade-in">
@@ -517,18 +569,6 @@ const AddDogPage = () => {
                 </div>
               </div>
 
-              {/* Reported by name — optional */}
-              <div className="mt-4 space-y-2">
-                <Label htmlFor="reportedByName">
-                  {t('addDog.reportedByName', 'Gemeldet von')}
-                  <span className="ml-1 text-xs text-muted-foreground font-normal">({t('common.optional', 'optional')})</span>
-                </Label>
-                <Input id="reportedByName"
-                  placeholder={t('addDog.reportedByNamePlaceholder', 'Dein Name (z.B. für Touristen-Meldungen)')}
-                  value={formData.reportedByName}
-                  onChange={(e) => setFormData(prev => ({ ...prev, reportedByName: e.target.value }))} />
-              </div>
-
               <div className="mt-4 space-y-2">
                 <Label className="flex items-center gap-2">
                   <Camera className="w-4 h-4" />
@@ -591,6 +631,45 @@ const AddDogPage = () => {
                     onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
                     rows={4} />
                 </div>
+              </div>
+            </div>
+
+            {/* Sender contact — required for all reports (v100) */}
+            <div className="glass-card rounded-xl p-6 animate-fade-in">
+              <h2 className="font-display text-xl font-bold text-foreground mb-1 flex items-center gap-2">
+                <Mail className="w-5 h-5 text-primary" />
+                {t('addDog.senderTitle', 'Deine Kontaktdaten')}
+                <span className="text-red-500 text-xs font-normal">{t('addDog.locationRequired', '(Pflicht)')}</span>
+              </h2>
+              <p className="text-xs text-muted-foreground mb-4">
+                {t('addDog.senderHint', 'Damit unser Team dich bei Rückfragen zu deiner Meldung erreichen kann.')}
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="reportedByName">{t('addDog.reportedByName', 'Gemeldet von')}</Label>
+                  <Input id="reportedByName" required autoComplete="name"
+                    placeholder={t('addDog.reportedByNamePlaceholder', 'Dein Name (z.B. für Touristen-Meldungen)')}
+                    value={formData.reportedByName}
+                    onChange={(e) => setFormData(prev => ({ ...prev, reportedByName: e.target.value }))} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="reporterEmail">{t('addDog.reporterEmail', 'E-Mail-Adresse')}</Label>
+                  <Input id="reporterEmail" type="email" required autoComplete="email" dir="ltr"
+                    placeholder={t('addDog.reporterEmailPlaceholder', 'deine@email.de')}
+                    value={formData.reporterEmail}
+                    onChange={(e) => setFormData(prev => ({ ...prev, reporterEmail: e.target.value }))} />
+                </div>
+              </div>
+              <div className="mt-4 flex items-start gap-3 p-3 bg-secondary/50 rounded-lg">
+                <Checkbox id="senderConsent" checked={consentGiven}
+                  onCheckedChange={(checked) => setConsentGiven(checked === true)}
+                  className="mt-0.5" />
+                <Label htmlFor="senderConsent" className="text-xs text-muted-foreground font-normal cursor-pointer leading-relaxed">
+                  {t('addDog.consentLabel', 'Ich stimme zu, dass mein Name und meine E-Mail-Adresse zur Bearbeitung dieser Meldung gespeichert werden.')}{' '}
+                  <Link to="/privacy" className="underline text-primary hover:text-primary/80" target="_blank">
+                    {t('privacy.learnMore', 'Mehr erfahren')}
+                  </Link>
+                </Label>
               </div>
             </div>
 

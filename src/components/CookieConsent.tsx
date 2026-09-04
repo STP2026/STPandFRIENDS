@@ -5,7 +5,7 @@ import { Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const CONSENT_KEY = 'stp_privacy_consent';
-const CONSENT_VERSION = '1'; // Bump this when privacy policy changes
+const CONSENT_VERSION = '2'; // v2: report sender data (name, email, timestamp) — bump when privacy policy changes
 
 /**
  * DSGVO-compliant privacy consent banner.
@@ -15,6 +15,9 @@ const CONSENT_VERSION = '1'; // Bump this when privacy policy changes
  * - Supabase Auth (essential for login functionality)
  * - OpenStreetMap tiles (external, loads map tiles from OSM servers)
  * - Google Maps links (only on user click, no tracking)
+ * - Report sender data: name, email and report timestamp, stored with each
+ *   report for follow-up questions (v100). Explicit consent is additionally
+ *   collected via checkbox on the report form itself.
  * 
  * No analytics, no tracking cookies, no third-party advertising.
  * The banner informs about essential data processing and links to the privacy page.
@@ -54,7 +57,7 @@ const CookieConsent = () => {
                 {t('privacy.bannerTitle', 'Datenschutz & Cookies')}
               </p>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                {t('privacy.bannerText', 'Diese App nutzt ausschließlich technisch notwendige Daten (Login-Session, Offline-Warteschlange) und lädt Kartendaten von OpenStreetMap. Es werden keine Tracking-Cookies gesetzt und keine Daten an Werbeanbieter weitergegeben.')}
+                {t('privacy.bannerText', 'Diese App nutzt ausschließlich technisch notwendige Daten (Login-Session, Offline-Warteschlange) und lädt Kartendaten von OpenStreetMap. Bei Hunde-Meldungen speichern wir Name, E-Mail-Adresse und Meldezeitpunkt für Rückfragen. Es werden keine Tracking-Cookies gesetzt und keine Daten an Werbeanbieter weitergegeben.')}
                 {' '}
                 <Link to="/privacy" className="underline text-primary hover:text-primary/80">
                   {t('privacy.learnMore', 'Mehr erfahren')}
