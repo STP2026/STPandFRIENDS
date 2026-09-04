@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Scale } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -19,6 +18,8 @@ export const isLawNoticeSeen = (): boolean => {
  * August 2026): Article 5 prohibits private individuals from feeding,
  * sheltering or treating stray animals without official authorization.
  *
+ * v104: intentionally ALWAYS English (not localized) per project decision;
+ * the report-page notice card (AddDogPage) stays localized.
  * Deliberately neutral wording — informs, does not advise. Each visitor
  * decides on their own responsibility. Shown once per device (localStorage),
  * plus a permanent notice card on the report page (AddDogPage).
@@ -27,7 +28,6 @@ export const isLawNoticeSeen = (): boolean => {
  * LAW_DISMISSED_EVENT; InstallPWA waits for cookie consent.
  */
 const LawNoticeModal = () => {
-  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -54,20 +54,20 @@ const LawNoticeModal = () => {
       aria-labelledby="law-notice-title"
     >
       {/* Opaque panel (bg-card is solid) — v102 contrast fix: no blur, no translucency */}
-      <div className="bg-card text-card-foreground border border-border rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6 shadow-2xl animate-fade-in">
+      <div dir="ltr" className="bg-card text-card-foreground border border-border rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6 shadow-2xl animate-fade-in">
         <div className="flex items-center gap-3 mb-3">
           <div className="bg-amber-100 dark:bg-amber-900/60 rounded-xl p-2 shrink-0">
             <Scale className="w-6 h-6 text-amber-600 dark:text-amber-300" />
           </div>
           <h2 id="law-notice-title" className="font-display text-lg font-bold text-card-foreground">
-            {t('lawNotice.title', 'Wichtiger rechtlicher Hinweis')}
+            Important legal notice
           </h2>
         </div>
         <p className="text-sm text-card-foreground/85 leading-relaxed mb-5">
-          {t('lawNotice.body', 'Seit August 2026 gilt in Marokko das Gesetz Nr. 19.25 zum Umgang mit streunenden Tieren. Artikel 5 untersagt Privatpersonen das Füttern, Unterbringen und Behandeln von Straßentieren ohne behördliche Genehmigung (Geldbußen 1.500–3.000 MAD). Die Versorgung soll über kommunale Zentren erfolgen. Bitte informiere dich über die aktuelle Rechtslage und entscheide eigenverantwortlich, wie du helfen möchtest.')}
+          Since August 2026, Law No. 19.25 on the handling of stray animals has been in force in Morocco. Article 5 prohibits private individuals from feeding, sheltering or treating street animals without official authorisation (fines of 1,500–3,000 MAD). Care is intended to be provided through municipal centres. Please inform yourself about the current legal situation and decide on your own responsibility how you wish to help.
         </p>
         <Button onClick={dismiss} className="w-full">
-          {t('lawNotice.accept', 'Verstanden')}
+          Understood
         </Button>
       </div>
     </div>
