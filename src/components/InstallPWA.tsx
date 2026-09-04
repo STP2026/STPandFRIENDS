@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, X, Smartphone } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { isConsentCurrent, CONSENT_ACCEPTED_EVENT } from "@/components/CookieConsent";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -13,7 +14,17 @@ const InstallPWA = () => {
   const [showBanner, setShowBanner] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  // v102 sequencing: install prompt only after cookie consent was accepted,
+  // so it never overlaps the consent banner (both were fixed bottom-0 z-50).
+  const [consentOk, setConsentOk] = useState(isConsentCurrent);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (consentOk) return;
+    const onConsent = () => setTimeout(() => setConsentOk(true), 1200);
+    window.addEventListener(CONSENT_ACCEPTED_EVENT, onConsent, { once: true });
+    return () => window.removeEventListener(CONSENT_ACCEPTED_EVENT, onConsent);
+  }, [consentOk]);
 
   useEffect(() => {
     // Check if already installed as standalone
@@ -76,7 +87,7 @@ const InstallPWA = () => {
     }
   }, []);
 
-  if (isStandalone || !showBanner) return null;
+  if (isStandalone || !showBanner || !consentOk) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-fade-in">

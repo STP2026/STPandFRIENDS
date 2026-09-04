@@ -3,9 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { isLawNoticeSeen, LAW_DISMISSED_EVENT } from '@/components/LawNoticeModal';
 
 const CONSENT_KEY = 'stp_privacy_consent';
 const CONSENT_VERSION = '2'; // v2: report sender data (name, email, timestamp) — bump when privacy policy changes
+
+/** Event fired when consent is accepted — InstallPWA waits for this. */
+export const CONSENT_ACCEPTED_EVENT = 'stp:consent-accepted';
+
+/** True when the current consent version has been accepted. */
+export const isConsentCurrent = (): boolean => {
+  try { return localStorage.getItem(CONSENT_KEY) === CONSENT_VERSION; } catch { return true; }
+};
 
 /**
  * DSGVO-compliant privacy consent banner.
@@ -29,11 +38,22 @@ const CookieConsent = () => {
   useEffect(() => {
     try {
       const consent = localStorage.getItem(CONSENT_KEY);
-      if (consent !== CONSENT_VERSION) {
-        // Small delay so the page content loads first
-        const timer = setTimeout(() => setVisible(true), 1500);
-        return () => clearTimeout(timer);
+      if (consent === CONSENT_VERSION) return;
+
+      // v102 sequencing: wait until the law notice modal was dismissed,
+      // so only one prompt is on screen at a time.
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const show = () => { timer = setTimeout(() => setVisible(true), 1200); };
+
+      if (isLawNoticeSeen()) {
+        show();
+      } else {
+        window.addEventListener(LAW_DISMISSED_EVENT, show, { once: true });
       }
+      return () => {
+        if (timer) clearTimeout(timer);
+        window.removeEventListener(LAW_DISMISSED_EVENT, show);
+      };
     } catch {
       // localStorage not available — banner won't show, but app still works
     }
@@ -42,6 +62,7 @@ const CookieConsent = () => {
   const handleAccept = () => {
     try { localStorage.setItem(CONSENT_KEY, CONSENT_VERSION); } catch {}
     setVisible(false);
+    window.dispatchEvent(new Event(CONSENT_ACCEPTED_EVENT));
   };
 
   if (!visible) return null;
